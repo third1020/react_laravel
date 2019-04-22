@@ -8,7 +8,7 @@ class User extends Model
 {
 
     protected $fillable = [
-        'name', 'password', 'nameuser','id_card','phone_number','email','permission_id'
+        'name', 'password', 'nameuser','id_card','phone_number','email','permission_id','image'
     ];
 
     public   $rules = [

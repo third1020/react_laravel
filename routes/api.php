@@ -21,8 +21,9 @@ Route::get('projects', 'ProjectController@index');
 
   Route::post('login', 'LoginController@Loginprocess');
 
-    Route::post('create_user', 'UserController@store');
-    
+    Route::post('user', 'UserController@store');
+    Route::get('permission', 'PermissionController@index');
+
   Route::middleware('auth:api')->get('/user', function (Request $request) {
   return $request->user();
 });

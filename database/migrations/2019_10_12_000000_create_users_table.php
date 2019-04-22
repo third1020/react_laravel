@@ -17,10 +17,10 @@ class CreateUsersTable extends Migration
         $table->increments('id');
           $table->string('name');
           $table->string('email')->unique();
-        
+
           $table->string('password');
           $table->string('nameuser')->nullable();
-          $table->binary('img')->nullable();
+
           $table->string('id_card')->nullable();
           $table->string('phone_number')->nullable();
 
@@ -28,9 +28,12 @@ class CreateUsersTable extends Migration
           $table->foreign('permission_id')->references('id')->on('permission');
 
 
-          $table->rememberToken();
+
           $table->timestamps();
         });
+
+        DB::statement("ALTER TABLE users ADD image  MEDIUMBLOB");
+
 
 
 

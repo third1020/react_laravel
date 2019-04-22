@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import Select from 'react-select';
+import ImageUploader from 'react-images-upload';
 
 
 
@@ -20,15 +21,25 @@ import axios from 'axios'
           Phone_Number: '',
           Email: '',
           permission: '',
+          image: [],
+          getpermission: [''],
           errors: []
         }
+
         this.handleFieldChange = this.handleFieldChange.bind(this)
         this.handleCreate= this.handleCreate.bind(this)
         this.hasErrorFor = this.hasErrorFor.bind(this)
         this.renderErrorFor = this.renderErrorFor.bind(this)
         this.handleSelectChange = this.handleSelectChange.bind(this)
+        this.onDrop = this.onDrop.bind(this)
 
       }
+
+      onDrop(pictureFiles, pictureDataURLs) {
+		this.setState({
+            image: this.state.image.concat(pictureFiles),
+        });
+	}
 
       handleFieldChange (event) {
         this.setState({
@@ -48,7 +59,8 @@ import axios from 'axios'
                                +this.state.ID_Card+ '\n'
                                +this.state.Phone_Number+ '\n'
                                +this.state.Email+ '\n'
-                               +this.state.permission);
+                               +this.state.permission+ '\n'
+                               +this.state.image[this.state.image.length - 1]);
         event.preventDefault()
 
         const { history } = this.props
@@ -62,9 +74,10 @@ import axios from 'axios'
           Phone_Number: this.state.Phone_Number,
           Email: this.state.Email,
           permission: this.state.permission,
+          // image: this.state.image[this.state.image.length - 1],
         }
 
-        axios.post('/api/create_user', project)
+        axios.post('/api/user', project)
           .then(response => {
             // redirect to the homepage
             history.push('/')
@@ -90,7 +103,16 @@ import axios from 'axios'
         }
       }
 
+      componentDidMount () {
+        axios.get('/api/permission').then(response => {
+          this.setState({
+            getpermission: response.data
+          })
+        })
+      }
+
       render () {
+
         return (
 
           <div className='container py-4' >
@@ -199,11 +221,28 @@ import axios from 'axios'
                         </div>
                         <select class="custom-select" value={this.state.permission} onChange={this.handleSelectChange}>
 
-                          <option value="1">One</option>
+                          <option selected>Choose...</option>
+                          <option value="1">{this.state.getpermission[0].permission_name}</option>
                           <option value="2">Two</option>
                           <option value="3">Three</option>
                         </select>
+
                       </div>
+
+                      <ImageUploader
+                	withIcon={true}
+                	buttonText='Choose images'
+                	onChange={this.onDrop}
+                	imgExtension={['.jpg', '.gif', '.png', '.gif']}
+                	maxFileSize={6777215}
+                  singleImage={true}
+                  label='ไฟล์ขนาดต้องไม่เกิน 6mb, accepted: jpg,png'
+            />
+
+
+
+
+
 
 
 
