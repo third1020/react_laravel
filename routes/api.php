@@ -20,6 +20,9 @@ Route::get('projects', 'ProjectController@index');
   Route::put('tasks/{task}', 'TaskController@markAsCompleted');
 
   Route::post('login', 'LoginController@Loginprocess');
+
+    Route::post('create_user', 'UserController@store');
+    
   Route::middleware('auth:api')->get('/user', function (Request $request) {
   return $request->user();
 });

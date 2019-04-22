@@ -18,9 +18,18 @@ export default class Header extends Component {
     }
 
 
+
     this.state.name = sessionStorage.getItem("name");
 
+    this.ClearSession = this.ClearSession.bind(this)
+
   }
+
+  ClearSession () {
+    sessionStorage.clear()
+  }
+
+
     render() {
         return (
 
@@ -35,7 +44,7 @@ export default class Header extends Component {
 
     <NavDropdown.Item href="#Profile">{this.state.name }</NavDropdown.Item>
     <NavDropdown.Divider />
-    <NavDropdown.Item href="signin">logout</NavDropdown.Item>
+    <NavDropdown.Item href="/" onclick={this.ClearSession}>logout</NavDropdown.Item>
   </NavDropdown>
 
 

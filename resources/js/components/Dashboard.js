@@ -10,6 +10,8 @@ import NewProject from './NewProject'
 import ProjectsList from './ProjectsList'
 import SingleProject  from './SingleProject'
 
+import Add_user from './manage_user/add_user'
+
 import '@trendmicro/react-sidenav/dist/react-sidenav.css';
 
 import { FaBlog,FaBeer } from 'react-icons/fa';
@@ -515,7 +517,7 @@ export default class Dashboard extends Component {
 
                               <Switch>
                               <Route exact path='/manage_user/list_user' component={ProjectsList} />
-                              <Route path='/manage_user/add_user' component={NewProject} />
+                              <Route path='/manage_user/add_user' component={Add_user} />
                               <Route path='/manage_user/list_user/:id' component={SingleProject} />
 
 
