@@ -5,6 +5,7 @@
 use Illuminate\Http\Request;
 use App\User;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Input as Input;
 
 class UserController extends Controller
 {
@@ -32,8 +33,19 @@ class UserController extends Controller
        'ID_Card' => 'required',
        'Phone_Number' => 'required',
        'Email' => 'required',
-       'permission' => 'required'
+       'permission' => 'required',
+
+
+
      ]);
+
+
+
+    $file = $request->file('image');
+    $file = $request->image;
+    $imageencode = base64_encode($file);
+
+
 
 
      $user = User::create([
@@ -45,7 +57,12 @@ class UserController extends Controller
        'phone_number' => $request->Phone_Number,
        'email' => $request->Email,
        'permission_id' => $request->permission,
+       'image' => $imageencode
+
+
      ]);
+
+
 
 
 

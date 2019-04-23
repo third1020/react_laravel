@@ -33,11 +33,12 @@ import axios from 'axios'
         this.handleSelectChange = this.handleSelectChange.bind(this)
         this.onDrop = this.onDrop.bind(this)
 
+
       }
 
       onDrop(pictureFiles, pictureDataURLs) {
 		this.setState({
-            image: this.state.image.concat(pictureFiles),
+            image: this.state.image.concat(pictureDataURLs),
         });
 	}
 
@@ -65,7 +66,7 @@ import axios from 'axios'
 
         const { history } = this.props
 
-        const project = {
+        const insertdata = {
 
           username: this.state.username,
           password: this.state.password,
@@ -74,13 +75,13 @@ import axios from 'axios'
           Phone_Number: this.state.Phone_Number,
           Email: this.state.Email,
           permission: this.state.permission,
-          // image: this.state.image[this.state.image.length - 1],
+          image: this.state.image[this.state.image.length - 1]
         }
 
-        axios.post('/api/user', project)
+        axios.post('/api/user', insertdata)
           .then(response => {
             // redirect to the homepage
-            history.push('/')
+            history.push('/success')
           })
           .catch(error => {
             this.setState({
@@ -103,15 +104,23 @@ import axios from 'axios'
         }
       }
 
+
+
+
       componentDidMount () {
         axios.get('/api/permission').then(response => {
           this.setState({
-            getpermission: response.data
+            getpermission: response.data,
+
           })
         })
+
       }
 
       render () {
+        const { getpermission } = this.state
+
+
 
         return (
 
@@ -215,47 +224,58 @@ import axios from 'axios'
                       <label htmlFor='permission'>สิทธิ์การเข้าถึง</label>
 
 
+
                       <div class="input-group mb-3">
                         <div class="input-group-prepend">
-                          <label class="input-group-text" for="inputGroupSelect01">เลือกสิทธิ์ผู้ใช้งาน</label>
+                        {  this.state.permission == '' ? (
+
+
+                            <label class="input-group-text" for="inputGroupSelect01" style={{color:'red'}}>เลือกสิทธิ์ผู้ใช้งาน</label>
+
+                        ):<label class="input-group-text" for="inputGroupSelect01">สิทธิ์ผู้ใช้งาน</label>}
+
+
                         </div>
                         <select class="custom-select" value={this.state.permission} onChange={this.handleSelectChange}>
+                        <option>Choose...</option>
 
-                          <option selected>Choose...</option>
-                          <option value="1">{this.state.getpermission[0].permission_name}</option>
-                          <option value="2">Two</option>
-                          <option value="3">Three</option>
+
+
+                          {getpermission.map(getpermission => (
+                            <option value={getpermission.id}>{getpermission.permission_name}</option>
+                          ))}
+
                         </select>
+
 
                       </div>
 
+
+                      <div className='form-group'>
+                      <label htmlFor='image'>เลือกรูปภาพโปรไฟล์</label>
+
                       <ImageUploader
+                  type="file"
                 	withIcon={true}
-                	buttonText='Choose images'
+                  value={this.state.image}
+                	buttonText='เลือกรูปภาพ'
                 	onChange={this.onDrop}
                 	imgExtension={['.jpg', '.gif', '.png', '.gif']}
-                	maxFileSize={6777215}
+                	maxFileSize={520215}
                   singleImage={true}
-                  label='ไฟล์ขนาดต้องไม่เกิน 6mb, accepted: jpg,png'
-            />
+                  label='ไฟล์ขนาดต้องไม่เกิน 500 kb, สกุลไฟล์: jpg,png'
+                  withPreview={true}
+                  fileSizeError="ขนาดไฟล์ใหญ่เกินไป"
+                  fileTypeError="ประเภทไฟล์ไม่ถูกต้อง"
+                      />
 
-
-
-
-
-
-
-
-
-
-
-
-
+                      </div>
 
 
 
                       <button className='btn btn-primary'>Create</button>
                     </form>
+
 
                   </div>
                 </div>

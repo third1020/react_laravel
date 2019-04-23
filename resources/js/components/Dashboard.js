@@ -9,6 +9,7 @@ import SideNav, { Toggle, Nav, NavItem, NavIcon, NavText } from '@trendmicro/rea
 import NewProject from './NewProject'
 import ProjectsList from './ProjectsList'
 import SingleProject  from './SingleProject'
+import Success from './success_insert'
 
 import Add_user from './manage_user/add_user'
 
@@ -519,6 +520,8 @@ export default class Dashboard extends Component {
                               <Route exact path='/manage_user/list_user' component={ProjectsList} />
                               <Route path='/manage_user/add_user' component={Add_user} />
                               <Route path='/manage_user/list_user/:id' component={SingleProject} />
+                              <Route path='/success' component={Success} />
+
 
 
                              </Switch>
