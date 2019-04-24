@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input as Input;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -13,13 +14,12 @@ class UserController extends Controller
    public function index()
    {
 
+     $getuser = DB::table('users')->get();
+
+     return $getuser->toJson();
+
    }
-   //
-   //
-   // public function create()
-   // {
-   //
-   // }
+
 
 
    public function store(Request $request)
@@ -45,13 +45,15 @@ class UserController extends Controller
     $file = $request->image;
     $imageencode = base64_encode($file);
 
+    $passwordhash = Hash::make($request->password);
+
 
 
 
      $user = User::create([
 
        'name' => $request->username,
-       'password' => $request->password,
+       'password' => $passwordhash,
        'nameuser' => $request->Name_lastname,
        'id_card' => $request->ID_Card,
        'phone_number' => $request->Phone_Number,

@@ -70,7 +70,7 @@ class LoginController extends Controller
      //:users   check in model Users
      $rules = ['name' => 'unique:users,name'];
      $input = ['name' => $name];
-     // $passwordhash = Hash::make($password);
+     $passwordhash = Hash::make($password);
 
 
 
@@ -79,8 +79,9 @@ class LoginController extends Controller
 
 if ($validator->fails()) {
 
-    // $checkpassword = Hash::check($password, $passworddatabase);
-      if($password == $passworddatabase){
+    $checkpassword = Hash::check($password, $passworddatabase);
+
+      if($checkpassword){
 
         return $userdatabase->tojson();
 

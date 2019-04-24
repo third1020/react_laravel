@@ -78,7 +78,7 @@ import axios from 'axios'
           image: this.state.image[this.state.image.length - 1]
         }
 
-        axios.post('/api/user', insertdata)
+        axios.post('/api/user_create', insertdata)
           .then(response => {
             // redirect to the homepage
             history.push('/success')
