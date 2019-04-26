@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import Table from 'react-bootstrap/Table';
 import PropTypes from 'prop-types';
+import Button from 'react-bootstrap/Button';
+import { Link } from 'react-router-dom';
 
  class DataTable extends Component {
   constructor(props) {
@@ -24,6 +26,18 @@ import PropTypes from 'prop-types';
       offset: 4,
       order: 'asc',
     };
+  }
+
+  handleDelete(id) {
+
+
+    // remove from local state
+
+    axios.delete(`/api/user/${id}`)
+
+      window.location.reload();
+
+
   }
 
   fetchEntities() {
@@ -89,7 +103,14 @@ import PropTypes from 'prop-types';
         return <tr key={ user.id }>
           {Object.keys(user).map(key => <td key={key}>{ user[key] }</td> )}
 
-          <td>{user.id}</td>
+          <td>
+          <Link className="btn btn-sm btn-success" >
+                                  {this.props.edit}
+                              </Link>
+                              <button onClick={() => this.handleDelete(user.id)} className="btn btn-sm btn-warning">
+                                  {this.props.delete}
+                              </button>
+          </td>
 
         </tr>
 
@@ -171,7 +192,10 @@ import PropTypes from 'prop-types';
 }
 
 DataTable.propTypes = {
-  headname: PropTypes.string
+  headname: PropTypes.string,
+  edit:PropTypes.string,
+  delete:PropTypes.string
+
 };
 
 export default DataTable

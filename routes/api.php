@@ -23,6 +23,7 @@ Route::get('projects', 'ProjectController@index');
 
     Route::post('user_create', 'UserController@store');
     Route::get('user', 'UserController@index');
+    Route::delete('user/{id}', 'UserController@destroy');
 
     Route::get('permission', 'PermissionController@index');
 

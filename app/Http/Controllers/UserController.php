@@ -100,18 +100,31 @@ class UserController extends Controller
    //     //
    // }
    //
-   // public function edit(Task $task)
-   // {
-   //     //
-   // }
-   //
-   // public function update(Request $request, Task $task)
-   // {
-   //     //
-   // }
-   //
-   // public function delete(Task $task)
-   // {
-   //     //
-   // }
+   public function edit($id)
+   {
+     $user = User::findOrFail($id);
+ 		return response()->json([
+ 			'task' => $task,
+ 		]);
+   }
+
+
+   public function update(Request $request, $id) {
+ 		// update task
+ 		$input = $request->all();
+ 		$task = Task::findOrFail($id);
+ 		$task->update($input);
+ 		return response()->json($task->with('user')->find($task->id));
+ 	}
+
+
+  public function destroy($id) {
+		User::findOrFail($id)->delete();
+
+    $query = $this->user->orderBy($request->column, $request->order);
+          $users = $query->paginate($request->per_page ?? 5);
+
+    return UsersResource::collection($users);
+	}
+
 }

@@ -20,6 +20,8 @@ import React, { Component } from 'react'
                <Route path='/home' component={Home} />
                <Route path='/success' component={Success} />
                 <Route path='/projectslist' component={ProjectsList} />
+                <Route path='/:id' component={SingleProject} />
+
              </Switch>
            </div>
          </BrowserRouter>
