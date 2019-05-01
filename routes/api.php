@@ -25,6 +25,8 @@ Route::get('projects', 'ProjectController@index');
     Route::get('user', 'UserController@index');
     Route::delete('user/{id}', 'UserController@destroy');
 
+    Route::get('user/{id}', 'UserController@edit');
+
     Route::get('permission', 'PermissionController@index');
 
 

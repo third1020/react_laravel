@@ -13,7 +13,7 @@ import Success from './success_insert'
 
 import List_User from './manage_user/list_user'
 import Add_user from './manage_user/add_user'
-import Update_user from './manage_user/add_user'
+import Update_user from './manage_user/update_user'
 
 
 import '@trendmicro/react-sidenav/dist/react-sidenav.css';
@@ -523,7 +523,7 @@ export default class Dashboard extends Component {
                               <Route exact path='/manage_user/list_user' component={List_User} />
                               <Route path='/manage_user/add_user' component={Add_user} />
                               <Route path='/manage_user/list_user/:id' component={SingleProject} />
-                              <Route path='/manage_user/update_user/:id' component={Update_user} />
+                              <Route path='/manage_user/edit/:id' component={Update_user} />
 
                               <Route path='/success' component={Success} />
 

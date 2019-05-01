@@ -271,6 +271,10 @@ import axios from 'axios'
 
                       </div>
 
+                      <img src={this.state.image}/>
+                      <p>{this.state.image}</p>
+
+
 
 
                       <button className='btn btn-primary'>Create</button>

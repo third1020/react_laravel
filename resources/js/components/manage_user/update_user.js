@@ -104,19 +104,9 @@ import axios from 'axios'
         }
       }
 
-
-
-
-      componentDidMount () {
+      componentWillMount () {
         const projectId = this.props.match.params.id
 
-        axios.get(`/api/projects/${projectId}`).then(response => {
-          this.setState({
-            project: response.data,
-            tasks: response.data.tasks
-          })
-        })
-        
         axios.get('/api/permission').then(response => {
           this.setState({
             getpermission: response.data,
@@ -124,10 +114,31 @@ import axios from 'axios'
           })
         })
 
+        axios.get(`/api/user/${projectId}`).then(response => {
+          this.setState({
+            username: response.data.user.name,
+
+            Name_lastname: response.data.user.nameuser,
+            ID_Card: response.data.user.id_card,
+            Phone_Number: response.data.user.phone_number,
+            Email: response.data.user.email,
+            permission: response.data.user.permission,
+            image: response.data.user.image
+
+
+          })
+        })
+
+      }
+
+
+      componentDidMount () {
+
+
       }
 
       render () {
-        const { getpermission } = this.state
+        const { getpermission} = this.state
 
 
 
@@ -278,7 +289,11 @@ import axios from 'axios'
                   fileTypeError="ประเภทไฟล์ไม่ถูกต้อง"
                       />
 
+
+
                       </div>
+                    <img src={this.state.image}/>
+
 
 
 

@@ -138,9 +138,9 @@ import 'react-confirm-alert/src/react-confirm-alert.css';
           {Object.keys(user).map(key => <td key={key}>{ user[key] }</td> )}
 
           <td>
-          <Link  className="btn btn-sm btn-success" to={`/${user.id}/edit`} >
+          <Link  className="btn btn-sm btn-success" to={`/manage_user/edit/${user.id}`} >
                                   {this.props.edit}
-                              </Link >
+                              </Link>
                               <button onClick={() => this.handleDelete(user.id)} className="btn btn-sm btn-warning">
                                   {this.props.delete}
                               </button>

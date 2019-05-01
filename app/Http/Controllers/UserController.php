@@ -65,7 +65,7 @@ class UserController extends Controller
 
     $file = $request->file('image');
     $file = $request->image;
-    $imageencode = base64_encode($file);
+    $imageencode = $file;
 
     $passwordhash = Hash::make($request->password);
 
@@ -104,7 +104,7 @@ class UserController extends Controller
    {
      $user = User::findOrFail($id);
  		return response()->json([
- 			'task' => $task,
+ 			'user' => $user,
  		]);
    }
 
