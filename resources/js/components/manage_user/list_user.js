@@ -12,7 +12,7 @@ import axios from 'axios'
 
 
      render () {
-       const columns = ['id', 'name', 'email','created_at'];
+       const columns = ['id', 'name', 'email','nameuser','created_at'];
      return (
        <DataTable url="/api/users" columns={columns} headname={"รายชื่อผู้ใช้เห็นไหม 5555"} edit={"แก้ไข"} delete={"ลบ"}  />
      )

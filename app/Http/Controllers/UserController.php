@@ -121,10 +121,6 @@ class UserController extends Controller
   public function destroy($id) {
 		User::findOrFail($id)->delete();
 
-    $query = $this->user->orderBy($request->column, $request->order);
-          $users = $query->paginate($request->per_page ?? 5);
-
-    return UsersResource::collection($users);
 	}
 
 }

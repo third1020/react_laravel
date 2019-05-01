@@ -4,6 +4,9 @@ import PropTypes from 'prop-types';
 import Button from 'react-bootstrap/Button';
 import { Link } from 'react-router-dom';
 
+import { confirmAlert } from 'react-confirm-alert';
+import 'react-confirm-alert/src/react-confirm-alert.css';
+
  class DataTable extends Component {
   constructor(props) {
     super(props);
@@ -15,7 +18,7 @@ import { Link } from 'react-router-dom';
           current_page: 1,
           from: 1,
           last_page: 1,
-          per_page: 5,
+          per_page: 10,
           to: 1,
           total: 1,
         },
@@ -30,13 +33,44 @@ import { Link } from 'react-router-dom';
 
   handleDelete(id) {
 
-
+    const list = this.state.entities.data.find((user) => {
+      return user.id == id
+    })
     // remove from local state
+    confirmAlert({
+  customUI: ({ onClose }) => {
+    return (
+      <div className='custom-ui'>
+        <h1>ยืนยันการลบข้อมูล User </h1>
+        <p>ID:{list.id}</p>
+        <p>Account:{list.name}</p>
+        <p>Name:{list.nameuser}</p>
 
+<footer class="modal-footer">
+        <button type="button" class="btn btn-success"
+          onClick={() => {
+            this.remove(id);
+            onClose();
+          }}
+        >
+          ยืนยัน
+        </button>
+
+        <button type="button" class="btn btn-danger" onClick={onClose}>ไม่ต้องการ</button>
+        </footer>
+      </div>
+    );
+  }
+  });
+
+  }
+
+  remove(id){
+    const isNotId = user => user.id !== id;
+    const updated = this.state.entities.data.filter(isNotId);
+      this.setState({ data: updated }, () => {this.fetchEntities()});
+    //
     axios.delete(`/api/user/${id}`)
-
-      window.location.reload();
-
 
   }
 
@@ -104,9 +138,9 @@ import { Link } from 'react-router-dom';
           {Object.keys(user).map(key => <td key={key}>{ user[key] }</td> )}
 
           <td>
-          <Link className="btn btn-sm btn-success" >
+          <Link  className="btn btn-sm btn-success" to={`/${user.id}/edit`} >
                                   {this.props.edit}
-                              </Link>
+                              </Link >
                               <button onClick={() => this.handleDelete(user.id)} className="btn btn-sm btn-warning">
                                   {this.props.delete}
                               </button>
