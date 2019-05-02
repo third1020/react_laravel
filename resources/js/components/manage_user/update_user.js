@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import Select from 'react-select';
 import ImageUploader from 'react-images-upload';
+import PropTypes from 'prop-types';
 import "../../../css/image.css";
 import { ToastContainer } from "react-toastr";
 import "../../../css/alert.css";
@@ -33,16 +34,17 @@ import axios from 'axios'
           errors: []
         }
 
+
         this.handleFieldChange = this.handleFieldChange.bind(this)
-        this.handleCreate= this.handleCreate.bind(this)
+        this.handleCreate = this.handleCreate.bind(this)
         this.hasErrorFor = this.hasErrorFor.bind(this)
         this.renderErrorFor = this.renderErrorFor.bind(this)
-        this.handleSelectChange = this.handleSelectChange.bind(this)
         this.onDrop = this.onDrop.bind(this)
+        this.handleSelectChange = this.handleSelectChange.bind(this)
+
 
 
       }
-
 
       Changestatusimage() {
     this.setState({checkimage: 1 ,
@@ -50,13 +52,15 @@ import axios from 'axios'
 
                    });
   }
-
-
-      onDrop(pictureFiles, pictureDataURLs) {
+  onDrop(pictureFiles, pictureDataURLs) {
 		this.setState({
             image: this.state.image.concat(pictureDataURLs),
         });
 	}
+  handleSelectChange(event) {
+    this.setState({permission: event.target.value});
+  }
+
 
       handleFieldChange (event) {
         this.setState({
@@ -64,11 +68,19 @@ import axios from 'axios'
         })
       }
 
-      handleSelectChange(event) {
-    this.setState({permission: event.target.value});
-  }
+      hasErrorFor (field) {
+        return !!this.state.errors[field]
+      }
 
-
+      renderErrorFor (field) {
+        if (this.hasErrorFor(field)) {
+          return (
+            <span className='invalid-feedback'>
+              <strong>{this.state.errors[field][0]}</strong>
+            </span>
+          )
+        }
+      }
       handleCreate (event) {
         alert(                  this.state.username + '\n'
                                +this.state.password+ '\n'
@@ -82,7 +94,7 @@ import axios from 'axios'
 
         const { history } = this.props
 
-        const userId = this.props.match.params.id
+
 
         let insertdata = {
 
@@ -98,7 +110,7 @@ import axios from 'axios'
           insertdata.password = this.state.password;
         }
 
-        axios.put(`/api/user_update/${userId}`, insertdata)
+        axios.put(`/api/user_update/${this.props.id}`, insertdata)
           .then(response => {
             // redirect to the homepage
             container.success(`update success `, `///title\\\\\\`, {
@@ -106,7 +118,7 @@ import axios from 'axios'
                 timeOut: 5000
               })
               window.scrollTo(0, 0);
-            history.push('/manage_user/list_user')
+
 
 
           })
@@ -126,22 +138,8 @@ import axios from 'axios'
           })
       }
 
-      hasErrorFor (field) {
-        return !!this.state.errors[field]
-      }
-
-      renderErrorFor (field) {
-        if (this.hasErrorFor(field)) {
-          return (
-            <span className='invalid-feedback'>
-              <strong>{this.state.errors[field][0]}</strong>
-            </span>
-          )
-        }
-      }
-
       componentWillMount () {
-        const projectId = this.props.match.params.id
+
 
         axios.get('/api/permission').then(response => {
           this.setState({
@@ -150,7 +148,7 @@ import axios from 'axios'
           })
         })
 
-        axios.get(`/api/user/${projectId}`).then(response => {
+        axios.get(`/api/user/${this.props.id}`).then(response => {
           this.setState({
             username: response.data.user.name,
 
@@ -164,14 +162,11 @@ import axios from 'axios'
 
           })
         })
-
       }
 
 
-      componentDidMount () {
 
 
-      }
 
       render () {
         const { getpermission} = this.state
@@ -180,104 +175,103 @@ import axios from 'axios'
 
         return (
 
-          <div className='container py-4' >
-            <div style={{paddingLeft: '200' ,paddingRight: '5'}}>
-              <div className='col-md-12'>
+
+              <div className='col-md-12' style={{width:600,padding:40}}>
                 <div className='card'>
                   <div className='card-header'>เพิ่มผู้ใช้งาน</div>
                   <div className='card-body'>
                     <form onSubmit={this.handleCreate}>
-                      <div className='form-group'>
-                        <label htmlFor='username'>ชื่อผู้ใช้</label>
-                        <input
-                          id='username'
-                          name='username'
-                          className={`form-control ${this.hasErrorFor('username') ? 'is-invalid' : ''}`}
-                          placeholder="กรอกชื่อผู้ใช้"
-                          type='text'
-                          value={this.state.username}
-                          onChange={this.handleFieldChange}
-                        />
-                        {this.renderErrorFor('username')}
+                    <div className='form-group'>
+                       <label htmlFor='username'>ชื่อผู้ใช้</label>
+                       <input
+                         id='username'
+                         name='username'
+                         className={`form-control ${this.hasErrorFor('username') ? 'is-invalid' : ''}`}
+                         placeholder="กรอกชื่อผู้ใช้"
+                         type='text'
+                         value={this.state.username}
+                         onChange={this.handleFieldChange}
+                       />
+                       {this.renderErrorFor('username')}
 
-                      </div>
+                     </div>
 
-                      <div className='form-group'>
-                        <label htmlFor='password'>รหัสผ่าน</label>
-                        <input
-                          id='password'
-                          name='password'
-                          className={`form-control ${this.hasErrorFor('password') ? 'is-invalid' : ''}`}
-                          placeholder="กรอกระหัสผ่าน"
-                          type="password"
-                          value={this.state.password}
-                          onChange={this.handleFieldChange}
-                        />
-                        {this.renderErrorFor('password')}
+                     <div className='form-group'>
+                       <label htmlFor='password'>รหัสผ่าน</label>
+                       <input
+                         id='password'
+                         name='password'
+                         className={`form-control ${this.hasErrorFor('password') ? 'is-invalid' : ''}`}
+                         placeholder="กรอกระหัสผ่าน"
+                         type="password"
+                         value={this.state.password}
+                         onChange={this.handleFieldChange}
+                       />
+                       {this.renderErrorFor('password')}
 
-                      </div>
+                     </div>
 
-                      <div className='form-group'>
-                        <label htmlFor='FullName'>ชื่อ-นามสกุล</label>
-                        <input
-                          id='Name_lastname'
-                          type='text'
-                          placeholder="กรอก ชื่อ-นามสกุล"
-                          className={`form-control ${this.hasErrorFor('Name_lastname') ? 'is-invalid' : ''}`}
-                          name='Name_lastname'
-                          value={this.state.Name_lastname}
-                          onChange={this.handleFieldChange}
-                        />
-                        {this.renderErrorFor('Name_lastname')}
+                     <div className='form-group'>
+                       <label htmlFor='FullName'>ชื่อ-นามสกุล</label>
+                       <input
+                         id='Name_lastname'
+                         type='text'
+                         placeholder="กรอก ชื่อ-นามสกุล"
+                         className={`form-control ${this.hasErrorFor('Name_lastname') ? 'is-invalid' : ''}`}
+                         name='Name_lastname'
+                         value={this.state.Name_lastname}
+                         onChange={this.handleFieldChange}
+                       />
+                       {this.renderErrorFor('Name_lastname')}
 
-                      </div>
+                     </div>
 
-                      <div className='form-group'>
-                        <label htmlFor='ID_Card'>รหัสบัตรประชาชน</label>
-                        <input
-                          id='ID_Card'
-                          type='text'
-                          placeholder="กรอกรหัสบัตรประชาชน 13 หลัก"
-                          className={`form-control ${this.hasErrorFor('ID_Card') ? 'is-invalid' : ''}`}
-                          name='ID_Card'
-                          value={this.state.ID_Card}
-                          onChange={this.handleFieldChange}
-                        />
-                        {this.renderErrorFor('ID_Card')}
+                     <div className='form-group'>
+                       <label htmlFor='ID_Card'>รหัสบัตรประชาชน</label>
+                       <input
+                         id='ID_Card'
+                         type='text'
+                         placeholder="กรอกรหัสบัตรประชาชน 13 หลัก"
+                         className={`form-control ${this.hasErrorFor('ID_Card') ? 'is-invalid' : ''}`}
+                         name='ID_Card'
+                         value={this.state.ID_Card}
+                         onChange={this.handleFieldChange}
+                       />
+                       {this.renderErrorFor('ID_Card')}
 
-                      </div>
+                     </div>
 
-                      <div className='form-group'>
-                        <label htmlFor='Phone_Number'>หมายเลขโทรศัพท์มือถือ</label>
-                        <input
-                          id='Phone_Number'
-                          type='text'
-                          placeholder="กรอก เบอร์โทรศัพท์"
-                          className={`form-control ${this.hasErrorFor('Phone_Number') ? 'is-invalid' : ''}`}
-                          name='Phone_Number'
-                          value={this.state.Phone_Number}
-                          onChange={this.handleFieldChange}
-                        />
-                        {this.renderErrorFor('Phone_Number')}
+                     <div className='form-group'>
+                       <label htmlFor='Phone_Number'>หมายเลขโทรศัพท์มือถือ</label>
+                       <input
+                         id='Phone_Number'
+                         type='text'
+                         placeholder="กรอก เบอร์โทรศัพท์"
+                         className={`form-control ${this.hasErrorFor('Phone_Number') ? 'is-invalid' : ''}`}
+                         name='Phone_Number'
+                         value={this.state.Phone_Number}
+                         onChange={this.handleFieldChange}
+                       />
+                       {this.renderErrorFor('Phone_Number')}
 
-                      </div>
+                     </div>
 
-                      <div className='form-group'>
-                        <label htmlFor='Email'>อีเมลย์</label>
-                        <input
-                          id='Email'
-                          type='text'
-                          placeholder="กรอก อีเมลย์"
-                          className={`form-control ${this.hasErrorFor('Email') ? 'is-invalid' : ''}`}
-                          name='Email'
-                          value={this.state.Email}
-                          onChange={this.handleFieldChange}
-                        />
-                        {this.renderErrorFor('Email')}
+                     <div className='form-group'>
+                       <label htmlFor='Email'>อีเมลย์</label>
+                       <input
+                         id='Email'
+                         type='text'
+                         placeholder="กรอก อีเมลย์"
+                         className={`form-control ${this.hasErrorFor('Email') ? 'is-invalid' : ''}`}
+                         name='Email'
+                         value={this.state.Email}
+                         onChange={this.handleFieldChange}
+                       />
+                       {this.renderErrorFor('Email')}
 
-                      </div>
+                     </div>
 
-                      <label htmlFor='permission'>สิทธิ์ผู้ใช้งาน</label>
+                     <label htmlFor='permission'>สิทธิ์ผู้ใช้งาน</label>
 
 
 
@@ -346,7 +340,7 @@ import axios from 'axios'
 
 
 
-                      <button className='btn btn-primary'>Create</button>
+                      <button className='btn btn-primary'>Update</button>
                     </form>
                     <ToastContainer
                       ref={ref => container = ref}
@@ -357,11 +351,15 @@ import axios from 'axios'
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
+
 
         )
       }
     }
+
+    Update_user.propTypes = {
+      id: PropTypes.number,
+
+    };
 
     export default Update_user

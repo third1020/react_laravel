@@ -36,16 +36,27 @@ import 'react-confirm-alert/src/react-confirm-alert.css';
   }
 
   handleUpdate(id) {
-      confirmAlert({
-        title: 'Confirm to submit',                        // Title dialog
-        message: 'Are you sure to do this.',               // Message dialog
-        childrenElement: () => <Update_user/>,       // Custom UI or Component
-        confirmLabel: 'Confirm',                           // Text button confirm
-        cancelLabel: 'Cancel',                             // Text button cancel
-        onConfirm: () => alert('Action after Confirm'),    // Action after Confirm
-        onCancel: () => alert('Action after Cancel'),      // Action after Cancel
-      })
-    };
+
+    confirmAlert({
+  customUI: ({ onClose }) => {
+    return (
+      <div style={{ position: 'center', height: '100%' }}>
+      <Update_user id={id}/>
+
+      <footer class="modal-footer">
+
+
+              <button type="button" class="btn btn-danger" onClick={onClose}>ปิด</button>
+              </footer>
+
+
+
+      </div>
+    );
+  }
+});
+
+    }
 
   handleDelete(id) {
 
