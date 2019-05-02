@@ -7,6 +7,7 @@ import React, { Component } from 'react'
    import SingleProject from './SingleProject'
    import Home from './Home'
    import Success from './success_insert'
+   import Update_user from './manage_user/update_user'
     import Login from './auth/Login'
    class App extends Component {
      render () {

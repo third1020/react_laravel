@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 import Table from 'react-bootstrap/Table';
 import PropTypes from 'prop-types';
 import Button from 'react-bootstrap/Button';
+import Update_user from './manage_user/update_user';
+import Success from './success_insert';
+
+
 import { Link } from 'react-router-dom';
 
 import { confirmAlert } from 'react-confirm-alert';
@@ -30,6 +34,18 @@ import 'react-confirm-alert/src/react-confirm-alert.css';
       order: 'asc',
     };
   }
+
+  handleUpdate(id) {
+      confirmAlert({
+        title: 'Confirm to submit',                        // Title dialog
+        message: 'Are you sure to do this.',               // Message dialog
+        childrenElement: () => <Update_user/>,       // Custom UI or Component
+        confirmLabel: 'Confirm',                           // Text button confirm
+        cancelLabel: 'Cancel',                             // Text button cancel
+        onConfirm: () => alert('Action after Confirm'),    // Action after Confirm
+        onCancel: () => alert('Action after Cancel'),      // Action after Cancel
+      })
+    };
 
   handleDelete(id) {
 
@@ -138,10 +154,10 @@ import 'react-confirm-alert/src/react-confirm-alert.css';
           {Object.keys(user).map(key => <td key={key}>{ user[key] }</td> )}
 
           <td>
-          <Link  className="btn btn-sm btn-success" to={`/manage_user/edit/${user.id}`} >
+          <button  onClick={() => this.handleUpdate(user.id)} className="btn btn-sm btn-primary" style={{color: '#fff'}}  >
                                   {this.props.edit}
-                              </Link>
-                              <button onClick={() => this.handleDelete(user.id)} className="btn btn-sm btn-warning">
+                              </button>
+                              <button onClick={() => this.handleDelete(user.id)} className="btn btn-sm btn-danger">
                                   {this.props.delete}
                               </button>
           </td>

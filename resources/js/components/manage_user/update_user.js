@@ -3,6 +3,10 @@ import ReactDOM from 'react-dom';
 import Select from 'react-select';
 import ImageUploader from 'react-images-upload';
 import "../../../css/image.css";
+import { ToastContainer } from "react-toastr";
+import "../../../css/alert.css";
+import "../../../css/animate.css";
+let container;
 
 
 
@@ -39,7 +43,7 @@ import axios from 'axios'
 
       }
 
-    
+
       Changestatusimage() {
     this.setState({checkimage: 1 ,
                     image: [],
@@ -80,10 +84,9 @@ import axios from 'axios'
 
         const userId = this.props.match.params.id
 
-        const insertdata = {
+        let insertdata = {
 
           username: this.state.username,
-          password: this.state.password,
           Name_lastname: this.state.Name_lastname,
           ID_Card: this.state.ID_Card,
           Phone_Number: this.state.Phone_Number,
@@ -91,16 +94,35 @@ import axios from 'axios'
           permission: this.state.permission,
           image: this.state.image[0]
         }
+        if (this.state.password.length > 0) {
+          insertdata.password = this.state.password;
+        }
 
         axios.put(`/api/user_update/${userId}`, insertdata)
           .then(response => {
             // redirect to the homepage
-            history.push('/success')
+            container.success(`update success `, `///title\\\\\\`, {
+                closeButton: true,
+                timeOut: 5000
+              })
+              window.scrollTo(0, 0);
+            history.push('/manage_user/list_user')
+
+
           })
           .catch(error => {
             this.setState({
               errors: error.response.data.errors
             })
+
+            container.error(`errors`, `///title\\\\\\`, {
+                closeButton: true,
+
+                timeOut: 5000,
+                extendedTimeOut: 2000
+              })
+            window.scrollTo(0, 0);
+
           })
       }
 
@@ -326,6 +348,10 @@ import axios from 'axios'
 
                       <button className='btn btn-primary'>Create</button>
                     </form>
+                    <ToastContainer
+                      ref={ref => container = ref}
+                      className="toast-top-right"
+                    />
 
 
                   </div>

@@ -1,7 +1,8 @@
 import axios from 'axios'
    import React, { Component } from 'react'
    import { Link } from 'react-router-dom'
-   import DataTable from "..//DataTable";
+   import DataTable from "../DataTable";
+
 
    class List_user extends Component {
      constructor () {
@@ -11,10 +12,14 @@ import axios from 'axios'
 
 
 
+
+
      render () {
        const columns = ['id', 'name', 'email','nameuser','created_at'];
      return (
        <DataTable url="/api/users" columns={columns} headname={"รายชื่อผู้ใช้เห็นไหม 5555"} edit={"แก้ไข"} delete={"ลบ"}  />
+
+    
      )
      }
    }

@@ -50,10 +50,10 @@ class UserController extends Controller
 
      $validatedData = $request->validate([
        'username' => 'required',
-       'password' => 'required',
+       'password' => 'required|min:8',
        'Name_lastname' => 'required',
        'ID_Card' => 'required',
-       'Phone_Number' => 'required',
+       'Phone_Number' => 'required|min:8',
        'Email' => 'required',
        'permission' => 'required',
 
@@ -111,34 +111,57 @@ class UserController extends Controller
 
    public function update(Request $request, $id) {
  		// update task
-    $validatedData = $request->validate([
-      'username' => 'required',
-      'password' => '',
-      'Name_lastname' => 'required',
-      'ID_Card' => 'required',
-      'Phone_Number' => 'required',
-      'Email' => 'required',
-      'permission' => 'required',
-    ]);
-
 
         $file = $request->file('image');
         $file = $request->image;
-        
-        $passwordhash = Hash::make($request->password);
 
-    DB::table('users')
-            ->where('id', $id)
-            ->update([
-            'name' => $request->username,
-            'password' => $passwordhash,
-            'nameuser' => $request->Name_lastname,
-            'id_card' => $request->ID_Card,
-            'phone_number' => $request->Phone_Number,
-            'email' => $request->Email,
-            'permission_id' => $request->permission,
-            'image' => $file
+        if($request->password){
+          $validatedData = $request->validate([
+            'username' => 'required|max:191',
+            'password' => 'required|min:8|max:191',
+            'Name_lastname' => 'required',
+            'ID_Card' => 'required',
+            'Phone_Number' => 'required',
+            'Email' => 'required',
+            'permission' => 'required',
           ]);
+          $passwordhash = Hash::make($request->password);
+
+          DB::table('users')
+              ->where('id', $id)
+              ->update([
+              'name' => $validatedData['username'],
+              'password' => $passwordhash,
+              'nameuser' => $validatedData['Name_lastname'],
+              'id_card' => $validatedData['ID_Card'],
+              'phone_number' => $validatedData['Phone_Number'],
+              'email' => $validatedData['Email'],
+              'permission_id' => $validatedData['permission'],
+              'image' => $file
+            ]);
+        }
+
+        else {
+          $validatedData = $request->validate([
+            'username' => 'required|max:191',
+            'Name_lastname' => 'required',
+            'ID_Card' => 'required',
+            'Phone_Number' => 'required',
+            'Email' => 'required',
+            'permission' => 'required',
+          ]);
+            DB::table('users')
+              ->where('id', $id)
+              ->update([
+            'name' => $validatedData['username'],
+            'nameuser' => $validatedData['Name_lastname'],
+            'id_card' => $validatedData['ID_Card'],
+            'phone_number' => $validatedData['Phone_Number'],
+            'email' => $validatedData['Email'],
+            'permission_id' => $validatedData['permission'],
+            'image' => $file
+            ]);
+        }
 
 
  	}

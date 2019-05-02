@@ -10,6 +10,7 @@ import { Button , Form , Col, Row} from 'react-bootstrap';
 import axios from 'axios'
 import { ToastContainer } from "react-toastr";
 import "../../../css/alert.css";
+import "../../../css/animate.css";
 let container;
 
 
@@ -90,13 +91,32 @@ let container;
         axios.post('/api/user_create', insertdata)
           .then(response => {
             // redirect to the homepage
+            this.setState({
+              errors: []
+            })
+
+            container.success(`success `, `///title\\\\\\`, {
+                closeButton: true,
+                timeOut: 5000
+              })
+              window.scrollTo(0, 0);
 
           })
           .catch(error => {
             this.setState({
               errors: error.response.data.errors
             })
+
+            container.error(`errors`, `///title\\\\\\`, {
+                closeButton: true,
+
+                timeOut: 5000,
+                extendedTimeOut: 2000
+              })
+            window.scrollTo(0, 0);
           })
+
+
 
           const username = this.state.username;
           const password = this.state.password;
@@ -111,6 +131,9 @@ let container;
 
 
 
+
+
+
           this.setState({
             username: '',
             password: '',
@@ -119,15 +142,12 @@ let container;
             Phone_Number: '',
             Email: '',
             permission: '',
-
-
             errors: []
 
       });
 
-      container.success(`hi! Now is `, `///title\\\\\\`, {
-          closeButton: true,
-        })
+
+
 
       }
 
