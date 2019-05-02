@@ -8,6 +8,10 @@ import ImageUploader from 'react-images-upload';
 
 import { Button , Form , Col, Row} from 'react-bootstrap';
 import axios from 'axios'
+import { ToastContainer } from "react-toastr";
+import "../../../css/alert.css";
+let container;
+
 
 
     class Add_user extends Component {
@@ -34,7 +38,10 @@ import axios from 'axios'
         this.onDrop = this.onDrop.bind(this)
 
 
+
       }
+
+
 
       onDrop(pictureFiles, pictureDataURLs) {
 		this.setState({
@@ -64,6 +71,8 @@ import axios from 'axios'
                                +this.state.image[this.state.image.length - 1]);
         event.preventDefault()
 
+
+
         const { history } = this.props
 
         const insertdata = {
@@ -81,13 +90,45 @@ import axios from 'axios'
         axios.post('/api/user_create', insertdata)
           .then(response => {
             // redirect to the homepage
-            history.push('/success')
+
           })
           .catch(error => {
             this.setState({
               errors: error.response.data.errors
             })
           })
+
+          const username = this.state.username;
+          const password = this.state.password;
+          const Name_lastname = this.state.Name_lastname;
+          const ID_Card = this.state.ID_Card;
+          const Phone_Number = this.state.Phone_Number;
+          const Email = this.state.Email;
+          const permission = this.state.permission;
+          const image = this.state.image;
+
+          const errors = this.state.errors;
+
+
+
+          this.setState({
+            username: '',
+            password: '',
+            Name_lastname: '',
+            ID_Card: '',
+            Phone_Number: '',
+            Email: '',
+            permission: '',
+
+
+            errors: []
+
+      });
+
+      container.success(`hi! Now is `, `///title\\\\\\`, {
+          closeButton: true,
+        })
+
       }
 
       hasErrorFor (field) {
@@ -107,7 +148,7 @@ import axios from 'axios'
 
 
 
-      componentDidMount () {
+      componentWillMount () {
         axios.get('/api/permission').then(response => {
           this.setState({
             getpermission: response.data,
@@ -271,14 +312,19 @@ import axios from 'axios'
 
                       </div>
 
-                      <img src={this.state.image}/>
-                      <p>{this.state.image}</p>
 
 
 
 
-                      <button className='btn btn-primary'>Create</button>
+                      <button className='btn btn-primary' >Create</button>
                     </form>
+
+                    <ToastContainer
+                      ref={ref => container = ref}
+                      className="toast-top-right"
+                    />
+
+
 
 
                   </div>

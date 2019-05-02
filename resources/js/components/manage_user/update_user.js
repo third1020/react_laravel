@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import Select from 'react-select';
 import ImageUploader from 'react-images-upload';
+import "../../../css/image.css";
+
 
 
 
@@ -21,6 +23,7 @@ import axios from 'axios'
           Phone_Number: '',
           Email: '',
           permission: '',
+          checkimage: 0,
           image: [],
           getpermission: [''],
           errors: []
@@ -35,6 +38,15 @@ import axios from 'axios'
 
 
       }
+
+    
+      Changestatusimage() {
+    this.setState({checkimage: 1 ,
+                    image: [],
+
+                   });
+  }
+
 
       onDrop(pictureFiles, pictureDataURLs) {
 		this.setState({
@@ -61,10 +73,12 @@ import axios from 'axios'
                                +this.state.Phone_Number+ '\n'
                                +this.state.Email+ '\n'
                                +this.state.permission+ '\n'
-                               +this.state.image[this.state.image.length - 1]);
+                               +this.state.image[0]);
         event.preventDefault()
 
         const { history } = this.props
+
+        const userId = this.props.match.params.id
 
         const insertdata = {
 
@@ -75,10 +89,10 @@ import axios from 'axios'
           Phone_Number: this.state.Phone_Number,
           Email: this.state.Email,
           permission: this.state.permission,
-          image: this.state.image[this.state.image.length - 1]
+          image: this.state.image[0]
         }
 
-        axios.put('/api/user_update', insertdata)
+        axios.put(`/api/user_update/${userId}`, insertdata)
           .then(response => {
             // redirect to the homepage
             history.push('/success')
@@ -122,8 +136,8 @@ import axios from 'axios'
             ID_Card: response.data.user.id_card,
             Phone_Number: response.data.user.phone_number,
             Email: response.data.user.email,
-            permission: response.data.user.permission,
-            image: response.data.user.image
+            permission: response.data.user.permission_id,
+            image: [response.data.user.image]
 
 
           })
@@ -241,7 +255,7 @@ import axios from 'axios'
 
                       </div>
 
-                      <label htmlFor='permission'>สิทธิ์การเข้าถึง</label>
+                      <label htmlFor='permission'>สิทธิ์ผู้ใช้งาน</label>
 
 
 
@@ -270,29 +284,42 @@ import axios from 'axios'
 
                       </div>
 
+                      { this.state.checkimage == 1 ? (
+                        <div className='form-group'>
+                        <label htmlFor='image'>เลือกรูปภาพโปรไฟล์</label>
 
-                      <div className='form-group'>
-                      <label htmlFor='image'>เลือกรูปภาพโปรไฟล์</label>
-
-                      <ImageUploader
-                  type="file"
-                	withIcon={true}
-                  value={this.state.image}
-                	buttonText='เลือกรูปภาพ'
-                	onChange={this.onDrop}
-                	imgExtension={['.jpg', '.gif', '.png', '.gif']}
-                	maxFileSize={520215}
-                  singleImage={true}
-                  label='ไฟล์ขนาดต้องไม่เกิน 500 kb, สกุลไฟล์: jpg,png'
-                  withPreview={true}
-                  fileSizeError="ขนาดไฟล์ใหญ่เกินไป"
-                  fileTypeError="ประเภทไฟล์ไม่ถูกต้อง"
-                      />
+                        <ImageUploader
+                    type="file"
+                  	withIcon={true}
+                    value={this.state.image}
+                  	buttonText='เลือกรูปภาพ'
+                  	onChange={this.onDrop}
+                  	imgExtension={['.jpg', '.gif', '.png', '.gif']}
+                  	maxFileSize={520215}
+                    singleImage={true}
+                    label='ไฟล์ขนาดต้องไม่เกิน 500 kb, สกุลไฟล์: jpg,png'
+                    withPreview={true}
+                    fileSizeError="ขนาดไฟล์ใหญ่เกินไป"
+                    fileTypeError="ประเภทไฟล์ไม่ถูกต้อง"
+                        />
 
 
 
-                      </div>
-                    <img src={this.state.image}/>
+
+
+                        </div>
+                      ): (
+                        <div align="center">
+
+
+                          <img src={this.state.image} className="uploadPictureContainer" style={{align:"middle"}} alt="preview"/>
+
+                          <button className="chooseFileButton" onClick={() => this.Changestatusimage()} >แก้ไขรูปภาพ</button>
+
+                         </div>
+
+
+                       ) }
 
 
 

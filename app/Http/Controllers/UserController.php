@@ -111,10 +111,36 @@ class UserController extends Controller
 
    public function update(Request $request, $id) {
  		// update task
- 		$input = $request->all();
- 		$task = Task::findOrFail($id);
- 		$task->update($input);
- 		return response()->json($task->with('user')->find($task->id));
+    $validatedData = $request->validate([
+      'username' => 'required',
+      'password' => '',
+      'Name_lastname' => 'required',
+      'ID_Card' => 'required',
+      'Phone_Number' => 'required',
+      'Email' => 'required',
+      'permission' => 'required',
+    ]);
+
+
+        $file = $request->file('image');
+        $file = $request->image;
+        
+        $passwordhash = Hash::make($request->password);
+
+    DB::table('users')
+            ->where('id', $id)
+            ->update([
+            'name' => $request->username,
+            'password' => $passwordhash,
+            'nameuser' => $request->Name_lastname,
+            'id_card' => $request->ID_Card,
+            'phone_number' => $request->Phone_Number,
+            'email' => $request->Email,
+            'permission_id' => $request->permission,
+            'image' => $file
+          ]);
+
+
  	}
 
 
