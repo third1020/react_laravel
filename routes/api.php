@@ -28,7 +28,7 @@ Route::get('projects', 'ProjectController@index');
 
    //user
     Route::post('user_create', 'UserController@store');
-    Route::get('user', 'UserController@index');
+    Route::get('users', 'UserController@index');
     Route::delete('user/{id}', 'UserController@destroy');
     Route::get('user/{id}', 'UserController@edit');
     Route::put('user_update/{id}', 'UserController@update');
@@ -43,5 +43,3 @@ Route::get('projects', 'ProjectController@index');
   Route::middleware('auth:api')->get('/user', function (Request $request) {
   return $request->user();
 });
-
-   Route::get('users', 'UserController@index')->name('users');

@@ -9,7 +9,7 @@ import Success from './success_insert';
 import { Link } from 'react-router-dom';
 
 import { confirmAlert } from 'react-confirm-alert';
-import 'react-confirm-alert/src/react-confirm-alert.css';
+import '../../css/react-confirm-alert.css';
 
  class DataTable extends Component {
   constructor(props) {
@@ -38,25 +38,28 @@ import 'react-confirm-alert/src/react-confirm-alert.css';
   handleUpdate(id) {
 
     confirmAlert({
+      onClickOutside: () => { this.fetchEntities();},
   customUI: ({ onClose }) => {
     return (
       <div style={{ position: 'center', height: '100%' }}>
       <Update_user id={id}/>
-
       <footer class="modal-footer">
 
-
-              <button type="button" class="btn btn-danger" onClick={onClose}>ปิด</button>
+              <button type="button" class="btn btn-danger"   onClick={() => {
+                  this.fetchEntities();
+                  onClose();
+                }}>ปิด</button>
               </footer>
-
 
 
       </div>
     );
   }
+
 });
 
     }
+
 
   handleDelete(id) {
 
@@ -74,9 +77,10 @@ import 'react-confirm-alert/src/react-confirm-alert.css';
         <p>Name:{list.nameuser}</p>
 
 <footer class="modal-footer">
+
         <button type="button" class="btn btn-success"
           onClick={() => {
-            this.remove(id);
+            this.refreshremove(id);
             onClose();
           }}
         >
@@ -92,7 +96,9 @@ import 'react-confirm-alert/src/react-confirm-alert.css';
 
   }
 
-  remove(id){
+
+
+  refreshremove(id){
     const isNotId = user => user.id !== id;
     const updated = this.state.entities.data.filter(isNotId);
       this.setState({ data: updated }, () => {this.fetchEntities()});
@@ -100,6 +106,17 @@ import 'react-confirm-alert/src/react-confirm-alert.css';
     axios.delete(`/api/user/${id}`)
 
   }
+
+  // refreshupdate(id){
+  //   const isNotId = user => user.id !== id;
+  //   const updated = this.state.entities.data.filter(isNotId);
+  //     this.setState({ data: updated }, () => {this.fetchEntities()});
+  //   //
+  //   axios.delete(`/api/user/${id}`)
+  //
+  // }
+
+
 
   fetchEntities() {
     let fetchUrl = `${this.props.url}/?page=${this.state.current_page}&column=${this.state.sorted_column}&order=${this.state.order}&per_page=${this.state.entities.meta.per_page}`;
@@ -139,8 +156,10 @@ import 'react-confirm-alert/src/react-confirm-alert.css';
     return pagesArray;
   }
 
+
   componentDidMount() {
     this.setState({ current_page: this.state.entities.meta.current_page }, () => {this.fetchEntities()});
+
   }
 
   tableHeads() {

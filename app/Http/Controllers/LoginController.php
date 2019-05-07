@@ -79,9 +79,9 @@ class LoginController extends Controller
 
 if ($validator->fails()) {
 
-    // $checkpassword = Hash::check($password, $passworddatabase);
+    $checkpassword = Hash::check($password, $passworddatabase);
 
-      if($password == $passworddatabase){
+      if($checkpassword){
 
         return $userdatabase->tojson();
 

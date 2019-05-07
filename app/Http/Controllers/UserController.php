@@ -127,8 +127,7 @@ class UserController extends Controller
           ]);
           $passwordhash = Hash::make($request->password);
 
-          DB::table('users')
-              ->where('id', $id)
+          User::findOrFail($id)
               ->update([
               'name' => $validatedData['username'],
               'password' => $passwordhash,
@@ -150,8 +149,7 @@ class UserController extends Controller
             'Email' => 'required',
             'permission' => 'required',
           ]);
-            DB::table('users')
-              ->where('id', $id)
+            User::findOrFail($id)
               ->update([
             'name' => $validatedData['username'],
             'nameuser' => $validatedData['Name_lastname'],
