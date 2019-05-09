@@ -6,10 +6,6 @@ import SideNav, { Toggle, Nav, NavItem, NavIcon, NavText } from '@trendmicro/rea
 
 
 
-import NewProject from './NewProject'
-import ProjectsList from './ProjectsList'
-import SingleProject  from './SingleProject'
-
 import '@trendmicro/react-sidenav/dist/react-sidenav.css';
 
 import { FaBlog,FaBeer } from 'react-icons/fa';

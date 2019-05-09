@@ -5,15 +5,13 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import SideNav, { Toggle, Nav, NavItem, NavIcon, NavText } from '@trendmicro/react-sidenav';
 
 
-
-import NewProject from './NewProject'
-import ProjectsList from './ProjectsList'
-import SingleProject  from './SingleProject'
 import Success from './success_insert'
 
 import List_User from './manage_user/list_user'
 import Add_user from './manage_user/add_user'
 import Update_user from './manage_user/update_user'
+
+import List_Permisson from './manage_permission/list_permission'
 
 
 import '@trendmicro/react-sidenav/dist/react-sidenav.css';
@@ -140,17 +138,17 @@ export default class Dashboard extends Component {
                                            เพิ่มผู้ใช้งาน
                                              </NavText>
                                       </NavItem>
-                                   <NavItem eventKey="manage_user/add_permission" style={{left: 30 , fontsize: '14px' }}>
+                                   <NavItem eventKey="manage_permission/add_permission" style={{left: 30 , fontsize: '14px' }}>
                                             <NavText style={{ fontsize: '18px' }}>
                                           สิทธิ์การเข้าถึง
                                             </NavText>
                                      </NavItem>
-                                     <NavItem eventKey="manage_user/add_permission" >
+                                     <NavItem eventKey="manage_permission/add_permission" >
                                               <NavText>
                                             เพิ่มสิทธิ์การเข้าถึง
                                               </NavText>
                                        </NavItem>
-                                       <NavItem eventKey="manage_user/change_permission" >
+                                       <NavItem eventKey="manage_permission/list_permission" >
                                                 <NavText>
                                               เปลี่ยนแปลงสิทธิ์การเข้าถึง
                                                 </NavText>
@@ -522,8 +520,9 @@ export default class Dashboard extends Component {
                               <Switch>
                               <Route exact path='/manage_user/list_user' component={List_User} />
                               <Route path='/manage_user/add_user' component={Add_user} />
-                              <Route path='/manage_user/list_user/:id' component={SingleProject} />
                               <Route path='/manage_user/edit/:id' component={Update_user} />
+
+                              <Route path='/manage_permission/list_permission' component={List_Permisson} />
 
                               <Route path='/success' component={Success} />
 

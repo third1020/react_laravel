@@ -14,8 +14,14 @@ class CreateRequestTable extends Migration
     public function up()
     {
         Schema::create('request', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->timestamps();
+          $table->bigIncrements('id');
+          $table->string('remark')->nullable();
+          $table->string('request_tital');
+          $table->longText('request_detail');
+          $table->boolean('request_status');
+          $table->BIginteger('equipment_id')->unsigned();
+          $table->foreign('equipment_id')->references('id')->on('equipment');
+          $table->timestamps();
         });
     }
 

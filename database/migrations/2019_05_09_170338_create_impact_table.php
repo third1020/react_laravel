@@ -14,8 +14,12 @@ class CreateImpactTable extends Migration
     public function up()
     {
         Schema::create('impact', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->timestamps();
+          $table->bigIncrements('id');
+          $table->string('remark')->nullable();
+          $table->string('impact_name');
+          $table->boolean('impact_value');
+          $table->string('created_by')->nullable();
+          $table->timestamps();
         });
     }
 

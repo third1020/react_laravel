@@ -7,6 +7,21 @@ use Illuminate\Database\Eloquent\Model;
 class Permission extends Model
 {
 
-  protected $fillable = ['permission_name'];
+  protected $fillable = ['permission_name',
+                         'created_by',
+                         'manage_user',
+                         'manage_knowledge',
+                         'manage_message',
+                         'manage_equipment',
+                         'manage_requipment',
+                         'manage_problem',
+                         'manage_incident',
+                         'manage_contact',
+                         'manage_impact',
+                         'manage_priority',
+                         'manage_solution',
+                         'Report'
+
+                       ];
     //
 }

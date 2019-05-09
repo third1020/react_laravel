@@ -10,14 +10,12 @@ import axios from 'axios'
 
        }
 
-
-
-
-
      render () {
        const columns = ['id', 'name', 'email','nameuser','created_at'];
      return (
-       <DataTable url="/api/users" columns={columns} headname={"รายชื่อผู้ใช้เห็นไหม 5555"} edit={"แก้ไข"} delete={"ลบ"}  />
+
+       <DataTable url="/api/users" columns={columns} headname={" List User - ข้อมูลผู้ใช้งาน "} headTablename={"ตารางแสดงข้อมูลสมาชิก"} edit={"แก้ไข"} delete={"ลบ"}  />
+
 
 
      )

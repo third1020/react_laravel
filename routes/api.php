@@ -12,12 +12,7 @@ use Illuminate\Http\Request;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-Route::get('projects', 'ProjectController@index');
-  Route::post('projects', 'ProjectController@store');
-  Route::get('projects/{id}', 'ProjectController@show');
-  Route::put('projects/{project}', 'ProjectController@markAsCompleted');
-  Route::post('tasks', 'TaskController@store');
-  Route::put('tasks/{task}', 'TaskController@markAsCompleted');
+
 
 
   //login auth
@@ -29,7 +24,7 @@ Route::get('projects', 'ProjectController@index');
    //user
     Route::post('user_create', 'UserController@store');
     Route::get('users', 'UserController@index');
-    Route::delete('user/{id}', 'UserController@destroy');
+    Route::delete('users/{id}', 'UserController@destroy');
     Route::get('user/{id}', 'UserController@edit');
     Route::put('user_update/{id}', 'UserController@update');
 
@@ -37,6 +32,10 @@ Route::get('projects', 'ProjectController@index');
     //permission
 
     Route::get('permission', 'PermissionController@index');
+    Route::get('permission_table', 'PermissionController@getTable');
+    Route::delete('permission_table/{id}', 'PermissionController@destroy');
+
+
 
 
 

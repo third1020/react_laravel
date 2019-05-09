@@ -82,8 +82,7 @@ import '../../css/react-confirm-alert.css';
       <div className='custom-ui'>
         <h1>ยืนยันการลบข้อมูล User </h1>
         <p>ID:{list.id}</p>
-        <p>Account:{list.name}</p>
-        <p>Name:{list.nameuser}</p>
+      
 
 <footer class="modal-footer">
 
@@ -112,36 +111,22 @@ import '../../css/react-confirm-alert.css';
     const updated = this.state.entities.data.filter(isNotId);
       this.setState({ data: updated }, () => {this.fetchEntities()});
     //
-    axios.delete(`/api/user/${id}`)
+    axios.delete(`${this.props.url}/${id}`)
 
   }
-
-  // refreshupdate(id){
-  //   const isNotId = user => user.id !== id;
-  //   const updated = this.state.entities.data.filter(isNotId);
-  //     this.setState({ data: updated }, () => {this.fetchEntities()});
-  //   //
-  //   axios.delete(`/api/user/${id}`)
-  //
-  // }
-
-
 
   fetchEntities() {
     let fetchUrl = `${this.props.url}/?page=${this.state.current_page}&column=${this.state.sorted_column}&order=${this.state.order}&per_page=${this.state.entities.meta.per_page}&search=${this.state.search}`;
     axios.get(fetchUrl)
       .then(response => {
           this.setState({ entities: response.data });
+
+          console.log(this.state.entities.data)
       })
       .catch(e => {
         console.error(e);
       });
   }
-
-
-
-
-
 
   changePage(pageNumber) {
     this.setState({ current_page: pageNumber }, () => {this.fetchEntities()});
@@ -230,51 +215,6 @@ import '../../css/react-confirm-alert.css';
     }
   }
 
-  userSearchList() {
-    if (this.state.entities.data.length) {
-
-
-        const result = this.state.entities.data.filter(user => {
-           return user.name.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1
-         })
-
-
-         console.log(result);
-         console.log(this.state.entities.data.length);
-
-
-
-        return result.map(user => {
-          return <tr key={ user.id }>
-            {Object.keys(user).map(key => <td key={key}>{ user[key] }</td> )}
-
-            <td>
-                              { this.props.edit != null ?(
-                                  <button  onClick={() => this.handleUpdate(user.id)} className="btn btn-sm btn-primary" style={{color: '#fff'}}  >
-                                    {this.props.edit}
-                                </button>)
-                                :null}
-
-                                { this.props.delete != null ?
-                                  (<button onClick={() => this.handleDelete(user.id)} className="btn btn-sm btn-danger" >
-                                      {this.props.delete}
-                                  </button>)
-                                  : null}
-
-            </td>
-
-          </tr>
-
-
-              })
-
-
-    } else {
-      return <tr>
-        <td colSpan={this.props.columns.length} className="text-center">ไม่พบข้อมูล</td>
-      </tr>
-    }
-  }
 
 
 
@@ -296,11 +236,13 @@ import '../../css/react-confirm-alert.css';
 
   render() {
     return (
+
       <div className='container py-4' >
         <div style={{paddingLeft: '200' ,paddingRight: '5'}}>
-          <div className='col-md-12'>
+          <div className='col-lg-12'>
+          <h3 class="page-header">{this.props.headname}</h3>
             <div className='card'>
-              <div className='card-header'>{this.props.headname}</div>
+              <div className='card-header'>{this.props.headTablename}</div>
               <div className='card-body'>
       <div className="data-table">
       <div style={{position:'right'}}>
@@ -356,14 +298,17 @@ import '../../css/react-confirm-alert.css';
     </div>
   </div>
 </div>
+
     );
   }
 }
 
 DataTable.propTypes = {
   headname: PropTypes.string,
+  headTablename: PropTypes.string,
   edit:PropTypes.string,
-  delete:PropTypes.string
+  delete:PropTypes.string,
+  one:PropTypes.string
 
 };
 

@@ -14,8 +14,18 @@ class CreateMessageTable extends Migration
     public function up()
     {
         Schema::create('message', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->timestamps();
+          $table->bigIncrements('id');
+          $table->string('remark')->nullable();
+          $table->string('message_title');
+          $table->longText('message_message');
+          $table->BIginteger('message_from')->unsigned();
+          $table->foreign('message_from')->references('id')->on('users');
+          $table->BIginteger('message_to')->unsigned();
+          $table->foreign('message_to')->references('id')->on('users');
+
+          $table->Integer('status');
+          $table->string('created_by')->nullable();
+          $table->timestamps();
         });
     }
 
