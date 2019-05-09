@@ -16,6 +16,7 @@ class UserController extends Controller
    */
   protected $user;
 
+
   /**
    * UsersController constructor.
    *
@@ -24,6 +25,8 @@ class UserController extends Controller
   public function __construct(User $user)
   {
       $this->user = $user;
+
+
   }
 
   /**
@@ -35,12 +38,32 @@ class UserController extends Controller
 
    public function index(Request $request)
    {
-     $query = $this->user->orderBy($request->column, $request->order);
+     $wordsearch = $request->search.'%';
+
+     // $query = $this->user->orderBy($request->column, $request->order);
+
+                         $query = $this->user->where('id','like',$wordsearch)
+                                             ->orwhere('name','like',$wordsearch)
+                                             ->orwhere('email','like',$wordsearch)
+                                             ->orwhere('nameuser','like',$wordsearch)
+                                             ->orwhere('id_card','like',$wordsearch)
+                                             ->orwhere('phone_number','like',$wordsearch)
+                                             ->orwhere('created_at','like',$wordsearch)
+                                             ->orderBy($request->column, $request->order);
+
+
+
+
+
            $users = $query->paginate($request->per_page ?? 5);
+
+
 
            return UsersResource::collection($users);
 
    }
+
+
 
 
 

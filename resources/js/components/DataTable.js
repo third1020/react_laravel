@@ -27,12 +27,21 @@ import '../../css/react-confirm-alert.css';
           total: 1,
         },
       },
+      search : '',
       first_page: 1,
       current_page: 1,
       sorted_column: this.props.columns[0],
       offset: 4,
       order: 'asc',
     };
+
+      this.handleFieldChange = this.handleFieldChange.bind(this)
+
+  }
+  handleFieldChange () {
+    this.setState({
+      search: event.target.value , current_page: 1
+    }, () => {this.fetchEntities()})
   }
 
   handleUpdate(id) {
@@ -119,7 +128,7 @@ import '../../css/react-confirm-alert.css';
 
 
   fetchEntities() {
-    let fetchUrl = `${this.props.url}/?page=${this.state.current_page}&column=${this.state.sorted_column}&order=${this.state.order}&per_page=${this.state.entities.meta.per_page}`;
+    let fetchUrl = `${this.props.url}/?page=${this.state.current_page}&column=${this.state.sorted_column}&order=${this.state.order}&per_page=${this.state.entities.meta.per_page}&search=${this.state.search}`;
     axios.get(fetchUrl)
       .then(response => {
           this.setState({ entities: response.data });
@@ -128,6 +137,11 @@ import '../../css/react-confirm-alert.css';
         console.error(e);
       });
   }
+
+
+
+
+
 
   changePage(pageNumber) {
     this.setState({ current_page: pageNumber }, () => {this.fetchEntities()});
@@ -157,8 +171,12 @@ import '../../css/react-confirm-alert.css';
   }
 
 
+
   componentDidMount() {
-    this.setState({ current_page: this.state.entities.meta.current_page }, () => {this.fetchEntities()});
+
+      this.setState({ current_page: this.state.entities.meta.current_page ,search : this.state.search }, () => {this.fetchEntities()});
+
+
 
   }
 
@@ -177,31 +195,88 @@ import '../../css/react-confirm-alert.css';
     });
   }
 
+
+
   userList() {
     if (this.state.entities.data.length) {
-      return this.state.entities.data.map(user => {
-        return <tr key={ user.id }>
-          {Object.keys(user).map(key => <td key={key}>{ user[key] }</td> )}
 
-          <td>
-          <button  onClick={() => this.handleUpdate(user.id)} className="btn btn-sm btn-primary" style={{color: '#fff'}}  >
-                                  {this.props.edit}
-                              </button>
-                              <button onClick={() => this.handleDelete(user.id)} className="btn btn-sm btn-danger">
-                                  {this.props.delete}
-                              </button>
-          </td>
+        return this.state.entities.data.map(user => {
+          return <tr key={ user.id }>
+            {Object.keys(user).map(key => <td key={key}>{ user[key] }</td> )}
 
-        </tr>
+            <td>
+                              { this.props.edit != null ?(
+                                  <button  onClick={() => this.handleUpdate(user.id)} className="btn btn-sm btn-primary" style={{color: '#fff'}}  >
+                                    {this.props.edit}
+                                </button>)
+                                :null}
 
+                                { this.props.delete != null ?
+                                  (<button onClick={() => this.handleDelete(user.id)} className="btn btn-sm btn-danger" >
+                                      {this.props.delete}
+                                  </button>)
+                                  : null}
 
-      })
+            </td>
+
+          </tr>
+
+              })
+
     } else {
       return <tr>
         <td colSpan={this.props.columns.length} className="text-center">ไม่พบข้อมูล</td>
       </tr>
     }
   }
+
+  userSearchList() {
+    if (this.state.entities.data.length) {
+
+
+        const result = this.state.entities.data.filter(user => {
+           return user.name.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1
+         })
+
+
+         console.log(result);
+         console.log(this.state.entities.data.length);
+
+
+
+        return result.map(user => {
+          return <tr key={ user.id }>
+            {Object.keys(user).map(key => <td key={key}>{ user[key] }</td> )}
+
+            <td>
+                              { this.props.edit != null ?(
+                                  <button  onClick={() => this.handleUpdate(user.id)} className="btn btn-sm btn-primary" style={{color: '#fff'}}  >
+                                    {this.props.edit}
+                                </button>)
+                                :null}
+
+                                { this.props.delete != null ?
+                                  (<button onClick={() => this.handleDelete(user.id)} className="btn btn-sm btn-danger" >
+                                      {this.props.delete}
+                                  </button>)
+                                  : null}
+
+            </td>
+
+          </tr>
+
+
+              })
+
+
+    } else {
+      return <tr>
+        <td colSpan={this.props.columns.length} className="text-center">ไม่พบข้อมูล</td>
+      </tr>
+    }
+  }
+
+
 
   sortByColumn(column) {
     if (column === this.state.sorted_column) {
@@ -228,6 +303,19 @@ import '../../css/react-confirm-alert.css';
               <div className='card-header'>{this.props.headname}</div>
               <div className='card-body'>
       <div className="data-table">
+      <div style={{position:'right'}}>
+      <label>
+      Search:<input
+          class="form-control input-sm"
+          placeholder="search text"
+          type='search'
+          value={this.state.search}
+          onChange={this.handleFieldChange}
+        />
+        </label>
+
+      </div>
+
         <Table striped bordered hover>
           <thead>
             <tr>{ this.tableHeads() }  <th>Action</th> </tr>
@@ -235,6 +323,7 @@ import '../../css/react-confirm-alert.css';
 
           </thead>
           <tbody>{ this.userList() } </tbody>
+
 
         </Table>
         { (this.state.entities.data && this.state.entities.data.length > 0) &&
