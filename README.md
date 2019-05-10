@@ -14,13 +14,14 @@
 
 7.php artisan key:generate
 
-8.npm run dev
+8.php artisan db:seed
 
 9.php artisan serve
 
-แล้วก็ login ไม่ได้ไม่มี user ในdatabase 555555 เดียวเติ้ดเอา hashpassword ออกก่อนจะได้เทสง่ายๆ ไอซ์ไปเพิ่ม permission กับ users ใน phpmyadmin ด้วย
+10.npm run dev
 
-ตรง permission   ช่องใส่ค่าพวก manage ต่างๆใส่ค่า 0 กับ 1 นะ
+password มัน hash อยู่นะ ลอง   อันที่สมบูรณ์แล้วมีแค่ Users อ่ะ  ส่วนอันอื่นเพิ่งทำแค่ตารางยังไม่ได้ทำForm Add กับ update
 
-ส่วนหน้าแก้ไขมันจะเลื่อนไม่ได้   ต้องเข้าไปแก้ไฟล์ใน node_module/react-comfirm-alert/src/react-comfirm-alert.cssถึงจะเลือนได้
+
+
 
