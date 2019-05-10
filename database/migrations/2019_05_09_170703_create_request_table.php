@@ -13,7 +13,7 @@ class CreateRequestTable extends Migration
      */
     public function up()
     {
-        Schema::create('request', function (Blueprint $table) {
+        Schema::create('requests', function (Blueprint $table) {
           $table->bigIncrements('id');
           $table->string('remark')->nullable();
           $table->string('request_tital');
@@ -32,6 +32,6 @@ class CreateRequestTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('request');
+        Schema::dropIfExists('requests');
     }
 }

@@ -4,46 +4,31 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\PermissionResource;
-
-use Illuminate\Http\Request;
 use App\Permission;
+use Illuminate\Http\Request;
+
 
 
 class PermissionController extends Controller
 {
 
-  /**
-   * @var Permission
-   */
-  protected $permission;
+  protected $list;
 
 
-  /**
-   * PermissionsController constructor.
-   *
-   * @param Permission
-   */
-  public function __construct(Permission $permission)
+
+  public function __construct(Permission $list)
   {
-      $this->permission = $permission;
+      $this->list = $list;
 
 
   }
-
-  /**
-   * List of users in Json format
-   *
-   * @param Request $request
-   * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
-   */
-
 
  public function getTable(Request $request)
  {
    $wordsearch = $request->search.'%';
 
 
-                       $query = $this->permission->where('id','like',$wordsearch)
+                       $query = $this->list->where('id','like',$wordsearch)
                                                  ->orwhere('permission_name','like',$wordsearch)
                                                  ->orderBy($request->column, $request->order);
 
@@ -51,11 +36,11 @@ class PermissionController extends Controller
 
 
 
-         $permission = $query->paginate($request->per_page ?? 5);
+         $list = $query->paginate($request->per_page ?? 5);
 
 
 
-         return PermissionResource::collection($permission);
+         return PermissionResource::collection($list);
 
  }
 

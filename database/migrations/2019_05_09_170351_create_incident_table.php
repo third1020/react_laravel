@@ -13,7 +13,7 @@ class CreateIncidentTable extends Migration
      */
     public function up()
     {
-        Schema::create('incident', function (Blueprint $table) {
+        Schema::create('incidents', function (Blueprint $table) {
           $table->bigIncrements('id');
           $table->string('remark')->nullable();
           $table->string('incident_tital');
@@ -22,12 +22,12 @@ class CreateIncidentTable extends Migration
           $table->BIginteger('equipment_id')->unsigned();
           $table->foreign('equipment_id')->references('id')->on('equipment');
           $table->BIginteger('contact_id')->unsigned();
-          $table->foreign('contact_id')->references('id')->on('contact');
+          $table->foreign('contact_id')->references('id')->on('contacts');
           $table->BIginteger('impact_id')->unsigned();
-          $table->foreign('impact_id')->references('id')->on('impact');
+          $table->foreign('impact_id')->references('id')->on('impacts');
           $table->BIginteger('priority_id')->unsigned();
-          $table->foreign('priority_id')->references('id')->on('priority');
-        
+          $table->foreign('priority_id')->references('id')->on('priorities');
+
 
           $table->string('created_by')->nullable();
           $table->timestamps();
@@ -41,6 +41,6 @@ class CreateIncidentTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('incident');
+        Schema::dropIfExists('incidents');
     }
 }

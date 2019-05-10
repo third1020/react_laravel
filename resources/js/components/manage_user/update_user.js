@@ -328,7 +328,7 @@ import axios from 'axios'
                         <div align="center">
 
 
-                          <img src={this.state.image} className="uploadPictureContainer" style={{align:"middle"}} alt="preview"/>
+                          <img src={this.state.image} className="uploadPictureContainer" style={{align:"middle",width:360,hight:240}} alt="preview"/>
 
                           <button className="chooseFileButton" onClick={() => this.Changestatusimage()} >แก้ไขรูปภาพ</button>
 

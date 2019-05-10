@@ -21,11 +21,11 @@ class CreateEquipmentTable extends Migration
           $table->string('equipment_number');
           $table->longText('contact_detail');
           $table->BIginteger('equipment_type_id')->unsigned();
-          $table->foreign('equipment_type_id')->references('id')->on('equipment_type');
+          $table->foreign('equipment_type_id')->references('id')->on('equipment_types');
           $table->string('created_by')->nullable();
           $table->timestamps();
         });
-        DB::statement("ALTER TABLE users ADD equipment_image  MEDIUMBLOB");
+        DB::statement("ALTER TABLE equipment ADD equipment_image  MEDIUMBLOB");
     }
 
     /**

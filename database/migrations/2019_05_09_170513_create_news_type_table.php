@@ -13,7 +13,7 @@ class CreateNewsTypeTable extends Migration
      */
     public function up()
     {
-        Schema::create('news_type', function (Blueprint $table) {
+        Schema::create('news_types', function (Blueprint $table) {
           $table->bigIncrements('id');
           $table->string('remark')->nullable();
           $table->string('type_name');
@@ -29,6 +29,6 @@ class CreateNewsTypeTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('news_type');
+        Schema::dropIfExists('news_types');
     }
 }

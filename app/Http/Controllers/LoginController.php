@@ -31,7 +31,7 @@ class LoginController extends Controller
     $passworddatabase = User::where('name', $name)->value('password');
     // //
     $userdatabase = User::where('name', $name)
-                          ->join('permission', 'users.permission_id', '=', 'permission.id')
+                          ->join('permissions', 'users.permission_id', '=', 'permissions.id')
                           ->get();
 
     // $userdatabase = User::table('users')

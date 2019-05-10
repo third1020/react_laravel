@@ -14,7 +14,7 @@ import axios from 'axios'
        const columns = ['id', 'Permission name','created_at'];
      return (
 
-       <DataTable url="/api/permission_table" columns={columns} headname={" List Permission - ข้อมูลสิทธิ์ผู้ใช้ "} headTablename={"ตารางแสดงข้อมูลสิทธิ์ผู้ใช้"} delete={"ลบ"}  one={"permission_name"}  />
+       <DataTable url="/api/permission_table" columns={columns} headname={" List Permission - ข้อมูลสิทธิ์ผู้ใช้ "} headTablename={"ตารางแสดงข้อมูลสิทธิ์ผู้ใช้"} delete={"ลบ"}  one={"permission_name"} deletefail={"ไม่สามารถลบสิทธิ์ผู้ใช้ได้เนื่องจากข้อมูลยังผูกอยู่กับผู้ใช้งาน"} deletesuccess={"ลบข้อมูลสิทธิ์ผู้ใช้สำเร็จ"} />
 
 
 

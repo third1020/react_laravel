@@ -13,7 +13,7 @@ class CreateIncidentWorkaroundTable extends Migration
      */
     public function up()
     {
-        Schema::create('incident_workaround', function (Blueprint $table) {
+        Schema::create('incident_workarounds', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->timestamps();
         });
@@ -26,6 +26,6 @@ class CreateIncidentWorkaroundTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('incident_workaround');
+        Schema::dropIfExists('incident_workarounds');
     }
 }

@@ -22,12 +22,12 @@ class CreateProblemsTable extends Migration
           $table->BIginteger('equipment_id')->unsigned();
           $table->foreign('equipment_id')->references('id')->on('equipment');
           $table->BIginteger('contact_id')->unsigned();
-          $table->foreign('contact_id')->references('id')->on('contact');
+          $table->foreign('contact_id')->references('id')->on('contacts');
           $table->BIginteger('impact_id')->unsigned();
-          $table->foreign('impact_id')->references('id')->on('impact');
+          $table->foreign('impact_id')->references('id')->on('impacts');
           $table->BIginteger('priority_id')->unsigned();
-          $table->foreign('priority_id')->references('id')->on('priority');
-        
+          $table->foreign('priority_id')->references('id')->on('priorities');
+
           $table->timestamps();
         });
     }

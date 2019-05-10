@@ -13,7 +13,7 @@ class CreateImpactTable extends Migration
      */
     public function up()
     {
-        Schema::create('impact', function (Blueprint $table) {
+        Schema::create('impacts', function (Blueprint $table) {
           $table->bigIncrements('id');
           $table->string('remark')->nullable();
           $table->string('impact_name');
@@ -30,6 +30,6 @@ class CreateImpactTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('impact');
+        Schema::dropIfExists('impacts');
     }
 }

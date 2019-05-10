@@ -12,6 +12,19 @@ import Add_user from './manage_user/add_user'
 import Update_user from './manage_user/update_user'
 
 import List_Permisson from './manage_permission/list_permission'
+import List_Contact from './manage_contact/List_Contact'
+import List_Equipment from './manage_equipment/list_equipment'
+import List_Equipment_register from './manage_equipment_register/list_equipment_register'
+import List_Equipment_type from './manage_equipment_type/list_equipment_type'
+import List_Impact from './manage_impact/list_impact'
+import List_Incident from './manage_incident/list_incident'
+import List_Message from './manage_message/list_message'
+import List_News from './manage_news/list_news'
+import List_News_type from './manage_news_type/list_news_type'
+import List_Priority from './manage_priority/list_priority'
+import List_Problems from './manage_problems/list_problems'
+import List_Request from './manage_request/list_request'
+
 
 
 import '@trendmicro/react-sidenav/dist/react-sidenav.css';
@@ -256,28 +269,28 @@ export default class Dashboard extends Component {
                                             เพิ่มอุปกรณ์
                                               </NavText>
                                        </NavItem>
-                                       <NavItem eventKey="manage_equipment/id_equipment">
+                                       <NavItem eventKey="manage_equipment_register/list_equipment_register">
                                              <NavText>
                                            รายการทะเบียนอุปกรณ์
                                              </NavText>
                                       </NavItem>
-                                      <NavItem eventKey="manage_equipment/add_id_equipment">
+                                      <NavItem eventKey="manage_equipment_register/add_equipment_register">
                                             <NavText>
                                           เพิ่มเลขทะเบียนอุปกรณ์
                                             </NavText>
                                      </NavItem>
-                                    <NavItem eventKey="manage_equipment/type_equipment" style={{left: 30 , fontsize: '14px' }}>
+                                    <NavItem eventKey="manage_equipment_type/type_equipment" style={{left: 30 , fontsize: '14px' }}>
                                              <NavText>
                                            ประเภทอุปกรณ์
                                              </NavText>
 
                                       </NavItem>
-                                      <NavItem eventKey="manage_equipment/list_type_equipment" >
+                                      <NavItem eventKey="manage_equipment_type/list_equipment_type" >
                                                <NavText>
                                              รายการประเภทอุปกรณ์
                                                </NavText>
                                         </NavItem>
-                                        <NavItem eventKey="manage_equipment/add_type_equipment" >
+                                        <NavItem eventKey="manage_equipment_type/add_type_equipment" >
                                                  <NavText>
                                                เพิ่มประเภทอุปกรณ์
                                                  </NavText>
@@ -291,19 +304,19 @@ export default class Dashboard extends Component {
 
                                 { this.state.manage_requipment == 1 ?
                                   (
-                                  <NavItem eventKey="manage_requipment">
+                                  <NavItem eventKey="manage_request">
                                   <NavIcon>
                                 <i style={{ fontSize: '2.25em',align: 'justify',position: 'relative',top: 10}}><FaBeer/></i>
                                   </NavIcon>
                                       <NavText>
                                           จัดการความต้องการ
                                       </NavText>
-                                      <NavItem eventKey="manage_requipment/list_requipment" >
+                                      <NavItem eventKey="manage_request/list_request" >
                                                <NavText>
                                              รายการข้อมูล
                                                </NavText>
                                         </NavItem>
-                                        <NavItem eventKey="manage_requipment/add_requipment" >
+                                        <NavItem eventKey="manage_request/add_request" >
                                                  <NavText>
                                                เพิ่มความต้องการ
                                                  </NavText>
@@ -317,19 +330,19 @@ export default class Dashboard extends Component {
 
                                 { this.state.manage_problem == 1 ?
                                   (
-                                  <NavItem eventKey="manage_problem">
+                                  <NavItem eventKey="manage_problems">
                                   <NavIcon>
                                   <i style={{ fontSize: '2.25em',align: 'justify',position: 'relative',top: 10}}><FaBeer/></i>
                                   </NavIcon>
                                       <NavText>
                                           จัดการปัญหา
                                       </NavText>
-                                      <NavItem eventKey="manage_problem/list_problem" >
+                                      <NavItem eventKey="manage_problems/list_problems" >
                                                <NavText>
                                              รายการข้อมูลปัญหา
                                                </NavText>
                                         </NavItem>
-                                        <NavItem eventKey="manage_problem/add_problem" >
+                                        <NavItem eventKey="manage_problems/add_problem" >
                                                  <NavText>
                                                เพิ่มปัญหา
                                                  </NavText>
@@ -522,7 +535,22 @@ export default class Dashboard extends Component {
                               <Route path='/manage_user/add_user' component={Add_user} />
                               <Route path='/manage_user/edit/:id' component={Update_user} />
 
-                              <Route path='/manage_permission/list_permission' component={List_Permisson} />
+                              <Route path='/manage_permission/list_permission'                 component={List_Permisson} />
+                              <Route path='/manage_contact/list_contact'                       component={List_Contact} />
+                              <Route path='/manage_equipment/list_equipment'                   component={List_Equipment} />
+                              <Route path='/manage_equipment_register/list_equipment_register' component={List_Equipment_register} />
+                              <Route path='/manage_equipment_type/list_equipment_type'         component={List_Equipment_type} />
+                              <Route path='/manage_impact/list_impact'                         component={List_Impact} />
+                              <Route path='/manage_incident/list_incident'                     component={List_Incident} />
+                              <Route path='/manage_message/list_message'                       component={List_Message} />
+                              <Route path='/manage_news/list_news'                             component={List_News} />
+                              <Route path='/manage_news_type/list_news_type'                   component={List_News_type} />
+                              <Route path='/manage_priority/list_priority'                     component={List_Priority} />
+                              <Route path='/manage_problems/list_problems'                     component={List_Problems} />
+                              <Route path='/manage_request/list_request'                       component={List_Request} />
+
+
+
 
                               <Route path='/success' component={Success} />
 

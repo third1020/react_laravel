@@ -13,7 +13,7 @@ class CreatePriorityTable extends Migration
      */
     public function up()
     {
-        Schema::create('priority', function (Blueprint $table) {
+        Schema::create('priorities', function (Blueprint $table) {
           $table->bigIncrements('id');
           $table->string('remark')->nullable();
           $table->string('priority_name');
@@ -29,6 +29,6 @@ class CreatePriorityTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('priority');
+        Schema::dropIfExists('priorities');
     }
 }

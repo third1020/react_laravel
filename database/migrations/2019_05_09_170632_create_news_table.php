@@ -18,8 +18,8 @@ class CreateNewsTable extends Migration
           $table->string('remark')->nullable();
           $table->string('news_title');
           $table->longText('news_detail');
-          $table->BIginteger('news_type')->unsigned();
-          $table->foreign('news_type')->references('id')->on('news_type');
+          $table->BIginteger('news_types_id')->unsigned();
+          $table->foreign('news_types_id')->references('id')->on('news_types');
           $table->string('created_by')->nullable();
           $table->timestamps();
         });

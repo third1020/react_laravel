@@ -13,7 +13,7 @@ class CreateWorkaroundTable extends Migration
      */
     public function up()
     {
-        Schema::create('workaround', function (Blueprint $table) {
+        Schema::create('workarounds', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->timestamps();
         });
@@ -26,6 +26,6 @@ class CreateWorkaroundTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('workaround');
+        Schema::dropIfExists('workarounds');
     }
 }

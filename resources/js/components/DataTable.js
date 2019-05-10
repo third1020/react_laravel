@@ -9,7 +9,11 @@ import Success from './success_insert';
 import { Link } from 'react-router-dom';
 
 import { confirmAlert } from 'react-confirm-alert';
+import { ToastContainer } from "react-toastr";
+import "../../css/alert.css";
+import "../../css/animate.css";
 import '../../css/react-confirm-alert.css';
+let container;
 
  class DataTable extends Component {
   constructor(props) {
@@ -82,7 +86,7 @@ import '../../css/react-confirm-alert.css';
       <div className='custom-ui'>
         <h1>ยืนยันการลบข้อมูล User </h1>
         <p>ID:{list.id}</p>
-      
+
 
 <footer class="modal-footer">
 
@@ -112,6 +116,26 @@ import '../../css/react-confirm-alert.css';
       this.setState({ data: updated }, () => {this.fetchEntities()});
     //
     axios.delete(`${this.props.url}/${id}`)
+    .then(response => {
+
+      container.success(`${this.props.deletesuccess}`, `success`, {
+          closeButton: true,
+          timeOut: 5000
+        })
+        window.scrollTo(0, 0);
+
+    })
+    .catch(error => {
+
+
+      container.error(`${this.props.deletefail}`, `errors`, {
+          closeButton: true,
+
+          timeOut: 5000,
+          extendedTimeOut: 2000
+        })
+      window.scrollTo(0, 0);
+    })
 
   }
 
@@ -292,6 +316,10 @@ import '../../css/react-confirm-alert.css';
             </ul>
           </nav>
         }
+        <ToastContainer
+          ref={ref => container = ref}
+          className="toast-top-right"
+        />
         </div>
        </div>
       </div>
@@ -308,7 +336,9 @@ DataTable.propTypes = {
   headTablename: PropTypes.string,
   edit:PropTypes.string,
   delete:PropTypes.string,
-  one:PropTypes.string
+  deletesuccess:PropTypes.string,
+  deletefail:PropTypes.string
+
 
 };
 
