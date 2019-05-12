@@ -12,13 +12,13 @@ use Illuminate\Http\Request;
 class PermissionController extends Controller
 {
 
-  protected $list;
+  protected $permission;
 
 
 
-  public function __construct(Permission $list)
+  public function __construct(Permission $permission)
   {
-      $this->list = $list;
+      $this->permission = $permission;
 
 
   }
@@ -28,19 +28,16 @@ class PermissionController extends Controller
    $wordsearch = $request->search.'%';
 
 
-                       $query = $this->list->where('id','like',$wordsearch)
-                                                 ->orwhere('permission_name','like',$wordsearch)
-                                                 ->orderBy($request->column, $request->order);
+                      $query = $this->permission->orderBy($request->column, $request->order);
 
 
 
 
-
-         $list = $query->paginate($request->per_page ?? 5);
-
+         $permission = $query->paginate($request->per_page ?? 5);
 
 
-         return PermissionResource::collection($list);
+
+         return PermissionResource::collection($permission);
 
  }
 

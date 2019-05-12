@@ -9,7 +9,7 @@ body.react-confirm-alert-body-element {
 }
 
 .react-confirm-alert-overlay {
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   right: 0;
@@ -42,7 +42,7 @@ body.react-confirm-alert-body-element {
   border-radius: 10px;
   box-shadow: 0 20px 75px rgba(0, 0, 0, 0.13);
   color: #666;
-  
+
 }
 
 .react-confirm-alert-svg {

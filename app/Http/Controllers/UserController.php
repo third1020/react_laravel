@@ -11,17 +11,11 @@ use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
-  /**
-   * @var User
-   */
+
   protected $user;
 
 
-  /**
-   * UsersController constructor.
-   *
-   * @param User $user
-   */
+
   public function __construct(User $user)
   {
       $this->user = $user;
@@ -29,12 +23,6 @@ class UserController extends Controller
 
   }
 
-  /**
-   * List of users in Json format
-   *
-   * @param Request $request
-   * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
-   */
 
    public function index(Request $request)
    {

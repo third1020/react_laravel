@@ -176,7 +176,7 @@ import axios from 'axios'
         return (
 
 
-              <div className='col-md-12' style={{width:600,padding:40}}>
+              <div className='col-lg-12' style={{width:900,padding:40}}>
                 <div className='card'>
                   <div className='card-header'>เพิ่มผู้ใช้งาน</div>
                   <div className='card-body'>

@@ -178,35 +178,35 @@ export default class Dashboard extends Component {
 
                                 { this.state.manage_knowledge == 1 ?
                                   (
-                                    <NavItem eventKey="manage_knowledge">
+                                    <NavItem eventKey="manage_news">
                                     <NavIcon>
                                     <i style={{ fontSize: '2.25em',align: 'justify',position: 'relative',top: 10}}><FaBeer/></i>
                                     </NavIcon>
                                         <NavText>
                                             การจัดการความรู้
                                         </NavText>
-                                        <NavItem eventKey="manage_knowledge/list_Content" >
+                                        <NavItem eventKey="manage_news/list_news" >
                                                   <NavText>
                                              หัวข้อเรื่อง
                                                   </NavText>
                                          </NavItem>
-                                          <NavItem eventKey="manage_knowledge/add_Content">
+                                          <NavItem eventKey="manage_news/add_news">
                                                 <NavText>
                                               เพิ่มเนื้อหา
                                                 </NavText>
                                          </NavItem>
-                                      <NavItem eventKey="manage_knowledge/type_knowledge" style={{left: 30 , fontsize: '14px' }}>
+                                      <NavItem eventKey="manage_news_type" style={{left: 30 , fontsize: '14px' }}>
                                                <NavText>
                                              ประเภทความรู้
                                                </NavText>
 
                                         </NavItem>
-                                        <NavItem eventKey="manage_knowledge/type_knowledge" >
+                                        <NavItem eventKey="manage_news_type/list_news_type" >
                                                  <NavText>
                                                หัวข้อความรู้
                                                  </NavText>
                                           </NavItem>
-                                          <NavItem eventKey="manage_knowledge/add_knowledge" >
+                                          <NavItem eventKey="manage_news_type/add_news_type" >
                                                    <NavText>
                                                  เพิ่มเนื้อหาความรู้
                                                    </NavText>

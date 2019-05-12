@@ -54,7 +54,7 @@ let container;
       onClickOutside: () => { this.fetchEntities();},
   customUI: ({ onClose }) => {
     return (
-      <div style={{ position: 'center', height: '100%' }}>
+      <div style={{ height: '100%' ,left:50 }}>
       <Update_user id={id}/>
       <footer class="modal-footer">
 
