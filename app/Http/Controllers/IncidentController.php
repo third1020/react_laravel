@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Resources\IncidentResource;
 use App\Incident;
+use Illuminate\Support\Facades\DB;
 
 class IncidentController extends Controller
 {
@@ -15,6 +16,16 @@ class IncidentController extends Controller
   public function __construct(Incident $list)
   {
       $this->list = $list;
+
+
+  }
+
+  public function index()
+  {
+
+    $getdata = DB::table('incidents')->get();
+
+    return $getdata->toJson();
 
 
   }
@@ -37,6 +48,35 @@ class IncidentController extends Controller
 
 
          return IncidentResource::collection($list);
+
+ }
+
+ public function store(Request $request)
+ {
+
+   $validatedData = $request->validate([
+     'incident_tital' => 'required',
+     'incident_detail' => 'required',
+     'incident_status' => 'required',
+     'equipment_id' => 'required',
+     'contact_id' => 'required',
+     'impact_id' => 'required',
+     'priority_id' => 'required',
+
+   ]);
+
+   Incident::create([
+
+     'incident_tital' => $validatedData['incident_tital'],
+     'incident_detail' => $validatedData['incident_detail'],
+     'incident_status' => $validatedData['incident_status'],
+     'equipment_id' => $validatedData['equipment_id'],
+     'contact_id' => $validatedData['contact_id'],
+     'impact_id' => $validatedData['impact_id'],
+     'priority_id' => $validatedData['priority_id'],
+
+   ]);
+   return response()->json('User created!');
 
  }
 

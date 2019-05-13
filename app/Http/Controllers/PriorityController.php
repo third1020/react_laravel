@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Resources\PriorityResource;
 use App\Priority;
+use Illuminate\Support\Facades\DB;
 
 class PriorityController extends Controller
 {
@@ -19,6 +20,16 @@ class PriorityController extends Controller
 
   }
 
+  public function index()
+  {
+
+    $getdata = DB::table('priorities')->get();
+
+    return $getdata->toJson();
+
+
+  }
+
  public function getTable(Request $request)
  {
    $wordsearch = $request->search.'%';
@@ -27,7 +38,7 @@ class PriorityController extends Controller
                        $query = $this->list->where('id','like',$wordsearch)
                                                  ->orwhere('priority_name','like',$wordsearch)
                                                  ->orwhere('priority_status','like',$wordsearch)
-                                            
+
                                                  ->orwhere('created_at','like',$wordsearch)
                                                  ->orderBy($request->column, $request->order);
 
@@ -37,6 +48,26 @@ class PriorityController extends Controller
 
 
          return PriorityResource::collection($list);
+
+ }
+
+ public function store(Request $request)
+ {
+
+   $validatedData = $request->validate([
+     'priority_name' => 'required',
+     'priority_status' => 'required',
+
+
+   ]);
+
+   Priority::create([
+
+     'priority_name' => $validatedData['priority_name'],
+     'priority_status' => $validatedData['priority_status'],
+
+   ]);
+   return response()->json('User created!');
 
  }
 

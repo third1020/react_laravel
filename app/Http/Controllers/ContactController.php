@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Resources\ContactResource;
 use App\Contact;
+use Illuminate\Support\Facades\DB;
 
 class ContactController extends Controller
 {
@@ -15,6 +16,16 @@ class ContactController extends Controller
   public function __construct(Contact $list)
   {
       $this->list = $list;
+
+
+  }
+
+  public function index()
+  {
+
+    $getdata = DB::table('contacts')->get();
+
+    return $getdata->toJson();
 
 
   }
@@ -38,6 +49,33 @@ class ContactController extends Controller
 
 
          return ContactResource::collection($list);
+
+ }
+
+ public function store(Request $request)
+ {
+
+   $validatedData = $request->validate([
+     'contact_name' => 'required',
+     'contact_phone' => 'required|min:8',
+     'contact_email' => 'required',
+     'contact_address' => 'required',
+     'contact_detail' => 'required',
+     'user_id' => 'required',
+
+   ]);
+
+   Contact::create([
+
+     'contact_name' => $validatedData['contact_name'],
+     'contact_phone' => $validatedData['contact_phone'],
+     'contact_email' => $validatedData['contact_email'],
+     'contact_address' => $validatedData['contact_address'],
+     'contact_detail' => $validatedData['contact_detail'],
+     'user_id' => $validatedData['user_id'],
+
+   ]);
+   return response()->json('User created!');
 
  }
 

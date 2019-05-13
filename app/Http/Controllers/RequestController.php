@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Resources\RequestResource;
 
 use App\Requests;
+use Illuminate\Support\Facades\DB;
 
 class RequestController extends Controller
 {
@@ -16,6 +17,16 @@ class RequestController extends Controller
   public function __construct(Requests $list)
   {
       $this->list = $list;
+
+
+  }
+
+  public function index()
+  {
+
+    $getdata = DB::table('requests')->get();
+
+    return $getdata->toJson();
 
 
   }
@@ -38,6 +49,31 @@ class RequestController extends Controller
 
 
          return RequestResource::collection($list);
+
+  }
+
+  public function store(Request $request)
+  {
+
+    $validatedData = $request->validate([
+      'request_tital' => 'required',
+      'request_detail' => 'required|min:8',
+      'request_status' => 'required',
+
+      'equipment_id' => 'required',
+
+    ]);
+
+    Requests::create([
+
+      'request_tital' => $validatedData['request_tital'],
+      'request_detail' => $validatedData['request_detail'],
+      'request_status' => $validatedData['request_status'],
+      'equipment_id' => $validatedData['equipment_id'],
+
+
+    ]);
+    return response()->json('User created!');
 
   }
 

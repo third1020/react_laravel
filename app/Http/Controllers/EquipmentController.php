@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Resources\EquipmentResource;
 use App\Equipment;
+use Illuminate\Support\Facades\DB;
 
 class EquipmentController extends Controller
 {
@@ -15,6 +16,16 @@ class EquipmentController extends Controller
   public function __construct(Equipment $list)
   {
       $this->list = $list;
+
+
+  }
+
+  public function index()
+  {
+
+    $getdata = DB::table('equipment')->get();
+
+    return $getdata->toJson();
 
 
   }
@@ -37,6 +48,33 @@ class EquipmentController extends Controller
 
 
          return EquipmentResource::collection($list);
+
+ }
+
+ public function store(Request $request)
+ {
+
+   $validatedData = $request->validate([
+     'equipment_name' => 'required',
+     'equipment_detail' => 'required',
+     'equipment_number' => 'required',
+     'contact_detail' => 'required',
+     'equipment_type_id' => 'required',
+     'equipment_image' => 'required',
+
+   ]);
+
+   Equipment::create([
+
+     'equipment_name' => $validatedData['equipment_name'],
+     'equipment_detail' => $validatedData['equipment_detail'],
+     'equipment_number' => $validatedData['equipment_number'],
+     'contact_detail' => $validatedData['contact_detail'],
+     'equipment_type_id' => $validatedData['equipment_type_id'],
+     'equipment_image' => $validatedData['equipment_image'],
+
+   ]);
+   return response()->json('User created!');
 
  }
 

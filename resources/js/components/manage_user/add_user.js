@@ -92,6 +92,14 @@ let container;
           .then(response => {
             // redirect to the homepage
             this.setState({
+              username: '',
+              password: '',
+              Name_lastname: '',
+              ID_Card: '',
+              Phone_Number: '',
+              Email: '',
+              permission: '',
+            
               errors: []
             })
 
@@ -116,35 +124,6 @@ let container;
             window.scrollTo(0, 0);
           })
 
-
-
-          const username = this.state.username;
-          const password = this.state.password;
-          const Name_lastname = this.state.Name_lastname;
-          const ID_Card = this.state.ID_Card;
-          const Phone_Number = this.state.Phone_Number;
-          const Email = this.state.Email;
-          const permission = this.state.permission;
-          const image = this.state.image;
-
-          const errors = this.state.errors;
-
-
-
-
-
-
-          this.setState({
-            username: '',
-            password: '',
-            Name_lastname: '',
-            ID_Card: '',
-            Phone_Number: '',
-            Email: '',
-            permission: '',
-            errors: []
-
-      });
 
 
 
@@ -279,14 +258,18 @@ let container;
                           onChange={this.handleFieldChange}
                         />
                         {this.renderErrorFor('Email')}
+                        {this.renderErrorFor('permission')}
+
+                        {this.renderErrorFor('image')}
+
+
 
                       </div>
 
                       <label htmlFor='permission'>สิทธิ์การเข้าถึง</label>
 
-
-
                       <div class="input-group mb-3">
+
                         <div class="input-group-prepend">
                         {  this.state.permission == '' ? (
 
@@ -309,10 +292,14 @@ let container;
                         </select>
 
 
+
                       </div>
 
 
+
+
                       <div className='form-group'>
+
                       <label htmlFor='image'>เลือกรูปภาพโปรไฟล์</label>
 
                       <ImageUploader
@@ -330,7 +317,11 @@ let container;
                   fileTypeError="ประเภทไฟล์ไม่ถูกต้อง"
                       />
 
+
+
+
                       </div>
+
 
 
 

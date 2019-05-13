@@ -23,8 +23,18 @@ class UserController extends Controller
 
   }
 
+  public function index()
+  {
 
-   public function index(Request $request)
+    $getdata = DB::table('users')->get();
+
+    return $getdata->toJson();
+
+
+  }
+
+
+   public function getTable(Request $request)
    {
      $wordsearch = $request->search.'%';
 
@@ -58,7 +68,6 @@ class UserController extends Controller
    public function store(Request $request)
    {
 
-
      $validatedData = $request->validate([
        'username' => 'required',
        'password' => 'required|min:8',
@@ -67,50 +76,31 @@ class UserController extends Controller
        'Phone_Number' => 'required|min:8',
        'Email' => 'required',
        'permission' => 'required',
-
-
+       'image' => 'required'
 
      ]);
 
 
 
-    $file = $request->file('image');
-    $file = $request->image;
-    $imageencode = $file;
 
     $passwordhash = Hash::make($request->password);
 
+     User::create([
 
-
-
-     $user = User::create([
-
-       'name' => $request->username,
+       'name' => $validatedData['username'],
        'password' => $passwordhash,
-       'nameuser' => $request->Name_lastname,
-       'id_card' => $request->ID_Card,
-       'phone_number' => $request->Phone_Number,
-       'email' => $request->Email,
-       'permission_id' => $request->permission,
-       'image' => $imageencode
-
+       'nameuser' => $validatedData['Name_lastname'],
+       'id_card' => $validatedData['ID_Card'],
+       'phone_number' => $validatedData['Phone_Number'],
+       'email' => $validatedData['Email'],
+       'permission_id' => $validatedData['permission'],
+       'image' => $validatedData['image'],
 
      ]);
-
-
-
-
-
      return response()->json('User created!');
 
    }
 
-
-   // public function show(Task $task)
-   // {
-   //     //
-   // }
-   //
    public function edit($id)
    {
      $user = User::findOrFail($id);

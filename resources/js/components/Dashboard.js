@@ -6,11 +6,25 @@ import SideNav, { Toggle, Nav, NavItem, NavIcon, NavText } from '@trendmicro/rea
 
 
 import Success from './success_insert'
-
-import List_User from './manage_user/list_user'
 import Add_user from './manage_user/add_user'
+import Add_contact from './manage_contact/add_contact'
+import Add_equipment from './manage_equipment/add_equipment'
+import Add_equipment_register from './manage_equipment_register/add_equipment_register'
+import Add_equipment_type from './manage_equipment_type/add_equipment_type'
+import Add_permission from './manage_permission/add_permission'
+
+
+
+
+
+
+
+
+
+
 import Update_user from './manage_user/update_user'
 
+import List_User from './manage_user/list_user'
 import List_Permisson from './manage_permission/list_permission'
 import List_Contact from './manage_contact/List_Contact'
 import List_Equipment from './manage_equipment/list_equipment'
@@ -290,7 +304,7 @@ export default class Dashboard extends Component {
                                              รายการประเภทอุปกรณ์
                                                </NavText>
                                         </NavItem>
-                                        <NavItem eventKey="manage_equipment_type/add_type_equipment" >
+                                        <NavItem eventKey="manage_equipment_type/add_equipment_type" >
                                                  <NavText>
                                                เพิ่มประเภทอุปกรณ์
                                                  </NavText>
@@ -531,10 +545,21 @@ export default class Dashboard extends Component {
 
 
                               <Switch>
-                              <Route exact path='/manage_user/list_user' component={List_User} />
+
                               <Route path='/manage_user/add_user' component={Add_user} />
+                              <Route path='/manage_permission/add_permission' component={Add_permission} />
+                              <Route path='/manage_contact/add_contact' component={Add_contact} />
+                              <Route path='/manage_equipment/add_equipment' component={Add_equipment} />
+                              <Route path='/manage_equipment_register/add_equipment_register' component={Add_equipment_register} />
+                              <Route path='/manage_equipment_type/add_equipment_type' component={Add_equipment_type} />
+
+
+
+
+
                               <Route path='/manage_user/edit/:id' component={Update_user} />
 
+                              <Route exact path='/manage_user/list_user'                       component={List_User} />
                               <Route path='/manage_permission/list_permission'                 component={List_Permisson} />
                               <Route path='/manage_contact/list_contact'                       component={List_Contact} />
                               <Route path='/manage_equipment/list_equipment'                   component={List_Equipment} />

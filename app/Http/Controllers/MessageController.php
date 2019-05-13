@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Resources\MessageResource;
 use App\Message;
+use Illuminate\Support\Facades\DB;
 
 class MessageController extends Controller
 {
@@ -15,6 +16,16 @@ class MessageController extends Controller
   public function __construct(Message $list)
   {
       $this->list = $list;
+
+
+  }
+
+  public function index()
+  {
+
+    $getdata = DB::table('messages')->get();
+
+    return $getdata->toJson();
 
 
   }
@@ -38,6 +49,33 @@ class MessageController extends Controller
 
 
          return MessageResource::collection($list);
+
+ }
+
+ public function store(Request $request)
+ {
+
+   $validatedData = $request->validate([
+     'message_title' => 'required',
+     'message_message' => 'required',
+     'message_from' => 'required',
+     'message_to' => 'required',
+     'status' => 'required',
+
+
+   ]);
+
+   Message::create([
+
+     'message_title' => $validatedData['message_title'],
+     'message_message' => $validatedData['message_message'],
+     'message_from' => $validatedData['message_from'],
+     'message_to' => $validatedData['message_to'],
+     'status' => $validatedData['status'],
+
+
+   ]);
+   return response()->json('User created!');
 
  }
 

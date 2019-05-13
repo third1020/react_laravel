@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Resources\News_typeResource;
 use App\News_type;
+use Illuminate\Support\Facades\DB;
 
 class News_typeController extends Controller
 {
@@ -19,6 +20,16 @@ class News_typeController extends Controller
 
   }
 
+  public function index()
+  {
+
+    $getdata = DB::table('news_types')->get();
+
+    return $getdata->toJson();
+
+
+  }
+
  public function getTable(Request $request)
  {
    $wordsearch = $request->search.'%';
@@ -26,7 +37,7 @@ class News_typeController extends Controller
 
                        $query = $this->list->where('id','like',$wordsearch)
                                                  ->orwhere('type_name','like',$wordsearch)
-                                              
+
                                                  ->orwhere('created_at','like',$wordsearch)
                                                  ->orderBy($request->column, $request->order);
 
@@ -36,6 +47,25 @@ class News_typeController extends Controller
 
 
          return News_typeResource::collection($list);
+
+ }
+
+ public function store(Request $request)
+ {
+
+   $validatedData = $request->validate([
+     'type_name' => 'required',
+
+
+   ]);
+
+   News_type::create([
+
+     'type_name' => $validatedData['type_name'],
+
+
+   ]);
+   return response()->json('User created!');
 
  }
 

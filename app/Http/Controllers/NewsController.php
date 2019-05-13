@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Resources\NewsResource;
 use App\News;
+use Illuminate\Support\Facades\DB;
 
 
 class NewsController extends Controller
@@ -20,6 +21,16 @@ class NewsController extends Controller
 
   }
 
+  public function index()
+  {
+
+    $getdata = DB::table('news')->get();
+
+    return $getdata->toJson();
+
+
+  }
+
  public function getTable(Request $request)
  {
    $wordsearch = $request->search.'%';
@@ -28,7 +39,7 @@ class NewsController extends Controller
                        $query = $this->list->where('id','like',$wordsearch)
                                                  ->orwhere('news_title','like',$wordsearch)
                                                  ->orwhere('news_types_id','like',$wordsearch)
-                                                
+
                                                  ->orwhere('created_at','like',$wordsearch)
                                                  ->orderBy($request->column, $request->order);
 
@@ -38,6 +49,29 @@ class NewsController extends Controller
 
 
          return NewsResource::collection($list);
+
+ }
+
+ public function store(Request $request)
+ {
+
+   $validatedData = $request->validate([
+     'news_title' => 'required',
+     'news_detail' => 'required',
+     'news_types_id' => 'required',
+
+
+   ]);
+
+   News::create([
+
+     'news_title' => $validatedData['news_title'],
+     'news_detail' => $validatedData['news_detail'],
+     'news_types_id' => $validatedData['news_types_id'],
+
+
+   ]);
+   return response()->json('User created!');
 
  }
 

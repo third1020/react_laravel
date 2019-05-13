@@ -89,7 +89,7 @@ import axios from 'axios'
                                +this.state.Phone_Number+ '\n'
                                +this.state.Email+ '\n'
                                +this.state.permission+ '\n'
-                               +this.state.image[0]);
+                               +this.state.image[this.state.image.length-1]);
         event.preventDefault()
 
         const { history } = this.props
@@ -104,7 +104,7 @@ import axios from 'axios'
           Phone_Number: this.state.Phone_Number,
           Email: this.state.Email,
           permission: this.state.permission,
-          image: this.state.image[0]
+          image: this.state.image[this.state.image.length-1]
         }
         if (this.state.password.length > 0) {
           insertdata.password = this.state.password;

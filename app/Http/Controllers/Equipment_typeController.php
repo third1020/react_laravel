@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Resources\Equipment_typeResource;
 use App\Equipment_type;
+use Illuminate\Support\Facades\DB;
 
 class Equipment_typeController extends Controller
 {
@@ -19,6 +20,16 @@ class Equipment_typeController extends Controller
 
   }
 
+  public function index()
+  {
+
+    $getdata = DB::table('equipment_types')->get();
+
+    return $getdata->toJson();
+
+
+  }
+
  public function getTable(Request $request)
  {
    $wordsearch = $request->search.'%';
@@ -26,7 +37,7 @@ class Equipment_typeController extends Controller
 
                        $query = $this->list->where('id','like',$wordsearch)
                                                  ->orwhere('type_name','like',$wordsearch)
-                                              
+
                                                  ->orderBy($request->column, $request->order);
 
 
@@ -35,6 +46,25 @@ class Equipment_typeController extends Controller
 
 
          return Equipment_typeResource::collection($list);
+
+ }
+
+ public function store(Request $request)
+ {
+
+   $validatedData = $request->validate([
+     'type_name' => 'required',
+
+
+   ]);
+
+   Equipment_type::create([
+
+     'type_name' => $validatedData['type_name'],
+
+
+   ]);
+   return response()->json('User created!');
 
  }
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Resources\ImpactResource;
 use App\Impact;
+use Illuminate\Support\Facades\DB;
 
 class ImpactController extends Controller
 {
@@ -19,6 +20,16 @@ class ImpactController extends Controller
 
   }
 
+  public function index()
+  {
+
+    $getdata = DB::table('impacts')->get();
+
+    return $getdata->toJson();
+
+
+  }
+
  public function getTable(Request $request)
  {
    $wordsearch = $request->search.'%';
@@ -27,7 +38,7 @@ class ImpactController extends Controller
                        $query = $this->list->where('id','like',$wordsearch)
                                                  ->orwhere('impact_name','like',$wordsearch)
                                                  ->orwhere('impact_value','like',$wordsearch)
-                                              
+
                                                  ->orderBy($request->column, $request->order);
 
 
@@ -36,6 +47,27 @@ class ImpactController extends Controller
 
 
          return ImpactResource::collection($list);
+
+ }
+
+ public function store(Request $request)
+ {
+
+   $validatedData = $request->validate([
+     'impact_name' => 'required',
+     'impact_value' => 'required',
+
+
+   ]);
+
+   Impact::create([
+
+     'impact_name' => $validatedData['impact_name'],
+     'impact_value' => $validatedData['impact_value'],
+
+
+   ]);
+   return response()->json('User created!');
 
  }
 
