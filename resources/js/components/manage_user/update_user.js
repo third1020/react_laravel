@@ -82,14 +82,7 @@ import axios from 'axios'
         }
       }
       handleCreate (event) {
-        alert(                  this.state.username + '\n'
-                               +this.state.password+ '\n'
-                               +this.state.Name_lastname+ '\n'
-                               +this.state.ID_Card+ '\n'
-                               +this.state.Phone_Number+ '\n'
-                               +this.state.Email+ '\n'
-                               +this.state.permission+ '\n'
-                               +this.state.image[this.state.image.length-1]);
+
         event.preventDefault()
 
         const { history } = this.props
@@ -287,7 +280,7 @@ import axios from 'axios'
 
                         </div>
                         <select class="custom-select" value={this.state.permission} onChange={this.handleSelectChange}>
-                        <option>Choose...</option>
+                      
 
 
 

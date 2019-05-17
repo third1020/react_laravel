@@ -50,6 +50,7 @@ export default class Login extends Component {
         })
         if(this.state.loginstatus[0].name != null ){
 
+          sessionStorage.setItem("id", this.state.loginstatus[0].id);
           sessionStorage.setItem("name", this.state.loginstatus[0].name);
           sessionStorage.setItem("email", this.state.loginstatus[0].email);
 

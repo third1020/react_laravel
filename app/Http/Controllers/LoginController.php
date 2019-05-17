@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\User;
-
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 
@@ -29,9 +29,17 @@ class LoginController extends Controller
 
 
     $passworddatabase = User::where('name', $name)->value('password');
+
+
+
     // //
-    $userdatabase = User::where('name', $name)
-                          ->join('permissions', 'users.permission_id', '=', 'permissions.id')
+    $userdatabase = DB::table('permissions')
+
+
+                          ->join('users', function ($join) {
+                               $join->on('permissions.id', '=', 'users.permission_id');
+                          })
+                          ->where('name', $name)
                           ->get();
 
     // $userdatabase = User::table('users')

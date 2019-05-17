@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import Table from 'react-bootstrap/Table';
 import PropTypes from 'prop-types';
 import Button from 'react-bootstrap/Button';
-import Update_user from './manage_user/update_user';
 import Success from './success_insert';
+import Select_update from './Select_update';
+
 
 
 import { Link } from 'react-router-dom';
@@ -14,6 +15,8 @@ import "../../css/alert.css";
 import "../../css/animate.css";
 import '../../css/react-confirm-alert.css';
 let container;
+
+
 
  class DataTable extends Component {
   constructor(props) {
@@ -48,6 +51,8 @@ let container;
     }, () => {this.fetchEntities()})
   }
 
+
+
   handleUpdate(id) {
 
     confirmAlert({
@@ -55,7 +60,7 @@ let container;
   customUI: ({ onClose }) => {
     return (
       <div style={{ height: '100%' ,left:50 }}>
-      <Update_user id={id}/>
+      <Select_update id={id} ChooseUpdateForm={this.props.name}/>
       <footer class="modal-footer">
 
               <button type="button" class="btn btn-danger"   onClick={() => {
@@ -332,6 +337,7 @@ let container;
 }
 
 DataTable.propTypes = {
+  name: PropTypes.string,
   headname: PropTypes.string,
   headTablename: PropTypes.string,
   edit:PropTypes.string,

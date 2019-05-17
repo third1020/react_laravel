@@ -69,6 +69,33 @@ class News_typeController extends Controller
 
  }
 
+ public function edit($id)
+ {
+   $listdata = DB::table('news_types')->where('id',$id)->get();
+
+   return $listdata->toJson();
+ }
+
+
+ public function update(Request $request, $id) {
+
+
+   $validatedData = $request->validate([
+     'type_name' => 'required',
+   ]);
+
+
+        News_type::findOrFail($id)
+            ->update([
+            'type_name' => $validatedData['type_name'],
+          ]);
+
+
+
+
+
+}
+
 
  public function destroy($id) {
   News_type::findOrFail($id)->delete();

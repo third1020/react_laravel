@@ -81,6 +81,45 @@ class ProblemsController extends Controller
 
  }
 
+ public function edit($id)
+ {
+   $listdata = DB::table('problems')->where('id',$id)->get();
+
+   return $listdata->toJson();
+ }
+
+
+ public function update(Request $request, $id) {
+
+
+   $validatedData = $request->validate([
+     'problems_tital' => 'required',
+     'problems_detail' => 'required',
+     'problems_status' => 'required',
+     'equipment_id' => 'required',
+     'contact_id' => 'required',
+     'impact_id' => 'required',
+     'priority_id' => 'required',
+   ]);
+
+
+        Problems::findOrFail($id)
+            ->update([
+              'problems_tital' => $validatedData['problems_tital'],
+              'problems_detail' => $validatedData['problems_detail'],
+              'problems_status' => $validatedData['problems_status'],
+              'equipment_id' => $validatedData['equipment_id'],
+              'contact_id' => $validatedData['contact_id'],
+              'impact_id' => $validatedData['impact_id'],
+              'priority_id' => $validatedData['priority_id'],
+          ]);
+
+
+
+
+
+}
+
 
  public function destroy($id) {
   Problems::findOrFail($id)->delete();

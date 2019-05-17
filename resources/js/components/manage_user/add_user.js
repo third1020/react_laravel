@@ -62,14 +62,7 @@ let container;
 
 
       handleCreate (event) {
-        alert(                  this.state.username + '\n'
-                               +this.state.password+ '\n'
-                               +this.state.Name_lastname+ '\n'
-                               +this.state.ID_Card+ '\n'
-                               +this.state.Phone_Number+ '\n'
-                               +this.state.Email+ '\n'
-                               +this.state.permission+ '\n'
-                               +this.state.image[this.state.image.length - 1]);
+
         event.preventDefault()
 
 
@@ -99,7 +92,7 @@ let container;
               Phone_Number: '',
               Email: '',
               permission: '',
-            
+
               errors: []
             })
 
@@ -258,9 +251,6 @@ let container;
                           onChange={this.handleFieldChange}
                         />
                         {this.renderErrorFor('Email')}
-                        {this.renderErrorFor('permission')}
-
-                        {this.renderErrorFor('image')}
 
 
 
@@ -280,8 +270,8 @@ let container;
 
 
                         </div>
-                        <select class="custom-select" value={this.state.permission} onChange={this.handleSelectChange}>
-                        <option>Choose...</option>
+                        <select class="custom-select" value={this.state.permission} onChange={this.handleSelectChange} className={`form-control ${this.hasErrorFor('permission') ? 'is-invalid' : ''}`}>
+                        <option value="">Choose...</option>
 
 
 
@@ -290,6 +280,8 @@ let container;
                           ))}
 
                         </select>
+
+                          {this.renderErrorFor('permission')}
 
 
 
@@ -301,6 +293,11 @@ let container;
                       <div className='form-group'>
 
                       <label htmlFor='image'>เลือกรูปภาพโปรไฟล์</label>
+
+                      <input
+                        className={`form-control ${this.hasErrorFor('image') ? 'is-invalid' : ''}`}
+                        hidden
+                      />
 
                       <ImageUploader
                   type="file"
@@ -315,7 +312,12 @@ let container;
                   withPreview={true}
                   fileSizeError="ขนาดไฟล์ใหญ่เกินไป"
                   fileTypeError="ประเภทไฟล์ไม่ถูกต้อง"
+
                       />
+
+                      {this.renderErrorFor('image')}
+
+
 
 
 

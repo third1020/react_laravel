@@ -71,6 +71,36 @@ class ImpactController extends Controller
 
  }
 
+ public function edit($id)
+ {
+   $listdata = DB::table('impacts')->where('id',$id)->get();
+
+   return $listdata->toJson();
+ }
+
+
+ public function update(Request $request, $id) {
+
+
+   $validatedData = $request->validate([
+     'impact_name' => 'required',
+     'impact_value' => 'required',
+
+   ]);
+
+
+        Impact::findOrFail($id)
+            ->update([
+              'impact_name' => $validatedData['impact_name'],
+              'impact_value' => $validatedData['impact_value'],
+          ]);
+
+
+
+
+
+}
+
 
  public function destroy($id) {
   Impact::findOrFail($id)->delete();

@@ -143,8 +143,7 @@ let container;
 
 
       handleCreate (event) {
-        alert(this.state.permission_name);
-
+      
 
 
         event.preventDefault()
@@ -170,10 +169,10 @@ let container;
 
         }
 
-        axios.post('/api/permissionpost', insertdata)
+        axios.post('/api/permission', insertdata)
           .then(response => {
 
-
+      $('input:checkbox').removeAttr('checked');
             // redirect to the homepage
             this.setState({
 
@@ -238,7 +237,6 @@ let container;
 
 
 
-
       componentWillMount () {
 
 
@@ -273,57 +271,57 @@ let container;
                     </div>
 
                       <div className='form-group'>
-                      <label>สิทธิ์การเข้าถึง User :</label>    <input type="checkbox" onChange={this.handleCheckboxUserChange}/>
+                      <label>สิทธิ์การเข้าถึง User :</label>    <input type="checkbox" checked={this.state.manage_user} onChange={this.handleCheckboxUserChange}/>
                       </div>
 
                       <div className='form-group'>
-                      <label>สิทธิ์การเข้าถึง News :</label>    <input type="checkbox" onChange={this.handleCheckboxknowledgeChange}/>
+                      <label>สิทธิ์การเข้าถึง News :</label>    <input type="checkbox" checked={this.state.manage_knowledge} onChange={this.handleCheckboxknowledgeChange}/>
                       </div>
 
                       <div className='form-group'>
-                      <label>สิทธิ์การเข้าถึง Message :</label>    <input type="checkbox" onChange={this.handleCheckboxmessageChange}/>
+                      <label>สิทธิ์การเข้าถึง Message :</label>    <input type="checkbox" checked={this.state.manage_message} onChange={this.handleCheckboxmessageChange}/>
                       </div>
 
                       <div className='form-group'>
-                      <label>สิทธิ์การเข้าถึง Equipment :</label>    <input type="checkbox" onChange={this.handleCheckboxequipmentChange}/>
+                      <label>สิทธิ์การเข้าถึง Equipment :</label>    <input type="checkbox"  checked={this.state.manage_equipment} onChange={this.handleCheckboxequipmentChange}/>
                       </div>
 
                       <div className='form-group'>
-                      <label>สิทธิ์การเข้าถึง Request :</label>    <input type="checkbox" onChange={this.handleCheckboxrequipmentChange}/>
+                      <label>สิทธิ์การเข้าถึง Request :</label>    <input type="checkbox" checked={this.state.manage_requipment} onChange={this.handleCheckboxrequipmentChange}/>
                       </div>
 
                       <div className='form-group'>
-                      <label>สิทธิ์การเข้าถึง Problems :</label>    <input type="checkbox" onChange={this.handleCheckboxproblemChange}/>
+                      <label>สิทธิ์การเข้าถึง Problems :</label>    <input type="checkbox"  checked={this.state.manage_problem} onChange={this.handleCheckboxproblemChange}/>
                       </div>
 
                       <div className='form-group'>
-                      <label>สิทธิ์การเข้าถึง Incident :</label>    <input type="checkbox" onChange={this.handleCheckboxincidentChange}/>
+                      <label>สิทธิ์การเข้าถึง Incident :</label>    <input type="checkbox" checked={this.state.manage_incident} onChange={this.handleCheckboxincidentChange}/>
                       </div>
 
                       <div className='form-group'>
-                      <label>สิทธิ์การเข้าถึง Contact :</label>    <input type="checkbox" onChange={this.handleCheckboxcontactChange}/>
+                      <label>สิทธิ์การเข้าถึง Contact :</label>    <input type="checkbox" checked={this.state.manage_contact} onChange={this.handleCheckboxcontactChange}/>
                       </div>
 
                       <div className='form-group'>
-                      <label>สิทธิ์การเข้าถึง Impact :</label>    <input type="checkbox" onChange={this.handleCheckboximpactChange}/>
+                      <label>สิทธิ์การเข้าถึง Impact :</label>    <input type="checkbox" checked={this.state.manage_impact} onChange={this.handleCheckboximpactChange}/>
                       </div>
 
                       <div className='form-group'>
-                      <label>สิทธิ์การเข้าถึง Priority :</label>    <input type="checkbox" onChange={this.handleCheckboxpriorityChange}/>
+                      <label>สิทธิ์การเข้าถึง Priority :</label>    <input type="checkbox" checked={this.state.manage_priority} onChange={this.handleCheckboxpriorityChange}/>
                       </div>
 
                       <div className='form-group'>
-                      <label>สิทธิ์การเข้าถึง Solution :</label>    <input type="checkbox" onChange={this.handleCheckboxsolutionChange}/>
+                      <label>สิทธิ์การเข้าถึง Solution :</label>    <input type="checkbox" checked={this.state.manage_solution}  onChange={this.handleCheckboxsolutionChange}/>
                       </div>
 
                       <div className='form-group'>
-                      <label>สิทธิ์การเข้าถึง Report :</label>    <input type="checkbox"  onChange={this.handleCheckboxReportChange}/>
+                      <label>สิทธิ์การเข้าถึง Report :</label>    <input type="checkbox" checked={this.state.Report} onChange={this.handleCheckboxReportChange}/>
                       </div>
 
 
 
 
-                      <button className='btn btn-primary' >Create</button>
+                      <button className='btn btn-primary' > Create</button>
                     </form>
 
                     <ToastContainer

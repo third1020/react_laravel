@@ -78,6 +78,43 @@ class EquipmentController extends Controller
 
  }
 
+ public function edit($id)
+ {
+   $listdata = DB::table('equipment')->where('id',$id)->get();
+
+   return $listdata->toJson();
+ }
+
+
+ public function update(Request $request, $id) {
+
+
+   $validatedData = $request->validate([
+     'equipment_name' => 'required',
+     'equipment_detail' => 'required',
+     'equipment_number' => 'required',
+     'contact_detail' => 'required',
+     'equipment_type_id' => 'required',
+     'equipment_image' => 'required',
+   ]);
+
+
+        Equipment::findOrFail($id)
+            ->update([
+              'equipment_name' => $validatedData['equipment_name'],
+              'equipment_detail' => $validatedData['equipment_detail'],
+              'equipment_number' => $validatedData['equipment_number'],
+              'contact_detail' => $validatedData['contact_detail'],
+              'equipment_type_id' => $validatedData['equipment_type_id'],
+              'equipment_image' => $validatedData['equipment_image'],
+          ]);
+
+
+
+
+
+}
+
 
  public function destroy($id) {
   Equipment::findOrFail($id)->delete();

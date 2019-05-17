@@ -14,7 +14,7 @@ import axios from 'axios'
        const columns = ['id', 'Request Tital','Request Status','created_at'];
      return (
 
-       <DataTable url="/api/request_table" columns={columns} headname={" List Request"} headTablename={"ตารางแสดงข้อมูล"} delete={"ลบ"}   deletefail={"ลบข้อมูลไม่สำเร็จ"} deletesuccess={"ลบข้อมูลสำเร็จ"} />
+       <DataTable url="/api/request_table" columns={columns} name={"request"} headname={" List Request"} headTablename={"ตารางแสดงข้อมูล"} edit={"แก้ไข"} delete={"ลบ"}   deletefail={"ลบข้อมูลไม่สำเร็จ"} deletesuccess={"ลบข้อมูลสำเร็จ"} />
 
 
 

@@ -57,8 +57,8 @@ class RequestController extends Controller
 
     $validatedData = $request->validate([
       'request_tital' => 'required',
-      'request_detail' => 'required|min:8',
-      'request_status' => 'required',
+      'request_detail' => 'required',
+      'request_status' => '',
 
       'equipment_id' => 'required',
 
@@ -68,7 +68,7 @@ class RequestController extends Controller
 
       'request_tital' => $validatedData['request_tital'],
       'request_detail' => $validatedData['request_detail'],
-      'request_status' => $validatedData['request_status'],
+      'request_status' => "1",
       'equipment_id' => $validatedData['equipment_id'],
 
 
@@ -76,6 +76,39 @@ class RequestController extends Controller
     return response()->json('User created!');
 
   }
+
+  public function edit($id)
+  {
+    $listdata = DB::table('requests')->where('id',$id)->get();
+
+    return $listdata->toJson();
+  }
+
+
+  public function update(Request $request, $id) {
+
+
+    $validatedData = $request->validate([
+      'request_tital' => 'required',
+      'request_detail' => 'required',
+      'request_status' => '',
+      'equipment_id' => 'required',
+    ]);
+
+
+         Requests::findOrFail($id)
+             ->update([
+               'request_tital' => $validatedData['request_tital'],
+               'request_detail' => $validatedData['request_detail'],
+               'request_status' => "1",
+               'equipment_id' => $validatedData['equipment_id'],
+           ]);
+
+
+
+
+
+ }
 
 
   public function destroy($id) {

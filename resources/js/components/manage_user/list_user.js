@@ -14,7 +14,7 @@ import axios from 'axios'
        const columns = ['id', 'name', 'email','nameuser','created_at'];
      return (
 
-       <DataTable url="/api/users" columns={columns} headname={" List User - ข้อมูลผู้ใช้งาน "} headTablename={"ตารางแสดงข้อมูลสมาชิก"} edit={"แก้ไข"} delete={"ลบ"} deletefail={"ไม่สามารถลบข้อมูลผู้ใช้งานได้"} deletesuccess={"ลบข้อมูลผู้ใช้งานสำเร็จ"} />
+       <DataTable url="/api/users" columns={columns} name={"user"} headname={" List User - ข้อมูลผู้ใช้งาน "} headTablename={"ตารางแสดงข้อมูลสมาชิก"} edit={"แก้ไข"} delete={"ลบ"} deletefail={"ไม่สามารถลบข้อมูลผู้ใช้งานได้"} deletesuccess={"ลบข้อมูลผู้ใช้งานสำเร็จ"} />
 
 
 

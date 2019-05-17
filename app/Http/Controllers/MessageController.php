@@ -60,7 +60,7 @@ class MessageController extends Controller
      'message_message' => 'required',
      'message_from' => 'required',
      'message_to' => 'required',
-     'status' => 'required',
+
 
 
    ]);
@@ -71,13 +71,47 @@ class MessageController extends Controller
      'message_message' => $validatedData['message_message'],
      'message_from' => $validatedData['message_from'],
      'message_to' => $validatedData['message_to'],
-     'status' => $validatedData['status'],
+     'status' => "0",
 
 
    ]);
    return response()->json('User created!');
 
  }
+
+ public function edit($id)
+ {
+   $listdata = DB::table('messages')->where('id',$id)->get();
+
+   return $listdata->toJson();
+ }
+
+
+ public function update(Request $request, $id) {
+
+
+   $validatedData = $request->validate([
+     'message_title' => 'required',
+     'message_message' => 'required',
+     'message_from' => 'required',
+     'message_to' => 'required',
+   ]);
+
+
+        Message::findOrFail($id)
+            ->update([
+              'message_title' => $validatedData['message_title'],
+              'message_message' => $validatedData['message_message'],
+              'message_from' => $validatedData['message_from'],
+              'message_to' => $validatedData['message_to'],
+              'status' => "0",
+          ]);
+
+
+
+
+
+}
 
 
  public function destroy($id) {

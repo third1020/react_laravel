@@ -68,6 +68,33 @@ class Equipment_typeController extends Controller
 
  }
 
+ public function edit($id)
+ {
+   $listdata = DB::table('equipment_types')->where('id',$id)->get();
+
+   return $listdata->toJson();
+ }
+
+
+ public function update(Request $request, $id) {
+
+
+   $validatedData = $request->validate([
+     'type_name' => 'required',
+   ]);
+
+
+        Equipment_type::findOrFail($id)
+            ->update([
+            'type_name' => $validatedData['type_name'],
+          ]);
+
+
+
+
+
+}
+
 
  public function destroy($id) {
   Equipment_type::findOrFail($id)->delete();

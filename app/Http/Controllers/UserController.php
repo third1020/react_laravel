@@ -23,16 +23,6 @@ class UserController extends Controller
 
   }
 
-  public function index()
-  {
-
-    $getdata = DB::table('users')->get();
-
-    return $getdata->toJson();
-
-
-  }
-
 
    public function getTable(Request $request)
    {
@@ -61,7 +51,15 @@ class UserController extends Controller
 
    }
 
+   public function index()
+   {
 
+     $getdata = DB::table('users')->get();
+
+     return $getdata->toJson();
+
+
+   }
 
 
 

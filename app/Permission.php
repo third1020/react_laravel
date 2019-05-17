@@ -8,7 +8,6 @@ class Permission extends Model
 {
 
   protected $fillable = ['permission_name',
-
                          'manage_user',
                          'manage_knowledge',
                          'manage_message',
@@ -21,8 +20,7 @@ class Permission extends Model
                          'manage_priority',
                          'manage_solution',
                          'Report',
-                         'created_by',
-
+                         'created_by'
                        ];
-    //
+
 }

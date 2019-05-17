@@ -217,8 +217,8 @@ let container;
                           onChange={this.handleFieldChange}
                         />
                         {this.renderErrorFor('contact_detail')}
-                        {this.renderErrorFor('getequipment_type_id')}
-                        {this.renderErrorFor('equipment_image')}
+
+
 
                       </div>
 
@@ -231,8 +231,8 @@ let container;
 
 
                         </div>
-                        <select class="custom-select" value={this.state.getequipment_type_id} onChange={this.handleSelectChange}>
-                        <option>Choose...</option>
+                        <select class="custom-select" value={this.state.getequipment_type_id} onChange={this.handleSelectChange} className={`form-control ${this.hasErrorFor('getequipment_type_id') ? 'is-invalid' : ''}`}>
+                        <option value="" >Choose...</option>
 
 
 
@@ -242,6 +242,8 @@ let container;
 
                         </select>
 
+                        {this.renderErrorFor('getequipment_type_id')}
+
 
 
                       </div>
@@ -250,6 +252,11 @@ let container;
                       <div className='form-group'>
 
                       <label htmlFor='image'>เลือกรูปภาพอุปกรณ์</label>
+
+                      <input
+                        className={`form-control ${this.hasErrorFor('equipment_image') ? 'is-invalid' : ''}`}
+                        hidden
+                      />
 
                       <ImageUploader
                   type="file"
@@ -264,7 +271,9 @@ let container;
                   withPreview={true}
                   fileSizeError="ขนาดไฟล์ใหญ่เกินไป"
                   fileTypeError="ประเภทไฟล์ไม่ถูกต้อง"
+
                       />
+                      {this.renderErrorFor('equipment_image')}
 
                       </div>
 

@@ -80,6 +80,45 @@ class IncidentController extends Controller
 
  }
 
+ public function edit($id)
+ {
+   $listdata = DB::table('incidents')->where('id',$id)->get();
+
+   return $listdata->toJson();
+ }
+
+
+ public function update(Request $request, $id) {
+
+
+   $validatedData = $request->validate([
+     'incident_tital' => 'required',
+     'incident_detail' => 'required',
+     'incident_status' => 'required',
+     'equipment_id' => 'required',
+     'contact_id' => 'required',
+     'impact_id' => 'required',
+     'priority_id' => 'required',
+   ]);
+
+
+        Incident::findOrFail($id)
+            ->update([
+              'incident_tital' => $validatedData['incident_tital'],
+              'incident_detail' => $validatedData['incident_detail'],
+              'incident_status' => $validatedData['incident_status'],
+              'equipment_id' => $validatedData['equipment_id'],
+              'contact_id' => $validatedData['contact_id'],
+              'impact_id' => $validatedData['impact_id'],
+              'priority_id' => $validatedData['priority_id'],
+          ]);
+
+
+
+
+
+}
+
 
  public function destroy($id) {
   Incident::findOrFail($id)->delete();

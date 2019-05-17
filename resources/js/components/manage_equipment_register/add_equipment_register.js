@@ -212,7 +212,7 @@ let container;
                           onChange={this.handleFieldChange}
                         />
                         {this.renderErrorFor('detail')}
-                        {this.renderErrorFor('user_id')}
+                    
 
                       </div>
 

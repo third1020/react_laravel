@@ -36,7 +36,7 @@ class NewsController extends Controller
    $wordsearch = $request->search.'%';
 
 
-                       $query = $this->list->where('id','like',$wordsearch)
+                       $query =DB::table('news')->where('id','like',$wordsearch)
                                                  ->orwhere('news_title','like',$wordsearch)
                                                  ->orwhere('news_types_id','like',$wordsearch)
 
@@ -74,6 +74,37 @@ class NewsController extends Controller
    return response()->json('User created!');
 
  }
+
+ public function edit($id)
+ {
+   $listdata = DB::table('news')->where('id',$id)->get();
+
+   return $listdata->toJson();
+ }
+
+
+ public function update(Request $request, $id) {
+
+
+   $validatedData = $request->validate([
+     'news_title' => 'required',
+     'news_detail' => 'required',
+     'news_types_id' => 'required',
+   ]);
+
+
+        News::findOrFail($id)
+            ->update([
+              'news_title' => $validatedData['news_title'],
+              'news_detail' => $validatedData['news_detail'],
+              'news_types_id' => $validatedData['news_types_id'],
+          ]);
+
+
+
+
+
+}
 
 
  public function destroy($id) {

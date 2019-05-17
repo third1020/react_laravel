@@ -171,7 +171,7 @@ let container;
                           name='contact_phone'
                           className={`form-control ${this.hasErrorFor('contact_phone') ? 'is-invalid' : ''}`}
                           placeholder="กรอกเบอร์โทรศัพท์"
-                          type="number"
+                          type="text"
                           value={this.state.contact_phone}
                           onChange={this.handleFieldChange}
                         />
@@ -223,7 +223,7 @@ let container;
                           onChange={this.handleFieldChange}
                         />
                         {this.renderErrorFor('contact_detail')}
-                        {this.renderErrorFor('user_id')}
+
 
                       </div>
 
@@ -236,8 +236,8 @@ let container;
 
 
                         </div>
-                        <select class="custom-select" value={this.state.user_id} onChange={this.handleSelectChange}>
-                        <option>Choose...</option>
+                        <select class="custom-select" value={this.state.user_id} onChange={this.handleSelectChange} className={`form-control ${this.hasErrorFor('user_id') ? 'is-invalid' : ''}`}>
+                        <option value="" >Choose...</option>
 
 
 
@@ -246,8 +246,7 @@ let container;
                           ))}
 
                         </select>
-
-
+                        {this.renderErrorFor('user_id')}
 
                       </div>
 

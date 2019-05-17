@@ -79,6 +79,42 @@ class Equipment_registerController extends Controller
 
  }
 
+ public function edit($id)
+ {
+   $listdata = DB::table('equipment_registers')->where('id',$id)->get();
+
+   return $listdata->toJson();
+ }
+
+
+ public function update(Request $request, $id) {
+
+
+   $validatedData = $request->validate([
+     'equipment_name' => 'required',
+     'equipment_type' => 'required',
+     'username' => 'required',
+     'department' => 'required',
+     'detail' => 'required',
+
+   ]);
+
+
+        Equipment_register::findOrFail($id)
+            ->update([
+              'equipment_name' => $validatedData['equipment_name'],
+              'equipment_type' => $validatedData['equipment_type'],
+              'username' => $validatedData['username'],
+              'department' => $validatedData['department'],
+              'detail' => $validatedData['detail'],
+          ]);
+
+
+
+
+
+}
+
 
  public function destroy($id) {
   Equipment_register::findOrFail($id)->delete();

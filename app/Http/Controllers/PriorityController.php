@@ -71,6 +71,35 @@ class PriorityController extends Controller
 
  }
 
+ public function edit($id)
+ {
+   $listdata = DB::table('priorities')->where('id',$id)->get();
+
+   return $listdata->toJson();
+ }
+
+
+ public function update(Request $request, $id) {
+
+
+   $validatedData = $request->validate([
+     'priority_name' => 'required',
+     'priority_status' => 'required',
+   ]);
+
+
+        Priority::findOrFail($id)
+            ->update([
+              'priority_name' => $validatedData['priority_name'],
+              'priority_status' => $validatedData['priority_status'],
+          ]);
+
+
+
+
+
+}
+
 
  public function destroy($id) {
   Priority::findOrFail($id)->delete();

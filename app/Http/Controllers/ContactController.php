@@ -79,6 +79,44 @@ class ContactController extends Controller
 
  }
 
+ public function edit($id)
+ {
+   $listdata = DB::table('contacts')->where('id',$id)->get();
+
+   return $listdata->toJson();
+ }
+
+
+ public function update(Request $request, $id) {
+
+
+   $validatedData = $request->validate([
+     'contact_name' => 'required',
+     'contact_phone' => 'required|min:8',
+     'contact_email' => 'required',
+     'contact_address' => 'required',
+     'contact_detail' => 'required',
+     'user_id' => 'required',
+
+   ]);
+
+
+        Contact::findOrFail($id)
+            ->update([
+              'contact_name' => $validatedData['contact_name'],
+              'contact_phone' => $validatedData['contact_phone'],
+              'contact_email' => $validatedData['contact_email'],
+              'contact_address' => $validatedData['contact_address'],
+              'contact_detail' => $validatedData['contact_detail'],
+              'user_id' => $validatedData['user_id'],
+          ]);
+
+
+
+
+
+}
+
 
  public function destroy($id) {
   Contact::findOrFail($id)->delete();

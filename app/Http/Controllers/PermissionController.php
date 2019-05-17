@@ -87,12 +87,64 @@ class PermissionController extends Controller
      'manage_impact' => $validatedData['manage_impact'],
      'manage_priority' => $validatedData['manage_priority'],
      'manage_solution' => $validatedData['manage_solution'],
-     'Report' => $validatedData['Report'],
+     'Report' => $validatedData['Report']
 
    ]);
-   return response()->json('User created!');
+
 
  }
+
+ public function edit($id)
+ {
+   $listdata = DB::table('permissions')->where('id',$id)->get();
+
+   return $listdata->toJson();
+ }
+
+
+ public function update(Request $request, $id) {
+
+
+   $validatedData = $request->validate([
+     'permission_name' => 'required',
+     'manage_user' => 'required',
+     'manage_knowledge' => 'required',
+     'manage_message' => 'required',
+     'manage_equipment' => 'required',
+     'manage_requipment' => 'required',
+     'manage_problem' => 'required',
+     'manage_incident' => 'required',
+     'manage_contact' => 'required',
+     'manage_impact' => 'required',
+     'manage_priority' => 'required',
+     'manage_solution' => 'required',
+     'Report' => 'required',
+
+   ]);
+
+
+        Permission::findOrFail($id)
+            ->update([
+              'permission_name' => $validatedData['permission_name'],
+              'manage_user' => $validatedData['manage_user'],
+              'manage_knowledge' => $validatedData['manage_knowledge'],
+              'manage_message' => $validatedData['manage_message'],
+              'manage_equipment' => $validatedData['manage_equipment'],
+              'manage_requipment' => $validatedData['manage_requipment'],
+              'manage_problem' => $validatedData['manage_problem'],
+              'manage_incident' => $validatedData['manage_incident'],
+              'manage_contact' => $validatedData['manage_contact'],
+              'manage_impact' => $validatedData['manage_impact'],
+              'manage_priority' => $validatedData['manage_priority'],
+              'manage_solution' => $validatedData['manage_solution'],
+              'Report' => $validatedData['Report']
+          ]);
+
+
+
+
+
+}
 
  public function destroy($id) {
   Permission::findOrFail($id)->delete();

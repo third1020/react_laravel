@@ -15,21 +15,21 @@ class CreatePermissionTable extends Migration
     {
         Schema::create('permissions', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('permission_name');
-            $table->string('created_by');
+            $table->string('permission_name')->nullable();
+            $table->string('created_by')->nullable();
 
-            $table->boolean('manage_user');
-            $table->boolean('manage_knowledge');
-            $table->boolean('manage_message');
-            $table->boolean('manage_equipment');
-            $table->boolean('manage_requipment');
-            $table->boolean('manage_problem');
-            $table->boolean('manage_incident');
-            $table->boolean('manage_contact');
-            $table->boolean('manage_impact');
-            $table->boolean('manage_priority');
-            $table->boolean('manage_solution');
-            $table->boolean('Report');
+            $table->boolean('manage_user')->nullable();
+            $table->boolean('manage_knowledge')->nullable();
+            $table->boolean('manage_message')->nullable();
+            $table->boolean('manage_equipment')->nullable();
+            $table->boolean('manage_requipment')->nullable();
+            $table->boolean('manage_problem')->nullable();
+            $table->boolean('manage_incident')->nullable();
+            $table->boolean('manage_contact')->nullable();
+            $table->boolean('manage_impact')->nullable();
+            $table->boolean('manage_priority')->nullable();
+            $table->boolean('manage_solution')->nullable();
+            $table->boolean('Report')->nullable();
 
 
 
