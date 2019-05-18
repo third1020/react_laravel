@@ -23,17 +23,6 @@ import Add_problems from './manage_problems/add_problems'
 
 
 
-
-
-
-
-
-
-
-
-
-
-
 import Update_user from './manage_user/update_user'
 
 import List_User from './manage_user/list_user'
@@ -82,6 +71,7 @@ export default class Dashboard extends Component {
       manage_priority:'',
       manage_solution:'',
       Report:'',
+      expanded: false,
 
 
       loginstatus: [],
@@ -107,7 +97,14 @@ export default class Dashboard extends Component {
     this.state.Report = sessionStorage.getItem("Report");
 
 
+    this.onToggle = this.onToggle.bind(this)
+
   }
+
+     onToggle(expanded){
+        this.setState({ expanded: expanded });
+      
+    }
 
 
 
@@ -115,10 +112,14 @@ export default class Dashboard extends Component {
 
     render() {
 
+      const { expanded } = this.state;
+
 
         return (
 
                     <div>
+                    {this.state.expanded ?(<Header left={260}/>)  : (<Header left={75}/>)}
+
 
                     <Router>
 
@@ -135,8 +136,11 @@ export default class Dashboard extends Component {
 
                                   }
                               }}
+
+                              onToggle={this.onToggle}
                           >
-                              <SideNav.Toggle />
+
+                              <SideNav.Toggle aria-expanded="true" />
                               <SideNav.Nav defaultSelected="/">
 
 

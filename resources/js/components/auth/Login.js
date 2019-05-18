@@ -71,7 +71,7 @@ export default class Login extends Component {
 
 
 
-          history.push('/home')
+          history.push('/Dashboard')
 
         }
 

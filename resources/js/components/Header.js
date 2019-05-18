@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 
 import Nav from 'react-bootstrap/Nav';
@@ -7,8 +8,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 
 
-
-export default class Header extends Component {
+ class Header extends Component {
 
   constructor (props) {
     super(props)
@@ -33,7 +33,7 @@ export default class Header extends Component {
     render() {
         return (
 
-  <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" style={{paddingRight: 75,paddingLeft: 75}}>
+  <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" style={{paddingRight: 75,paddingLeft: this.props.left}}>
   <Navbar.Brand href="#home" style={{align: 'middle'}}>React-Bootstrap</Navbar.Brand>
   <Navbar.Toggle aria-controls="responsive-navbar-nav" />
   <Navbar.Collapse id="responsive-navbar-nav">
@@ -55,3 +55,10 @@ export default class Header extends Component {
   );
 }
 }
+
+Header.propTypes = {
+  left: PropTypes.number,
+
+};
+
+export default Header
