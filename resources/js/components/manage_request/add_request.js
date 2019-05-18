@@ -149,7 +149,7 @@ let container;
         return (
 
           <div className='container py-4' >
-            <div style={{paddingLeft: '200' ,paddingRight: '5'}}>
+            <div style={{paddingLeft: '10' ,paddingRight: '5'}}>
               <div className='col-md-12'>
                 <div className='card'>
                   <div className='card-header'>เพิ่มความต้องการ</div>

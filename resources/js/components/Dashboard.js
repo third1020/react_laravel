@@ -103,7 +103,7 @@ export default class Dashboard extends Component {
 
      onToggle(expanded){
         this.setState({ expanded: expanded });
-      
+
     }
 
 
@@ -119,463 +119,470 @@ export default class Dashboard extends Component {
 
                     <div>
                     {this.state.expanded ?(<Header left={260}/>)  : (<Header left={75}/>)}
+                    <div
+                    style={{
+                        marginLeft: expanded ? 240 : 64,
+                        padding: '15px 20px 0 20px'
+                    }}
+                >
 
 
-                    <Router>
+                <Router>
 
-                  <Route render={({ location, history }) => (
-                      <React.Fragment>
-                          <SideNav
-                          style={{ background: '#e44745',position: 'absolute', height: '150%' }}
-                               onSelect={(selected) => {
-                                  const to = '/' + selected;
-                                  if (location.pathname !== to) {
-                                      history.push(to);
-              console.log(location.pathname);
-              console.log(to);
+              <Route render={({ location, history }) => (
+                  <React.Fragment>
+                      <SideNav
+                      style={{ background: '#e44745',position: 'absolute', height: '150%' }}
+                           onSelect={(selected) => {
+                              const to = '/' + selected;
+                              if (location.pathname !== to) {
+                                  history.push(to);
+          console.log(location.pathname);
+          console.log(to);
 
-                                  }
-                              }}
+                              }
+                          }}
 
-                              onToggle={this.onToggle}
-                          >
+                          onToggle={this.onToggle}
+                      >
 
-                              <SideNav.Toggle aria-expanded="true" />
-                              <SideNav.Nav defaultSelected="/">
+                          <SideNav.Toggle />
+
+                          <SideNav.Nav defaultSelected="/">
 
 
 
-                             <NavItem eventKey="Dashboard">
+                         <NavItem eventKey="Dashboard">
+                         <NavIcon>
+
+                         <i style={{ fontSize: '2.25em',align: 'justify',position: 'relative',top: 10}}><FaHome/></i>
+
+                         </NavIcon>
+                             <NavText>
+                                หน้าแรก
+                             </NavText>
+
+
+                         </NavItem>
+
+
+
+
+
+                         { this.state.manage_user == 1 ?
+                           (
+                             <NavItem eventKey="manage_user">
                              <NavIcon>
-
-                             <i style={{ fontSize: '2.25em',align: 'justify',position: 'relative',top: 10}}><FaHome/></i>
-
+                             <i style={{ fontSize: '2.25em',align: 'justify',position: 'relative',top: 10}}><FaUser/></i>
                              </NavIcon>
-                                 <NavText>
-                                    หน้าแรก
+                                 <NavText style={{ paddingRight: 32  }} title="รายงาน">
+                                   จัดการผู้ใช้งาน
                                  </NavText>
-
-
+                                 <NavItem eventKey="manage_user/list_user" >
+                                           <NavText>
+                                      รายการข้อมูล
+                                           </NavText>
+                                  </NavItem>
+                                   <NavItem eventKey="manage_user/add_user">
+                                         <NavText>
+                                       เพิ่มผู้ใช้งาน
+                                         </NavText>
+                                  </NavItem>
+                               <NavItem eventKey="manage_permission" style={{left: 30 , fontsize: '14px' }}>
+                                        <NavText style={{ fontsize: '18px' }}>
+                                      สิทธิ์การเข้าถึง
+                                        </NavText>
+                                 </NavItem>
+                                 <NavItem eventKey="manage_permission/add_permission" >
+                                          <NavText>
+                                        เพิ่มสิทธิ์การเข้าถึง
+                                          </NavText>
+                                   </NavItem>
+                                   <NavItem eventKey="manage_permission/list_permission" >
+                                            <NavText>
+                                          เปลี่ยนแปลงสิทธิ์การเข้าถึง
+                                            </NavText>
+                                     </NavItem>
                              </NavItem>
 
+                            )
+                           : null
+                            }
 
 
 
 
-                             { this.state.manage_user == 1 ?
-                               (
-                                 <NavItem eventKey="manage_user">
-                                 <NavIcon>
-                                 <i style={{ fontSize: '2.25em',align: 'justify',position: 'relative',top: 10}}><FaUser/></i>
-                                 </NavIcon>
-                                     <NavText style={{ paddingRight: 32  }} title="รายงาน">
-                                       จัดการผู้ใช้งาน
-                                     </NavText>
-                                     <NavItem eventKey="manage_user/list_user" >
-                                               <NavText>
-                                          รายการข้อมูล
-                                               </NavText>
-                                      </NavItem>
-                                       <NavItem eventKey="manage_user/add_user">
-                                             <NavText>
-                                           เพิ่มผู้ใช้งาน
-                                             </NavText>
-                                      </NavItem>
-                                   <NavItem eventKey="manage_permission" style={{left: 30 , fontsize: '14px' }}>
-                                            <NavText style={{ fontsize: '18px' }}>
-                                          สิทธิ์การเข้าถึง
-                                            </NavText>
+
+                            { this.state.manage_knowledge == 1 ?
+                              (
+                                <NavItem eventKey="manage_news">
+                                <NavIcon>
+                                <i style={{ fontSize: '2.25em',align: 'justify',position: 'relative',top: 10}}><FaRegNewspaper/></i>
+                                </NavIcon>
+                                    <NavText>
+                                        การจัดการข่าว
+                                    </NavText>
+                                    <NavItem eventKey="manage_news/list_news" >
+                                              <NavText>
+                                         หัวข้อเรื่อง
+                                              </NavText>
                                      </NavItem>
-                                     <NavItem eventKey="manage_permission/add_permission" >
-                                              <NavText>
-                                            เพิ่มสิทธิ์การเข้าถึง
-                                              </NavText>
-                                       </NavItem>
-                                       <NavItem eventKey="manage_permission/list_permission" >
-                                                <NavText>
-                                              เปลี่ยนแปลงสิทธิ์การเข้าถึง
-                                                </NavText>
-                                         </NavItem>
-                                 </NavItem>
-
-                                )
-                               : null
-                                }
-
-
-
-
-
-                                { this.state.manage_knowledge == 1 ?
-                                  (
-                                    <NavItem eventKey="manage_news">
-                                    <NavIcon>
-                                    <i style={{ fontSize: '2.25em',align: 'justify',position: 'relative',top: 10}}><FaRegNewspaper/></i>
-                                    </NavIcon>
-                                        <NavText>
-                                            การจัดการข่าว
-                                        </NavText>
-                                        <NavItem eventKey="manage_news/list_news" >
-                                                  <NavText>
-                                             หัวข้อเรื่อง
-                                                  </NavText>
-                                         </NavItem>
-                                          <NavItem eventKey="manage_news/add_news">
-                                                <NavText>
-                                              เพิ่มเนื้อหา
-                                                </NavText>
-                                         </NavItem>
-                                      <NavItem eventKey="manage_news_type" style={{left: 30 , fontsize: '14px' }}>
-                                               <NavText>
-                                             ประเภทข่าว
-                                               </NavText>
-
-                                        </NavItem>
-                                        <NavItem eventKey="manage_news_type/list_news_type" >
-                                                 <NavText>
-                                               หัวข้อข่าว
-                                                 </NavText>
-                                          </NavItem>
-                                          <NavItem eventKey="manage_news_type/add_news_type" >
-                                                   <NavText>
-                                                 เพิ่มเนื้อหาข่าว
-                                                   </NavText>
-                                            </NavItem>
-                                    </NavItem>
-
-                                   )
-                                  : null
-                                   }
-
-
-
-
-                                   { this.state.manage_message == 1 ?
-                                     (
-                                       <NavItem eventKey="message">
-                                       <NavIcon>
-                                       <i style={{ fontSize: '2.25em',align: 'justify',position: 'relative',top: 10}}><FaFacebookMessenger/></i>
-                                       </NavIcon>
-                                           <NavText>
-                                               จัดการข้อความ
-                                           </NavText>
-                                           <NavItem eventKey="manage_message/list_message" >
-                                                    <NavText>
-                                                  รายชื่อข้อความ
-                                                    </NavText>
-                                             </NavItem>
-                                             <NavItem eventKey="manage_message/add_message" >
-                                                      <NavText>
-                                                    เพิ่มข้อความ
-                                                      </NavText>
-                                               </NavItem>
-                                       </NavItem>
-
-
-                                      )
-                                     : null
-                                      }
-
-
-
-
-
-                                      { this.state.manage_equipment == 1 ?
-                                        (
-                                  <NavItem eventKey="manage_equipment">
-                                  <NavIcon>
-                                  <i style={{ fontSize: '2.25em',align: 'justify',position: 'relative',top: 10}}><FaBox/></i>
-                                  </NavIcon>
-                                      <NavText>
-                                          จัดการอุปกรณ์
-                                      </NavText>
-                                      <NavItem eventKey="manage_equipment/list_equipment" >
-                                                <NavText>
-                                           รายการข้อมูลอุปกรณ์
-                                                </NavText>
-                                       </NavItem>
-                                        <NavItem eventKey="manage_equipment/add_equipment">
-                                              <NavText>
-                                            เพิ่มอุปกรณ์
-                                              </NavText>
-                                       </NavItem>
-                                       <NavItem eventKey="manage_equipment_register/list_equipment_register">
-                                             <NavText>
-                                           รายการทะเบียนอุปกรณ์
-                                             </NavText>
-                                      </NavItem>
-                                      <NavItem eventKey="manage_equipment_register/add_equipment_register">
+                                      <NavItem eventKey="manage_news/add_news">
                                             <NavText>
-                                          เพิ่มเลขทะเบียนอุปกรณ์
+                                          เพิ่มเนื้อหา
                                             </NavText>
                                      </NavItem>
-                                    <NavItem eventKey="manage_equipment_type/type_equipment" style={{left: 30 , fontsize: '14px' }}>
+                                  <NavItem eventKey="manage_news_type" style={{left: 30 , fontsize: '14px' }}>
+                                           <NavText>
+                                         ประเภทข่าว
+                                           </NavText>
+
+                                    </NavItem>
+                                    <NavItem eventKey="manage_news_type/list_news_type" >
                                              <NavText>
-                                           ประเภทอุปกรณ์
+                                           หัวข้อข่าว
                                              </NavText>
-
                                       </NavItem>
-                                      <NavItem eventKey="manage_equipment_type/list_equipment_type" >
+                                      <NavItem eventKey="manage_news_type/add_news_type" >
                                                <NavText>
-                                             รายการประเภทอุปกรณ์
+                                             เพิ่มเนื้อหาข่าว
                                                </NavText>
                                         </NavItem>
-                                        <NavItem eventKey="manage_equipment_type/add_equipment_type" >
-                                                 <NavText>
-                                               เพิ่มประเภทอุปกรณ์
-                                                 </NavText>
-                                          </NavItem>
-                                  </NavItem>
-                                )
-                               : null
-                                }
+                                </NavItem>
+
+                               )
+                              : null
+                               }
 
 
 
-                                { this.state.manage_requipment == 1 ?
-                                  (
-                                  <NavItem eventKey="manage_request">
-                                  <NavIcon>
-                                <i style={{ fontSize: '2.25em',align: 'justify',position: 'relative',top: 10}}><FaPen/></i>
-                                  </NavIcon>
-                                      <NavText>
-                                          จัดการความต้องการ
-                                      </NavText>
-                                      <NavItem eventKey="manage_request/list_request" >
-                                               <NavText>
-                                             รายการข้อมูล
-                                               </NavText>
-                                        </NavItem>
-                                        <NavItem eventKey="manage_request/add_request" >
-                                                 <NavText>
-                                               เพิ่มความต้องการ
-                                                 </NavText>
-                                          </NavItem>
-                                  </NavItem>
-                                )
-                               : null
-                                }
+
+                               { this.state.manage_message == 1 ?
+                                 (
+                                   <NavItem eventKey="message">
+                                   <NavIcon>
+                                   <i style={{ fontSize: '2.25em',align: 'justify',position: 'relative',top: 10}}><FaFacebookMessenger/></i>
+                                   </NavIcon>
+                                       <NavText>
+                                           จัดการข้อความ
+                                       </NavText>
+                                       <NavItem eventKey="manage_message/list_message" >
+                                                <NavText>
+                                              รายชื่อข้อความ
+                                                </NavText>
+                                         </NavItem>
+                                         <NavItem eventKey="manage_message/add_message" >
+                                                  <NavText>
+                                                เพิ่มข้อความ
+                                                  </NavText>
+                                           </NavItem>
+                                   </NavItem>
+
+
+                                  )
+                                 : null
+                                  }
 
 
 
-                                { this.state.manage_problem == 1 ?
-                                  (
-                                  <NavItem eventKey="manage_problems">
-                                  <NavIcon>
-                                  <i style={{ fontSize: '2.25em',align: 'justify',position: 'relative',top: 10}}><FaPen/></i>
-                                  </NavIcon>
-                                      <NavText>
-                                          จัดการปัญหา
-                                      </NavText>
-                                      <NavItem eventKey="manage_problems/list_problems" >
-                                               <NavText>
-                                             รายการข้อมูลปัญหา
-                                               </NavText>
-                                        </NavItem>
-                                        <NavItem eventKey="manage_problems/add_problems" >
-                                                 <NavText>
-                                               เพิ่มปัญหา
-                                                 </NavText>
-                                          </NavItem>
-                                  </NavItem>
-                                )
-                               : null
-                                }
 
 
-
-                                  { this.state.manage_incident == 1 ?
+                                  { this.state.manage_equipment == 1 ?
                                     (
-                                  <NavItem eventKey="manage_incident">
-                                  <NavIcon>
-                                  <i style={{ fontSize: '2.25em',align: 'justify',position: 'relative',top: 10}}><FaPen/></i>
-                                  </NavIcon>
-                                      <NavText>
-                                          จัดการเหตุการณ์
-                                      </NavText>
-                                      <NavItem eventKey="manage_incident/list_incident" >
-                                               <NavText>
-                                             รายการข้อมูลเหตุการณ์
+                              <NavItem eventKey="manage_equipment">
+                              <NavIcon>
+                              <i style={{ fontSize: '2.25em',align: 'justify',position: 'relative',top: 10}}><FaBox/></i>
+                              </NavIcon>
+                                  <NavText>
+                                      จัดการอุปกรณ์
+                                  </NavText>
+                                  <NavItem eventKey="manage_equipment/list_equipment" >
+                                            <NavText>
+                                       รายการข้อมูลอุปกรณ์
+                                            </NavText>
+                                   </NavItem>
+                                    <NavItem eventKey="manage_equipment/add_equipment">
+                                          <NavText>
+                                        เพิ่มอุปกรณ์
+                                          </NavText>
+                                   </NavItem>
+                                   <NavItem eventKey="manage_equipment_register/list_equipment_register">
+                                         <NavText>
+                                       รายการทะเบียนอุปกรณ์
+                                         </NavText>
+                                  </NavItem>
+                                  <NavItem eventKey="manage_equipment_register/add_equipment_register">
+                                        <NavText>
+                                      เพิ่มเลขทะเบียนอุปกรณ์
+                                        </NavText>
+                                 </NavItem>
+                                <NavItem eventKey="manage_equipment_type/type_equipment" style={{left: 30 , fontsize: '14px' }}>
+                                         <NavText>
+                                       ประเภทอุปกรณ์
+                                         </NavText>
+
+                                  </NavItem>
+                                  <NavItem eventKey="manage_equipment_type/list_equipment_type" >
+                                           <NavText>
+                                         รายการประเภทอุปกรณ์
+                                           </NavText>
+                                    </NavItem>
+                                    <NavItem eventKey="manage_equipment_type/add_equipment_type" >
+                                             <NavText>
+                                           เพิ่มประเภทอุปกรณ์
+                                             </NavText>
+                                      </NavItem>
+                              </NavItem>
+                            )
+                           : null
+                            }
+
+
+
+                            { this.state.manage_requipment == 1 ?
+                              (
+                              <NavItem eventKey="manage_request">
+                              <NavIcon>
+                            <i style={{ fontSize: '2.25em',align: 'justify',position: 'relative',top: 10}}><FaPen/></i>
+                              </NavIcon>
+                                  <NavText>
+                                      จัดการความต้องการ
+                                  </NavText>
+                                  <NavItem eventKey="manage_request/list_request" >
+                                           <NavText>
+                                         รายการข้อมูล
+                                           </NavText>
+                                    </NavItem>
+                                    <NavItem eventKey="manage_request/add_request" >
+                                             <NavText>
+                                           เพิ่มความต้องการ
+                                             </NavText>
+                                      </NavItem>
+                              </NavItem>
+                            )
+                           : null
+                            }
+
+
+
+                            { this.state.manage_problem == 1 ?
+                              (
+                              <NavItem eventKey="manage_problems">
+                              <NavIcon>
+                              <i style={{ fontSize: '2.25em',align: 'justify',position: 'relative',top: 10}}><FaPen/></i>
+                              </NavIcon>
+                                  <NavText>
+                                      จัดการปัญหา
+                                  </NavText>
+                                  <NavItem eventKey="manage_problems/list_problems" >
+                                           <NavText>
+                                         รายการข้อมูลปัญหา
+                                           </NavText>
+                                    </NavItem>
+                                    <NavItem eventKey="manage_problems/add_problems" >
+                                             <NavText>
+                                           เพิ่มปัญหา
+                                             </NavText>
+                                      </NavItem>
+                              </NavItem>
+                            )
+                           : null
+                            }
+
+
+
+                              { this.state.manage_incident == 1 ?
+                                (
+                              <NavItem eventKey="manage_incident">
+                              <NavIcon>
+                              <i style={{ fontSize: '2.25em',align: 'justify',position: 'relative',top: 10}}><FaPen/></i>
+                              </NavIcon>
+                                  <NavText>
+                                      จัดการเหตุการณ์
+                                  </NavText>
+                                  <NavItem eventKey="manage_incident/list_incident" >
+                                           <NavText>
+                                         รายการข้อมูลเหตุการณ์
+                                           </NavText>
+                                    </NavItem>
+                                    <NavItem eventKey="manage_incident/add_incident" >
+                                             <NavText>
+                                           เพิ่มเหตุการณ์
+                                             </NavText>
+                                      </NavItem>
+                              </NavItem>
+                            )
+                           : null
+                            }
+
+
+
+                              { this.state.manage_contact == 1 ?
+                                (
+                              <NavItem eventKey="manage_contact">
+                              <NavIcon>
+                              <i style={{ fontSize: '2.25em',align: 'justify',position: 'relative',top: 10}}><FaBook/></i>
+                              </NavIcon>
+                                  <NavText>
+                                      จัดการผู้ติดต่อ
+                                  </NavText>
+                                  <NavItem eventKey="manage_contact/list_contact" >
+                                           <NavText>
+                                         รายการข้อมูลผู้ติดต่อ
+                                           </NavText>
+                                    </NavItem>
+                                    <NavItem eventKey="manage_contact/add_contact" >
+                                             <NavText>
+                                           เพิ่มผู้ติดต่อ
+                                             </NavText>
+                                      </NavItem>
+                              </NavItem>
+                            )
+                           : null
+                            }
+
+
+                              { this.state.manage_impact == 1 ?
+                                (
+                              <NavItem eventKey="manage_impact">
+                              <NavIcon>
+                              <i style={{ fontSize: '2.25em',align: 'justify',position: 'relative',top: 10}}><FaHospital/></i>
+                              </NavIcon>
+                                  <NavText>
+                                      จัดการผลกระทบ
+                                  </NavText>
+                                  <NavItem eventKey="manage_impact/list_impact" >
+                                           <NavText>
+                                         รายการข้อมูลผลกระทบ
+                                           </NavText>
+                                    </NavItem>
+                                    <NavItem eventKey="manage_impact/add_impact" >
+                                             <NavText>
+                                           เพิ่มผลกระทบ
+                                             </NavText>
+                                      </NavItem>
+                              </NavItem>
+                            )
+                           : null
+                            }
+
+
+                              { this.state.manage_priority == 1 ?
+                                (
+                              <NavItem eventKey="manage_priority">
+                              <NavIcon>
+                              <i style={{ fontSize: '2.25em',align: 'justify',position: 'relative',top: 10}}><FaHospital/></i>
+                              </NavIcon>
+                                  <NavText>
+                                      จัดการความสำคัญ
+                                  </NavText>
+                                  <NavItem eventKey="manage_priority/list_priority" >
+                                           <NavText>
+                                         รายการข้อมูลความสำคัญ
+                                           </NavText>
+                                    </NavItem>
+                                    <NavItem eventKey="manage_priority/add_priority" >
+                                             <NavText>
+                                           เพิ่มความสำคัญ
+                                             </NavText>
+                                      </NavItem>
+                              </NavItem>
+                            )
+                           : null
+                            }
+
+
+
+                              { this.state.manage_solution == 1 ?
+                                (
+                              <NavItem eventKey="manage_solution">
+                              <NavIcon>
+                              <i style={{ fontSize: '2.25em',align: 'justify',position: 'relative',top: 10}}><FaHospital/></i>
+                              </NavIcon>
+                                  <NavText>
+                                      จัดการการแก้ไขปัญหา
+                                  </NavText>
+                                  <NavItem eventKey="manage_solution/list_solution" >
+                                           <NavText>
+                                         รายการข้อมูลการแก้ไขปัญหา
+                                           </NavText>
+                                    </NavItem>
+                              </NavItem>
+                            )
+                           : null
+                            }
+
+
+
+                              { this.state.Report == 1 ?
+                                (
+                              <NavItem eventKey="Report">
+                              <NavIcon>
+                              <i style={{ fontSize: '2.25em',verticalAlign: 'middle' ,top: 10}}><FaComment/></i>
+                              </NavIcon>
+                                  <NavText style={{ paddingRight: 2 }} title="รายงาน">
+                                      รายงาน
+                                  </NavText>
+
+                                  <NavItem eventKey="Report/request" >
+                                           <NavText style={{ paddingRight: 2 }} title="รายงานผู้ขอใช้บริการ">
+                                         รายงานผู้ขอใช้บริการ
+                                           </NavText>
+                                    </NavItem>
+                                  <NavItem eventKey="Report/problem" >
+                                           <NavText title="รายงานปัญหา">
+                                         รายงานปัญหา
+                                           </NavText>
+                                    </NavItem>
+                                    <NavItem eventKey="Report/incident" >
+                                             <NavText title="รายงานอินซิเด้นท์">
+                                           รายงานอินซิเด้นท์
+                                             </NavText>
+                                      </NavItem>
+                                      <NavItem eventKey="Report/total" >
+                                               <NavText title="รายงานภาพรวมทั้งหมด">
+                                             รายงานภาพรวมทั้งหมด
                                                </NavText>
                                         </NavItem>
-                                        <NavItem eventKey="manage_incident/add_incident" >
-                                                 <NavText>
-                                               เพิ่มเหตุการณ์
+                                        <NavItem eventKey="Report/workaround" >
+                                                 <NavText title="รายงานข้อมูลการทำงาน">
+                                               รายงานข้อมูลการทำงาน
                                                  </NavText>
                                           </NavItem>
-                                  </NavItem>
-                                )
-                               : null
-                                }
 
-
-
-                                  { this.state.manage_contact == 1 ?
-                                    (
-                                  <NavItem eventKey="manage_contact">
-                                  <NavIcon>
-                                  <i style={{ fontSize: '2.25em',align: 'justify',position: 'relative',top: 10}}><FaBook/></i>
-                                  </NavIcon>
-                                      <NavText>
-                                          จัดการผู้ติดต่อ
-                                      </NavText>
-                                      <NavItem eventKey="manage_contact/list_contact" >
-                                               <NavText>
-                                             รายการข้อมูลผู้ติดต่อ
-                                               </NavText>
-                                        </NavItem>
-                                        <NavItem eventKey="manage_contact/add_contact" >
-                                                 <NavText>
-                                               เพิ่มผู้ติดต่อ
-                                                 </NavText>
-                                          </NavItem>
-                                  </NavItem>
-                                )
-                               : null
-                                }
-
-
-                                  { this.state.manage_impact == 1 ?
-                                    (
-                                  <NavItem eventKey="manage_impact">
-                                  <NavIcon>
-                                  <i style={{ fontSize: '2.25em',align: 'justify',position: 'relative',top: 10}}><FaHospital/></i>
-                                  </NavIcon>
-                                      <NavText>
-                                          จัดการผลกระทบ
-                                      </NavText>
-                                      <NavItem eventKey="manage_impact/list_impact" >
-                                               <NavText>
-                                             รายการข้อมูลผลกระทบ
-                                               </NavText>
-                                        </NavItem>
-                                        <NavItem eventKey="manage_impact/add_impact" >
-                                                 <NavText>
-                                               เพิ่มผลกระทบ
-                                                 </NavText>
-                                          </NavItem>
-                                  </NavItem>
-                                )
-                               : null
-                                }
-
-
-                                  { this.state.manage_priority == 1 ?
-                                    (
-                                  <NavItem eventKey="manage_priority">
-                                  <NavIcon>
-                                  <i style={{ fontSize: '2.25em',align: 'justify',position: 'relative',top: 10}}><FaHospital/></i>
-                                  </NavIcon>
-                                      <NavText>
-                                          จัดการความสำคัญ
-                                      </NavText>
-                                      <NavItem eventKey="manage_priority/list_priority" >
-                                               <NavText>
-                                             รายการข้อมูลความสำคัญ
-                                               </NavText>
-                                        </NavItem>
-                                        <NavItem eventKey="manage_priority/add_priority" >
-                                                 <NavText>
-                                               เพิ่มความสำคัญ
-                                                 </NavText>
-                                          </NavItem>
-                                  </NavItem>
-                                )
-                               : null
-                                }
-
-
-
-                                  { this.state.manage_solution == 1 ?
-                                    (
-                                  <NavItem eventKey="manage_solution">
-                                  <NavIcon>
-                                  <i style={{ fontSize: '2.25em',align: 'justify',position: 'relative',top: 10}}><FaHospital/></i>
-                                  </NavIcon>
-                                      <NavText>
-                                          จัดการการแก้ไขปัญหา
-                                      </NavText>
-                                      <NavItem eventKey="manage_solution/list_solution" >
-                                               <NavText>
-                                             รายการข้อมูลการแก้ไขปัญหา
-                                               </NavText>
-                                        </NavItem>
-                                  </NavItem>
-                                )
-                               : null
-                                }
-
-
-
-                                  { this.state.Report == 1 ?
-                                    (
-                                  <NavItem eventKey="Report">
-                                  <NavIcon>
-                                  <i style={{ fontSize: '2.25em',verticalAlign: 'middle' ,top: 10}}><FaComment/></i>
-                                  </NavIcon>
-                                      <NavText style={{ paddingRight: 2 }} title="รายงาน">
-                                          รายงาน
-                                      </NavText>
-
-                                      <NavItem eventKey="Report/request" >
-                                               <NavText style={{ paddingRight: 2 }} title="รายงานผู้ขอใช้บริการ">
-                                             รายงานผู้ขอใช้บริการ
-                                               </NavText>
-                                        </NavItem>
-                                      <NavItem eventKey="Report/problem" >
-                                               <NavText title="รายงานปัญหา">
-                                             รายงานปัญหา
-                                               </NavText>
-                                        </NavItem>
-                                        <NavItem eventKey="Report/incident" >
-                                                 <NavText title="รายงานอินซิเด้นท์">
-                                               รายงานอินซิเด้นท์
-                                                 </NavText>
-                                          </NavItem>
-                                          <NavItem eventKey="Report/total" >
-                                                   <NavText title="รายงานภาพรวมทั้งหมด">
-                                                 รายงานภาพรวมทั้งหมด
-                                                   </NavText>
-                                            </NavItem>
-                                            <NavItem eventKey="Report/workaround" >
-                                                     <NavText title="รายงานข้อมูลการทำงาน">
-                                                   รายงานข้อมูลการทำงาน
-                                                     </NavText>
-                                              </NavItem>
-
-                                  </NavItem>
-                                )
-                               : null
-                                }
+                              </NavItem>
+                            )
+                           : null
+                            }
 
 
 
 
 
 
-                              </SideNav.Nav>
-                          </SideNav>
-                          <main>
+                          </SideNav.Nav>
+                      </SideNav>
+                      <main>
 
 
 
 
-                              <Switch>
+                          <Switch>
 
-                              <Route path='/manage_user/add_user'                             component={Add_user} />
-                              <Route path='/manage_permission/add_permission'                 component={Add_permission} />
-                              <Route path='/manage_contact/add_contact'                       component={Add_contact} />
-                              <Route path='/manage_equipment/add_equipment'                   component={Add_equipment} />
-                              <Route path='/manage_equipment_register/add_equipment_register' component={Add_equipment_register} />
-                              <Route path='/manage_equipment_type/add_equipment_type'         component={Add_equipment_type} />
-                              <Route path='/manage_impact/add_impact'                         component={Add_impact} />
-                              <Route path='/manage_incident/add_incident'                     component={Add_incident} />
-                              <Route path='/manage_message/add_message'                       component={Add_message} />
-                              <Route path='/manage_news_type/add_news_type'                     component={Add_news_type} />
-                              <Route path='/manage_news/add_news'                               component={Add_news} />
-                              <Route path='/manage_priority/add_priority'                       component={Add_priority} />
-                              <Route path='/manage_request/add_request'                         component={Add_request} />
-                              <Route path='/manage_problems/add_problems'                       component={Add_problems} />
+                          <Route path='/manage_user/add_user'                             component={Add_user} />
+                          <Route path='/manage_permission/add_permission'                 component={Add_permission} />
+                          <Route path='/manage_contact/add_contact'                       component={Add_contact} />
+                          <Route path='/manage_equipment/add_equipment'                   component={Add_equipment} />
+                          <Route path='/manage_equipment_register/add_equipment_register' component={Add_equipment_register} />
+                          <Route path='/manage_equipment_type/add_equipment_type'         component={Add_equipment_type} />
+                          <Route path='/manage_impact/add_impact'                         component={Add_impact} />
+                          <Route path='/manage_incident/add_incident'                     component={Add_incident} />
+                          <Route path='/manage_message/add_message'                       component={Add_message} />
+                          <Route path='/manage_news_type/add_news_type'                     component={Add_news_type} />
+                          <Route path='/manage_news/add_news'                               component={Add_news} />
+                          <Route path='/manage_priority/add_priority'                       component={Add_priority} />
+                          <Route path='/manage_request/add_request'                         component={Add_request} />
+                          <Route path='/manage_problems/add_problems'                       component={Add_problems} />
 
 
 
@@ -588,36 +595,41 @@ export default class Dashboard extends Component {
 
 
 
-                              <Route path='/manage_user/edit/:id' component={Update_user} />
+                          <Route path='/manage_user/edit/:id' component={Update_user} />
 
-                              <Route exact path='/manage_user/list_user'                       component={List_User} />
-                              <Route path='/manage_permission/list_permission'                 component={List_Permisson} />
-                              <Route path='/manage_contact/list_contact'                       component={List_Contact} />
-                              <Route path='/manage_equipment/list_equipment'                   component={List_Equipment} />
-                              <Route path='/manage_equipment_register/list_equipment_register' component={List_Equipment_register} />
-                              <Route path='/manage_equipment_type/list_equipment_type'         component={List_Equipment_type} />
-                              <Route path='/manage_impact/list_impact'                         component={List_Impact} />
-                              <Route path='/manage_incident/list_incident'                     component={List_Incident} />
-                              <Route path='/manage_message/list_message'                       component={List_Message} />
-                              <Route path='/manage_news/list_news'                             component={List_News} />
-                              <Route path='/manage_news_type/list_news_type'                   component={List_News_type} />
-                              <Route path='/manage_priority/list_priority'                     component={List_Priority} />
-                              <Route path='/manage_problems/list_problems'                     component={List_Problems} />
-                              <Route path='/manage_request/list_request'                       component={List_Request} />
-
-
-
-
-                              <Route path='/success' component={Success} />
+                          <Route exact path='/manage_user/list_user'                       component={List_User} />
+                          <Route path='/manage_permission/list_permission'                 component={List_Permisson} />
+                          <Route path='/manage_contact/list_contact'                       component={List_Contact} />
+                          <Route path='/manage_equipment/list_equipment'                   component={List_Equipment} />
+                          <Route path='/manage_equipment_register/list_equipment_register' component={List_Equipment_register} />
+                          <Route path='/manage_equipment_type/list_equipment_type'         component={List_Equipment_type} />
+                          <Route path='/manage_impact/list_impact'                         component={List_Impact} />
+                          <Route path='/manage_incident/list_incident'                     component={List_Incident} />
+                          <Route path='/manage_message/list_message'                       component={List_Message} />
+                          <Route path='/manage_news/list_news'                             component={List_News} />
+                          <Route path='/manage_news_type/list_news_type'                   component={List_News_type} />
+                          <Route path='/manage_priority/list_priority'                     component={List_Priority} />
+                          <Route path='/manage_problems/list_problems'                     component={List_Problems} />
+                          <Route path='/manage_request/list_request'                       component={List_Request} />
 
 
 
-                             </Switch>
-                          </main>
-                      </React.Fragment>
-                  )}
-                  />
-              </Router></div>
+
+                          <Route path='/success' component={Success} />
+
+
+
+                         </Switch>
+                      </main>
+                  </React.Fragment>
+              )}
+              />
+          </Router>
+
+                    </div>
+
+
+                    </div>
         );
     }
 }

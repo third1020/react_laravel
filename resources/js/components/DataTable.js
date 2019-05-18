@@ -267,7 +267,7 @@ let container;
     return (
 
       <div className='container py-4' >
-        <div style={{paddingLeft: '200' ,paddingRight: '5'}}>
+        <div style={{paddingLeft: '10' ,paddingRight: '5'}}>
           <div className='col-lg-12'>
           <h3 class="page-header">{this.props.headname}</h3>
             <div className='card'>

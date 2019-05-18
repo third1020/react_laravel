@@ -44,7 +44,7 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 
     <NavDropdown.Item href="#Profile">{this.state.name }</NavDropdown.Item>
     <NavDropdown.Divider />
-    <NavDropdown.Item href="/" onclick={this.ClearSession}>logout</NavDropdown.Item>
+    <NavDropdown.Item href="/" onclick={this.ClearSession()}>logout</NavDropdown.Item>
   </NavDropdown>
 
 
