@@ -27,6 +27,7 @@ let container;
           equipment_type_id: '',
           equipment_image: [],
           getequipment_type:[],
+          checkimage:0,
           errors: []
         }
 
@@ -45,6 +46,13 @@ let container;
             equipment_image: this.state.equipment_image.concat(pictureDataURLs),
         });
   }
+
+  Changestatusimage() {
+this.setState({checkimage: 1 ,
+                equipment_image: [],
+
+               });
+}
 
 
       handleFieldChange (event) {
@@ -75,18 +83,10 @@ let container;
 
         }
 
-        axios.post('/api/equipment', insertdata)
+        axios.put(`/api/equipment_update/${this.props.id}`, insertdata)
           .then(response => {
             // redirect to the homepage
-            this.setState({
-              equipment_name: '',
-              equipment_detail: '',
-              equipment_number: '',
-              contact_detail: '',
-              equipment_type_id: '',
 
-              errors: []
-            })
 
             container.success(`success `, `///title\\\\\\`, {
                 closeButton: true,
@@ -137,6 +137,18 @@ let container;
         axios.get('/api/queryequipment_type').then(response => {
           this.setState({
             getequipment_type: response.data,
+
+          })
+        })
+
+        axios.get(`/api/equipment/${this.props.id}`).then(response => {
+          this.setState({
+            equipment_name	: response.data[0].equipment_name,
+            equipment_detail: response.data[0].equipment_detail,
+            equipment_number: response.data[0].equipment_number,
+            contact_detail: response.data[0].contact_detail,
+            equipment_type_id: response.data[0].equipment_type_id,
+            equipment_image: [response.data[0].equipment_image,]
 
           })
         })
@@ -231,8 +243,8 @@ let container;
 
 
                         </div>
-                        <select class="custom-select" value={this.state.getequipment_type_id} onChange={this.handleSelectChange} className={`form-control ${this.hasErrorFor('getequipment_type_id') ? 'is-invalid' : ''}`}>
-                        <option value="" >Choose...</option>
+                        <select class="custom-select" value={this.state.equipment_type_id} onChange={this.handleSelectChange} className={`form-control ${this.hasErrorFor('getequipment_type_id') ? 'is-invalid' : ''}`}>
+
 
 
 
@@ -249,33 +261,54 @@ let container;
                       </div>
 
 
-                      <div className='form-group'>
 
-                      <label htmlFor='image'>เลือกรูปภาพอุปกรณ์</label>
 
                       <input
                         className={`form-control ${this.hasErrorFor('equipment_image') ? 'is-invalid' : ''}`}
                         hidden
                       />
+                      { this.state.checkimage == 1 ? (
+                        <div className='form-group'>
+                      <label htmlFor='image'>เลือกรูปภาพอุปกรณ์</label>
 
-                      <ImageUploader
-                  type="file"
-                	withIcon={true}
-                  value={this.state.equipment_image}
-                	buttonText='เลือกรูปภาพ'
-                	onChange={this.onDrop}
-                	imgExtension={['.jpg', '.gif', '.png', '.gif']}
-                	maxFileSize={520215}
-                  singleImage={true}
-                  label='ไฟล์ขนาดต้องไม่เกิน 500 kb, สกุลไฟล์: jpg,png'
-                  withPreview={true}
-                  fileSizeError="ขนาดไฟล์ใหญ่เกินไป"
-                  fileTypeError="ประเภทไฟล์ไม่ถูกต้อง"
+                        <ImageUploader
+                    type="file"
+                    withIcon={true}
+                    value={this.state.equipment_image}
+                    buttonText='เลือกรูปภาพ'
+                    onChange={this.onDrop}
+                    imgExtension={['.jpg', '.gif', '.png', '.gif']}
+                    maxFileSize={520215}
+                    singleImage={true}
+                    label='ไฟล์ขนาดต้องไม่เกิน 500 kb, สกุลไฟล์: jpg,png'
+                    withPreview={true}
+                    fileSizeError="ขนาดไฟล์ใหญ่เกินไป"
+                    fileTypeError="ประเภทไฟล์ไม่ถูกต้อง"
+                        />
+                        {this.renderErrorFor('equipment_image')}
 
-                      />
-                      {this.renderErrorFor('equipment_image')}
 
-                      </div>
+
+
+
+                        </div>
+                      ): (
+                        <div align="center">
+
+
+                          <img src={this.state.equipment_image} className="uploadPictureContainer" style={{align:"middle",width:360,hight:240}} alt="preview"/>
+
+                          <button className="chooseFileButton" onClick={() => this.Changestatusimage()} >แก้ไขรูปภาพ</button>
+
+                         </div>
+
+
+                       ) }
+
+
+
+
+
 
 
 

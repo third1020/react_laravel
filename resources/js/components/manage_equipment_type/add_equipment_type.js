@@ -125,7 +125,7 @@ let container;
             <div style={{paddingLeft: '200' ,paddingRight: '5'}}>
               <div className='col-md-12'>
                 <div className='card'>
-                  <div className='card-header'>เพิ่มผู้ติดต่อ</div>
+                  <div className='card-header'>เพิ่มประเภทอุปกรณ์</div>
                   <div className='card-body'>
                     <form onSubmit={this.handleCreate}>
                       <div className='form-group'>

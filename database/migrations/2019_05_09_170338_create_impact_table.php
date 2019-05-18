@@ -17,7 +17,7 @@ class CreateImpactTable extends Migration
           $table->bigIncrements('id');
           $table->string('remark')->nullable();
           $table->string('impact_name');
-          $table->boolean('impact_value');
+          $table->string('impact_value');
           $table->string('created_by')->nullable();
           $table->timestamps();
         });

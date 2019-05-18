@@ -67,7 +67,7 @@ let container;
           user_id: this.state.user_id,
         }
 
-        axios.put(`/api/contact/${this.props.id}`, insertdata)
+        axios.put(`/api/contact_update/${this.props.id}`, insertdata)
           .then(response => {
             // redirect to the homepage
 
