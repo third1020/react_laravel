@@ -266,9 +266,9 @@ let container;
   render() {
     return (
 
-      <div className='container py-4' >
+
         <div style={{paddingLeft: '10' ,paddingRight: '5'}}>
-          <div className='col-lg-12'>
+          <div className='col-md-12 col-lg-12'>
           <h3 class="page-header">{this.props.headname}</h3>
             <div className='card'>
               <div className='card-header'>{this.props.headTablename}</div>
@@ -330,7 +330,7 @@ let container;
       </div>
     </div>
   </div>
-</div>
+
 
     );
   }

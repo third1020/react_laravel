@@ -7,6 +7,7 @@ import "../../../css/image.css";
 import { ToastContainer } from "react-toastr";
 import "../../../css/alert.css";
 import "../../../css/animate.css";
+import Image from 'react-bootstrap/Image'
 let container;
 
 
@@ -280,7 +281,7 @@ import axios from 'axios'
 
                         </div>
                         <select class="custom-select" value={this.state.permission} onChange={this.handleSelectChange}>
-                      
+
 
 
 
@@ -322,6 +323,7 @@ import axios from 'axios'
 
 
                           <img src={this.state.image} className="uploadPictureContainer" style={{align:"middle",width:360,hight:240}} alt="preview"/>
+                          
 
                           <button className="chooseFileButton" onClick={() => this.Changestatusimage()} >แก้ไขรูปภาพ</button>
 

@@ -1,5 +1,6 @@
 import axios from 'axios'
 import React, { Component } from 'react';
+import Profile  from '../Profile';
 
 import { Button, FormGroup, FormControl} from "react-bootstrap";
 import "../../../css/Login.css";
@@ -143,6 +144,10 @@ export default class Login extends Component {
             Login
           </Button>
         </form>
+
+
+
+
       </div>
 
 

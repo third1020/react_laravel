@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 
 import SideNav, { Toggle, Nav, NavItem, NavIcon, NavText } from '@trendmicro/react-sidenav';
+import  { Redirect } from 'react-router-dom'
 
 
 import Success from './success_insert'
@@ -47,6 +48,7 @@ import '@trendmicro/react-sidenav/dist/react-sidenav.css';
 import { FaBlog,FaBeer ,FaUser,FaHome,FaBook,FaRegAddressBook,FaFacebookMessenger,FaRegNewspaper,FaBox,FaComment,FaPen,FaHospital} from 'react-icons/fa';
 
 import Header from './Header';
+import Home from './Home';
 // import { SideNav, Nav } from 'react-sidenav';
 
 
@@ -56,8 +58,10 @@ export default class Dashboard extends Component {
   constructor (props) {
     super(props)
     this.state = {
+      id:'',
       name: '',
       email:'',
+      image:'',
       permission_name:'',
       manage_user:'',
       manage_knowledge:'',
@@ -78,9 +82,11 @@ export default class Dashboard extends Component {
       errors: []
     }
 
-
+    this.state.id = sessionStorage.getItem("id");
     this.state.name = sessionStorage.getItem("name");
     this.state.email = sessionStorage.getItem("email");
+    this.state.image = sessionStorage.getItem("image");
+
 
     this.state.permission_name = sessionStorage.getItem("permission_name");
     this.state.manage_user = sessionStorage.getItem("manage_user");
@@ -106,6 +112,14 @@ export default class Dashboard extends Component {
 
     }
 
+    componentWillMount(){
+
+      if(sessionStorage.getItem("id") == null){
+        this.props.history.push('/')
+
+      }
+    }
+
 
 
 
@@ -117,12 +131,22 @@ export default class Dashboard extends Component {
 
         return (
 
-                    <div>
-                    {this.state.expanded ?(<Header left={260}/>)  : (<Header left={75}/>)}
+
+
+                    <div
+                    style={{
+                        background:'#f2f4f7',
+                        height: '125%'
+
+                    }}>
+
+
+                    {this.state.expanded ?(<Header left={260} /> )  : (<Header left={75}/>)}
                     <div
                     style={{
                         marginLeft: expanded ? 240 : 64,
-                        padding: '15px 20px 0 20px'
+                        padding: '15px 20px 0 20px',
+
                     }}
                 >
 
@@ -132,13 +156,14 @@ export default class Dashboard extends Component {
               <Route render={({ location, history }) => (
                   <React.Fragment>
                       <SideNav
-                      style={{ background: '#e44745',position: 'absolute', height: '150%' }}
+                      style={{ background: '#e44745',position: 'absolute', height: '125%' }}
                            onSelect={(selected) => {
                               const to = '/' + selected;
                               if (location.pathname !== to) {
                                   history.push(to);
           console.log(location.pathname);
           console.log(to);
+
 
                               }
                           }}
@@ -155,12 +180,13 @@ export default class Dashboard extends Component {
                          <NavItem eventKey="Dashboard">
                          <NavIcon>
 
-                         <i style={{ fontSize: '2.25em',align: 'justify',position: 'relative',top: 10}}><FaHome/></i>
+                         <i style={{ fontSize: '1.5em',align: 'justify',position: 'relative',top: 15}}><FaHome/></i>
 
                          </NavIcon>
                              <NavText>
-                                หน้าแรก
+                             {this.state.id}
                              </NavText>
+
 
 
                          </NavItem>
@@ -173,7 +199,7 @@ export default class Dashboard extends Component {
                            (
                              <NavItem eventKey="manage_user">
                              <NavIcon>
-                             <i style={{ fontSize: '2.25em',align: 'justify',position: 'relative',top: 10}}><FaUser/></i>
+                             <i style={{ fontSize: '1.5em',align: 'justify',position: 'relative',top: 15}}><FaUser/></i>
                              </NavIcon>
                                  <NavText style={{ paddingRight: 32  }} title="รายงาน">
                                    จัดการผู้ใช้งาน
@@ -217,7 +243,7 @@ export default class Dashboard extends Component {
                               (
                                 <NavItem eventKey="manage_news">
                                 <NavIcon>
-                                <i style={{ fontSize: '2.25em',align: 'justify',position: 'relative',top: 10}}><FaRegNewspaper/></i>
+                                <i style={{ fontSize: '1.5em',align: 'justify',position: 'relative',top: 15}}><FaRegNewspaper/></i>
                                 </NavIcon>
                                     <NavText>
                                         การจัดการข่าว
@@ -261,7 +287,7 @@ export default class Dashboard extends Component {
                                  (
                                    <NavItem eventKey="message">
                                    <NavIcon>
-                                   <i style={{ fontSize: '2.25em',align: 'justify',position: 'relative',top: 10}}><FaFacebookMessenger/></i>
+                                   <i style={{ fontSize: '1.5em',align: 'justify',position: 'relative',top: 15}}><FaFacebookMessenger/></i>
                                    </NavIcon>
                                        <NavText>
                                            จัดการข้อความ
@@ -291,7 +317,7 @@ export default class Dashboard extends Component {
                                     (
                               <NavItem eventKey="manage_equipment">
                               <NavIcon>
-                              <i style={{ fontSize: '2.25em',align: 'justify',position: 'relative',top: 10}}><FaBox/></i>
+                              <i style={{ fontSize: '1.5em',align: 'justify',position: 'relative',top: 15}}><FaBox/></i>
                               </NavIcon>
                                   <NavText>
                                       จัดการอุปกรณ์
@@ -343,7 +369,7 @@ export default class Dashboard extends Component {
                               (
                               <NavItem eventKey="manage_request">
                               <NavIcon>
-                            <i style={{ fontSize: '2.25em',align: 'justify',position: 'relative',top: 10}}><FaPen/></i>
+                            <i style={{ fontSize: '1.5em',align: 'justify',position: 'relative',top: 15}}><FaPen/></i>
                               </NavIcon>
                                   <NavText>
                                       จัดการความต้องการ
@@ -369,7 +395,7 @@ export default class Dashboard extends Component {
                               (
                               <NavItem eventKey="manage_problems">
                               <NavIcon>
-                              <i style={{ fontSize: '2.25em',align: 'justify',position: 'relative',top: 10}}><FaPen/></i>
+                              <i style={{ fontSize: '1.5em',align: 'justify',position: 'relative',top: 15}}><FaPen/></i>
                               </NavIcon>
                                   <NavText>
                                       จัดการปัญหา
@@ -395,7 +421,7 @@ export default class Dashboard extends Component {
                                 (
                               <NavItem eventKey="manage_incident">
                               <NavIcon>
-                              <i style={{ fontSize: '2.25em',align: 'justify',position: 'relative',top: 10}}><FaPen/></i>
+                              <i style={{ fontSize: '1.5em',align: 'justify',position: 'relative',top: 15}}><FaPen/></i>
                               </NavIcon>
                                   <NavText>
                                       จัดการเหตุการณ์
@@ -421,7 +447,7 @@ export default class Dashboard extends Component {
                                 (
                               <NavItem eventKey="manage_contact">
                               <NavIcon>
-                              <i style={{ fontSize: '2.25em',align: 'justify',position: 'relative',top: 10}}><FaBook/></i>
+                              <i style={{ fontSize: '1.5em',align: 'justify',position: 'relative',top: 15}}><FaBook/></i>
                               </NavIcon>
                                   <NavText>
                                       จัดการผู้ติดต่อ
@@ -446,7 +472,7 @@ export default class Dashboard extends Component {
                                 (
                               <NavItem eventKey="manage_impact">
                               <NavIcon>
-                              <i style={{ fontSize: '2.25em',align: 'justify',position: 'relative',top: 10}}><FaHospital/></i>
+                              <i style={{ fontSize: '1.5em',align: 'justify',position: 'relative',top: 15}}><FaHospital/></i>
                               </NavIcon>
                                   <NavText>
                                       จัดการผลกระทบ
@@ -471,7 +497,7 @@ export default class Dashboard extends Component {
                                 (
                               <NavItem eventKey="manage_priority">
                               <NavIcon>
-                              <i style={{ fontSize: '2.25em',align: 'justify',position: 'relative',top: 10}}><FaHospital/></i>
+                              <i style={{ fontSize: '1.5em',align: 'justify',position: 'relative',top: 15}}><FaHospital/></i>
                               </NavIcon>
                                   <NavText>
                                       จัดการความสำคัญ
@@ -497,7 +523,7 @@ export default class Dashboard extends Component {
                                 (
                               <NavItem eventKey="manage_solution">
                               <NavIcon>
-                              <i style={{ fontSize: '2.25em',align: 'justify',position: 'relative',top: 10}}><FaHospital/></i>
+                              <i style={{ fontSize: '1.5em',align: 'justify',position: 'relative',top: 15}}><FaHospital/></i>
                               </NavIcon>
                                   <NavText>
                                       จัดการการแก้ไขปัญหา
@@ -518,7 +544,7 @@ export default class Dashboard extends Component {
                                 (
                               <NavItem eventKey="Report">
                               <NavIcon>
-                              <i style={{ fontSize: '2.25em',verticalAlign: 'middle' ,top: 10}}><FaComment/></i>
+                              <i style={{ fontSize: '1.5em',verticalAlign: 'middle' ,top: 10}}><FaComment/></i>
                               </NavIcon>
                                   <NavText style={{ paddingRight: 2 }} title="รายงาน">
                                       รายงาน
@@ -616,6 +642,9 @@ export default class Dashboard extends Component {
 
 
                           <Route path='/success' component={Success} />
+                          <Route path='/' component={Home} />
+
+
 
 
 
@@ -627,6 +656,7 @@ export default class Dashboard extends Component {
           </Router>
 
                     </div>
+
 
 
                     </div>

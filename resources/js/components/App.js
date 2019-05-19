@@ -8,6 +8,7 @@ import React, { Component } from 'react'
    import Update_user from './manage_user/update_user'
     import Login from './auth/Login'
     import Dashboard from './Dashboard'
+    import Profile from './Profile'
 
 
    class App extends Component {
@@ -63,6 +64,7 @@ import React, { Component } from 'react'
                <Route path='/manage_priority' component={Dashboard} />
                <Route path='/manage_problems' component={Dashboard} />
                <Route path='/manage_request' component={Dashboard} />
+               <Route path='/Profile' component={Profile} />
 
 
 

@@ -21,12 +21,13 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 
     this.state.name = sessionStorage.getItem("name");
 
-    this.ClearSession = this.ClearSession.bind(this)
 
   }
 
   ClearSession () {
-    sessionStorage.clear()
+    sessionStorage.clear();
+
+
   }
 
 
@@ -42,9 +43,9 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
   <Nav>
   <NavDropdown title={this.state.name } id="collasible-nav-dropdown">
 
-    <NavDropdown.Item href="#Profile">{this.state.name }</NavDropdown.Item>
+    <NavDropdown.Item href="/Dashboard">{this.state.name}</NavDropdown.Item>
     <NavDropdown.Divider />
-    <NavDropdown.Item href="/" onclick={this.ClearSession()}>logout</NavDropdown.Item>
+    <NavDropdown.Item href="/" >logout</NavDropdown.Item>
   </NavDropdown>
 
 
