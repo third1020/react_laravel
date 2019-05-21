@@ -271,6 +271,9 @@ let container;
                   withPreview={true}
                   fileSizeError="ขนาดไฟล์ใหญ่เกินไป"
                   fileTypeError="ประเภทไฟล์ไม่ถูกต้อง"
+                  width="150"
+                  height="150"
+
 
                       />
                       {this.renderErrorFor('equipment_image')}

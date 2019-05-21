@@ -4,10 +4,15 @@ import Select from 'react-select';
 import ImageUploader from 'react-images-upload';
 import PropTypes from 'prop-types';
 import "../../css/image.css";
+import { confirmAlert } from 'react-confirm-alert';
 import { ToastContainer } from "react-toastr";
 import "../../css/alert.css";
 import "../../css/animate.css";
-import Image from 'react-bootstrap/Image'
+import "../../css/front.css";
+import Image from 'react-bootstrap/Image';
+import Card from 'react-bootstrap/Card';
+import Update_user from './manage_user/update_user'
+
 
 
 let container;
@@ -40,6 +45,32 @@ import axios from 'axios'
 
       }
 
+      edituser(){
+        confirmAlert({
+      onClickOutside: () => {   window.location.reload(true);},
+      customUI: ({ onClose }) => {
+        return (
+          <div style={{ height: '100%' ,left:50 }}>
+          <Update_user id={sessionStorage.getItem("id")}/>
+          <footer class="modal-footer">
+
+                  <button type="button" class="btn btn-danger"   onClick={() => {
+                      window.location.reload(true);
+                      onClose();
+                    }}>ปิด</button>
+                  </footer>
+
+
+          </div>
+        );
+      }
+
+    });
+
+      }
+
+
+
 
 
 
@@ -66,6 +97,8 @@ import axios from 'axios'
 
 
 
+
+
       render () {
 
 
@@ -74,16 +107,34 @@ import axios from 'axios'
         return (
 
           <div class="grid card">
-             <div class="card-body">
-                <div class="profile__avatar">
+             <div class="card-body" >
+                <div >
 
-                <center><img src={this.state.image} style={{width:'200',hight:'200'}} class="rounded-circle"  />  </center>
-                <center>{this.state.username} </center>
-                <center>{this.state.Name_lastname} </center>
-                <center>{this.state.ID_Card} </center>
-                <center>{this.state.Phone_Number} </center>
-                <center>{this.state.Email} </center>
-          
+
+                <center>
+                  <Card.Img variant="top" src={this.state.image} style={{width:'140px',height:'140px',paddingTop:'10'}} class="rounded-circle" />
+                  </center>
+                     <Card.Body>
+                       <Card.Title><center><h2 class="cursive">{this.state.username} </h2></center></Card.Title>
+                          <Card.Text>
+
+
+                          <p style={{paddingLeft:70}}>ชื่อผู้ใช้งาน: {this.state.Name_lastname} </p>
+                          <p style={{paddingLeft:70}}>รหัสบัตรประจำตัวประชาชน: {this.state.ID_Card} </p>
+                          <p style={{paddingLeft:70}}>เบอร์ติดต่อ: {this.state.Phone_Number} </p>
+                          <p style={{paddingLeft:70}}>อีเมลย์: {this.state.Email} </p>
+
+                          </Card.Text>
+                          <center>
+                        <Button variant="primary" onClick={() => this.edituser()} >Edit Profile</Button>
+                        </center>
+                    </Card.Body>
+
+
+
+
+
+
 
 
 

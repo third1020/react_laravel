@@ -14,13 +14,41 @@ import { ToastContainer } from "react-toastr";
 import "../../css/alert.css";
 import "../../css/animate.css";
 import '../../css/react-confirm-alert.css';
+
+import '../../css/froala-editor/froala_style.min.css';
+import '../../css/froala-editor/froala_editor.pkgd.min.css';
+
+import FroalaEditorView from 'react-froala-wysiwyg/FroalaEditorView';
 let container;
+
 
 
 
  class DataTable extends Component {
   constructor(props) {
     super(props);
+    if(this.props.review == "review"){
+      this.state = {
+        entities: {
+          data: [],
+          meta: {
+            current_page: 1,
+            from: 1,
+            last_page: 1,
+            per_page: 3,
+            to: 1,
+            total: 1,
+          },
+        },
+        search : '',
+        first_page: 1,
+        current_page: 1,
+        sorted_column: this.props.columns[0],
+        offset: 4,
+        order: 'desc',
+      };
+
+    }else{
 
     this.state = {
       entities: {
@@ -41,6 +69,7 @@ let container;
       offset: 4,
       order: 'asc',
     };
+  }
 
       this.handleFieldChange = this.handleFieldChange.bind(this)
 
@@ -186,13 +215,19 @@ let container;
 
 
 
+
+
   componentDidMount() {
 
       this.setState({ current_page: this.state.entities.meta.current_page ,search : this.state.search }, () => {this.fetchEntities()});
 
+    }
 
 
-  }
+
+
+
+
 
   tableHeads() {
     let icon;
@@ -244,6 +279,49 @@ let container;
     }
   }
 
+  reviewList() {
+    if (this.state.entities.data.length) {
+
+        return this.state.entities.data.map(user => {
+          return <div key={ user.id }>
+
+
+            <div style={{borderBottom:'solid', borderBottomColor:'#e7e7e7',borderBottomWidth: '1px',marginBottom: '30'}}>
+            <div class="card-body">
+             <h5 class="card-title" style={{fontWeight:'700', color:'#70bbfd'}}>{user.news_title} <small style={{color:'#999' ,fontSize:'10px',fontWeight:'400'}}> {user.created_at}</small></h5>
+
+             <FroalaEditorView
+  model={user.news_detail}
+/>
+
+
+
+              <span style={{fontSize:'12px',float: 'right' ,backgroundColor:'rgb(52, 195, 218)',padding: '6px' ,textTransform:'uppercase' ,color:'#fff',borderRadius:'.25rem',fontWeight:'600'}}>{user.news_type}</span>
+
+
+            </div>
+
+
+            </div>
+
+
+          </div>
+
+              })
+
+    } else {
+      return <tr>
+        <td colSpan={this.props.columns.length} className="text-center">ไม่พบข้อมูล</td>
+      </tr>
+    }
+
+    let girlsAges = this.state.entities.data.map(user => user.news_title);
+
+    console.log(girlsAges);  //[19, 10, 29, 23]
+
+
+  }
+
 
 
 
@@ -265,17 +343,13 @@ let container;
 
   render() {
     return (
+  <div style={{paddingLeft: '10' ,paddingRight: '5'}}>
+      {this.props.review =="review"?
 
 
-        <div style={{paddingLeft: '10' ,paddingRight: '5'}}>
-          <div className='col-md-12 col-lg-12'>
-          <h3 class="page-header">{this.props.headname}</h3>
-            <div className='card'>
-              <div className='card-header'>{this.props.headTablename}</div>
-              <div className='card-body'>
       <div className="data-table">
       <div style={{position:'right'}}>
-      <label>
+
       Search:<input
           class="form-control input-sm"
           placeholder="search text"
@@ -283,20 +357,16 @@ let container;
           value={this.state.search}
           onChange={this.handleFieldChange}
         />
-        </label>
+
 
       </div>
 
-        <Table striped bordered hover>
-          <thead>
-            <tr>{ this.tableHeads() }  <th>Action</th> </tr>
+
+            { this.reviewList() }
 
 
-          </thead>
-          <tbody>{ this.userList() } </tbody>
 
 
-        </Table>
         { (this.state.entities.data && this.state.entities.data.length > 0) &&
           <nav>
             <ul className="pagination">
@@ -326,10 +396,80 @@ let container;
           className="toast-top-right"
         />
         </div>
-       </div>
-      </div>
-    </div>
-  </div>
+
+
+
+
+
+  :
+              <div style={{paddingLeft: '10' ,paddingRight: '5'}}>
+                <div className='col-md-12 col-lg-12'>
+                <h3 class="page-header">{this.props.headname}</h3>
+                  <div className='card'>
+                    <div className='card-header'>{this.props.headTablename}</div>
+                    <div className='card-body'>
+            <div className="data-table">
+            <div style={{position:'right'}}>
+            <label>
+            Search:<input
+                class="form-control input-sm"
+                placeholder="search text"
+                type='search'
+                value={this.state.search}
+                onChange={this.handleFieldChange}
+              />
+              </label>
+
+            </div>
+
+
+              <Table striped bordered hover>
+                <thead>
+                  <tr>{ this.tableHeads() }  <th>Action</th> </tr>
+
+
+                </thead>
+                <tbody>{ this.userList() } </tbody>
+
+
+              </Table>
+              { (this.state.entities.data && this.state.entities.data.length > 0) &&
+                <nav>
+                  <ul className="pagination">
+                    <li className="page-item">
+                      <button className="page-link"
+                        disabled={ 1 === this.state.entities.meta.current_page }
+                        onClick={() => this.changePage(this.state.entities.meta.current_page - 1)}
+                      >
+                        Previous
+                      </button>
+                    </li>
+                    { this.pageList() }
+                    <li className="page-item">
+                      <button className="page-link"
+                        disabled={this.state.entities.meta.last_page === this.state.entities.meta.current_page}
+                        onClick={() => this.changePage(this.state.entities.meta.current_page + 1)}
+                      >
+                        Next
+                      </button>
+                    </li>
+                    <span style={{ marginTop: '8px' }}> &nbsp; <i>Displaying { this.state.entities.data.length } of { this.state.entities.meta.total } entries.</i></span>
+                  </ul>
+                </nav>
+              }
+              <ToastContainer
+                ref={ref => container = ref}
+                className="toast-top-right"
+              />
+              </div>
+             </div>
+            </div>
+          </div>
+        </div>}
+        </div>
+
+
+
 
 
     );
@@ -343,7 +483,8 @@ DataTable.propTypes = {
   edit:PropTypes.string,
   delete:PropTypes.string,
   deletesuccess:PropTypes.string,
-  deletefail:PropTypes.string
+  deletefail:PropTypes.string,
+  review:PropTypes.string,
 
 
 };

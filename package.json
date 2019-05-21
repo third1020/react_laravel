@@ -31,13 +31,16 @@
         "react-alert-template-basic": "^1.0.0",
         "react-bootstrap": "^1.0.0-beta.8",
         "react-confirm-alert": "^2.4.1",
+        "react-froala-wysiwyg": "^3.0.0-beta.1-1",
         "react-icons": "^3.6.1",
         "react-images-upload": "^1.2.6",
         "react-radio-group": "^3.0.3",
         "react-router-dom": "^5.0.0",
+        "react-script-tag": "^1.1.2",
         "react-select": "^2.4.3",
         "react-simple-checkbox": "^1.2.1",
         "react-toastr": "^3.0.0",
+        "react-user-profile": "^1.0.3",
         "react-widgets": "^4.4.10",
         "redux-form": "^8.2.0"
     }

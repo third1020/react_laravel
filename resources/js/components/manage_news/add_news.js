@@ -4,28 +4,56 @@ import Select from 'react-select';
 import ImageUploader from 'react-images-upload';
 
 
-
-
 import { Button , Form , Col, Row} from 'react-bootstrap';
 import axios from 'axios'
 import { ToastContainer } from "react-toastr";
 import "../../../css/alert.css";
 import "../../../css/animate.css";
+
+import '../../../css/froala-editor/froala_style.min.css';
+import '../../../css/froala-editor/froala_editor.pkgd.min.css';
+
+import FroalaEditor from 'react-froala-wysiwyg';
+import FroalaEditorImg from 'react-froala-wysiwyg/FroalaEditorImg';
+import ScriptTag from 'react-script-tag';
 let container;
+
+
+
+
 
 
 
     class Add_news extends Component {
       constructor (props) {
         super(props)
+
+        this.config = {
+      reactIgnoreAttrs: ['tmpattr'],
+      placeholderText: 'กรอกรายละเอียดข่าว',
+    heightMin: 250,
+    heightMax: 400,
+    autoFocus: true,
+    fontFamilySelection: true,
+    fontSizeSelection: true,
+    tabSpaces: 4,
+    imageUpload: true,
+
+
+
+
+  }
+
         this.state = {
           news_title: '',
           news_detail: '',
           news_types_id: '',
 
+
           getnews_type: [],
           errors: []
         }
+
 
         this.handleFieldChange = this.handleFieldChange.bind(this)
         this.handleCreate= this.handleCreate.bind(this)
@@ -33,12 +61,16 @@ let container;
         this.renderErrorFor = this.renderErrorFor.bind(this)
         this.handleSelectChange = this.handleSelectChange.bind(this)
         this.onDrop = this.onDrop.bind(this)
-
-
-
+        this.handleModelChange = this.handleModelChange.bind(this)
 
 
       }
+
+      handleModelChange(news_detail) {
+    this.setState({
+      news_detail: news_detail
+    });
+  }
 
 
 
@@ -60,6 +92,8 @@ let container;
 
 
       handleCreate (event) {
+
+        alert(location.pathname);
 
         event.preventDefault()
 
@@ -146,10 +180,14 @@ let container;
         const { getnews_type } = this.state
 
 
-
         return (
 
+
           <div className='container py-4' >
+          <ScriptTag isHydrating={true} type="text/javascript" src="https://cdn.jsdelivr.net/npm/froala-editor@3.0.0-beta.1/js/froala_editor.min.js" />
+          <ScriptTag isHydrating={true} type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.9.5/js/plugins/image.min.js" />
+
+
             <div style={{paddingLeft: '10' ,paddingRight: '5'}}>
               <div className='col-md-12'>
                 <div className='card'>
@@ -173,17 +211,18 @@ let container;
 
                       <div className='form-group'>
                         <label htmlFor='news_detail'>รายละเอียด</label>
-                        <textarea
-                          id='news_detail'
-                          type='text'
-                          placeholder="กรอกรายละเอียด"
-                          className={`form-control ${this.hasErrorFor('news_detail') ? 'is-invalid' : ''}`}
-                          name='news_detail'
-                          rows="5"
-                          value={this.state.news_detail}
-                          onChange={this.handleFieldChange}
+
+                        <FroalaEditor
+                        tag='textarea'
+                        config={this.config}
+                        model={this.state.news_detail}
+  			                onModelChange={this.handleModelChange}
                         />
-                        {this.renderErrorFor('news_detail')}
+
+
+                      {this.renderErrorFor('news_detail')}
+
+
                       </div>
 
 

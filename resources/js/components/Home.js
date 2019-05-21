@@ -7,6 +7,8 @@ import Header from './Header';
 import Dashboard from './Dashboard';
 import Image from 'react-bootstrap/Image'
 import Profile from './Profile';
+
+import BoardHome from './BoardHome';
 import PropTypes from 'prop-types';
 // import { SideNav, Nav } from 'react-sidenav';
 
@@ -37,21 +39,22 @@ import PropTypes from 'prop-types';
                    <div class="grid card">
                       <div class="card-body">
 
-                      <center><Image src="https://storage.googleapis.com/image_react_laravel/Title%20Home.png" style={{width:'50%',hight:'40%'}} fluid /></center>
+                      <center><Image src="https://storage.googleapis.com/image_react_laravel/Title%20Home.png" style={{width:'50%',height:'30%'}} fluid /></center>
 
                       </div>
                    </div>
                 </div>
              </div>
              <div class="row" style={{padding:10}}>
-               <div class="col-sm-12 col-md-5">
+               <div class="col-sm-12 col-md-4">
                 <Profile id={this.state.id}/>
                </div>
-               <div class="col-sm-12 col-md-7">
+               <div class="col-sm-12 col-md-8">
                   <div class="grid card">
-                     <div class="card-body">
-                     <p>{this.props.id}</p>
-                     </div>
+
+                     <BoardHome id={this.state.id}/>
+
+                  
                   </div>
                </div>
              </div>

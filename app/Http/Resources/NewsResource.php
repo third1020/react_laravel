@@ -21,6 +21,7 @@ class NewsResource extends JsonResource
       return [
           'id'                    =>  $this->id ,
           'news_title'            =>  $this->news_title,
+          'news_detail'            =>  $this->news_detail,
           'news_type'         =>  $getdata[0]->type_name,
 
 

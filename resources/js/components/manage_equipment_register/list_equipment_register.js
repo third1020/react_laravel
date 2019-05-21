@@ -11,7 +11,7 @@ import axios from 'axios'
        }
 
      render () {
-       const columns = ['id', 'Equipment Register Name','Equipment Register Type','Username','Department','created_at'];
+       const columns = ['id', 'equipment_name','equipment_type','username','department','created_at'];
      return (
 
        <DataTable url="/api/equipment_register_table" columns={columns} name={"equipment_register"} headname={" List Equipment_register"} headTablename={"ตารางแสดงข้อมูล"}  edit={"แก้ไข"} delete={"ลบ"}   deletefail={"ลบข้อมูลไม่สำเร็จ"} deletesuccess={"ลบข้อมูลสำเร็จ"} />

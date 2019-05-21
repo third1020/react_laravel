@@ -69,9 +69,6 @@ import React, { Component } from 'react'
 
 
 
-               <Route path='/success' component={Success} />
-
-
              </Switch>
            </div>
          </BrowserRouter>

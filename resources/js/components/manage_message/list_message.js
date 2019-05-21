@@ -11,7 +11,7 @@ import axios from 'axios'
        }
 
      render () {
-       const columns = ['id', 'Message Title','Message From','Message To','Status','created_at'];
+       const columns = ['id', 'message_title','message_from','message_to','status','created_at'];
      return (
 
        <DataTable url="/api/message_table" columns={columns} name={"message"} headname={" List Message"} headTablename={"ตารางแสดงข้อมูล"} edit={"แก้ไข"} delete={"ลบ"}   deletefail={"ลบข้อมูลไม่สำเร็จ"} deletesuccess={"ลบข้อมูลสำเร็จ"} />

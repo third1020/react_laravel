@@ -11,7 +11,7 @@ import axios from 'axios'
        }
 
      render () {
-       const columns = ['id', 'Type Name','created_at'];
+       const columns = ['id', 'type_name','created_at'];
      return (
 
        <DataTable url="/api/news_type_table" columns={columns} name={"news_type"} headname={" List News Type"} headTablename={"ตารางแสดงข้อมูล"} edit={"แก้ไข"} delete={"ลบ"}   deletefail={"ลบข้อมูลไม่สำเร็จ"} deletesuccess={"ลบข้อมูลสำเร็จ"} />

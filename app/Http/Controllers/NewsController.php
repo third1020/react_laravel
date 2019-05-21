@@ -24,7 +24,7 @@ class NewsController extends Controller
   public function index()
   {
 
-    $getdata = DB::table('news')->get();
+    $getdata = DB::table('news')->latest()->limit(3)->get();
 
     return $getdata->toJson();
 

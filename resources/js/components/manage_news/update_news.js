@@ -83,7 +83,6 @@ let container;
             this.setState({
               news_title: '',
               news_detail: '',
-              message_from: '',
               news_types_id: '',
 
               errors: []
@@ -146,7 +145,6 @@ let container;
 
             news_title: response.data.news_title,
             news_detail: response.data.news_detail,
-            message_from: response.data.message_from,
             news_types_id: response.data.news_types_id,
 
 
@@ -228,7 +226,7 @@ let container;
                   </div>
                 </div>
               </div>
-          
+
         )
       }
     }

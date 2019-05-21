@@ -184,7 +184,7 @@ export default class Dashboard extends Component {
 
                          </NavIcon>
                              <NavText>
-                             {this.state.id}
+                             หน้าแรก
                              </NavText>
 
 

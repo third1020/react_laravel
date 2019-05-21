@@ -23,6 +23,7 @@ class CreateNewsTable extends Migration
           $table->string('created_by')->nullable();
           $table->timestamps();
         });
+        DB::statement("ALTER TABLE news ADD news_image  MEDIUMBLOB");
     }
 
     /**
