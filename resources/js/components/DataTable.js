@@ -28,6 +28,17 @@ let container;
   constructor(props) {
     super(props);
     if(this.props.review == "review"){
+      this.config = {
+    reactIgnoreAttrs: ['tmpattr'],
+  heightMin: 250,
+  heightMax: 400,
+  autoFocus: true,
+  fontFamilySelection: true,
+  fontSizeSelection: true,
+
+
+}
+
       this.state = {
         entities: {
           data: [],
@@ -291,8 +302,9 @@ let container;
              <h5 class="card-title" style={{fontWeight:'700', color:'#70bbfd'}}>{user.news_title} <small style={{color:'#999' ,fontSize:'10px',fontWeight:'400'}}> {user.created_at}</small></h5>
 
              <FroalaEditorView
-  model={user.news_detail}
-/>
+                model={user.news_detail}
+                config={this.config}
+                />
 
 
 

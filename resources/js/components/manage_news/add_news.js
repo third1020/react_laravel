@@ -28,6 +28,19 @@ let container;
       constructor (props) {
         super(props)
 
+
+
+        this.state = {
+          news_title: '',
+          news_detail: '',
+          news_types_id: '',
+          img:'',
+
+
+          getnews_type: [],
+          errors: []
+        }
+
         this.config = {
       reactIgnoreAttrs: ['tmpattr'],
       placeholderText: 'กรอกรายละเอียดข่าว',
@@ -39,20 +52,51 @@ let container;
     tabSpaces: 4,
     imageUpload: true,
 
+    // Set max image size to 5MB.
+    imageMaxSize: 5 * 1024 * 1024,
+
+    // Allow to upload PNG and JPG.
+    imageAllowedTypes: ['jpeg', 'jpg', 'png'],
+    fileUploadURL: '/storage/app/image_froala_editor',
+
+    events: {
+      'image.beforeUpload': function (images) {
+        // Return false if you want to stop the image upload.
+
+        let data = new FormData();
+        data.append('image', images[0]);
+        data.append('id', sessionStorage.getItem("id"));
+
+        console.log(data.image);
+        console.log(images[0]);
+        console.log(sessionStorage.getItem("id"));
+        axios.post('/api/news/image',data,{
+
+          onUploadProgress: progressEvent => {
+      console.log(progressEvent.loaded / progressEvent.total)
+    }
+        })  .then(res => {
+
+          const fileimage = res.data
 
 
+
+            }).catch(err => {
+              console.log(err);
+            });
+      },
+
+      'image.inserted': function ($img, response) {
+    // Image was inserted in the editor.
+
+    $img[0].src = "http://www.silpathai.net/wp-content/uploads/2014/10/%E0%B8%99%E0%B8%81%E0%B8%AE%E0%B8%B9%E0%B8%81-294x300.jpg"
+  console.log($img[0].src);
 
   }
 
-        this.state = {
-          news_title: '',
-          news_detail: '',
-          news_types_id: '',
 
-
-          getnews_type: [],
-          errors: []
-        }
+  }
+}
 
 
         this.handleFieldChange = this.handleFieldChange.bind(this)
@@ -93,7 +137,7 @@ let container;
 
       handleCreate (event) {
 
-        alert(location.pathname);
+
 
         event.preventDefault()
 
@@ -116,7 +160,6 @@ let container;
             this.setState({
               news_title: '',
               news_detail: '',
-              message_from: '',
               news_types_id: '',
 
               errors: []
@@ -183,12 +226,17 @@ let container;
         return (
 
 
+
           <div className='container py-4' >
           <ScriptTag isHydrating={true} type="text/javascript" src="https://cdn.jsdelivr.net/npm/froala-editor@3.0.0-beta.1/js/froala_editor.min.js" />
           <ScriptTag isHydrating={true} type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.9.5/js/plugins/image.min.js" />
+          <img src={process.env.PUBLIC_URL + '/Title_Home.png'} />;
+
+
 
 
             <div style={{paddingLeft: '10' ,paddingRight: '5'}}>
+
               <div className='col-md-12'>
                 <div className='card'>
                   <div className='card-header'>เพิ่มข่าว</div>
@@ -217,10 +265,8 @@ let container;
                         config={this.config}
                         model={this.state.news_detail}
   			                onModelChange={this.handleModelChange}
+
                         />
-
-
-                      {this.renderErrorFor('news_detail')}
 
 
                       </div>

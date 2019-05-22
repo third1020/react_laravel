@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Resources\NewsResource;
 use App\News;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 
 class NewsController extends Controller
@@ -74,6 +75,25 @@ class NewsController extends Controller
    return response()->json('User created!');
 
  }
+
+
+ public function upload_image(Request $request)
+ {
+
+
+
+   $path = $request->file('image')->store('image_froala_editor', 'public');
+   // $path = Storage::disk('local')->put('file.txt', 'Contents');
+
+   // $url = Storage::url($request->file('image'));
+
+   $url = storage::url('9VtajpibSE4es5ViOzdcuLRuNj6yqQq8lmXl4BxK.png');
+
+   return $url;
+
+
+ }
+
 
  public function edit($id)
  {

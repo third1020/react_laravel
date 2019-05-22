@@ -47,6 +47,8 @@ use Illuminate\Http\Request;
     Route::get('news_table', 'NewsController@getTable');
     Route::delete('news_table/{id}', 'NewsController@destroy');
     Route::post('news', 'NewsController@store');
+    Route::post('news/image', 'NewsController@upload_image');
+
     Route::get('querynews', 'NewsController@index');
     Route::get('news/{id}', 'NewsController@edit');
     Route::put('news_update/{id}', 'NewsController@update');
