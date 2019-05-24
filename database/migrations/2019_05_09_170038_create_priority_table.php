@@ -19,6 +19,7 @@ class CreatePriorityTable extends Migration
           $table->string('priority_name');
           $table->Integer('priority_status');
           $table->timestamps();
+          $table->softDeletes();
         });
     }
 

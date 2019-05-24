@@ -22,6 +22,7 @@ class CreateRequestTable extends Migration
           $table->BIginteger('equipment_id')->unsigned();
           $table->foreign('equipment_id')->references('id')->on('equipment');
           $table->timestamps();
+          $table->softDeletes();
         });
     }
 

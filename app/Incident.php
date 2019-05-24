@@ -3,9 +3,11 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Incident extends Model
 {
+  use SoftDeletes;
   protected $fillable = ['remark',
                          'incident_tital',
                          'incident_detail',

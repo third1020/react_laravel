@@ -23,6 +23,7 @@ class CreateEquipmentRegisterTable extends Migration
           $table->longText('detail');
           $table->string('created_by')->nullable();
           $table->timestamps();
+          $table->softDeletes();
         });
     }
 

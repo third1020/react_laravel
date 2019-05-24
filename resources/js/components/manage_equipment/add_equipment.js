@@ -2,6 +2,11 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import Select from 'react-select';
 import ImageUploader from 'react-images-upload';
+import FroalaEditor from 'react-froala-wysiwyg';
+import FroalaEditorImg from 'react-froala-wysiwyg/FroalaEditorImg';
+import ScriptTag from 'react-script-tag';
+import '../../../css/froala-editor/froala_style.min.css';
+import '../../../css/froala-editor/froala_editor.pkgd.min.css';
 
 
 
@@ -12,6 +17,49 @@ import { ToastContainer } from "react-toastr";
 import "../../../css/alert.css";
 import "../../../css/animate.css";
 let container;
+
+const config = {
+reactIgnoreAttrs: ['tmpattr'],
+placeholderText: 'กรอกรายละเอียด',
+heightMin: 250,
+heightMax: 400,
+autoFocus: true,
+fontFamilySelection: true,
+fontSizeSelection: true,
+tabSpaces: 4,
+imageUpload: true,
+videoUpload: true,
+pluginsEnabled: ['align', 'charCounter', 'codeBeautifier', 'codeView', 'colors', 'draggable', 'embedly', 'emoticons', 'entities', 'file', 'fontFamily', 'fontSize', 'fullscreen', 'image', 'imageManager', 'inlineStyle', 'lineBreaker', 'link', 'lists', 'paragraphFormat', 'paragraphStyle', 'quickInsert', 'quote', 'save', 'table', 'url', 'video', 'wordPaste'],
+toolbarButtons: ['bold', 'italic', 'underline', 'strikeThrough', 'subscript', 'superscript', '|', 'fontFamily', 'fontSize', 'color', 'inlineStyle', 'paragraphStyle', '|', 'paragraphFormat', 'align', 'formatOL', 'formatUL', 'outdent', 'indent', 'quote', 'check', '|', 'insertLink', 'insertImage', 'embedly', 'insertFile', 'insertTable', '|', 'emoticons', 'specialCharacters', 'insertHR', 'selectAll', 'clearFormatting', '|', 'spellChecker', 'help', 'html', '|', 'undo', 'redo'],
+toolbarButtonsMD: ['bold', 'italic', 'underline', 'strikeThrough', 'subscript', 'superscript', '|', 'fontFamily', 'fontSize', 'color', 'inlineStyle', 'paragraphStyle', '|', 'paragraphFormat', 'align', 'formatOL', 'formatUL', 'outdent', 'indent', 'quote', 'check', '|', 'insertLink', 'insertImage', 'embedly', 'insertFile', 'insertTable', '|', 'emoticons', 'specialCharacters', 'insertHR', 'selectAll', 'clearFormatting', '|', 'spellChecker', 'help', 'html', '|', 'undo', 'redo'],
+toolbarButtonsSM: ['bold', 'italic', 'underline', 'strikeThrough', '|', 'fontFamily', 'fontSize', 'color', '|', 'align', 'formatOL', 'formatUL', 'outdent', 'indent', 'quote', 'check', '|', 'insertLink', 'insertImage', 'embedly', 'insertFile', 'insertTable', '|', 'emoticons', 'specialCharacters', 'insertHR', 'selectAll', 'clearFormatting', '|', 'spellChecker', 'help', 'html', '|', 'undo', 'redo'],
+toolbarButtonsXS: ['bold', 'italic', 'underline', '|', 'fontFamily', 'fontSize', 'color', '|', 'align', 'formatOL', 'formatUL', 'outdent', 'indent', 'check', '|', 'insertLink', 'insertImage', 'insertFile', 'insertTable', '|', 'insertHR', 'selectAll', 'clearFormatting', '|', 'spellChecker', '|', 'undo', 'redo'],
+imageUploadParam: 'file',
+imageUploadURL: '/api/news/image',
+imageUploadMethod: 'POST',
+// Set max image size to 5MB.
+imageMaxSize: 5 * 1024 * 1024,
+// Allow to upload PNG and JPG.
+imageAllowedTypes: ['jpeg', 'jpg', 'png'],
+fileUploadParam: 'file',
+fileUploadURL: '/api/news/image',
+fileUploadMethod: 'POST',
+fileMaxSize: 20 * 1024 * 1024, // 10MB
+events: {
+'image.beforeUpload': function (images) {
+// Return false if you want to stop the image upload.
+console.log(images[0]);
+if(images[0] !== ""){
+  return true
+}
+},
+'image.inserted': function ($img, response) {
+// Image was inserted in the editor.
+console.log($img[0]);
+console.log(response);
+},
+}
+}
 
 
 
@@ -29,6 +77,51 @@ let container;
           errors: []
         }
 
+        this.config = {
+    reactIgnoreAttrs: ['tmpattr'],
+    placeholderText: 'กรอกรายละเอียด',
+    heightMin: 250,
+    heightMax: 400,
+    autoFocus: true,
+    fontFamilySelection: true,
+    fontSizeSelection: true,
+    tabSpaces: 4,
+    imageUpload: true,
+    videoUpload: true,
+    pluginsEnabled: ['align', 'charCounter', 'codeBeautifier', 'codeView', 'colors', 'draggable', 'embedly', 'emoticons', 'entities', 'file', 'fontFamily', 'fontSize', 'fullscreen', 'image', 'imageManager', 'inlineStyle', 'lineBreaker', 'link', 'lists', 'paragraphFormat', 'paragraphStyle', 'quickInsert', 'quote', 'save', 'table', 'url', 'video', 'wordPaste'],
+    toolbarButtons: ['bold', 'italic', 'underline', 'strikeThrough', 'subscript', 'superscript', '|', 'fontFamily', 'fontSize', 'color', 'inlineStyle', 'paragraphStyle', '|', 'paragraphFormat', 'align', 'formatOL', 'formatUL', 'outdent', 'indent', 'quote', 'check', '|', 'insertLink', 'insertImage', 'embedly', 'insertFile', 'insertTable', '|', 'emoticons', 'specialCharacters', 'insertHR', 'selectAll', 'clearFormatting', '|', 'spellChecker', 'help', 'html', '|', 'undo', 'redo'],
+    toolbarButtonsMD: ['bold', 'italic', 'underline', 'strikeThrough', 'subscript', 'superscript', '|', 'fontFamily', 'fontSize', 'color', 'inlineStyle', 'paragraphStyle', '|', 'paragraphFormat', 'align', 'formatOL', 'formatUL', 'outdent', 'indent', 'quote', 'check', '|', 'insertLink', 'insertImage', 'embedly', 'insertFile', 'insertTable', '|', 'emoticons', 'specialCharacters', 'insertHR', 'selectAll', 'clearFormatting', '|', 'spellChecker', 'help', 'html', '|', 'undo', 'redo'],
+    toolbarButtonsSM: ['bold', 'italic', 'underline', 'strikeThrough', '|', 'fontFamily', 'fontSize', 'color', '|', 'align', 'formatOL', 'formatUL', 'outdent', 'indent', 'quote', 'check', '|', 'insertLink', 'insertImage', 'embedly', 'insertFile', 'insertTable', '|', 'emoticons', 'specialCharacters', 'insertHR', 'selectAll', 'clearFormatting', '|', 'spellChecker', 'help', 'html', '|', 'undo', 'redo'],
+    toolbarButtonsXS: ['bold', 'italic', 'underline', '|', 'fontFamily', 'fontSize', 'color', '|', 'align', 'formatOL', 'formatUL', 'outdent', 'indent', 'check', '|', 'insertLink', 'insertImage', 'insertFile', 'insertTable', '|', 'insertHR', 'selectAll', 'clearFormatting', '|', 'spellChecker', '|', 'undo', 'redo'],
+    imageUploadParam: 'file',
+    imageUploadURL: '/api/news/image',
+    imageUploadMethod: 'POST',
+    // Set max image size to 5MB.
+    imageMaxSize: 5 * 1024 * 1024,
+    // Allow to upload PNG and JPG.
+    imageAllowedTypes: ['jpeg', 'jpg', 'png'],
+    fileUploadParam: 'file',
+    fileUploadURL: '/api/news/image',
+    fileUploadMethod: 'POST',
+    fileMaxSize: 20 * 1024 * 1024, // 10MB
+    events: {
+      'image.beforeUpload': function (images) {
+        // Return false if you want to stop the image upload.
+        console.log(images[0]);
+        if(images[0] !== ""){
+          return true
+        }
+      },
+      'image.inserted': function ($img, response) {
+        // Image was inserted in the editor.
+        console.log($img[0]);
+        console.log(response);
+      },
+  }
+}
+        this.handleModelEquipmentChange = this.handleModelEquipmentChange.bind(this)
+        this.handleModelContactChange = this.handleModelContactChange.bind(this)
+
         this.handleFieldChange = this.handleFieldChange.bind(this)
         this.handleCreate= this.handleCreate.bind(this)
         this.hasErrorFor = this.hasErrorFor.bind(this)
@@ -38,6 +131,19 @@ let container;
 
 
       }
+      handleModelEquipmentChange(equipment_detail) {
+    this.setState({
+      equipment_detail: equipment_detail
+    });
+  }
+
+  handleModelContactChange(contact_detail) {
+this.setState({
+  contact_detail: contact_detail
+});
+}
+
+
 
       onDrop(pictureFiles, pictureDataURLs) {
     this.setState({
@@ -83,6 +189,8 @@ let container;
               equipment_number: '',
               contact_detail: '',
               equipment_type_id: '',
+            
+
 
               errors: []
             })
@@ -174,17 +282,13 @@ let container;
 
                       <div className='form-group'>
                         <label htmlFor='equipment_detail'>รายละเอียดอุปกรณ์</label>
-                        <textarea
-                          id='equipment_detail'
-                          name='equipment_detail'
-                          className={`form-control ${this.hasErrorFor('equipment_detail') ? 'is-invalid' : ''}`}
-                          placeholder="กรอกรายละเอียดอุปกรณ"
-                          type="text"
-                          rows="3"
-                          value={this.state.equipment_detail}
-                          onChange={this.handleFieldChange}
+                        <FroalaEditor
+                        tag='textarea'
+                        config={this.config}
+                        model={this.state.equipment_detail}
+                        onModelChange={this.handleModelEquipmentChange}
+
                         />
-                        {this.renderErrorFor('equipment_detail')}
 
                       </div>
 
@@ -206,17 +310,14 @@ let container;
 
                       <div className='form-group'>
                         <label htmlFor='contact_detail'>รายละเอียดผู้ติดต่อ</label>
-                        <textarea
-                          id='contact_detail'
-                          type='text'
-                          placeholder="กรอก รายละเอียดผู้ติดต่อ"
-                          className={`form-control ${this.hasErrorFor('contact_detail') ? 'is-invalid' : ''}`}
-                          name='contact_detail'
-                          rows="3"
-                          value={this.state.contact_detail}
-                          onChange={this.handleFieldChange}
+                        <FroalaEditor
+                        tag='textarea'
+                        config={config}
+                        model={this.state.contact_detail}
+                        onModelChange={this.handleModelContactChange}
+
                         />
-                        {this.renderErrorFor('contact_detail')}
+
 
 
 
@@ -231,7 +332,7 @@ let container;
 
 
                         </div>
-                        <select class="custom-select" value={this.state.getequipment_type_id} onChange={this.handleSelectChange} className={`form-control ${this.hasErrorFor('getequipment_type_id') ? 'is-invalid' : ''}`}>
+                        <select class="custom-select" value={this.state.equipment_type_id} onChange={this.handleSelectChange} className={`form-control ${this.hasErrorFor('getequipment_type_id') ? 'is-invalid' : ''}`}>
                         <option value="" >Choose...</option>
 
 

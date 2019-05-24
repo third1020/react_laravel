@@ -13,8 +13,9 @@ import Card from 'react-bootstrap/Card';
 import Nav from 'react-bootstrap/Nav';
 import Tabs from 'react-bootstrap/Tabs';
 import Tab from 'react-bootstrap/Tab';
-import CardGroup from 'react-bootstrap/CardGroup'
+import CardGroup from 'react-bootstrap/CardGroup';
    import DataTable from "./DataTable";
+   import Profile from "./Profile";
 
 
 let container;
@@ -74,8 +75,15 @@ import axios from 'axios';
 
 
           <Tabs defaultActiveKey="home" id="uncontrolled-tab-example">
+
     <Tab eventKey="home" title="Home">
     <p>{this.state.getnews_type.length}</p>
+
+    </Tab>
+
+    <Tab eventKey="profile" title="profile">
+    <Profile id={sessionStorage.getItem("id")} />
+
 
     </Tab>
     <Tab eventKey="news" title="News">

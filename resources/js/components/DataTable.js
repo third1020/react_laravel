@@ -5,24 +5,21 @@ import Button from 'react-bootstrap/Button';
 import Success from './success_insert';
 import Select_update from './Select_update';
 
-
-
 import { Link } from 'react-router-dom';
 
 import { confirmAlert } from 'react-confirm-alert';
 import { ToastContainer } from "react-toastr";
 import "../../css/alert.css";
 import "../../css/animate.css";
+import "../../css/search.css";
 import '../../css/react-confirm-alert.css';
 
 import '../../css/froala-editor/froala_style.min.css';
 import '../../css/froala-editor/froala_editor.pkgd.min.css';
 
 import FroalaEditorView from 'react-froala-wysiwyg/FroalaEditorView';
+import {FaStar,FaPlusSquare,FaFilePdf,FaFileExcel,FaTrashAlt,FaTrash,FaPen,FaRegCheckSquare,FaCheckDouble,FaMinus} from 'react-icons/fa';
 let container;
-
-
-
 
  class DataTable extends Component {
   constructor(props) {
@@ -35,10 +32,7 @@ let container;
   autoFocus: true,
   fontFamilySelection: true,
   fontSizeSelection: true,
-
-
 }
-
       this.state = {
         entities: {
           data: [],
@@ -79,12 +73,60 @@ let container;
       sorted_column: this.props.columns[0],
       offset: 4,
       order: 'asc',
+      checkedList: [],
+      statuslist : []
     };
+
   }
 
       this.handleFieldChange = this.handleFieldChange.bind(this)
+      this.handleCheckboxChange = this.handleCheckboxChange.bind(this)
+      this.DeleteSelectAll = this.DeleteSelectAll.bind(this)
+
 
   }
+
+  DeleteSelectAll (event) {
+    alert(this.state.checkedList);
+    var arrayid = this.state.checkedList;
+    console.log(arrayid);
+    axios.delete(`${this.props.url}`, { data: { foo: arrayid } })
+    .then(response => {
+      console.log(response);
+      container.success(`${this.props.deletesuccess}`, `success`, {
+          closeButton: true,
+          timeOut: 5000
+        })
+        window.scrollTo(0, 0);
+    })
+    .catch(error => {
+      container.error(`${this.props.deletefail}`, `errors`, {
+          closeButton: true,
+
+          timeOut: 5000,
+          extendedTimeOut: 2000
+        })
+      window.scrollTo(0, 0);
+    })
+    this.setState({checkedList : []}, () => {this.fetchEntities()});
+
+  }
+
+  handleCheckboxChange (event) {
+
+    if(event.target.checked){
+
+      this.state.checkedList.push(event.target.name);
+
+    }else if(event.target.checked == false){
+     this.state.checkedList = this.state.checkedList.filter(el => el !== event.target.name);
+
+    }
+  }
+
+
+
+
   handleFieldChange () {
     this.setState({
       search: event.target.value , current_page: 1
@@ -226,19 +268,11 @@ let container;
 
 
 
-
-
   componentDidMount() {
 
       this.setState({ current_page: this.state.entities.meta.current_page ,search : this.state.search }, () => {this.fetchEntities()});
 
     }
-
-
-
-
-
-
 
   tableHeads() {
     let icon;
@@ -256,7 +290,6 @@ let container;
   }
 
 
-
   userList() {
     if (this.state.entities.data.length) {
 
@@ -266,16 +299,28 @@ let container;
 
             <td>
                               { this.props.edit != null ?(
-                                  <button  onClick={() => this.handleUpdate(user.id)} className="btn btn-sm btn-primary" style={{color: '#fff'}}  >
+                                  <button  onClick={() => this.handleUpdate(user.id)} className="btn btn-sm btn-warning" style={{color: '#fff' ,backgroundColor:'#ffab43',borderColor:'#ffab43'}}  >
+                                  <i style={{  fontSize:'1.2 em',color: ''}} ><FaPen/></i>
                                     {this.props.edit}
                                 </button>)
                                 :null}
 
                                 { this.props.delete != null ?
                                   (<button onClick={() => this.handleDelete(user.id)} className="btn btn-sm btn-danger" >
+                                  <i style={{  fontSize:'1.2 em',color: ''}} ><FaTrash/></i>
                                       {this.props.delete}
                                   </button>)
                                   : null}
+
+
+
+            </td>
+            <td>
+            <center>
+
+            <input type="checkbox" name={user.id} checked={this.state.statuslist[user.id]} onChange={this.handleCheckboxChange} />
+
+            </center>
 
             </td>
 
@@ -300,24 +345,14 @@ let container;
             <div style={{borderBottom:'solid', borderBottomColor:'#e7e7e7',borderBottomWidth: '1px',marginBottom: '30'}}>
             <div class="card-body">
              <h5 class="card-title" style={{fontWeight:'700', color:'#70bbfd'}}>{user.news_title} <small style={{color:'#999' ,fontSize:'10px',fontWeight:'400'}}> {user.created_at}</small></h5>
-
              <FroalaEditorView
                 model={user.news_detail}
                 config={this.config}
                 />
-
-
-
               <span style={{fontSize:'12px',float: 'right' ,backgroundColor:'rgb(52, 195, 218)',padding: '6px' ,textTransform:'uppercase' ,color:'#fff',borderRadius:'.25rem',fontWeight:'600'}}>{user.news_type}</span>
-
-
             </div>
-
-
-            </div>
-
-
           </div>
+        </div>
 
               })
 
@@ -333,9 +368,6 @@ let container;
 
 
   }
-
-
-
 
   sortByColumn(column) {
     if (column === this.state.sorted_column) {
@@ -376,9 +408,6 @@ let container;
 
             { this.reviewList() }
 
-
-
-
         { (this.state.entities.data && this.state.entities.data.length > 0) &&
           <nav>
             <ul className="pagination">
@@ -409,41 +438,59 @@ let container;
         />
         </div>
 
-
-
-
-
   :
-              <div style={{paddingLeft: '10' ,paddingRight: '5'}}>
+              <div>
                 <div className='col-md-12 col-lg-12'>
                 <h3 class="page-header">{this.props.headname}</h3>
                   <div className='card'>
                     <div className='card-header'>{this.props.headTablename}</div>
                     <div className='card-body'>
+
+
+
+
+                      <div>
+                      <p></p>
+
+                      <button  class="btn btn-outline-success" style={{ marginLeft: '30px',marginBottom: '10px'}}><i style={{ fontSize:'1.5em', color:'green'}}><FaPlusSquare/></i> New</button>
+
+                        <label for="searchWeb" style={{
+                          fontSize: '18px',
+                          fontWeight: '900',
+                          color: '#008cff',
+                          padding:'10',
+
+                        }}>Search :   </label>
+                        <input
+                        style={{
+
+                          fontFamily: 'Nunito',
+                          width: '350',
+                          padding: '5px 10px',
+                          backgroundColor: 'transparent',
+                          transition: 'transform 250ms ease-in-out',
+                          fontSize: '18px',
+                          lineHeight: '18px',
+                          color: '#575756',
+                          borderRadius:'120px'
+
+                        }}
+                            placeholder="search text"
+                            type='search'
+                            value={this.state.search}
+                            onChange={this.handleFieldChange}
+                          />
+
+                          <button  class="btn btn-outline-warning" style={{ marginLeft: '8px',marginBottom: '10px',color: '#ff9f4c',borderColor:'#ff9f4c'}}><i style={{  fontSize:'1.5em',color: '#ff9f4c'}} ><FaFilePdf/></i>  PDF</button>
+                          <button  class="btn btn-outline-success" style={{ marginLeft: '8px',marginBottom: '10px'}}><i style={{  fontSize:'1.5em'}} ><FaFileExcel/></i>  Excel</button>
+                          <button  class="btn btn-outline-danger" style={{ marginLeft: '8px',marginBottom: '10px' ,float: 'right'}} onClick={() => this.DeleteSelectAll()}><i style={{  fontSize:'1.5em'}}><FaTrashAlt/></i>  Delete Selected</button>
+                    </div>
             <div className="data-table">
-            <div style={{position:'right'}}>
-            <label>
-            Search:<input
-                class="form-control input-sm"
-                placeholder="search text"
-                type='search'
-                value={this.state.search}
-                onChange={this.handleFieldChange}
-              />
-              </label>
-
-            </div>
-
-
               <Table striped bordered hover>
                 <thead>
-                  <tr>{ this.tableHeads() }  <th>Action</th> </tr>
-
-
+                  <tr>{ this.tableHeads() }  <th>Action</th> <th><center>Status</center></th> </tr>
                 </thead>
                 <tbody>{ this.userList() } </tbody>
-
-
               </Table>
               { (this.state.entities.data && this.state.entities.data.length > 0) &&
                 <nav>
@@ -479,10 +526,6 @@ let container;
           </div>
         </div>}
         </div>
-
-
-
-
 
     );
   }

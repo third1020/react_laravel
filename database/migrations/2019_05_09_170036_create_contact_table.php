@@ -25,6 +25,7 @@ class CreateContactTable extends Migration
             $table->foreign('user_id')->references('id')->on('users');
             $table->string('created_by')->nullable();
             $table->timestamps();
+            $table->softDeletes();
 
 
         });

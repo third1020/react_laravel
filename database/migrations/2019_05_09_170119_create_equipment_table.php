@@ -24,6 +24,7 @@ class CreateEquipmentTable extends Migration
           $table->foreign('equipment_type_id')->references('id')->on('equipment_types');
           $table->string('created_by')->nullable();
           $table->timestamps();
+          $table->softDeletes();
         });
         DB::statement("ALTER TABLE equipment ADD equipment_image  MEDIUMBLOB");
     }

@@ -30,6 +30,7 @@ class CreatePermissionTable extends Migration
             $table->boolean('manage_priority')->nullable();
             $table->boolean('manage_solution')->nullable();
             $table->boolean('Report')->nullable();
+            $table->softDeletes();
 
 
 

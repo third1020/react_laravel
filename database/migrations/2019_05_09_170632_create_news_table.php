@@ -22,6 +22,7 @@ class CreateNewsTable extends Migration
           $table->foreign('news_types_id')->references('id')->on('news_types');
           $table->string('created_by')->nullable();
           $table->timestamps();
+          $table->softDeletes();
         });
         DB::statement("ALTER TABLE news ADD news_image  MEDIUMBLOB");
     }

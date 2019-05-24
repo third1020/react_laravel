@@ -97,8 +97,33 @@ class News_typeController extends Controller
 }
 
 
+
  public function destroy($id) {
-  News_type::findOrFail($id)->delete();
+
+
+     News_type::findOrFail($id)->delete();
+
+
+
 
 }
+
+
+ public function destroy_select(Request $request) {
+
+
+     News_type::destroy($request->foo);
+
+
+   return response()->json([
+      'data' => 'delect successfully',
+    ]);
+
+
+
+
+}
+
+
+
 }

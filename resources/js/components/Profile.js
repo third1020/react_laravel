@@ -9,9 +9,11 @@ import { ToastContainer } from "react-toastr";
 import "../../css/alert.css";
 import "../../css/animate.css";
 import "../../css/front.css";
+import "../../css/profile.css";
 import Image from 'react-bootstrap/Image';
 import Card from 'react-bootstrap/Card';
 import Update_user from './manage_user/update_user'
+import {FaStar} from 'react-icons/fa';
 
 
 
@@ -50,6 +52,8 @@ import axios from 'axios'
       onClickOutside: () => {   window.location.reload(true);},
       customUI: ({ onClose }) => {
         return (
+
+
           <div style={{ height: '100%' ,left:50 }}>
           <Update_user id={sessionStorage.getItem("id")}/>
           <footer class="modal-footer">
@@ -107,28 +111,51 @@ import axios from 'axios'
         return (
 
           <div class="grid card">
-             <div class="card-body" >
-                <div >
+
+          <div class="container portfolio" class="bodyprofile">
+          	<div class="row">
+          		<div class="col-md-12">
+          			<div class="heading">
+          				<h3>About {this.state.username}</h3>
+          			</div>
+          		</div>
+          	</div>
+          	<div class="bio-info">
+          		<div class="row">
+          			<div class="col-md-6">
+          				<div class="row">
+          					<div class="col-md-12">
+          						<div class="bio-image">
+          							<img src={this.state.image} style={{width:'180px',height:'180px'}} class="rounded-circle" alt="image" />
+          						</div>
+          					</div>
+          				</div>
+          			</div>
+          			<div class="col-md-6">
+          				<div class="bio-content">
+
+          					<h1>{this.state.username}</h1>
+          					<h6>ชื่อผู้ใช้งาน: {this.state.Name_lastname}</h6>
+                    <h6>รหัสบัตรประจำตัวประชาชน: {this.state.ID_Card}</h6>
+                    <h6>เบอร์ติดต่อ: {this.state.Phone_Number}</h6>
+                    <h6>อีเมลย์: {this.state.Email}</h6>
+
+          				<i style={{ fontSize: '1.5em',align: 'justify',position: 'relative',color:'yellow'}}><FaStar/></i>
+                  <i style={{ fontSize: '1.5em',align: 'justify',position: 'relative',color:'yellow'}}><FaStar/></i>
+                  <i style={{ fontSize: '1.5em',align: 'justify',position: 'relative',color:'yellow'}}><FaStar/></i>
+                  <i style={{ fontSize: '1.5em',align: 'justify',position: 'relative',color:'yellow'}}><FaStar/></i>
+                  <i style={{ fontSize: '1.5em',align: 'justify',position: 'relative',color:'yellow'}}><FaStar/></i>
+
+                    <center>
 
 
-                <center>
-                  <Card.Img variant="top" src={this.state.image} style={{width:'140px',height:'140px',paddingTop:'10'}} class="rounded-circle" />
+                  <Button variant="primary" onClick={() => this.edituser()} >Edit Profile</Button>
                   </center>
-                     <Card.Body>
-                       <Card.Title><center><h2 class="cursive">{this.state.username} </h2></center></Card.Title>
-                          <Card.Text>
-
-
-                          <p style={{paddingLeft:70}}>ชื่อผู้ใช้งาน: {this.state.Name_lastname} </p>
-                          <p style={{paddingLeft:70}}>รหัสบัตรประจำตัวประชาชน: {this.state.ID_Card} </p>
-                          <p style={{paddingLeft:70}}>เบอร์ติดต่อ: {this.state.Phone_Number} </p>
-                          <p style={{paddingLeft:70}}>อีเมลย์: {this.state.Email} </p>
-
-                          </Card.Text>
-                          <center>
-                        <Button variant="primary" onClick={() => this.edituser()} >Edit Profile</Button>
-                        </center>
-                    </Card.Body>
+          				</div>
+          			</div>
+          		</div>
+          	</div>
+          </div>
 
 
 
@@ -138,9 +165,13 @@ import axios from 'axios'
 
 
 
-                </div>
 
-             </div>
+
+
+
+
+
+
           </div>
 
 

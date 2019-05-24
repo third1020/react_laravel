@@ -35,15 +35,13 @@ let container;
           news_detail: '',
           news_types_id: '',
           img:'',
-
-
           getnews_type: [],
           errors: []
         }
 
         this.config = {
-      reactIgnoreAttrs: ['tmpattr'],
-      placeholderText: 'กรอกรายละเอียดข่าว',
+    reactIgnoreAttrs: ['tmpattr'],
+    placeholderText: 'กรอกรายละเอียดข่าว',
     heightMin: 250,
     heightMax: 400,
     autoFocus: true,
@@ -51,50 +49,36 @@ let container;
     fontSizeSelection: true,
     tabSpaces: 4,
     imageUpload: true,
-
+    videoUpload: true,
+    pluginsEnabled: ['align', 'charCounter', 'codeBeautifier', 'codeView', 'colors', 'draggable', 'embedly', 'emoticons', 'entities', 'file', 'fontFamily', 'fontSize', 'fullscreen', 'image', 'imageManager', 'inlineStyle', 'lineBreaker', 'link', 'lists', 'paragraphFormat', 'paragraphStyle', 'quickInsert', 'quote', 'save', 'table', 'url', 'video', 'wordPaste'],
+    toolbarButtons: ['bold', 'italic', 'underline', 'strikeThrough', 'subscript', 'superscript', '|', 'fontFamily', 'fontSize', 'color', 'inlineStyle', 'paragraphStyle', '|', 'paragraphFormat', 'align', 'formatOL', 'formatUL', 'outdent', 'indent', 'quote', 'check', '|', 'insertLink', 'insertImage', 'embedly', 'insertFile', 'insertTable', '|', 'emoticons', 'specialCharacters', 'insertHR', 'selectAll', 'clearFormatting', '|', 'spellChecker', 'help', 'html', '|', 'undo', 'redo'],
+    toolbarButtonsMD: ['bold', 'italic', 'underline', 'strikeThrough', 'subscript', 'superscript', '|', 'fontFamily', 'fontSize', 'color', 'inlineStyle', 'paragraphStyle', '|', 'paragraphFormat', 'align', 'formatOL', 'formatUL', 'outdent', 'indent', 'quote', 'check', '|', 'insertLink', 'insertImage', 'embedly', 'insertFile', 'insertTable', '|', 'emoticons', 'specialCharacters', 'insertHR', 'selectAll', 'clearFormatting', '|', 'spellChecker', 'help', 'html', '|', 'undo', 'redo'],
+    toolbarButtonsSM: ['bold', 'italic', 'underline', 'strikeThrough', '|', 'fontFamily', 'fontSize', 'color', '|', 'align', 'formatOL', 'formatUL', 'outdent', 'indent', 'quote', 'check', '|', 'insertLink', 'insertImage', 'embedly', 'insertFile', 'insertTable', '|', 'emoticons', 'specialCharacters', 'insertHR', 'selectAll', 'clearFormatting', '|', 'spellChecker', 'help', 'html', '|', 'undo', 'redo'],
+    toolbarButtonsXS: ['bold', 'italic', 'underline', '|', 'fontFamily', 'fontSize', 'color', '|', 'align', 'formatOL', 'formatUL', 'outdent', 'indent', 'check', '|', 'insertLink', 'insertImage', 'insertFile', 'insertTable', '|', 'insertHR', 'selectAll', 'clearFormatting', '|', 'spellChecker', '|', 'undo', 'redo'],
+    imageUploadParam: 'file',
+    imageUploadURL: '/api/news/image',
+    imageUploadMethod: 'POST',
     // Set max image size to 5MB.
     imageMaxSize: 5 * 1024 * 1024,
-
     // Allow to upload PNG and JPG.
     imageAllowedTypes: ['jpeg', 'jpg', 'png'],
-    fileUploadURL: '/storage/app/image_froala_editor',
-
+    fileUploadParam: 'file',
+    fileUploadURL: '/api/news/image',
+    fileUploadMethod: 'POST',
+    fileMaxSize: 20 * 1024 * 1024, // 10MB
     events: {
       'image.beforeUpload': function (images) {
         // Return false if you want to stop the image upload.
-
-        let data = new FormData();
-        data.append('image', images[0]);
-        data.append('id', sessionStorage.getItem("id"));
-
-        console.log(data.image);
         console.log(images[0]);
-        console.log(sessionStorage.getItem("id"));
-        axios.post('/api/news/image',data,{
-
-          onUploadProgress: progressEvent => {
-      console.log(progressEvent.loaded / progressEvent.total)
-    }
-        })  .then(res => {
-
-          const fileimage = res.data
-
-
-
-            }).catch(err => {
-              console.log(err);
-            });
+        if(images[0] !== ""){
+          return true
+        }
       },
-
       'image.inserted': function ($img, response) {
-    // Image was inserted in the editor.
-
-    $img[0].src = "http://www.silpathai.net/wp-content/uploads/2014/10/%E0%B8%99%E0%B8%81%E0%B8%AE%E0%B8%B9%E0%B8%81-294x300.jpg"
-  console.log($img[0].src);
-
-  }
-
-
+        // Image was inserted in the editor.
+        console.log($img[0]);
+        console.log(response);
+      },
   }
 }
 
@@ -230,10 +214,6 @@ let container;
           <div className='container py-4' >
           <ScriptTag isHydrating={true} type="text/javascript" src="https://cdn.jsdelivr.net/npm/froala-editor@3.0.0-beta.1/js/froala_editor.min.js" />
           <ScriptTag isHydrating={true} type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.9.5/js/plugins/image.min.js" />
-          <img src={process.env.PUBLIC_URL + '/Title_Home.png'} />;
-
-
-
 
             <div style={{paddingLeft: '10' ,paddingRight: '5'}}>
 

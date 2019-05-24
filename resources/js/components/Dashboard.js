@@ -135,7 +135,7 @@ export default class Dashboard extends Component {
 
                     <div
                     style={{
-                        background:'#f2f4f7',
+
                         height: '125%'
 
                     }}>
@@ -156,7 +156,7 @@ export default class Dashboard extends Component {
               <Route render={({ location, history }) => (
                   <React.Fragment>
                       <SideNav
-                      style={{ background: '#e44745',position: 'absolute', height: '125%' }}
+                      style={{ background: '#e44745', height: '125%' ,position: 'absolute'}}
                            onSelect={(selected) => {
                               const to = '/' + selected;
                               if (location.pathname !== to) {
@@ -581,17 +581,9 @@ export default class Dashboard extends Component {
                            : null
                             }
 
-
-
-
-
-
                           </SideNav.Nav>
                       </SideNav>
                       <main>
-
-
-
 
                           <Switch>
 
@@ -610,17 +602,6 @@ export default class Dashboard extends Component {
                           <Route path='/manage_request/add_request'                         component={Add_request} />
                           <Route path='/manage_problems/add_problems'                       component={Add_problems} />
 
-
-
-
-
-
-
-
-
-
-
-
                           <Route path='/manage_user/edit/:id' component={Update_user} />
 
                           <Route exact path='/manage_user/list_user'                       component={List_User} />
@@ -637,15 +618,8 @@ export default class Dashboard extends Component {
                           <Route path='/manage_priority/list_priority'                     component={List_Priority} />
                           <Route path='/manage_problems/list_problems'                     component={List_Problems} />
                           <Route path='/manage_request/list_request'                       component={List_Request} />
-
-
-
-
                           <Route path='/success' component={Success} />
                           <Route path='/' component={Home} />
-
-
-
 
 
                          </Switch>

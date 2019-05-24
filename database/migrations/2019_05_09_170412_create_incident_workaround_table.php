@@ -16,6 +16,7 @@ class CreateIncidentWorkaroundTable extends Migration
         Schema::create('incident_workarounds', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

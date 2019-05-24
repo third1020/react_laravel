@@ -82,14 +82,15 @@ class NewsController extends Controller
 
 
 
-   $path = $request->file('image')->store('image_froala_editor', 'public');
+   // $path = $request->file('image')->store('image_froala_editor', 'public');
+   $path = Storage::disk('public')->put('Froala_editor', $request->file('file'));
    // $path = Storage::disk('local')->put('file.txt', 'Contents');
 
-   // $url = Storage::url($request->file('image'));
+   $url = Storage::url($path);
 
-   $url = storage::url('9VtajpibSE4es5ViOzdcuLRuNj6yqQq8lmXl4BxK.png');
 
-   return $url;
+
+   return response()->json(['link' => $url]);
 
 
  }

@@ -20,6 +20,7 @@ class CreateImpactTable extends Migration
           $table->string('impact_value');
           $table->string('created_by')->nullable();
           $table->timestamps();
+          $table->softDeletes();
         });
     }
 

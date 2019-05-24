@@ -29,6 +29,7 @@ class CreateProblemsTable extends Migration
           $table->foreign('priority_id')->references('id')->on('priorities');
 
           $table->timestamps();
+          $table->softDeletes();
         });
     }
 

@@ -25,6 +25,8 @@ let container;
           errors: []
         }
 
+        
+
         this.handleFieldChange = this.handleFieldChange.bind(this)
         this.handleCreate= this.handleCreate.bind(this)
         this.hasErrorFor = this.hasErrorFor.bind(this)

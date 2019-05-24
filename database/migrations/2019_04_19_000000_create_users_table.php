@@ -27,9 +27,8 @@ class CreateUsersTable extends Migration
           $table->BIginteger('permission_id')->unsigned();
           $table->foreign('permission_id')->references('id')->on('permissions');
 
-
-
           $table->timestamps();
+          $table->softDeletes();
         });
 
         DB::statement("ALTER TABLE users ADD image  MEDIUMBLOB");

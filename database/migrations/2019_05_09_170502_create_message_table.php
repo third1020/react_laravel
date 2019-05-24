@@ -26,6 +26,7 @@ class CreateMessageTable extends Migration
           $table->Integer('status');
           $table->string('created_by')->nullable();
           $table->timestamps();
+          $table->softDeletes();
         });
     }
 

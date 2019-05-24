@@ -46,20 +46,16 @@ import PropTypes from 'prop-types';
                 </div>
              </div>
              <div class="row" style={{padding:10}}>
-               <div class="col-sm-12 col-md-4">
-                <Profile id={this.state.id}/>
-               </div>
-               <div class="col-sm-12 col-md-8">
+               <div class="col-sm-12 col-md-12">
                   <div class="grid card">
 
                      <BoardHome id={this.state.id}/>
 
-                  
+
                   </div>
                </div>
              </div>
-             <div class="row">test3</div>
-             <div class="row">test4</div>
+            
 
           </div>
 

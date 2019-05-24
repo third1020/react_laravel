@@ -19,6 +19,7 @@ class CreateNewsTypeTable extends Migration
           $table->string('type_name');
           $table->string('created_by')->nullable();
           $table->timestamps();
+          $table->softDeletes();
         });
     }
 

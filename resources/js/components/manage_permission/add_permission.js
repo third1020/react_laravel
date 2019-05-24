@@ -172,7 +172,7 @@ let container;
         axios.post('/api/permission', insertdata)
           .then(response => {
 
-      $('input:checkbox').removeAttr('checked');
+    
             // redirect to the homepage
             this.setState({
 

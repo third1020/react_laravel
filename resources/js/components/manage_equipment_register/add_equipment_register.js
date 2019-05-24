@@ -2,6 +2,11 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import Select from 'react-select';
 import ImageUploader from 'react-images-upload';
+import FroalaEditor from 'react-froala-wysiwyg';
+import FroalaEditorImg from 'react-froala-wysiwyg/FroalaEditorImg';
+import ScriptTag from 'react-script-tag';
+import '../../../css/froala-editor/froala_style.min.css';
+import '../../../css/froala-editor/froala_editor.pkgd.min.css';
 
 
 
@@ -27,6 +32,49 @@ let container;
 
           errors: []
         }
+        this.config = {
+    reactIgnoreAttrs: ['tmpattr'],
+    placeholderText: 'กรอกรายละเอียด',
+    heightMin: 250,
+    heightMax: 400,
+    autoFocus: true,
+    fontFamilySelection: true,
+    fontSizeSelection: true,
+    tabSpaces: 4,
+    imageUpload: true,
+    videoUpload: true,
+    pluginsEnabled: ['align', 'charCounter', 'codeBeautifier', 'codeView', 'colors', 'draggable', 'embedly', 'emoticons', 'entities', 'file', 'fontFamily', 'fontSize', 'fullscreen', 'image', 'imageManager', 'inlineStyle', 'lineBreaker', 'link', 'lists', 'paragraphFormat', 'paragraphStyle', 'quickInsert', 'quote', 'save', 'table', 'url', 'video', 'wordPaste'],
+    toolbarButtons: ['bold', 'italic', 'underline', 'strikeThrough', 'subscript', 'superscript', '|', 'fontFamily', 'fontSize', 'color', 'inlineStyle', 'paragraphStyle', '|', 'paragraphFormat', 'align', 'formatOL', 'formatUL', 'outdent', 'indent', 'quote', 'check', '|', 'insertLink', 'insertImage', 'embedly', 'insertFile', 'insertTable', '|', 'emoticons', 'specialCharacters', 'insertHR', 'selectAll', 'clearFormatting', '|', 'spellChecker', 'help', 'html', '|', 'undo', 'redo'],
+    toolbarButtonsMD: ['bold', 'italic', 'underline', 'strikeThrough', 'subscript', 'superscript', '|', 'fontFamily', 'fontSize', 'color', 'inlineStyle', 'paragraphStyle', '|', 'paragraphFormat', 'align', 'formatOL', 'formatUL', 'outdent', 'indent', 'quote', 'check', '|', 'insertLink', 'insertImage', 'embedly', 'insertFile', 'insertTable', '|', 'emoticons', 'specialCharacters', 'insertHR', 'selectAll', 'clearFormatting', '|', 'spellChecker', 'help', 'html', '|', 'undo', 'redo'],
+    toolbarButtonsSM: ['bold', 'italic', 'underline', 'strikeThrough', '|', 'fontFamily', 'fontSize', 'color', '|', 'align', 'formatOL', 'formatUL', 'outdent', 'indent', 'quote', 'check', '|', 'insertLink', 'insertImage', 'embedly', 'insertFile', 'insertTable', '|', 'emoticons', 'specialCharacters', 'insertHR', 'selectAll', 'clearFormatting', '|', 'spellChecker', 'help', 'html', '|', 'undo', 'redo'],
+    toolbarButtonsXS: ['bold', 'italic', 'underline', '|', 'fontFamily', 'fontSize', 'color', '|', 'align', 'formatOL', 'formatUL', 'outdent', 'indent', 'check', '|', 'insertLink', 'insertImage', 'insertFile', 'insertTable', '|', 'insertHR', 'selectAll', 'clearFormatting', '|', 'spellChecker', '|', 'undo', 'redo'],
+    imageUploadParam: 'file',
+    imageUploadURL: '/api/news/image',
+    imageUploadMethod: 'POST',
+    // Set max image size to 5MB.
+    imageMaxSize: 5 * 1024 * 1024,
+    // Allow to upload PNG and JPG.
+    imageAllowedTypes: ['jpeg', 'jpg', 'png'],
+    fileUploadParam: 'file',
+    fileUploadURL: '/api/news/image',
+    fileUploadMethod: 'POST',
+    fileMaxSize: 20 * 1024 * 1024, // 10MB
+    events: {
+      'image.beforeUpload': function (images) {
+        // Return false if you want to stop the image upload.
+        console.log(images[0]);
+        if(images[0] !== ""){
+          return true
+        }
+      },
+      'image.inserted': function ($img, response) {
+        // Image was inserted in the editor.
+        console.log($img[0]);
+        console.log(response);
+      },
+  }
+}
+        this.handleModelChange = this.handleModelChange.bind(this)
 
         this.handleFieldChange = this.handleFieldChange.bind(this)
         this.handleCreate= this.handleCreate.bind(this)
@@ -36,6 +84,13 @@ let container;
 
 
       }
+
+      handleModelChange(detail) {
+    this.setState({
+      detail: detail
+    });
+    }
+
 
 
       handleFieldChange (event) {
@@ -201,17 +256,13 @@ let container;
 
                       <div className='form-group'>
                         <label htmlFor='detail'>รายละเอียด</label>
-                        <textarea
-                          id='detail'
-                          type='text'
-                          placeholder="กรอก รายละเอียด"
-                          className={`form-control ${this.hasErrorFor('detail') ? 'is-invalid' : ''}`}
-                          name='detail'
-                          rows="5"
-                          value={this.state.detail}
-                          onChange={this.handleFieldChange}
+                        <FroalaEditor
+                        tag='textarea'
+                        config={this.config}
+                        model={this.state.detail}
+                        onModelChange={this.handleModelChange}
+
                         />
-                        {this.renderErrorFor('detail')}
 
 
                       </div>

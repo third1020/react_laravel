@@ -3,9 +3,11 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Contact extends Model
 {
+  use SoftDeletes;
   protected $fillable = ['remark',
                          'contact_name',
                          'contact_phone',
@@ -14,6 +16,6 @@ class Contact extends Model
                          'contact_detail',
                          'user_id',
                          'created_by'
-                        
+
                        ];
 }
