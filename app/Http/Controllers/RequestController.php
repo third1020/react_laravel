@@ -115,4 +115,15 @@ class RequestController extends Controller
   Requests::findOrFail($id)->delete();
 
   }
+
+  public function destroy_select(Request $request) {
+
+      Requests::destroy($request->foo);
+
+
+    return response()->json([
+       'data' => 'delect successfully',
+     ]);
+
+  }
 }

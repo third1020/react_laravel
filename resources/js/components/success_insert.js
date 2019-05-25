@@ -1,26 +1,29 @@
-import React, { Component } from 'react';
+import React from 'react';
+import { Page, Text, View, Document, StyleSheet } from '@react-pdf/renderer';
 
+// Create styles
+const styles = StyleSheet.create({
+  page: {
+    flexDirection: 'row',
+    backgroundColor: '#E4E4E4'
+  },
+  section: {
+    margin: 10,
+    padding: 10,
+    flexGrow: 1
+  }
+});
 
-
-import { Button , Form} from 'react-bootstrap';
-
-export default class Success extends Component {
-    render() {
-        return (
-
-          <div className='container py-4'>
-            <div className='row justify-content-center'>
-              <div className='col-md-8'>
-              <div class="alert alert-success" role="alert">
-          This is a success alert—check it out!
-            <label>  This is a success alert—check it out!</label>
-        </div>
-              </div>
-            </div>
-          </div>
-
-
-
-        );
-    }
-}
+// Create Document Component
+const MyDocument = () => (
+  <Document>
+    <Page size="A4" style={styles.page}>
+      <View style={styles.section}>
+        <Text>Section #1</Text>
+      </View>
+      <View style={styles.section}>
+        <Text>Section #2</Text>
+      </View>
+    </Page>
+  </Document>
+);

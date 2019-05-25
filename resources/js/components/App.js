@@ -9,6 +9,7 @@ import React, { Component } from 'react'
     import Login from './auth/Login'
     import Dashboard from './Dashboard'
     import Profile from './Profile'
+    
 
 
    class App extends Component {
@@ -65,6 +66,7 @@ import React, { Component } from 'react'
                <Route path='/manage_problems' component={Dashboard} />
                <Route path='/manage_request' component={Dashboard} />
                <Route path='/Profile' component={Profile} />
+               <Route path='/Success' component={Success} />
 
 
 

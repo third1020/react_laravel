@@ -106,4 +106,15 @@ class ImpactController extends Controller
   Impact::findOrFail($id)->delete();
 
 }
+
+public function destroy_select(Request $request) {
+
+    Impact::destroy($request->foo);
+
+
+  return response()->json([
+     'data' => 'delect successfully',
+   ]);
+
+}
 }

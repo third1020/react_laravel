@@ -124,4 +124,15 @@ class IncidentController extends Controller
   Incident::findOrFail($id)->delete();
 
 }
+
+public function destroy_select(Request $request) {
+
+    Incident::destroy($request->foo);
+
+
+  return response()->json([
+     'data' => 'delect successfully',
+   ]);
+
+}
 }

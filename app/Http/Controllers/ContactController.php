@@ -122,4 +122,14 @@ class ContactController extends Controller
   Contact::findOrFail($id)->delete();
 
 }
+public function destroy_select(Request $request) {
+
+    Contact::destroy($request->foo);
+
+
+  return response()->json([
+     'data' => 'delect successfully',
+   ]);
+
+}
 }

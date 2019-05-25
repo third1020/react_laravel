@@ -111,16 +111,12 @@ class News_typeController extends Controller
 
  public function destroy_select(Request $request) {
 
-
      News_type::destroy($request->foo);
 
 
    return response()->json([
       'data' => 'delect successfully',
     ]);
-
-
-
 
 }
 

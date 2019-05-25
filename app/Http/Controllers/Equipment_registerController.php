@@ -120,4 +120,14 @@ class Equipment_registerController extends Controller
   Equipment_register::findOrFail($id)->delete();
 
 }
+public function destroy_select(Request $request) {
+
+    Equipment_register::destroy($request->foo);
+
+
+  return response()->json([
+     'data' => 'delect successfully',
+   ]);
+
+}
 }

@@ -118,4 +118,15 @@ class MessageController extends Controller
   Message::findOrFail($id)->delete();
 
 }
+
+public function destroy_select(Request $request) {
+
+    Message::destroy($request->foo);
+
+
+  return response()->json([
+     'data' => 'delect successfully',
+   ]);
+
+}
 }

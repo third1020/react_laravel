@@ -169,4 +169,15 @@ class UserController extends Controller
 
 	}
 
+  public function destroy_select(Request $request) {
+
+      User::destroy($request->foo);
+
+
+    return response()->json([
+       'data' => 'delect successfully',
+     ]);
+
+  }
+
 }

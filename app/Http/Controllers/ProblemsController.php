@@ -125,4 +125,15 @@ class ProblemsController extends Controller
   Problems::findOrFail($id)->delete();
 
 }
+
+public function destroy_select(Request $request) {
+
+    Problems::destroy($request->foo);
+
+
+  return response()->json([
+     'data' => 'delect successfully',
+   ]);
+
+}
 }

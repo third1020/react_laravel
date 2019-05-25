@@ -14,7 +14,18 @@ import axios from 'axios'
        const columns = ['id', 'priority_name','priority_status','created_at'];
      return (
 
-       <DataTable url="/api/priority_table" columns={columns} name={"priority"} headname={" List Priority"} headTablename={"ตารางแสดงข้อมูล"} edit={"แก้ไข"} delete={"ลบ"}   deletefail={"ลบข้อมูลไม่สำเร็จ"} deletesuccess={"ลบข้อมูลสำเร็จ"} />
+       <DataTable
+            url="/api/priority_table"
+            columns={columns}
+            name={"priority"}
+            headname={" List Priority"}
+            headTablename={"ตารางแสดงข้อมูล"}
+            edit={"แก้ไข"} delete={"ลบ"}
+            deletefail={"ลบข้อมูลไม่สำเร็จ"}
+            deletesuccess={"ลบข้อมูลสำเร็จ"}
+            addlink={"/manage_priority/add_priority"}
+            addbutton={"เพิ่มผลกระทบ"}
+            delectselect={"ลบข้อมูลที่ถูกเลือก"} />
 
 
 

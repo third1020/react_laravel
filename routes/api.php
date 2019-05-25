@@ -28,6 +28,7 @@ use Illuminate\Http\Request;
     Route::get('queryuser', 'UserController@index');
     Route::get('user/{id}', 'UserController@edit');
     Route::put('user_update/{id}', 'UserController@update');
+    Route::delete('users', 'UserController@destroy_select');
 
 
 
@@ -40,6 +41,8 @@ use Illuminate\Http\Request;
     Route::get('permission', 'PermissionController@index');
     Route::get('permission/{id}', 'PermissionController@edit');
     Route::put('permission_update/{id}', 'PermissionController@update');
+    Route::delete('permission_table', 'PermissionController@destroy_select');
+
 
 
     //news
@@ -51,6 +54,7 @@ use Illuminate\Http\Request;
     Route::get('querynews', 'NewsController@index');
     Route::get('news/{id}', 'NewsController@edit');
     Route::put('news_update/{id}', 'NewsController@update');
+    Route::delete('news_table', 'NewsController@destroy_select');
 
     //news_type
 
@@ -62,6 +66,7 @@ use Illuminate\Http\Request;
     Route::get('news_type/{id}', 'News_typeController@edit');
     Route::put('news_type_update/{id}', 'News_typeController@update');
 
+
     //message
 
     Route::get('message_table', 'MessageController@getTable');
@@ -70,6 +75,7 @@ use Illuminate\Http\Request;
     Route::get('querymessage', 'MessageController@index');
     Route::get('message/{id}', 'MessageController@edit');
     Route::put('message_update/{id}', 'MessageController@update');
+    Route::delete('message_table', 'MessageController@destroy_select');
 
     //equipment
 
@@ -79,6 +85,7 @@ use Illuminate\Http\Request;
     Route::get('queryequipment', 'EquipmentController@index');
     Route::get('equipment/{id}', 'EquipmentController@edit');
     Route::put('equipment_update/{id}', 'EquipmentController@update');
+    Route::delete('equipment_table', 'EquipmentController@destroy_select');
 
     //equipment_register
 
@@ -88,6 +95,7 @@ use Illuminate\Http\Request;
     Route::get('queryequipment_register', 'Equipment_registerController@index');
     Route::get('equipment_register/{id}', 'Equipment_registerController@edit');
     Route::put('equipment_register_update/{id}', 'Equipment_registerController@update');
+    Route::delete('equipment_register_table', 'Equipment_registerController@destroy_select');
 
     //equipment_type
 
@@ -97,6 +105,7 @@ use Illuminate\Http\Request;
     Route::get('queryequipment_type', 'Equipment_typeController@index');
     Route::get('equipment_type/{id}', 'Equipment_typeController@edit');
     Route::put('equipment_type_update/{id}', 'Equipment_typeController@update');
+    Route::delete('equipment_type_table', 'Equipment_typeController@destroy_select');
 
     //request
 
@@ -106,6 +115,7 @@ use Illuminate\Http\Request;
     Route::get('queryrequest', 'RequestController@index');
     Route::get('request/{id}', 'RequestController@edit');
     Route::put('request_update/{id}', 'RequestController@update');
+    Route::delete('request_table', 'RequestController@destroy_select');
 
     //problems
 
@@ -115,6 +125,7 @@ use Illuminate\Http\Request;
     Route::get('queryproblems', 'ProblemsController@index');
     Route::get('problems/{id}', 'ProblemsController@edit');
     Route::put('problems_update/{id}', 'ProblemsController@update');
+    Route::delete('problems_table', 'ProblemsController@destroy_select');
 
     //incident
 
@@ -124,6 +135,7 @@ use Illuminate\Http\Request;
     Route::get('queryincident', 'IncidentController@index');
     Route::get('incident/{id}', 'IncidentController@edit');
     Route::put('incident_update/{id}', 'IncidentController@update');
+    Route::delete('incident_table', 'IncidentController@destroy_select');
 
     //contact
 
@@ -133,6 +145,7 @@ use Illuminate\Http\Request;
     Route::get('querycontact', 'ContactController@index');
     Route::get('contact/{id}', 'ContactController@edit');
     Route::put('contact_update/{id}', 'ContactController@update');
+    Route::delete('contact_table', 'ContactController@destroy_select');
 
     //impact
 
@@ -142,6 +155,7 @@ use Illuminate\Http\Request;
     Route::get('queryimpact', 'ImpactController@index');
     Route::get('impact/{id}', 'ImpactController@edit');
     Route::put('impact_update/{id}', 'ImpactController@update');
+    Route::delete('impact_table', 'ImpactController@destroy_select');
 
     //priority
 
@@ -151,6 +165,7 @@ use Illuminate\Http\Request;
     Route::get('querypriority', 'PriorityController@index');
     Route::get('priority/{id}', 'PriorityController@edit');
     Route::put('priority_update/{id}', 'PriorityController@update');
+    Route::delete('priority_table', 'PriorityController@destroy_select');
 
 
 

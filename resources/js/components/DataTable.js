@@ -4,6 +4,10 @@ import PropTypes from 'prop-types';
 import Button from 'react-bootstrap/Button';
 import Success from './success_insert';
 import Select_update from './Select_update';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import Add_user from './manage_user/add_user';
+import Add_news from './manage_news/add_news';
+import Add_message from './manage_message/add_message';
 
 import { Link } from 'react-router-dom';
 
@@ -82,12 +86,52 @@ let container;
       this.handleFieldChange = this.handleFieldChange.bind(this)
       this.handleCheckboxChange = this.handleCheckboxChange.bind(this)
       this.DeleteSelectAll = this.DeleteSelectAll.bind(this)
+      this.handleDeleteSelect = this.handleDeleteSelect.bind(this)
+
 
 
   }
 
+
+
+  handleDeleteSelect(event) {
+
+    var arrayid = this.state.checkedList;
+
+
+
+
+    // remove from local state
+    confirmAlert({
+  customUI: ({ onClose }) => {
+
+    return (
+      <div className='custom-ui'>
+        <h1>ยืนยันการลบข้อมูล User </h1>
+        {<p>{'ID:'+arrayid +'\n'}</p>}
+
+
+<footer class="modal-footer">
+
+        <button type="button" class="btn btn-success"
+          onClick={() => {
+            this.DeleteSelectAll();
+            onClose();
+          }}
+        >
+          ยืนยัน
+        </button>
+
+        <button type="button" class="btn btn-danger" onClick={onClose}>ไม่ต้องการ</button>
+        </footer>
+      </div>
+    );
+  }
+  });
+
+  }
+
   DeleteSelectAll (event) {
-    alert(this.state.checkedList);
     var arrayid = this.state.checkedList;
     console.log(arrayid);
     axios.delete(`${this.props.url}`, { data: { foo: arrayid } })
@@ -159,6 +203,7 @@ let container;
 });
 
     }
+
 
 
   handleDelete(id) {
@@ -386,146 +431,156 @@ let container;
   }
 
   render() {
+
+    const { history } = this.props;
     return (
-  <div style={{paddingLeft: '10' ,paddingRight: '5'}}>
-      {this.props.review =="review"?
+
+    <div style={{paddingLeft: '10' ,paddingRight: '5'}}>
+        {this.props.review =="review"?
 
 
-      <div className="data-table">
-      <div style={{position:'right'}}>
+        <div className="data-table">
+        <div style={{position:'right'}}>
 
-      Search:<input
-          class="form-control input-sm"
-          placeholder="search text"
-          type='search'
-          value={this.state.search}
-          onChange={this.handleFieldChange}
-        />
-
-
-      </div>
+        Search:<input
+            class="form-control input-sm"
+            placeholder="search text"
+            type='search'
+            value={this.state.search}
+            onChange={this.handleFieldChange}
+          />
 
 
-            { this.reviewList() }
-
-        { (this.state.entities.data && this.state.entities.data.length > 0) &&
-          <nav>
-            <ul className="pagination">
-              <li className="page-item">
-                <button className="page-link"
-                  disabled={ 1 === this.state.entities.meta.current_page }
-                  onClick={() => this.changePage(this.state.entities.meta.current_page - 1)}
-                >
-                  Previous
-                </button>
-              </li>
-              { this.pageList() }
-              <li className="page-item">
-                <button className="page-link"
-                  disabled={this.state.entities.meta.last_page === this.state.entities.meta.current_page}
-                  onClick={() => this.changePage(this.state.entities.meta.current_page + 1)}
-                >
-                  Next
-                </button>
-              </li>
-              <span style={{ marginTop: '8px' }}> &nbsp; <i>Displaying { this.state.entities.data.length } of { this.state.entities.meta.total } entries.</i></span>
-            </ul>
-          </nav>
-        }
-        <ToastContainer
-          ref={ref => container = ref}
-          className="toast-top-right"
-        />
         </div>
 
-  :
-              <div>
-                <div className='col-md-12 col-lg-12'>
-                <h3 class="page-header">{this.props.headname}</h3>
-                  <div className='card'>
-                    <div className='card-header'>{this.props.headTablename}</div>
-                    <div className='card-body'>
 
+              { this.reviewList() }
 
-
-
-                      <div>
-                      <p></p>
-
-                      <button  class="btn btn-outline-success" style={{ marginLeft: '30px',marginBottom: '10px'}}><i style={{ fontSize:'1.5em', color:'green'}}><FaPlusSquare/></i> New</button>
-
-                        <label for="searchWeb" style={{
-                          fontSize: '18px',
-                          fontWeight: '900',
-                          color: '#008cff',
-                          padding:'10',
-
-                        }}>Search :   </label>
-                        <input
-                        style={{
-
-                          fontFamily: 'Nunito',
-                          width: '350',
-                          padding: '5px 10px',
-                          backgroundColor: 'transparent',
-                          transition: 'transform 250ms ease-in-out',
-                          fontSize: '18px',
-                          lineHeight: '18px',
-                          color: '#575756',
-                          borderRadius:'120px'
-
-                        }}
-                            placeholder="search text"
-                            type='search'
-                            value={this.state.search}
-                            onChange={this.handleFieldChange}
-                          />
-
-                          <button  class="btn btn-outline-warning" style={{ marginLeft: '8px',marginBottom: '10px',color: '#ff9f4c',borderColor:'#ff9f4c'}}><i style={{  fontSize:'1.5em',color: '#ff9f4c'}} ><FaFilePdf/></i>  PDF</button>
-                          <button  class="btn btn-outline-success" style={{ marginLeft: '8px',marginBottom: '10px'}}><i style={{  fontSize:'1.5em'}} ><FaFileExcel/></i>  Excel</button>
-                          <button  class="btn btn-outline-danger" style={{ marginLeft: '8px',marginBottom: '10px' ,float: 'right'}} onClick={() => this.DeleteSelectAll()}><i style={{  fontSize:'1.5em'}}><FaTrashAlt/></i>  Delete Selected</button>
-                    </div>
-            <div className="data-table">
-              <Table striped bordered hover>
-                <thead>
-                  <tr>{ this.tableHeads() }  <th>Action</th> <th><center>Status</center></th> </tr>
-                </thead>
-                <tbody>{ this.userList() } </tbody>
-              </Table>
-              { (this.state.entities.data && this.state.entities.data.length > 0) &&
-                <nav>
-                  <ul className="pagination">
-                    <li className="page-item">
-                      <button className="page-link"
-                        disabled={ 1 === this.state.entities.meta.current_page }
-                        onClick={() => this.changePage(this.state.entities.meta.current_page - 1)}
-                      >
-                        Previous
-                      </button>
-                    </li>
-                    { this.pageList() }
-                    <li className="page-item">
-                      <button className="page-link"
-                        disabled={this.state.entities.meta.last_page === this.state.entities.meta.current_page}
-                        onClick={() => this.changePage(this.state.entities.meta.current_page + 1)}
-                      >
-                        Next
-                      </button>
-                    </li>
-                    <span style={{ marginTop: '8px' }}> &nbsp; <i>Displaying { this.state.entities.data.length } of { this.state.entities.meta.total } entries.</i></span>
-                  </ul>
-                </nav>
-              }
-              <ToastContainer
-                ref={ref => container = ref}
-                className="toast-top-right"
-              />
-              </div>
-             </div>
-            </div>
+          { (this.state.entities.data && this.state.entities.data.length > 0) &&
+            <nav>
+              <ul className="pagination">
+                <li className="page-item">
+                  <button className="page-link"
+                    disabled={ 1 === this.state.entities.meta.current_page }
+                    onClick={() => this.changePage(this.state.entities.meta.current_page - 1)}
+                  >
+                    Previous
+                  </button>
+                </li>
+                { this.pageList() }
+                <li className="page-item">
+                  <button className="page-link"
+                    disabled={this.state.entities.meta.last_page === this.state.entities.meta.current_page}
+                    onClick={() => this.changePage(this.state.entities.meta.current_page + 1)}
+                  >
+                    Next
+                  </button>
+                </li>
+                <span style={{ marginTop: '8px' }}> &nbsp; <i>Displaying { this.state.entities.data.length } of { this.state.entities.meta.total } entries.</i></span>
+              </ul>
+            </nav>
+          }
+          <ToastContainer
+            ref={ref => container = ref}
+            className="toast-top-right"
+          />
           </div>
-        </div>}
-        </div>
+
+    :
+                <div>
+                  <div className='col-md-12 col-lg-12'>
+                  <h3 class="page-header">{this.props.headname}</h3>
+                    <div className='card'>
+                      <div className='card-header'>{this.props.headTablename}</div>
+                      <div className='card-body'>
+
+
+
+
+                        <div>
+                        <p></p>
+                        <Link to={this.props.addlink} >
+
+                        <button  class="btn btn-outline-success" style={{ marginLeft: '30px',marginBottom: '10px'}}><i style={{ fontSize:'1.5em', color:'green'}}><FaPlusSquare/></i> {this.props.addbutton}</button>
+
+                        </Link>
+
+
+
+                          <label for="searchWeb" style={{
+                            fontSize: '18px',
+                            fontWeight: '900',
+                            color: '#008cff',
+                            padding:'10',
+
+                          }}>Search :   </label>
+                          <input
+                          style={{
+
+                            fontFamily: 'Nunito',
+                            width: '350',
+                            padding: '5px 10px',
+                            backgroundColor: 'transparent',
+                            transition: 'transform 250ms ease-in-out',
+                            fontSize: '18px',
+                            lineHeight: '18px',
+                            color: '#575756',
+                            borderRadius:'120px'
+
+                          }}
+                              placeholder="search text"
+                              type='search'
+                              value={this.state.search}
+                              onChange={this.handleFieldChange}
+                            />
+
+                            <button  class="btn btn-outline-warning" style={{ marginLeft: '8px',marginBottom: '10px',color: '#ff9f4c',borderColor:'#ff9f4c'}}><i style={{  fontSize:'1.5em',color: '#ff9f4c'}} ><FaFilePdf/></i>  PDF</button>
+
+                            <button  class="btn btn-outline-success" style={{ marginLeft: '8px',marginBottom: '10px'}}><i style={{  fontSize:'1.5em'}} ><FaFileExcel/></i>  Excel</button>
+                            <button  class="btn btn-outline-danger" style={{ marginLeft: '8px',marginBottom: '10px' ,float: 'right'}} onClick={() => this.handleDeleteSelect()}><i style={{  fontSize:'1.5em'}}><FaTrashAlt/></i>{this.props.delectselect}</button>
+                      </div>
+              <div className="data-table">
+                <Table striped bordered hover>
+                  <thead>
+                    <tr>{ this.tableHeads() }  <th>Action</th> <th><center>Status</center></th> </tr>
+                  </thead>
+                  <tbody>{ this.userList() } </tbody>
+                </Table>
+                { (this.state.entities.data && this.state.entities.data.length > 0) &&
+                  <nav>
+                    <ul className="pagination">
+                      <li className="page-item">
+                        <button className="page-link"
+                          disabled={ 1 === this.state.entities.meta.current_page }
+                          onClick={() => this.changePage(this.state.entities.meta.current_page - 1)}
+                        >
+                          Previous
+                        </button>
+                      </li>
+                      { this.pageList() }
+                      <li className="page-item">
+                        <button className="page-link"
+                          disabled={this.state.entities.meta.last_page === this.state.entities.meta.current_page}
+                          onClick={() => this.changePage(this.state.entities.meta.current_page + 1)}
+                        >
+                          Next
+                        </button>
+                      </li>
+                      <span style={{ marginTop: '8px' }}> &nbsp; <i>Displaying { this.state.entities.data.length } of { this.state.entities.meta.total } entries.</i></span>
+                    </ul>
+                  </nav>
+                }
+                <ToastContainer
+                  ref={ref => container = ref}
+                  className="toast-top-right"
+                />
+                </div>
+               </div>
+              </div>
+            </div>
+          </div>}
+          </div>
+
 
     );
   }
@@ -540,6 +595,9 @@ DataTable.propTypes = {
   deletesuccess:PropTypes.string,
   deletefail:PropTypes.string,
   review:PropTypes.string,
+  addlink:PropTypes.string,
+  addbutton:PropTypes.string,
+  delectselect:PropTypes.string
 
 
 };

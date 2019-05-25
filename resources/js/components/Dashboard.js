@@ -133,25 +133,26 @@ export default class Dashboard extends Component {
 
 
 
-                    <div
-                    style={{
 
-                        height: '125%'
-
-                    }}>
-
-
-                    {this.state.expanded ?(<Header left={260} /> )  : (<Header left={75}/>)}
-                    <div
-                    style={{
-                        marginLeft: expanded ? 240 : 64,
-                        padding: '15px 20px 0 20px',
-
-                    }}
-                >
 
 
                 <Router>
+                <div
+                style={{
+
+                    height: '125%'
+
+                }}>
+
+
+                {this.state.expanded ?(<Header left={260} /> )  : (<Header left={75}/>)}
+                <div
+                style={{
+                    marginLeft: expanded ? 240 : 64,
+                    padding: '15px 20px 0 20px',
+
+                }}
+            >
 
               <Route render={({ location, history }) => (
                   <React.Fragment>
@@ -206,27 +207,13 @@ export default class Dashboard extends Component {
                                  </NavText>
                                  <NavItem eventKey="manage_user/list_user" >
                                            <NavText>
-                                      รายการข้อมูล
+                                      รายการข้อมูลผู้ใช้งาน
                                            </NavText>
                                   </NavItem>
-                                   <NavItem eventKey="manage_user/add_user">
-                                         <NavText>
-                                       เพิ่มผู้ใช้งาน
-                                         </NavText>
-                                  </NavItem>
-                               <NavItem eventKey="manage_permission" style={{left: 30 , fontsize: '14px' }}>
-                                        <NavText style={{ fontsize: '18px' }}>
-                                      สิทธิ์การเข้าถึง
-                                        </NavText>
-                                 </NavItem>
-                                 <NavItem eventKey="manage_permission/add_permission" >
-                                          <NavText>
-                                        เพิ่มสิทธิ์การเข้าถึง
-                                          </NavText>
-                                   </NavItem>
+
                                    <NavItem eventKey="manage_permission/list_permission" >
                                             <NavText>
-                                          เปลี่ยนแปลงสิทธิ์การเข้าถึง
+                                          รายการข้อมูลสิทธิ์การเข้าถึง
                                             </NavText>
                                      </NavItem>
                              </NavItem>
@@ -250,30 +237,15 @@ export default class Dashboard extends Component {
                                     </NavText>
                                     <NavItem eventKey="manage_news/list_news" >
                                               <NavText>
-                                         หัวข้อเรื่อง
+                                         รายการข้อมูลข่าว
                                               </NavText>
                                      </NavItem>
-                                      <NavItem eventKey="manage_news/add_news">
-                                            <NavText>
-                                          เพิ่มเนื้อหา
-                                            </NavText>
-                                     </NavItem>
-                                  <NavItem eventKey="manage_news_type" style={{left: 30 , fontsize: '14px' }}>
-                                           <NavText>
-                                         ประเภทข่าว
-                                           </NavText>
-
-                                    </NavItem>
                                     <NavItem eventKey="manage_news_type/list_news_type" >
                                              <NavText>
-                                           หัวข้อข่าว
+                                           รายการข้อมูลประเภทข่าว
                                              </NavText>
                                       </NavItem>
-                                      <NavItem eventKey="manage_news_type/add_news_type" >
-                                               <NavText>
-                                             เพิ่มเนื้อหาข่าว
-                                               </NavText>
-                                        </NavItem>
+
                                 </NavItem>
 
                                )
@@ -294,17 +266,10 @@ export default class Dashboard extends Component {
                                        </NavText>
                                        <NavItem eventKey="manage_message/list_message" >
                                                 <NavText>
-                                              รายชื่อข้อความ
+                                              รายการข้อมูลข้อความ
                                                 </NavText>
                                          </NavItem>
-                                         <NavItem eventKey="manage_message/add_message" >
-                                                  <NavText>
-                                                เพิ่มข้อความ
-                                                  </NavText>
-                                           </NavItem>
                                    </NavItem>
-
-
                                   )
                                  : null
                                   }
@@ -327,37 +292,16 @@ export default class Dashboard extends Component {
                                        รายการข้อมูลอุปกรณ์
                                             </NavText>
                                    </NavItem>
-                                    <NavItem eventKey="manage_equipment/add_equipment">
-                                          <NavText>
-                                        เพิ่มอุปกรณ์
-                                          </NavText>
-                                   </NavItem>
                                    <NavItem eventKey="manage_equipment_register/list_equipment_register">
                                          <NavText>
                                        รายการทะเบียนอุปกรณ์
                                          </NavText>
-                                  </NavItem>
-                                  <NavItem eventKey="manage_equipment_register/add_equipment_register">
-                                        <NavText>
-                                      เพิ่มเลขทะเบียนอุปกรณ์
-                                        </NavText>
-                                 </NavItem>
-                                <NavItem eventKey="manage_equipment_type/type_equipment" style={{left: 30 , fontsize: '14px' }}>
-                                         <NavText>
-                                       ประเภทอุปกรณ์
-                                         </NavText>
-
                                   </NavItem>
                                   <NavItem eventKey="manage_equipment_type/list_equipment_type" >
                                            <NavText>
                                          รายการประเภทอุปกรณ์
                                            </NavText>
                                     </NavItem>
-                                    <NavItem eventKey="manage_equipment_type/add_equipment_type" >
-                                             <NavText>
-                                           เพิ่มประเภทอุปกรณ์
-                                             </NavText>
-                                      </NavItem>
                               </NavItem>
                             )
                            : null
@@ -376,14 +320,10 @@ export default class Dashboard extends Component {
                                   </NavText>
                                   <NavItem eventKey="manage_request/list_request" >
                                            <NavText>
-                                         รายการข้อมูล
+                                         รายการข้อมูลความต้องการ
                                            </NavText>
                                     </NavItem>
-                                    <NavItem eventKey="manage_request/add_request" >
-                                             <NavText>
-                                           เพิ่มความต้องการ
-                                             </NavText>
-                                      </NavItem>
+
                               </NavItem>
                             )
                            : null
@@ -405,11 +345,6 @@ export default class Dashboard extends Component {
                                          รายการข้อมูลปัญหา
                                            </NavText>
                                     </NavItem>
-                                    <NavItem eventKey="manage_problems/add_problems" >
-                                             <NavText>
-                                           เพิ่มปัญหา
-                                             </NavText>
-                                      </NavItem>
                               </NavItem>
                             )
                            : null
@@ -431,11 +366,6 @@ export default class Dashboard extends Component {
                                          รายการข้อมูลเหตุการณ์
                                            </NavText>
                                     </NavItem>
-                                    <NavItem eventKey="manage_incident/add_incident" >
-                                             <NavText>
-                                           เพิ่มเหตุการณ์
-                                             </NavText>
-                                      </NavItem>
                               </NavItem>
                             )
                            : null
@@ -457,11 +387,6 @@ export default class Dashboard extends Component {
                                          รายการข้อมูลผู้ติดต่อ
                                            </NavText>
                                     </NavItem>
-                                    <NavItem eventKey="manage_contact/add_contact" >
-                                             <NavText>
-                                           เพิ่มผู้ติดต่อ
-                                             </NavText>
-                                      </NavItem>
                               </NavItem>
                             )
                            : null
@@ -482,11 +407,6 @@ export default class Dashboard extends Component {
                                          รายการข้อมูลผลกระทบ
                                            </NavText>
                                     </NavItem>
-                                    <NavItem eventKey="manage_impact/add_impact" >
-                                             <NavText>
-                                           เพิ่มผลกระทบ
-                                             </NavText>
-                                      </NavItem>
                               </NavItem>
                             )
                            : null
@@ -507,11 +427,6 @@ export default class Dashboard extends Component {
                                          รายการข้อมูลความสำคัญ
                                            </NavText>
                                     </NavItem>
-                                    <NavItem eventKey="manage_priority/add_priority" >
-                                             <NavText>
-                                           เพิ่มความสำคัญ
-                                             </NavText>
-                                      </NavItem>
                               </NavItem>
                             )
                            : null
@@ -601,9 +516,7 @@ export default class Dashboard extends Component {
                           <Route path='/manage_priority/add_priority'                       component={Add_priority} />
                           <Route path='/manage_request/add_request'                         component={Add_request} />
                           <Route path='/manage_problems/add_problems'                       component={Add_problems} />
-
                           <Route path='/manage_user/edit/:id' component={Update_user} />
-
                           <Route exact path='/manage_user/list_user'                       component={List_User} />
                           <Route path='/manage_permission/list_permission'                 component={List_Permisson} />
                           <Route path='/manage_contact/list_contact'                       component={List_Contact} />
@@ -627,13 +540,14 @@ export default class Dashboard extends Component {
                   </React.Fragment>
               )}
               />
+              </div>
+
+
+
+              </div>
           </Router>
 
-                    </div>
 
-
-
-                    </div>
         );
     }
 }
