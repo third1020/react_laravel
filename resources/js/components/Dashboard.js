@@ -6,7 +6,6 @@ import SideNav, { Toggle, Nav, NavItem, NavIcon, NavText } from '@trendmicro/rea
 import  { Redirect } from 'react-router-dom'
 
 
-import Success from './success_insert'
 import Add_user from './manage_user/add_user'
 import Add_contact from './manage_contact/add_contact'
 import Add_equipment from './manage_equipment/add_equipment'
@@ -40,6 +39,9 @@ import List_News_type from './manage_news_type/list_news_type'
 import List_Priority from './manage_priority/list_priority'
 import List_Problems from './manage_problems/list_problems'
 import List_Request from './manage_request/list_request'
+import Report_request from './Report/report_request'
+import Report_incident from './Report/report_incident'
+import Report_problems from './Report/report_problems'
 
 
 
@@ -465,27 +467,27 @@ export default class Dashboard extends Component {
                                       รายงาน
                                   </NavText>
 
-                                  <NavItem eventKey="Report/request" >
+                                  <NavItem eventKey="Report/report_request" >
                                            <NavText style={{ paddingRight: 2 }} title="รายงานผู้ขอใช้บริการ">
                                          รายงานผู้ขอใช้บริการ
                                            </NavText>
                                     </NavItem>
-                                  <NavItem eventKey="Report/problem" >
+                                  <NavItem eventKey="Report/report_problems" >
                                            <NavText title="รายงานปัญหา">
                                          รายงานปัญหา
                                            </NavText>
                                     </NavItem>
-                                    <NavItem eventKey="Report/incident" >
+                                    <NavItem eventKey="Report/report_incident" >
                                              <NavText title="รายงานอินซิเด้นท์">
                                            รายงานอินซิเด้นท์
                                              </NavText>
                                       </NavItem>
-                                      <NavItem eventKey="Report/total" >
+                                      <NavItem eventKey="Report/report_total" >
                                                <NavText title="รายงานภาพรวมทั้งหมด">
                                              รายงานภาพรวมทั้งหมด
                                                </NavText>
                                         </NavItem>
-                                        <NavItem eventKey="Report/workaround" >
+                                        <NavItem eventKey="Report/report_workaround" >
                                                  <NavText title="รายงานข้อมูลการทำงาน">
                                                รายงานข้อมูลการทำงาน
                                                  </NavText>
@@ -531,7 +533,12 @@ export default class Dashboard extends Component {
                           <Route path='/manage_priority/list_priority'                     component={List_Priority} />
                           <Route path='/manage_problems/list_problems'                     component={List_Problems} />
                           <Route path='/manage_request/list_request'                       component={List_Request} />
-                          <Route path='/success' component={Success} />
+                          <Route path='/Report/report_request'                       component={Report_request} />
+                          <Route path='/Report/report_incident'                       component={Report_incident} />
+                          <Route path='/Report/report_problems'                       component={Report_problems} />
+
+
+
                           <Route path='/' component={Home} />
 
 

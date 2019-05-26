@@ -25,16 +25,23 @@
         "sass-loader": "^7.1.0"
     },
     "dependencies": {
+        "@ashvin27/react-datatable": "^1.1.8",
         "@react-pdf/renderer": "^1.6.0",
         "@trendmicro/react-sidenav": "^0.4.5",
+        "html2canvas": "^1.0.0-rc.1",
+        "jspdf": "^1.5.3",
         "prop-types": "^15.7.2",
         "react-alert": "^5.4.0",
         "react-alert-template-basic": "^1.0.0",
         "react-bootstrap": "^1.0.0-beta.8",
+        "react-bootstrap-table": "^4.3.1",
         "react-confirm-alert": "^2.4.1",
+        "react-datepicker": "^2.5.0",
         "react-froala-wysiwyg": "^3.0.0-beta.1-1",
+        "react-google-charts": "^3.0.13",
         "react-icons": "^3.6.1",
         "react-images-upload": "^1.2.6",
+        "react-load-script": "0.0.6",
         "react-pdf": "^4.0.5",
         "react-radio-group": "^3.0.3",
         "react-router-dom": "^5.0.0",
@@ -44,6 +51,7 @@
         "react-toastr": "^3.0.0",
         "react-user-profile": "^1.0.3",
         "react-widgets": "^4.4.10",
+        "recharts": "^1.6.2",
         "redux-form": "^8.2.0"
     }
 }

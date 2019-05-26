@@ -196,8 +196,7 @@ let container;
         return (
 
 
-          <div className='container py-4' >
-            <div style={{paddingLeft: '10' ,paddingRight: '5'}}>
+
               <div className='col-md-12'>
                 <div className='card'>
                   <div className='card-header'>เพิ่มผู้ติดต่อ</div>
@@ -316,9 +315,7 @@ let container;
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
-
+        
         )
       }
     }

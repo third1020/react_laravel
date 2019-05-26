@@ -131,9 +131,8 @@ let container;
         return (
 
 
-          <div className='container py-4' >
-            <div style={{paddingLeft: '10' ,paddingRight: '5'}}>
-              <div className='col-md-12'>
+
+              <div className='col-jg-12'>
                 <div className='card'>
                   <div className='card-header'>เพิ่มความสำคัญ</div>
                   <div className='card-body'>
@@ -190,8 +189,7 @@ let container;
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
+        
 
         )
       }

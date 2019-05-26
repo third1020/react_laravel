@@ -4,12 +4,14 @@ import React, { Component } from 'react'
    import Header from './Header'
 
    import Home from './Home'
-   import Success from './success_insert'
+
    import Update_user from './manage_user/update_user'
     import Login from './auth/Login'
     import Dashboard from './Dashboard'
     import Profile from './Profile'
-    
+    import Page from './Pdf/Page'
+
+
 
 
    class App extends Component {
@@ -66,7 +68,10 @@ import React, { Component } from 'react'
                <Route path='/manage_problems' component={Dashboard} />
                <Route path='/manage_request' component={Dashboard} />
                <Route path='/Profile' component={Profile} />
-               <Route path='/Success' component={Success} />
+               <Route path='/Page' component={Page} />
+
+
+
 
 
 

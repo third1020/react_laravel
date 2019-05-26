@@ -172,7 +172,7 @@ let container;
         axios.post('/api/permission', insertdata)
           .then(response => {
 
-    
+
             // redirect to the homepage
             this.setState({
 
@@ -248,9 +248,8 @@ let container;
         return (
 
 
-          <div className='container py-4' >
-            <div style={{paddingLeft: '10' ,paddingRight: '5'}}>
-              <div className='col-md-12'>
+
+              <div className='col-lg-12'>
                 <div className='card'>
                   <div className='card-header'>เพิ่มสิทธิ์ผู้ใช้งาน</div>
                   <div className='card-body'>
@@ -335,8 +334,7 @@ let container;
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
+
 
         )
       }

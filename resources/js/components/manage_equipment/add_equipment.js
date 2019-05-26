@@ -189,7 +189,7 @@ this.setState({
               equipment_number: '',
               contact_detail: '',
               equipment_type_id: '',
-            
+
 
 
               errors: []
@@ -258,9 +258,8 @@ this.setState({
         return (
 
 
-          <div className='container py-4' >
-            <div style={{paddingLeft: '10' ,paddingRight: '5'}}>
-              <div className='col-md-12'>
+
+              <div className='col-lg-12'>
                 <div className='card'>
                   <div className='card-header'>เพิ่มอุปกรณ์</div>
                   <div className='card-body'>
@@ -398,8 +397,7 @@ this.setState({
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
+          
 
         )
       }

@@ -11,7 +11,7 @@ import axios from 'axios'
        }
 
      render () {
-       const columns = ['id', 'message_title','message_from','message_to','status','created_at'];
+       const columns = ['id', 'message_title','message_from','message_to','status','created_at','Action'];
      return (
 
        <DataTable
@@ -23,7 +23,7 @@ import axios from 'axios'
             edit={"แก้ไข"} delete={"ลบ"}
             deletefail={"ลบข้อมูลไม่สำเร็จ"}
             deletesuccess={"ลบข้อมูลสำเร็จ"}
-            addlink={"/manage_message/add_mewssage"}
+            addlink={"/manage_message/add_message"}
             addbutton={"เพิ่มข้อความ"}
             delectselect={"ลบข้อมูลที่ถูกเลือก"}
             />

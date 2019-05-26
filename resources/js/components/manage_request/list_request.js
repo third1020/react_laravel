@@ -11,7 +11,7 @@ import axios from 'axios'
        }
 
      render () {
-       const columns = ['id', 'request_tital','request_status','created_at'];
+       const columns = ['id', 'request_tital','request_status','created_at','Action'];
      return (
 
        <DataTable

@@ -245,9 +245,8 @@ let container;
         return (
 
 
-          <div className='container py-4' >
-            <div style={{paddingLeft: '10' ,paddingRight: '5'}}>
-              <div className='col-md-12'>
+
+              <div className='col-lg-12'>
                 <div className='card'>
                   <div className='card-header'>เพิ่มปัญหา</div>
                   <div className='card-body'>
@@ -299,9 +298,9 @@ let container;
                       <div class="input-group mb-3">
                          <div class="input-group-prepend">
                         {  this.state.equipment_id == '' ? (
-                            <label class="input-group-text" for="inputGroupSelect01" style={{color:'red'}}>เลือกชื่ออุปกรณ์ที่มีปัญหา</label>
+                            <label class="input-group-text" style={{width:'190',color:'red'}} for="inputGroupSelect01" >เลือกชื่ออุปกรณ์ที่มีปัญหา</label>
 
-                        ):<label class="input-group-text" for="inputGroupSelect01">ชื่ออุปกรณ์ที่มีปัญหา</label>}
+                        ):<label class="input-group-text" style={{width:'190'}} for="inputGroupSelect01">ชื่ออุปกรณ์ที่มีปัญหา</label>}
                          </div>
                         <select class="custom-select" name='equipment_id' value={this.state.equipment_id} onChange={this.handleSelectChange} className={`form-control ${this.hasErrorFor('equipment_id') ? 'is-invalid' : ''}`}>
                         <option value="" >Choose...</option>
@@ -317,9 +316,9 @@ let container;
                       <div class="input-group mb-3">
                          <div class="input-group-prepend">
                         {  this.state.contact_id == '' ? (
-                            <label class="input-group-text" for="inputGroupSelect01" style={{color:'red'}}>เลือกชื่อผู้ติดต่อ</label>
+                            <label class="input-group-text" style={{width:'190',color:'red'}} for="inputGroupSelect01" >เลือกชื่อผู้ติดต่อ</label>
 
-                        ):<label class="input-group-text" for="inputGroupSelect01">ผู้ติดต่อชื่อ</label>}
+                        ):<label class="input-group-text" style={{width:'190'}} for="inputGroupSelect01">ผู้ติดต่อชื่อ</label>}
                          </div>
                         <select class="custom-select" name='contact_id' value={this.state.contact_id} onChange={this.handleSelectChange} className={`form-control ${this.hasErrorFor('contact_id') ? 'is-invalid' : ''}`}>
                         <option value="" >Choose...</option>
@@ -335,9 +334,9 @@ let container;
                       <div class="input-group mb-3">
                          <div class="input-group-prepend">
                         {  this.state.impact_id == '' ? (
-                            <label class="input-group-text" for="inputGroupSelect01" style={{color:'red'}}>เลือกชื่อผลกระทบ</label>
+                            <label class="input-group-text" style={{width:'190',color:'red'}} for="inputGroupSelect01" >เลือกชื่อผลกระทบ</label>
 
-                        ):<label class="input-group-text" for="inputGroupSelect01">ผลกระทบชื่อ</label>}
+                        ):<label class="input-group-text" style={{width:'190'}} for="inputGroupSelect01">ผลกระทบชื่อ</label>}
                          </div>
                         <select class="custom-select" name='impact_id' value={this.state.impact_id} onChange={this.handleSelectChange} className={`form-control ${this.hasErrorFor('impact_id') ? 'is-invalid' : ''}`}>
                         <option value="" >Choose...</option>
@@ -353,9 +352,9 @@ let container;
                       <div class="input-group mb-3">
                          <div class="input-group-prepend">
                         {  this.state.priority_id == '' ? (
-                            <label class="input-group-text" for="inputGroupSelect01" style={{color:'red'}}>เลือกระดับความสำคัญ</label>
+                            <label class="input-group-text" style={{width:'190',color:'red'}} for="inputGroupSelect01" >เลือกระดับความสำคัญ</label>
 
-                        ):<label class="input-group-text" for="inputGroupSelect01">ระดับความสำคัญ</label>}
+                        ):<label class="input-group-text" style={{width:'190'}} style={{width:'190'}} for="inputGroupSelect01">ระดับความสำคัญ</label>}
                          </div>
                         <select class="custom-select" name='priority_id' value={this.state.priority_id} onChange={this.handleSelectChange} className={`form-control ${this.hasErrorFor('priority_id') ? 'is-invalid' : ''}`}>
                         <option value="" >Choose...</option>
@@ -385,8 +384,8 @@ let container;
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
+
+
 
         )
       }

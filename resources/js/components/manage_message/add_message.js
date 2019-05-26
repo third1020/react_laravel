@@ -205,11 +205,8 @@ let container;
 
         return (
 
-          <div className='container py-4' >
-          <ScriptTag isHydrating={true} type="text/javascript" src="https://cdn.jsdelivr.net/npm/froala-editor@3.0.0-beta.1/js/froala_editor.min.js" />
-          <ScriptTag isHydrating={true} type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.9.5/js/plugins/image.min.js" />
-            <div style={{paddingLeft: '10' ,paddingRight: '5'}}>
-              <div className='col-md-12'>
+
+              <div className='col-lg-12'>
                 <div className='card'>
                   <div className='card-header'>เพิ่มข้อความ</div>
                   <div className='card-body'>
@@ -271,8 +268,7 @@ let container;
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
+        
 
         )
       }
