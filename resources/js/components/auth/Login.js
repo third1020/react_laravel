@@ -2,8 +2,11 @@ import axios from 'axios'
 import React, { Component } from 'react';
 import Profile  from '../Profile';
 
-import { Button, FormGroup, FormControl} from "react-bootstrap";
-import "../../../css/Login.css";
+import { Button, FormGroup, FormControl, Container, Row, Col} from "react-bootstrap";
+import "../../../css/login.css";
+import "../../../vendor/jquery/jquery-3.2.1.min.js";
+import "../../../vendor/tilt/tilt.jquery.min.js";
+// import "../../../css/login/util.css";
 
 
 
@@ -23,6 +26,11 @@ export default class Login extends Component {
 
   }
 
+  componentDidMount () {
+    $('.js-tilt').tilt({
+			scale: 1.1
+		})
+  }
 
   handleFieldChange (event) {
     this.setState({
@@ -70,8 +78,6 @@ export default class Login extends Component {
           sessionStorage.setItem("manage_solution", this.state.loginstatus[0].manage_solution);
           sessionStorage.setItem("Report", this.state.loginstatus[0].Report);
 
-
-
           history.push('/Dashboard')
 
         }
@@ -92,11 +98,7 @@ export default class Login extends Component {
   renderErrorFor (field) {
     if (this.hasErrorFor(field)) {
       return (
-
-
              <strong style={{color:'red'}}>{this.state.errors[field][0]}</strong>
-
-
       )
     }
   }
@@ -104,56 +106,70 @@ export default class Login extends Component {
 
   render () {
     return (
+      <div className="container-login100">
+      <Container className="wrap-login100">
+        <Row>
+          <Col className="login100-pic js-tilt" sm={8}>
+            <img src="images/img-01.png"></img>
+          </Col>
+          <Col sm={4}>
+            <form className="login100-form validate-form" onSubmit={this.handleCreateNewProject}>
+              <span className="login100-form-title">Member Login</span>
+              <FormGroup controlId="name" bsSize="large">
+                <label>Name</label>
+                <FormControl
+                autoFocus
+                id='name'
+                type='text'
+                className={`form-control ${this.hasErrorFor('name') ? 'is-invalid' : ''}`}
+                name='name'
+                value={this.state.name}
+                onChange={this.handleFieldChange}
 
-      <div className="Login">
-        <form onSubmit={this.handleCreateNewProject}>
-          <FormGroup controlId="name" bsSize="large">
-            <label>name</label>
-            <FormControl
-            autoFocus
-            id='name'
-            type='text'
-            className={`form-control ${this.hasErrorFor('name') ? 'is-invalid' : ''}`}
-            name='name'
-            value={this.state.name}
-            onChange={this.handleFieldChange}
+                />
+              </FormGroup>
+            {this.renderErrorFor('name')}
+              <FormGroup controlId="password" bsSize="large">
+                <label>password</label>
+                <FormControl
+                id='password'
+                className={`form-control ${this.hasErrorFor('password') ? 'is-invalid' : ''}`}
+                name='password'
+                rows='10'
+                value={this.state.password}
+                onChange={this.handleFieldChange}
 
-            />
-          </FormGroup>
-        {this.renderErrorFor('name')}
-          <FormGroup controlId="password" bsSize="large">
-            <label>password</label>
-            <FormControl
-            id='password'
-            className={`form-control ${this.hasErrorFor('password') ? 'is-invalid' : ''}`}
-            name='password'
-            rows='10'
-            value={this.state.password}
-            onChange={this.handleFieldChange}
+                />
+              </FormGroup>
+              {this.renderErrorFor('password')}
 
-            />
-          </FormGroup>
-          {this.renderErrorFor('password')}
+              <Button
+                block
+                bsSize="large"
 
-          <Button
-            block
-            bsSize="large"
-
-            type="submit"
-          >
-            Login
-          </Button>
-        </form>
-
-
-
-
+                type="submit"
+              >
+                Login
+              </Button>
+              <div class="text-center p-t-12">
+                <span class="txt1">
+                  Forgot
+                </span>
+                <a class="txt2" href="#">
+                  Username / Password?
+                </a>
+              </div>
+              <div class="text-center p-t-136">
+              <a class="txt2" href="#">
+                Create your Account
+                <i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
+              </a>
+            </div>
+            </form>
+          </Col>
+        </Row>
+      </Container>
       </div>
-
-
-
-
-
     )
   }
  }
