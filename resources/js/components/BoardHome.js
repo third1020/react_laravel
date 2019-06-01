@@ -14,103 +14,82 @@ import Nav from 'react-bootstrap/Nav';
 import Tabs from 'react-bootstrap/Tabs';
 import Tab from 'react-bootstrap/Tab';
 import CardGroup from 'react-bootstrap/CardGroup';
-   import DataTable from "./DataTable";
-   import Profile from "./Profile";
-
+import DataTable from "./DataTable";
+import Profile from "./Profile";
 
 let container;
 
-
-
-
-
-import { Button , Form , Col, Row} from 'react-bootstrap';
+import { Button, Form, Col, Row } from 'react-bootstrap';
 import axios from 'axios';
 
 
-    class BoardHome extends Component {
-      constructor (props) {
-        super(props)
-        this.state = {
-
-
-          getnews_type: [],
-          getnews: [],
-          errors: []
-        }
-
-      }
-
-
-
-      componentWillMount () {
-        axios.get('/api/querynews_type').then(response => {
-          this.setState({
-            getnews_type: response.data
-
-          })
-        })
-
-        axios.get(`/api/querynews`).then(response => {
-          this.setState({
-
-            getnews: response.data
-
-
-          })
-        })
-
-        console.log(this.state.getnews);
-
-
-
-      }
-
-      render () {
-          const {getnews} = this.state
-          const columns = ['id', 'news_title','news_types_id','created_at'];
-
-
-        return (
-
-
-          <Tabs defaultActiveKey="home" id="uncontrolled-tab-example">
-
-    <Tab eventKey="home" title="Home">
-    <p>{this.state.getnews_type.length}</p>
-
-    </Tab>
-
-    <Tab eventKey="profile" title="profile">
-    <Profile id={sessionStorage.getItem("id")} />
-
-
-    </Tab>
-    <Tab eventKey="news" title="News">
-
-<DataTable url="/api/news_table" columns={columns} name={"news"} headname={" List News"} headTablename={"ตารางแสดงข้อมูล"} edit={"แก้ไข"} delete={"ลบ"}   deletefail={"ลบข้อมูลไม่สำเร็จ"} deletesuccess={"ลบข้อมูลสำเร็จ"} review={"review"} />
-
-
-    </Tab>
-    <Tab eventKey="activity" title="Activity" >
-    <p>ActivityActivityActivityActivityActivity</p>
-
-    </Tab>
-  </Tabs>
-
-
-
-
-
-
-
-        )
-      }
+class BoardHome extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      getnews_type: [],
+      getnews: [],
+      errors: []
     }
+  }
 
-    BoardHome.propTypes = {
-      id: PropTypes.number,
+  componentWillMount() {
+    axios.get('/api/querynews_type').then(response => {
+      this.setState({
+        getnews_type: response.data
 
-    };
+      })
+    })
 
-    export default BoardHome
+    axios.get(`/api/querynews`).then(response => {
+      this.setState({
+
+        getnews: response.data
+
+
+      })
+    })
+    console.log(this.state.getnews);
+  }
+
+  render() {
+    const { getnews } = this.state
+    const columns = ['id', 'news_title', 'news_types_id', 'created_at'];
+
+
+    return (
+
+
+      <Tabs defaultActiveKey="home" id="uncontrolled-tab-example">
+
+        <Tab eventKey="home" title="Home">
+          <p>{this.state.getnews_type.length}</p>
+
+        </Tab>
+
+        <Tab eventKey="profile" title="profile">
+          <Profile id={sessionStorage.getItem("id")} />
+
+
+        </Tab>
+        <Tab eventKey="news" title="News">
+
+          <DataTable url="/api/news_table" columns={columns} name={"news"} headname={" List News"} headTablename={"ตารางแสดงข้อมูล"} edit={"แก้ไข"} delete={"ลบ"} deletefail={"ลบข้อมูลไม่สำเร็จ"} deletesuccess={"ลบข้อมูลสำเร็จ"} review={"review"} />
+
+
+        </Tab>
+        <Tab eventKey="activity" title="Activity" >
+          <p>ActivityActivityActivityActivityActivity</p>
+
+        </Tab>
+      </Tabs>
+    )
+  }
+}
+
+BoardHome.propTypes = {
+  id: PropTypes.number,
+
+};
+
+export default BoardHome
