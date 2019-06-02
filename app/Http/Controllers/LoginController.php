@@ -26,7 +26,6 @@ class LoginController extends Controller
         }
         // Validator check in model myself
         $validator = Validator::make($input, $rules);
-
         if ($validator->fails()) {
             $checkpassword = Hash::check($password, $passworddatabase);
 
