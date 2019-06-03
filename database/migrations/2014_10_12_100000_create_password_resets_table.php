@@ -16,7 +16,7 @@ class CreatePasswordResetsTable extends Migration
         Schema::create('password_resets', function (Blueprint $table) {
             $table->string('email')->index()->comment('อีเมลล์ที่ส่ง');
             $table->string('token')->comment('หมายเลขยืนยัน');
-            $table->timestamp()->nullable();
+            $table->timestamps();
             $table->softDeletes();
         });
     }

@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use DurianSoftware\Traits\Uuids;
+use App\Traits\Uuids;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class FactUserModel extends Model

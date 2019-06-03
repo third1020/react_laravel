@@ -1,72 +1,52 @@
 <?php
 
- namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api\UserController;
 
 use Illuminate\Http\Request;
 use App\Http\Resources\UsersResource;
 use App\User;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Input as Input;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
+    protected $user;
 
-  protected $user;
+    public function __construct(User $user)
+    {
+        $this->user = $user;
+    }
 
+    public function getTable(Request $request)
+    {
+        $wordsearch = $request->search.'%';
 
+        // $query = $this->user->orderBy($request->column, $request->order);
 
-  public function __construct(User $user)
-  {
-      $this->user = $user;
-
-
-  }
-
-
-   public function getTable(Request $request)
-   {
-     $wordsearch = $request->search.'%';
-
-     // $query = $this->user->orderBy($request->column, $request->order);
-
-                         $query = $this->user->where('id','like',$wordsearch)
-                                             ->orwhere('name','like',$wordsearch)
-                                             ->orwhere('email','like',$wordsearch)
-                                             ->orwhere('nameuser','like',$wordsearch)
-                                             ->orwhere('id_card','like',$wordsearch)
-                                             ->orwhere('phone_number','like',$wordsearch)
-                                             ->orwhere('created_at','like',$wordsearch)
+        $query = $this->user->where('id', 'like', $wordsearch)
+                                             ->orwhere('name', 'like', $wordsearch)
+                                             ->orwhere('email', 'like', $wordsearch)
+                                             ->orwhere('nameuser', 'like', $wordsearch)
+                                             ->orwhere('id_card', 'like', $wordsearch)
+                                             ->orwhere('phone_number', 'like', $wordsearch)
+                                             ->orwhere('created_at', 'like', $wordsearch)
                                              ->orderBy($request->column, $request->order);
 
+        $users = $query->paginate($request->per_page ?? 5);
 
+        return UsersResource::collection($users);
+    }
 
+    public function index()
+    {
+        $getdata = DB::table('users')->get();
 
+        return $getdata->toJson();
+    }
 
-           $users = $query->paginate($request->per_page ?? 5);
-
-
-
-           return UsersResource::collection($users);
-
-   }
-
-   public function index()
-   {
-
-     $getdata = DB::table('users')->get();
-
-     return $getdata->toJson();
-
-
-   }
-
-
-
-   public function store(Request $request)
-   {
-
-     $validatedData = $request->validate([
+    public function store(Request $request)
+    {
+        $validatedData = $request->validate([
        'username' => 'required',
        'password' => 'required|min:8',
        'Name_lastname' => 'required',
@@ -74,17 +54,12 @@ class UserController extends Controller
        'Phone_Number' => 'required|min:8',
        'Email' => 'required',
        'permission' => 'required',
-       'image' => 'required'
-
+       'image' => 'required',
      ]);
 
+        $passwordhash = Hash::make($request->password);
 
-
-
-    $passwordhash = Hash::make($request->password);
-
-     User::create([
-
+        User::create([
        'name' => $validatedData['username'],
        'password' => $passwordhash,
        'nameuser' => $validatedData['Name_lastname'],
@@ -93,29 +68,29 @@ class UserController extends Controller
        'email' => $validatedData['Email'],
        'permission_id' => $validatedData['permission'],
        'image' => $validatedData['image'],
-
      ]);
-     return response()->json('User created!');
 
-   }
+        return response()->json('User created!');
+    }
 
-   public function edit($id)
-   {
-     $user = User::findOrFail($id);
- 		return response()->json([
- 			'user' => $user,
- 		]);
-   }
+    public function edit($id)
+    {
+        $user = User::findOrFail($id);
 
+        return response()->json([
+            'user' => $user,
+        ]);
+    }
 
-   public function update(Request $request, $id) {
- 		// update task
+    public function update(Request $request, $id)
+    {
+        // update task
 
         $file = $request->file('image');
         $file = $request->image;
 
-        if($request->password){
-          $validatedData = $request->validate([
+        if ($request->password) {
+            $validatedData = $request->validate([
             'username' => 'required|max:191',
             'password' => 'required|min:8|max:191',
             'Name_lastname' => 'required',
@@ -124,9 +99,9 @@ class UserController extends Controller
             'Email' => 'required',
             'permission' => 'required',
           ]);
-          $passwordhash = Hash::make($request->password);
+            $passwordhash = Hash::make($request->password);
 
-          User::findOrFail($id)
+            User::findOrFail($id)
               ->update([
               'name' => $validatedData['username'],
               'password' => $passwordhash,
@@ -135,12 +110,10 @@ class UserController extends Controller
               'phone_number' => $validatedData['Phone_Number'],
               'email' => $validatedData['Email'],
               'permission_id' => $validatedData['permission'],
-              'image' => $file
+              'image' => $file,
             ]);
-        }
-
-        else {
-          $validatedData = $request->validate([
+        } else {
+            $validatedData = $request->validate([
             'username' => 'required|max:191',
             'Name_lastname' => 'required',
             'ID_Card' => 'required',
@@ -156,28 +129,22 @@ class UserController extends Controller
             'phone_number' => $validatedData['Phone_Number'],
             'email' => $validatedData['Email'],
             'permission_id' => $validatedData['permission'],
-            'image' => $file
+            'image' => $file,
             ]);
         }
+    }
 
+    public function destroy($id)
+    {
+        User::findOrFail($id)->delete();
+    }
 
- 	}
+    public function destroy_select(Request $request)
+    {
+        User::destroy($request->foo);
 
-
-  public function destroy($id) {
-		User::findOrFail($id)->delete();
-
-	}
-
-  public function destroy_select(Request $request) {
-
-      User::destroy($request->foo);
-
-
-    return response()->json([
+        return response()->json([
        'data' => 'delect successfully',
      ]);
-
-  }
-
+    }
 }

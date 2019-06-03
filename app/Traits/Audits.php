@@ -1,9 +1,9 @@
 <?php
 
-namespace DurianSoftware\Traits;
+namespace App\Traits;
 
 use Illuminate\Database\Eloquent\Model;
-use DurianSoftware\Traits\Uuids;
+use App\Traits\Uuids;
 
 class Audits extends Model implements \OwenIt\Auditing\Contracts\Audit
 {

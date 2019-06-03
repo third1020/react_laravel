@@ -1,6 +1,6 @@
 <?php
 
-namespace DurianSoftware\Traits;
+namespace App\Traits;
 
 use Webpatser\Uuid\Uuid;
 
