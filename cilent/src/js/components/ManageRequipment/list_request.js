@@ -5,7 +5,7 @@
       import DataTable from "../DataTable";
       import clsx from 'clsx';
       import { makeStyles, useTheme } from '@material-ui/core/styles';
-      import Navigation from './Navigation';
+      import Navigation from '../Navigation';
 
       const drawerWidth = 240;
 

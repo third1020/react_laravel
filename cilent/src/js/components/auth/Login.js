@@ -54,7 +54,7 @@ export default class Login extends Component {
         sessionStorage.setItem("Token", response.data.token);
 
         if(response.data.token != null){
-          alert(sessionStorage.getItem("Token"));
+          alert("Token :"+sessionStorage.getItem("Token"));
           history.push('/Dashboard')
 
         }else{
