@@ -1,41 +1,30 @@
 <?php
 
-namespace App\Http\Controllers\Api\UserController;
+namespace App\Http\Controllers\Api\User;
 
 use Illuminate\Http\Request;
 use App\Http\Resources\UsersResource;
+use App\Models\DimUserModel;
 use App\User;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+//use JWTAuth;
+use Tymon\JWTAuth\Facades\JWTAuth;
+use Tymon\JWTAuth\Facades\JWTFactory;
+use Tymon\JWTAuth\Exceptions\JWTException;
+use Tymon\JWTAuth\Contracts\JWTSubject;
+use Tymon\JWTAuth\PayloadFactory;
+use Tymon\JWTAuth\JWTManager as JWT;
 
 class UserController extends Controller
 {
-    protected $user;
 
-    public function __construct(User $user)
-    {
-        $this->user = $user;
-    }
+  public function __construct()
+   {
+       $this->middleware('auth:api', ['except' => ['login']]);
+   }
 
-    public function getTable(Request $request)
-    {
-        $wordsearch = $request->search.'%';
-
-        // $query = $this->user->orderBy($request->column, $request->order);
-
-        $query = $this->user->where('id', 'like', $wordsearch)
-                                             ->orwhere('name', 'like', $wordsearch)
-                                             ->orwhere('email', 'like', $wordsearch)
-                                             ->orwhere('nameuser', 'like', $wordsearch)
-                                             ->orwhere('id_card', 'like', $wordsearch)
-                                             ->orwhere('phone_number', 'like', $wordsearch)
-                                             ->orwhere('created_at', 'like', $wordsearch)
-                                             ->orderBy($request->column, $request->order);
-
-        $users = $query->paginate($request->per_page ?? 5);
-
-        return UsersResource::collection($users);
-    }
 
     public function index()
     {
@@ -44,38 +33,99 @@ class UserController extends Controller
         return $getdata->toJson();
     }
 
-    public function store(Request $request)
+    public function CreateUser(Request $request)
     {
         $validatedData = $request->validate([
-       'username' => 'required',
-       'password' => 'required|min:8',
-       'Name_lastname' => 'required',
-       'ID_Card' => 'required',
-       'Phone_Number' => 'required|min:8',
-       'Email' => 'required',
-       'permission' => 'required',
-       'image' => 'required',
+
+       'username' => 'required|string|max:255',
+       'password' => 'required|string|min:6',
+       'email' => 'required|string|email|max:255|unique:users',
+       'image_id' => 'required',
+       'client_id' => 'required',
+       'permission_id' => 'required',
+
+
+
      ]);
 
-        $passwordhash = Hash::make($request->password);
 
-        User::create([
-       'name' => $validatedData['username'],
+
+        $passwordhash = Hash::make($validatedData['password']);
+        $hashed_email = Hash::make($validatedData['email']);
+
+        $user = DimUserModel::create([
+       'client_id' => $validatedData['client_id'],
+       'username' => $validatedData['username'],
        'password' => $passwordhash,
-       'nameuser' => $validatedData['Name_lastname'],
-       'id_card' => $validatedData['ID_Card'],
-       'phone_number' => $validatedData['Phone_Number'],
-       'email' => $validatedData['Email'],
-       'permission_id' => $validatedData['permission'],
-       'image' => $validatedData['image'],
+       'email' => $validatedData['email'],
+       'hashed_email' => $hashed_email,
+       'image_id' => $validatedData['image_id'],
+       'client_id' => $validatedData['client_id'],
+       'permission_id' => $validatedData['permission_id'],
+
      ]);
 
-        return response()->json('User created!');
+     $token = JWTAuth::fromUser($user);
+
+        return response()->json($token);
     }
+
+    public function login(Request $request)
+    {
+        $credentials = $request->json()->all();
+
+        $checkusername = DB::table('users')->where('username', '=', $request->username)->get();
+
+        if($checkusername !== null){
+          $checkpassword = Hash::check($request->password, $checkusername[0]->password);
+
+          if($checkpassword){
+
+            try {
+                // attempt to verify the credentials and create a token for the user
+                if (! $token = JWTAuth::attempt(['username' => 'third1080', 'password' => '1234567890','permission_id' =>$checkusername[0]->permission_id ])) {
+                    return response()->json(['error' => 'invalid_credentials'], 401);
+                }
+            } catch (JWTException $e) {
+                // something went wrong whilst attempting to encode the token
+                return response()->json(['error' => 'could_not_create_token'], 500);
+            }
+
+            // all good so return the token
+            return response()->json(compact('token'));
+
+          }
+          return response()->json(['error' => 'invalid password']);
+
+
+        }
+      
+
+
+    }
+
+
+
+    public function getAuthenticatedUser()
+    {
+        try {
+            if (! $user = JWTAuth::parseToken()->authenticate()) {
+                return response()->json(['user_not_found'], 404);
+            }
+        } catch (Tymon\JWTAuth\Exceptions\TokenExpiredException $e) {
+            return response()->json(['token_expired'], $e->getStatusCode());
+        } catch (Tymon\JWTAuth\Exceptions\TokenInvalidException $e) {
+            return response()->json(['token_invalid'], $e->getStatusCode());
+        } catch (Tymon\JWTAuth\Exceptions\JWTException $e) {
+            return response()->json(['token_absent'], $e->getStatusCode());
+        }
+        return response()->json(compact('user'));
+    }
+
 
     public function edit($id)
     {
-        $user = User::findOrFail($id);
+        $user = DimUserModel::findOrFail($id);
 
         return response()->json([
             'user' => $user,
@@ -101,7 +151,7 @@ class UserController extends Controller
           ]);
             $passwordhash = Hash::make($request->password);
 
-            User::findOrFail($id)
+            DimUserModel::findOrFail($id)
               ->update([
               'name' => $validatedData['username'],
               'password' => $passwordhash,
@@ -121,7 +171,7 @@ class UserController extends Controller
             'Email' => 'required',
             'permission' => 'required',
           ]);
-            User::findOrFail($id)
+            DimUserModel::findOrFail($id)
               ->update([
             'name' => $validatedData['username'],
             'nameuser' => $validatedData['Name_lastname'],
@@ -136,12 +186,12 @@ class UserController extends Controller
 
     public function destroy($id)
     {
-        User::findOrFail($id)->delete();
+        DimUserModel::findOrFail($id)->delete();
     }
 
     public function destroy_select(Request $request)
     {
-        User::destroy($request->foo);
+        DimUserModel::destroy($request->foo);
 
         return response()->json([
        'data' => 'delect successfully',
