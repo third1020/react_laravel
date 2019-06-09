@@ -85,7 +85,7 @@ const useStyles = makeStyles(theme => ({
 
 function Dashboard() {
   var links = [
-    {link: 'ManageUser', icon: FaBlog},
+    {link: 'User', icon: FaBlog},
     {link: 'ManageNews', icon: FaBeer},
     {link: 'ManageMessage', icon: FaUser},
     {link: 'ManageEquipment', icon: FaHome},

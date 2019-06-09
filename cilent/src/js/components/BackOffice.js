@@ -1,5 +1,8 @@
 import React from 'react';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
+import { BrowserRouter,
+  Route,
+  Switch } from 'react-router-dom'
 
 import Typography from '@material-ui/core/Typography';
 import Navigation from './Navigation';
@@ -68,7 +71,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-function Dashboard() {
+function BackOffice() {
 
   const classes = useStyles();
   const theme = useTheme();
@@ -84,17 +87,20 @@ function Dashboard() {
 
   return (
     <div className={classes.root}>
-    <Navigation />
+      <Navigation />
       <main className={classes.content}>
         <div className={classes.toolbar} />
         <Typography paragraph>
+        <Switch>
+          <Route path='back-office/user' component={UserIndex} />
+        </Switch>
         </Typography>
         <Typography paragraph>
-         
+
         </Typography>
       </main>
     </div>
   );
 }
 
-export default Dashboard;
+export default BackOffice;
