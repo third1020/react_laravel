@@ -101,15 +101,19 @@ function Dashboard() {
 
   const classes = useStyles();
   const theme = useTheme();
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = React.useState(sessionStorage.getItem("sidebar"));
 
   function handleDrawerOpen() {
     setOpen(true);
+    sessionStorage.setItem("sidebar" ,true);
   }
 
   function handleDrawerClose() {
     setOpen(false);
+    sessionStorage.setItem("sidebar" ,false);
   }
+
+
 
   return (
     <React.Fragment>
@@ -132,11 +136,14 @@ function Dashboard() {
           >
             <MenuIcon />
           </IconButton>
+          <Link to='/' onClick={() => sessionStorage.removeItem('Token')} style={{position:'fixed',right:'5%',paddingBottom:'5px'}}><button style={{color:'white' ,fontSize:'20px'}}>logout</button></Link>
           <Typography variant="h6" noWrap>
-            Mini variant drawer
+            React-Laravel
           </Typography>
+
         </Toolbar>
       </AppBar>
+
       <Drawer
         variant="permanent"
         className={clsx(classes.drawer, {

@@ -16,8 +16,9 @@ use Illuminate\Http\Request;
 
 Route::post('CreateUser', 'Api\User\UserController@CreateUser');
 Route::post('login', 'Api\User\UserController@login');
-Route::get('profile', 'Api\User\UserController@getAuthenticatedUser');
-Route::get('index', 'Api\User\UserController@index');
+Route::middleware('cors')->get('profile', 'Api\User\UserController@getAuthenticatedUser');
+Route::middleware('cors')->get('/user/indexretrun', 'Api\User\UserController@indexretrun');
+Route::middleware('cors')->delete('/user/delete/{id}', 'Api\User\UserController@destroy');
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
 return $request->user();

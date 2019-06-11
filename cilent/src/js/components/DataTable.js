@@ -1,794 +1,166 @@
-import React, { Component } from 'react';
-import Table from 'react-bootstrap/Table';
+import {BootstrapTable, TableHeaderColumn,DeleteButton } from 'react-bootstrap-table';
 import PropTypes from 'prop-types';
-import Button from 'react-bootstrap/Button';
-import Success from './success_insert';
-import Select_update from './Select_update';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import Add_user from './manage_user/add_user';
-import Add_news from './manage_news/add_news';
-import Add_message from './manage_message/add_message';
-import Script from 'react-load-script';
- import ReactDOM from 'react-dom'
-
-import { Link } from 'react-router-dom';
-
-import { confirmAlert } from 'react-confirm-alert';
-import { ToastContainer } from "react-toastr";
-import "../../css/alert.css";
-import "../../css/animate.css";
-import "../../css/search.css";
-import '../../css/react-confirm-alert.css';
-
-import "../../css/datatable.css";
-import "../../css/datatable.js";
-
-import '../../css/froala-editor/froala_style.min.css';
-import '../../css/froala-editor/froala_editor.pkgd.min.css';
-
-import FroalaEditorView from 'react-froala-wysiwyg/FroalaEditorView';
-import {FaStar,FaPlusSquare,FaFilePdf,FaFileExcel,FaTrashAlt,FaTrash,FaPen,FaRegCheckSquare,FaCheckDouble,FaMinus} from 'react-icons/fa';
-// with es6
-import {BootstrapTable, TableHeaderColumn,DeleteButton,ShowSelectedOnlyButton,ExportCSVButton  } from 'react-bootstrap-table';
+import React, { Component } from 'react';
+import ScriptTag from 'react-script-tag';
+import axios from 'axios';
+import DeleteIcon from '@material-ui/icons/Delete';
 import 'react-bootstrap-table/dist/react-bootstrap-table-all.min.css';
-import jsPDF from 'jspdf';
-// with es5
-
-let container;
-
-
-
-
-
-
-
+import { FaPen,FaTrash} from 'react-icons/fa';
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
 
  class DataTable extends Component {
   constructor(props) {
     super(props);
-
-
-
-
-    if(this.props.review == "review"){
-      this.config = {
-    reactIgnoreAttrs: ['tmpattr'],
-  heightMin: 250,
-  heightMax: 400,
-  autoFocus: true,
-  fontFamilySelection: true,
-  fontSizeSelection: true,
-}
-      this.state = {
-        page: 3,
-        entities: {
-          data: [],
-          meta: {
-            current_page: 1,
-            from: 1,
-            last_page: 1,
-            per_page: 3,
-            to: 1,
-            total: 1,
-          },
-        },
-        search : '',
-        first_page: 1,
-        current_page: 1,
-        sorted_column: this.props.columns[0],
-        offset: 4,
-        order: 'desc',
-      };
-
-    }else{
-
     this.state = {
-      header: this.props.columns,
-      page: 10,
-      entities: {
-        data: [],
-        meta: {
-          current_page: 1,
-          from: 1,
-          last_page: 1,
-          per_page: '10',
-          to: 1,
-          total: 1,
-        },
-      },
-      search : '',
-      first_page: 1,
-      current_page: 1,
-      sorted_column: this.props.columns[0],
-      offset: 4,
-      order: 'asc',
-      checkedList: [],
-      statuslist : []
-    };
-
-    // If you want to enable deleteRow, you must enable row selection also.
-    this.selectRow = {
-        mode: 'radio' ,
-        showOnlySelected: true//radio or checkbox
-      };
-
-
-
-  }
-
-      this.handleFieldChange = this.handleFieldChange.bind(this)
-      this.handleCheckboxChange = this.handleCheckboxChange.bind(this)
-      this.DeleteSelectAll = this.DeleteSelectAll.bind(this)
-      this.DeleteSelectAlert = this.DeleteSelectAlert.bind(this)
-      this.customConfirm = this.customConfirm.bind(this)
-
-      this.handleUpdate = this.handleUpdate.bind(this)
-      this.priceFormatter = this.priceFormatter.bind(this)
-      this.handleDelete = this.handleDelete.bind(this)
-      this.CreatePdf = this.CreatePdf.bind(this)
-      this.createCustomInsertButton = this.createCustomInsertButton.bind(this)
-      this.createHeaders = this.createHeaders.bind(this)
-      this.handleSelectChange = this.handleSelectChange.bind(this)
-
-
-  }
-
-  handleSelectChange(event){
-
-    this.setState({ page: event.target.value }, () => {this.fetchEntities()});
-  }
-
-
-
-  createHeaders(keys) {
-    const newkeys = keys.filter(word => word != "Action");
-    return newkeys.map(key => ({
-      'name': key,
-      'prompt': key,
-      'width':45,
-      'align':'center',
-      'padding':0
-    }));
-}
-
-
-  CreatePdf(){
-    var doc = new jsPDF()
-    var header = this.createHeaders(this.state.header);
-    console.log("header :"+header);
-
-
-  doc.table(1, 1, this.state.entities.data, header)
-
-  doc.save('a4.pdf')
-
-  }
-
-  priceFormatter(cell, row) {
-    console.log(cell);
-
-    return (<div>                <button  onClick={() => this.handleUpdate(row.id)} className="btn btn-sm btn-warning" style={{color: '#fff' ,backgroundColor:'#ffab43',borderColor:'#ffab43'}}  >
-                                  <i style={{  fontSize:'1.2 em',color: ''}} ><FaPen/></i>
-                                    {this.props.edit}
-                                </button>
-
-                                <button onClick={() => this.handleDelete(row.id)} className="btn btn-sm btn-danger" >
-                                  <i style={{  fontSize:'1.2 em',color: ''}} ><FaTrash/></i>
-                                      {this.props.delete}
-                                  </button>
-
-              </div>);
-  }
-
-  customConfirm(next, dropRowKeys) {
-  const dropRowKeysStr = dropRowKeys
-
-  confirmAlert({
-customUI: ({ onClose }) => {
-
-  return (
-    <div className='custom-ui'>
-      <h1>ยืนยันการลบข้อมูล User </h1>
-      {<p>{'ID:'+dropRowKeysStr +'\n'}</p>}
-
-
-<footer class="modal-footer">
-
-      <button type="button" class="btn btn-success"
-        onClick={() => {
-          this.DeleteSelectAlert(dropRowKeysStr);
-          onClose();
-          next();
-        }}
-      >
-        ยืนยัน
-      </button>
-
-      <button type="button" class="btn btn-danger" onClick={onClose}>ไม่ต้องการ</button>
-      </footer>
-    </div>
-  );
-}
-});
-
-
-}
-
-
-
-
-
-  DeleteSelectAlert(rowKeys) {
-  var arrayid = rowKeys;
-  axios.delete(`${this.props.url}`, { data: { foo: arrayid } })
-  .then(response => {
-    this.fetchEntities()
-    console.log(response);
-    container.success(`${this.props.deletesuccess}`, `success`, {
-        closeButton: true,
-        timeOut: 5000
-      })
-      window.scrollTo(0, 0);
-  })
-  .catch(error => {
-    container.error(`${this.props.deletefail}`, `errors`, {
-        closeButton: true,
-
-        timeOut: 5000,
-        extendedTimeOut: 2000
-      })
-    window.scrollTo(0, 0);
-  })
-
-}
-
-
-
-
-createCustomInsertButton(){
-  return (
-    <button  class="btn btn-outline-warning"
-             style={{ marginLeft: '8px',marginBottom: '10px',color:'#ff8300'}}
-             onClick={ () => this.CreatePdf() }
-             >
-                <i style={{  fontSize:'1.5em',color: '#ff8300'}} >
-                    <FaFilePdf/>
-                 </i>  PDF
-     </button>
-  );
-}
-
-
-createCustomDeleteButton (onClick) {
-  return (
-    <button  class="btn btn-outline-danger"
-    style={{ marginLeft: '8px',marginBottom: '10px' }}
-    onClick={ onClick }>
-    <i style={{  fontSize:'1.5em'}}>     <FaTrashAlt/>   </i>Delete Select
-    </button>
-
-  );
-}
-createCustomExportCSVButton(onClick)  {
-  return (
-    <button  class="btn btn-outline-success" onClick={onClick} style={{ marginLeft: '8px',marginBottom: '10px'}}><i style={{  fontSize:'1.5em'}} ><FaFileExcel/></i>  Excel</button>
-  );
-}
-
-
-
-  DeleteSelectAll (event) {
-    var arrayid = this.state.checkedList;
-    console.log(arrayid);
-    axios.delete(`${this.props.url}`, { data: { foo: arrayid } })
-    .then(response => {
-      console.log(response);
-      container.success(`${this.props.deletesuccess}`, `success`, {
-          closeButton: true,
-          timeOut: 5000
-        })
-        window.scrollTo(0, 0);
-    })
-    .catch(error => {
-      container.error(`${this.props.deletefail}`, `errors`, {
-          closeButton: true,
-
-          timeOut: 5000,
-          extendedTimeOut: 2000
-        })
-      window.scrollTo(0, 0);
-    })
-    this.setState({checkedList : []}, () => {this.fetchEntities()});
-
-  }
-
-  handleCheckboxChange (event) {
-
-    if(event.target.checked){
-
-      this.state.checkedList.push(event.target.name);
-
-    }else if(event.target.checked == false){
-     this.state.checkedList = this.state.checkedList.filter(el => el !== event.target.name);
-
-    }
-  }
-
-
-
-
-  handleFieldChange () {
-    this.setState({
-      search: event.target.value , current_page: 1
-    }, () => {this.fetchEntities()})
-  }
-
-
-
-  handleUpdate(id) {
-
-    confirmAlert({
-      onClickOutside: () => { this.fetchEntities();},
-  customUI: ({ onClose }) => {
-    return (
-      <div style={{ height: '100%' ,left:50 }}>
-      <Select_update id={id} ChooseUpdateForm={this.props.name}/>
-      <footer class="modal-footer">
-
-              <button type="button" class="btn btn-danger"   onClick={() => {
-                  this.fetchEntities();
-                  onClose();
-                }}>ปิด</button>
-              </footer>
-
-
-      </div>
-    );
-  }
-
-});
-
+      products: [],
     }
 
 
+  }
 
-  handleDelete(id) {
+  handleDeleteButtonClick = (onClick) => {
+  // Custom your onClick event here,
+  // it's not necessary to implement this function if you have no any process before onClick
+  console.log('This is my custom function for DeleteButton click event');
+  onClick();
+}
+createCustomDeleteButton = (onClick) => {
+  return (
+    <DeleteButton
+      btnText='CustomDeleteText'
+      btnContextual='btn-warning'
+      className='my-custom-class'
+      btnGlyphicon='glyphicon-edit'
+      onClick={ () => this.handleDeleteButtonClick(onClick) }/>
+  );
+}
 
-    const list = this.state.entities.data.find((user) => {
-      return user.id == id
-    })
-    // remove from local state
-    confirmAlert({
-  customUI: ({ onClose }) => {
+  HandleDelete = (row) => {
+    const swalWithBootstrapButtons = Swal.mixin({
+  customClass: {
+    confirmButton: 'btn btn-success',
+    cancelButton: 'btn btn-danger'
+  },
+  buttonsStyling: false,
+})
     return (
-      <div className='custom-ui'>
-        <h1>ยืนยันการลบข้อมูล User </h1>
-        <p>ID:{list.id}</p>
+      swalWithBootstrapButtons.fire({
+  title: 'คุณแน่ใจว่าจะลบข้อมูลนี้?',
+  text: "เมื่อลบแล้วจะไม่สามารถย้อนกลับได้",
+  type: 'warning',
+  showCancelButton: true,
+  confirmButtonText: 'ยืนยันการลบข้อมูล',
+  cancelButtonText: 'ยกเลิก',
+  reverseButtons: true
+}).then((result) => {
+  if (result.value) {
+    axios.delete(`${this.props.url}/delete/${row}`).then(response => {
+      swalWithBootstrapButtons.fire(
+        'ลบข้อมูลสำเร็จ!',
+        'ข้อมูลได้ถูกลบออกจากตารางแล้ว',
+        'success'
+      )
+    }).catch(e => {
+      swalWithBootstrapButtons.fire(
+        'ลบข้อมูลไม่สำเร็จ!',
+        'เกิดข้อผิดพลาดในการส่งข้อมูล',
+        'error'
+      )
+    })
 
 
-<footer class="modal-footer">
-
-        <button type="button" class="btn btn-success"
-          onClick={() => {
-            this.refreshremove(id);
-            onClose();
-          }}
-        >
-          ยืนยัน
-        </button>
-
-        <button type="button" class="btn btn-danger" onClick={onClose}>ไม่ต้องการ</button>
-        </footer>
-      </div>
-    );
+  } else if (
+    // Read more about handling dismissals
+    result.dismiss === Swal.DismissReason.cancel
+  ) {
+    swalWithBootstrapButtons.fire(
+      'ยกเลิก',
+      'ข้อมูลยังไม่ได้ทำการลบออก',
+      'error'
+    )
   }
-  });
+})
 
-  }
+
+);
+ }
 
   csvFormatter(cell, row) {
-    return `${row.id}: ${cell} USD`;
-  }
+   return `${row.id}: ${cell} USD`;
+ }
 
+ priceFormatter = (cell, row) => {
+  console.log(cell);
 
-
-  refreshremove(id){
-    const isNotId = user => user.id !== id;
-    const updated = this.state.entities.data.filter(isNotId);
-      this.setState({ data: updated }, () => {this.fetchEntities()});
-    //
-    axios.delete(`${this.props.url}/${id}`)
-    .then(response => {
-
-      container.success(`${this.props.deletesuccess}`, `success`, {
-          closeButton: true,
-          timeOut: 5000
-        })
-        window.scrollTo(0, 0);
-
-    })
-    .catch(error => {
-
-
-      container.error(`${this.props.deletefail}`, `errors`, {
-          closeButton: true,
-
-          timeOut: 5000,
-          extendedTimeOut: 2000
-        })
-      window.scrollTo(0, 0);
-    })
-
-  }
-
-  fetchEntities() {
-    let fetchUrl = `${this.props.url}/?page=${this.state.current_page}&column=${this.state.sorted_column}&order=${this.state.order}&per_page=${this.state.page}&search=${this.state.search}`;
-    axios.get(fetchUrl)
-      .then(response => {
-          this.setState({ entities: response.data });
-
-          console.log(this.state.entities.data)
-      })
-      .catch(e => {
-        console.error(e);
-      });
-  }
-
-  changePage(pageNumber) {
-    this.setState({ current_page: pageNumber }, () => {this.fetchEntities()});
-  }
-
-  columnHead(value) {
-    return value.split('_').join(' ').toUpperCase()
-  }
-
-  pagesNumbers() {
-    if (!this.state.entities.meta.to) {
-      return [];
-    }
-    let from = this.state.entities.meta.current_page - this.state.offset;
-    if (from < 1) {
-      from = 1;
-    }
-    let to = from + (this.state.offset * 2);
-    if (to >= this.state.entities.meta.last_page) {
-      to = this.state.entities.meta.last_page;
-    }
-    let pagesArray = [];
-    for (let page = from; page <= to; page++) {
-      pagesArray.push(page);
-    }
-    return pagesArray;
-  }
-
-  componentWillMount() {
-
-
-
-
-
-
-    }
-
-
-
-  componentDidMount() {
-
-      this.setState({ current_page: this.state.entities.meta.current_page ,search : this.state.search }, () => {this.fetchEntities()});
-
-    }
-
-  tableHeads() {
-    let icon;
-    if (this.state.order === 'asc') {
-      icon = <i className="fas fa-arrow-up"></i>;
-    } else {
-      icon = <i className="fas fa-arrow-down"></i>;
-    }
-    console.log('colum :'+this.props.columns);
-    return this.props.columns.map(column => {
-      return <th className="table-head" key={column} onClick={() => this.sortByColumn(column)}>
-        { this.columnHead(column) }
-        { column === this.state.sorted_column && icon }
-      </th>
-    });
-  }
-
-
-  userList() {
-
-    console.log('data :'+this.state.entities.data);
-    if (this.state.entities.data.length) {
-
-        return this.state.entities.data.map(user => {
-          return <tr key={ user.id }>
-            {Object.keys(user).map(key => <td key={key}>{ user[key] }</td> )}
-
-            <td>
-                              { this.props.edit != null ?(
-                                  <button  onClick={() => this.handleUpdate(user.id)} className="btn btn-sm btn-warning" style={{color: '#fff' ,backgroundColor:'#ffab43',borderColor:'#ffab43'}}  >
+  return (<div>                <button  onClick={() => alert('id  :' +row.id)} className="btn btn-sm btn-warning" style={{color: '#fff' ,backgroundColor:'#ffab43',borderColor:'#ffab43'}}  >
                                   <i style={{  fontSize:'1.2 em',color: ''}} ><FaPen/></i>
-                                    {this.props.edit}
-                                </button>)
-                                :null}
+                                    Update
+                                </button>
 
-                                { this.props.delete != null ?
-                                  (<button onClick={() => this.handleDelete(user.id)} className="btn btn-sm btn-danger" >
-                                  <i style={{  fontSize:'1.2 em',color: ''}} ><FaTrash/></i>
-                                      {this.props.delete}
-                                  </button>)
-                                  : null}
+                                <button onClick={() => this.HandleDelete(row.id)} className="btn btn-sm btn-danger" style={{  fontSize:'0.75 em'}} >
+                                  <i style={{  fontSize:'1.2 em'}} ><FaTrash/></i>
+                                      Delete
+                                  </button>
 
-
-
-            </td>
-            <td>
-            <center>
-
-            <input type="checkbox" name={user.id} checked={this.state.statuslist[user.id]} onChange={this.handleCheckboxChange} />
-
-            </center>
-
-            </td>
-
-          </tr>
-
-              })
-
-    } else {
-      return <tr>
-        <td colSpan={this.props.columns.length} className="text-center">ไม่พบข้อมูล</td>
-      </tr>
-    }
-  }
-
-  reviewList() {
-    if (this.state.entities.data.length) {
-
-        return this.state.entities.data.map(user => {
-          return <div key={ user.id }>
+            </div>);
+}
 
 
-            <div style={{borderBottom:'solid', borderBottomColor:'#e7e7e7',borderBottomWidth: '1px',marginBottom: '30'}}>
-            <div class="card-body">
-             <h5 class="card-title" style={{fontWeight:'700', color:'#70bbfd'}}>{user.news_title} <small style={{color:'#999' ,fontSize:'10px',fontWeight:'400'}}> {user.created_at}</small></h5>
-             <FroalaEditorView
-                model={user.news_detail}
-                config={this.config}
-                />
-              <span style={{fontSize:'12px',float: 'right' ,backgroundColor:'rgb(52, 195, 218)',padding: '6px' ,textTransform:'uppercase' ,color:'#fff',borderRadius:'.25rem',fontWeight:'600'}}>{user.news_type}</span>
-            </div>
-          </div>
-        </div>
-
-              })
-
-    } else {
-      return <tr>
-        <td colSpan={this.props.columns.length} className="text-center">ไม่พบข้อมูล</td>
-      </tr>
-    }
-
-    let girlsAges = this.state.entities.data.map(user => user.news_title);
-
-    console.log(girlsAges);  //[19, 10, 29, 23]
-
-
-  }
-
-  sortByColumn(column) {
-    if (column === this.state.sorted_column) {
-      this.state.order === 'asc' ? this.setState({ order: 'desc', current_page: this.state.first_page }, () => {this.fetchEntities()}) : this.setState({ order: 'asc' }, () => {this.fetchEntities()});
-    } else {
-      this.setState({ sorted_column: column, order: 'asc', current_page: this.state.first_page }, () => {this.fetchEntities()});
-    }
-  }
-
-  pageList() {
-    return this.pagesNumbers().map(page => {
-      return <li className={ page === this.state.entities.meta.current_page ? 'page-item active' : 'page-item' } key={page}>
-        <button className="page-link" onClick={() => this.changePage(page)}>{page}</button>
-      </li>
+  componentDidMount(){
+    axios.get(`${this.props.url}/indexretrun`).then(response => {
+      this.setState({
+        products: response.data
+      })
+    }).catch(e =>{
+      alert("errors");
     })
   }
 
-
-  TableHeaderColumn() {
-
-  }
 
   render() {
-
-
-
-    const options = {
-  handleConfirmDeleteRow: this.customConfirm,
-  onExportToCSV: this.onExportToCSV,
-  deleteBtn: this.createCustomDeleteButton,
-  exportCSVBtn: this.createCustomExportCSVButton,
-  insertBtn: this.createCustomInsertButton
-
-};
 const selectRow = {
-  mode: 'checkbox'
-
+  mode: 'checkbox',
+  bgColor: 'pink'
 };
 
-    const { history } = this.props;
-    return (
-      <div style={{paddingLeft: '10' ,paddingRight: '5'}}>
-      <Script url="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.debug.js" integrity="sha384-NaWTHo/8YCBYJ59830LTz/P4aQZK1sS0SneOgAvhsIl3zBu8r9RevNg5lHCHAuQ/" crossorigin="anonymous"/>
-      <Script url="https://unpkg.com/jspdf@latest/dist/jspdf.min.js"/>
-      <Script url="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.1.1/jspdf.plugin.autotable.min.js"/>
+const options = {
+defaultSortName: 'name',  // default sort column name
+defaultSortOrder: 'desc',
+exportCSVText: 'my_export',
+  deleteBtn: this.createCustomDeleteButton
+};
+    return(
 
-
-          {this.props.review =="review"?
-
-
-          <div className="data-table">
-          <div style={{position:'right'}}>
-
-          Search:<input
-              class="form-control input-sm"
-              placeholder="search text"
-              type='search'
-              value={this.state.search}
-              onChange={this.handleFieldChange}
-            />
-
-
-          </div>
-
-
-                { this.reviewList() }
-
-            { (this.state.entities.data && this.state.entities.data.length > 0) &&
-              <nav>
-                <ul className="pagination">
-                  <li className="page-item">
-                    <button className="page-link"
-                      disabled={ 1 === this.state.entities.meta.current_page }
-                      onClick={() => this.changePage(this.state.entities.meta.current_page - 1)}
-                    >
-                      Previous
-                    </button>
-                  </li>
-                  { this.pageList() }
-                  <li className="page-item">
-                    <button className="page-link"
-                      disabled={this.state.entities.meta.last_page === this.state.entities.meta.current_page}
-                      onClick={() => this.changePage(this.state.entities.meta.current_page + 1)}
-                    >
-                      Next
-                    </button>
-                  </li>
-                  <span style={{ marginTop: '8px' }}> &nbsp; <i>Displaying { this.state.entities.data.length } of { this.state.entities.meta.total } entries.</i></span>
-                </ul>
-              </nav>
-            }
-            <ToastContainer
-              ref={ref => container = ref}
-              className="toast-top-right"
-            />
-            </div>
-
-      :
-                  <div>
-                    <div className='col-md-12 col-lg-12'>
-                    <h3 class="page-header">{this.props.headname}</h3>
-                      <div className='card'>
-                        <div className='card-header'>{this.props.headTablename}</div>
-                        <div className='card-body'>
-
-
-
-
-                          <div>
-                          <p></p>
-
-
-
-
-
-
-
-
-                              <Link to={this.props.addlink} >
-
-                              <button  class="btn btn-outline-success" style={{ marginLeft: '8px',marginBottom: '10px',float: 'left'}}><i style={{ fontSize:'1.5em', color:'green'}}><FaPlusSquare/></i> {this.props.addbutton}</button>
-
-                              </Link>
-                        </div>
-                <div className="data-table">
-                <BootstrapTable
-                      data={this.state.entities.data}
-                      exportCSV={ true }
-                      selectRow={ selectRow }
+      <BootstrapTable data={this.state.products}
                       options={ options }
+
+                      options={ { noDataText: 'This is custom text for empty data' } }
+                      dataSort={ true }
+                      selectRow={ selectRow }
                       deleteRow
-                      insertRow
-                      search
-                      multiColumnSearch
-                      searchPlaceholder='ค้นหา'
+                      pagination
+                      multiColumnSearch={ true }
+                      search={ true }
+                      exportCSV={ true }
+                      striped bordered hover>
 
+      {this.props.columns.map((colum) =>{
+        if(colum == "id"){
+         return  <TableHeaderColumn  dataField={colum} searchable={ false } isKey hidden >{colum}</TableHeaderColumn>
 
+       }else if(colum == "Action"){
+          return <TableHeaderColumn width='200' dataFormat={ this.priceFormatter } dataField='action' headerAlign='center' dataAlign='center' ali export={ false }>Action</TableHeaderColumn>
+        }else{
 
-                       >
+          return <TableHeaderColumn  dataField={colum} dataSort columnTitle>{colum}</TableHeaderColumn>
+        }
 
+      })
+    }
 
-
-                    {
-
-                      this.props.columns.map(column => {
-                      if(column == "id"){
-
-                        return  <TableHeaderColumn  isKey dataField={column} searchable={ false } hidden ></TableHeaderColumn>
-
-                      }else if(column == "Action"){
-
-                        return <TableHeaderColumn width='150'  dataField={column} dataFormat={ this.priceFormatter } ><center>{column}</center></TableHeaderColumn>
-
-                      }else {
-
-                        return <TableHeaderColumn  dataField={column} dataSort={ true } >{column}</TableHeaderColumn>
-
-                      }
-
-                    })
-                    }
-
-                    </BootstrapTable>
-                    <div style={{float: 'right' ,padding:'10'}}>
-                    <select class="custom-select" name='per_page' value={this.state.entities.meta.per_page} onChange={this.handleSelectChange}>
-                    <option value="10">10</option>
-                    <option value="25">25</option>
-                    <option value="50">50</option>
-                      </select>
-
-
-                    </div>
-                  { (this.state.entities.data && this.state.entities.data.length > 0) &&
-
-                    <nav style={{paddingTop:'10'}}>
-
-                      <ul className="pagination">
-                        <li className="page-item">
-                          <button className="page-link"
-                            disabled={ 1 === this.state.entities.meta.current_page }
-                            onClick={() => this.changePage(this.state.entities.meta.current_page - 1)}
-                          >
-                            Previous
-                          </button>
-                        </li>
-                        { this.pageList() }
-                        <li className="page-item">
-                          <button className="page-link"
-                            disabled={this.state.entities.meta.last_page === this.state.entities.meta.current_page}
-                            onClick={() => this.changePage(this.state.entities.meta.current_page + 1)}
-                          >
-                            Next
-                          </button>
-                        </li>
-                        <span style={{ marginTop: '8px' }}> &nbsp; <i>Displaying { this.state.entities.data.length } of { this.state.entities.meta.total } entries.</i></span>
-
-                      </ul>
-                    </nav>
-                  }
-
-                  <ToastContainer
-                    ref={ref => container = ref}
-                    className="toast-top-right"
-                  />
-                  </div>
-                 </div>
-                </div>
-              </div>
-            </div>}
-            </div>
-
-
-
-    );
+        </BootstrapTable>
+    )
   }
 }
 
@@ -803,8 +175,8 @@ DataTable.propTypes = {
   review:PropTypes.string,
   addlink:PropTypes.string,
   addbutton:PropTypes.string,
-  delectselect:PropTypes.string
-
+  delectselect:PropTypes.string,
+  columns:PropTypes.string,
 
 };
 

@@ -20,17 +20,15 @@ use Tymon\JWTAuth\JWTManager as JWT;
 class UserController extends Controller
 {
 
-  public function __construct()
-   {
-       $this->middleware('auth:api', ['except' => ['login']]);
-   }
 
 
-    public function index()
+
+    public function indexretrun()
     {
-        $getdata = DB::table('users')->get();
+      $getdata = DB::table('users')->get();
 
-        return $getdata->toJson();
+      return $getdata->toJson();
+
     }
 
     public function CreateUser(Request $request)
@@ -83,7 +81,7 @@ class UserController extends Controller
 
             try {
                 // attempt to verify the credentials and create a token for the user
-                if (! $token = JWTAuth::attempt(['username' => 'third1080', 'password' => '1234567890','permission_id' =>$checkusername[0]->permission_id ])) {
+                if (! $token = JWTAuth::attempt(['username' => $request->username, 'password' => $request->password,'permission_id' =>$checkusername[0]->permission_id ])) {
                     return response()->json(['error' => 'invalid_credentials'], 401);
                 }
             } catch (JWTException $e) {
@@ -99,7 +97,7 @@ class UserController extends Controller
 
 
         }
-      
+
 
 
     }
@@ -186,7 +184,8 @@ class UserController extends Controller
 
     public function destroy($id)
     {
-        DimUserModel::findOrFail($id)->delete();
+        // DimUserModel::destroy($id);
+        return response()->json($id);
     }
 
     public function destroy_select(Request $request)

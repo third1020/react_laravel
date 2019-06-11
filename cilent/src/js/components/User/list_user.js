@@ -72,7 +72,7 @@ import axios from 'axios'
    function ManageUser() {
 
      const classes = useStyles();
-     const columns = ['id', 'name', 'email','nameuser','created_at','Action'];
+     const columns = ['id','client_id', 'username', 'email','is_block','user_right','permission_id','Action'];
 
 
      return (
@@ -81,10 +81,8 @@ import axios from 'axios'
          <main className={classes.content}>
            <div className={classes.toolbar} />
 
-
-
            <DataTable
-               url="/api/users"
+               url="/api/user"
                columns={columns}
                name={"user"}
                headname={" List User - ข้อมูลผู้ใช้งาน "}
