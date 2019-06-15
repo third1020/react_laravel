@@ -17,7 +17,8 @@ class DimImageModel extends Model
 
     protected $softDelete = true;
 
-    protected $fillable = ['client_id',
+    protected $fillable = [
+            'client_id',
             'image',
     ];
 

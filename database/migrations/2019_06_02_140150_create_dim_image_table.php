@@ -14,12 +14,12 @@ class CreateDimImageTable extends Migration
     public function up()
     {
         Schema::create('dim_image', function (Blueprint $table) {
-            $table->uuid('id')->comment('รหัสข้อมูลตาราง');
-			$table->primary('id');
+            $table->bigIncrements('id')->comment('รหัสข้อมูลตาราง');
+
 			$table->uuid('client_id')->comment('รหัสข้อมูลผู้สร้าง');
-			
+
 			$table->text('image')->nullable();
-			
+
             $table->timestamps();
 			$table->softDeletes();
         });

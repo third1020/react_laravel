@@ -20,34 +20,28 @@ use Tymon\JWTAuth\JWTManager as JWT;
 class UserController extends Controller
 {
 
-
-
-
-    public function indexretrun()
+    public function index()
     {
-      $getdata = DB::table('users')->get();
+      $getdata = DB::table('users')->whereNull('deleted_at')->get();
 
       return $getdata->toJson();
 
     }
 
-    public function CreateUser(Request $request)
+    public function store(Request $request)
     {
         $validatedData = $request->validate([
-
-       'username' => 'required|string|max:255',
+       'username' => 'required|string|max:255|unique:users',
        'password' => 'required|string|min:6',
        'email' => 'required|string|email|max:255|unique:users',
+       'is_block' => 'required',
+       'user_right' => 'required',
+       'image_show' => 'required',
        'image_id' => 'required',
        'client_id' => 'required',
        'permission_id' => 'required',
 
-
-
      ]);
-
-
-
         $passwordhash = Hash::make($validatedData['password']);
         $hashed_email = Hash::make($validatedData['email']);
 
@@ -60,12 +54,15 @@ class UserController extends Controller
        'image_id' => $validatedData['image_id'],
        'client_id' => $validatedData['client_id'],
        'permission_id' => $validatedData['permission_id'],
+       'is_block' => $validatedData['is_block'],
+       'user_right' => $validatedData['user_right'],
+
 
      ]);
 
      $token = JWTAuth::fromUser($user);
 
-        return response()->json($token);
+        return response()->json(compact('user','token'),201);
     }
 
     public function login(Request $request)
@@ -81,8 +78,8 @@ class UserController extends Controller
 
             try {
                 // attempt to verify the credentials and create a token for the user
-                if (! $token = JWTAuth::attempt(['username' => $request->username, 'password' => $request->password,'permission_id' =>$checkusername[0]->permission_id ])) {
-                    return response()->json(['error' => 'invalid_credentials'], 401);
+                if (! $token = JWTAuth::attempt(['username' => $request->username, 'password' => $request->password,'permission_id' =>$checkusername[0]->permission_id ] )) {
+                    return response()->json(['error' => 'invalid_username/passoword'], 401);
                 }
             } catch (JWTException $e) {
                 // something went wrong whilst attempting to encode the token
@@ -90,19 +87,12 @@ class UserController extends Controller
             }
 
             // all good so return the token
-            return response()->json(compact('token'));
+            return response()->json(['success' => true, 'data'=> [ 'token' => $token ]]);
 
           }
           return response()->json(['error' => 'invalid password']);
-
-
         }
-
-
-
     }
-
-
 
     public function getAuthenticatedUser()
     {
@@ -132,68 +122,81 @@ class UserController extends Controller
 
     public function update(Request $request, $id)
     {
-        // update task
+      if($request->password == ''){
+        $validatedData = $request->validate([
+       'username' => 'required|string|max:255|',
+       'email' => 'required|string|email|max:255|',
+       'is_block' => 'required',
+       'user_right' => 'required',
+       'image_show' => 'required',
+       'image_id' => 'required',
+       'client_id' => 'required',
+       'permission_id' => 'required',
 
-        $file = $request->file('image');
-        $file = $request->image;
+     ]);
 
-        if ($request->password) {
-            $validatedData = $request->validate([
-            'username' => 'required|max:191',
-            'password' => 'required|min:8|max:191',
-            'Name_lastname' => 'required',
-            'ID_Card' => 'required',
-            'Phone_Number' => 'required',
-            'Email' => 'required',
-            'permission' => 'required',
-          ]);
-            $passwordhash = Hash::make($request->password);
 
-            DimUserModel::findOrFail($id)
-              ->update([
-              'name' => $validatedData['username'],
-              'password' => $passwordhash,
-              'nameuser' => $validatedData['Name_lastname'],
-              'id_card' => $validatedData['ID_Card'],
-              'phone_number' => $validatedData['Phone_Number'],
-              'email' => $validatedData['Email'],
-              'permission_id' => $validatedData['permission'],
-              'image' => $file,
-            ]);
-        } else {
-            $validatedData = $request->validate([
-            'username' => 'required|max:191',
-            'Name_lastname' => 'required',
-            'ID_Card' => 'required',
-            'Phone_Number' => 'required',
-            'Email' => 'required',
-            'permission' => 'required',
-          ]);
-            DimUserModel::findOrFail($id)
-              ->update([
-            'name' => $validatedData['username'],
-            'nameuser' => $validatedData['Name_lastname'],
-            'id_card' => $validatedData['ID_Card'],
-            'phone_number' => $validatedData['Phone_Number'],
-            'email' => $validatedData['Email'],
-            'permission_id' => $validatedData['permission'],
-            'image' => $file,
-            ]);
-        }
+        $hashed_email = Hash::make($validatedData['email']);
+
+        $user = DimUserModel::where('id',$id)->update([
+       'client_id' => $validatedData['client_id'],
+       'username' => $validatedData['username'],
+       'email' => $validatedData['email'],
+       'hashed_email' => $hashed_email,
+       'image_id' => $validatedData['image_id'],
+       'client_id' => $validatedData['client_id'],
+       'permission_id' => $validatedData['permission_id'],
+       'is_block' => $validatedData['is_block'],
+       'user_right' => $validatedData['user_right'],
+
+     ]);
+
+   }else{
+
+     $validatedData = $request->validate([
+    'username' => 'required|string|max:255|',
+    'password' => 'required|string|min:6',
+    'email' => 'required|string|email|max:255|',
+    'is_block' => 'required',
+    'user_right' => 'required',
+    'image_show' => 'required',
+    'image_id' => 'required',
+    'client_id' => 'required',
+    'permission_id' => 'required',
+
+  ]);
+
+     $passwordhash = Hash::make($validatedData['password']);
+     $hashed_email = Hash::make($validatedData['email']);
+
+     $user = DimUserModel::where('id',$id)->update([
+    'client_id' => $validatedData['client_id'],
+    'username' => $validatedData['username'],
+    'password' => $passwordhash,
+    'email' => $validatedData['email'],
+    'hashed_email' => $hashed_email,
+    'image_id' => $validatedData['image_id'],
+    'client_id' => $validatedData['client_id'],
+    'permission_id' => $validatedData['permission_id'],
+    'is_block' => $validatedData['is_block'],
+    'user_right' => $validatedData['user_right'],
+
+  ]);
+
+   }
+
     }
-
     public function destroy($id)
     {
-        // DimUserModel::destroy($id);
-        return response()->json($id);
+          DimUserModel::destroy($id);
+          return response()->json('delete successfully'.$id);
     }
-
     public function destroy_select(Request $request)
     {
         DimUserModel::destroy($request->foo);
 
         return response()->json([
-       'data' => 'delect successfully',
+       'data' => $request->foo,
      ]);
     }
 }

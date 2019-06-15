@@ -4,75 +4,66 @@ namespace App\Http\Controllers\Api\Permission;
 
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
-use App\Http\Resources\PermissionResource;
-use App\Permission;
+use App\Models\PermissionModel;
 use Illuminate\Http\Request;
 
 class PermissionController extends Controller
 {
-    protected $permission;
 
-    public function __construct(Permission $permission)
+
+
+  public function index()
+  {
+      $getpermission = DB::table('permission')->select('id', 'permission_name')->get();
+
+      return response()->json(compact('getpermission'));
+  }
+    public function getPermission(Request $request)
     {
-        $this->permission = $permission;
-    }
+        $getpermission = DB::table('permission')->where('id',$request->permission_id)->first();
 
-    public function getTable(Request $request)
-    {
-        $wordsearch = $request->search.'%';
-
-        $query = $this->permission->orderBy($request->column, $request->order);
-
-        $permission = $query->paginate($request->per_page ?? 5);
-
-        return PermissionResource::collection($permission);
-    }
-
-    public function index()
-    {
-        $getpermission = DB::table('permissions')->get();
-
-        return $getpermission->toJson();
+        return response()->json(compact('getpermission'));
     }
 
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-     'permission_name' => 'required',
-     'manage_user' => 'required',
-     'manage_knowledge' => 'required',
-     'manage_message' => 'required',
-     'manage_equipment' => 'required',
-     'manage_requipment' => 'required',
-     'manage_problem' => 'required',
-     'manage_incident' => 'required',
-     'manage_contact' => 'required',
-     'manage_impact' => 'required',
-     'manage_priority' => 'required',
-     'manage_solution' => 'required',
-     'Report' => 'required',
+          'permission_name' => 'required|unique:permission|max:255',
+          'ManageUser' => 'required|boolean',
+          'ManageNews' => 'required|boolean',
+          'ManageMessage' => 'required|boolean',
+          'ManageEquipment' => 'required|boolean',
+          'ManageRequipment' => 'required|boolean',
+          'ManageProblem' => 'required|boolean',
+          'ManageIncident' => 'required|boolean',
+          'ManageContact' => 'required|boolean',
+          'ManageImpact' => 'required|boolean',
+          'ManagePriority' => 'required|boolean',
+          'ManageSolution' => 'required|boolean',
+          'Report' => 'required|boolean'
+
    ]);
 
-        Permission::create([
+        PermissionModel::create([
      'permission_name' => $validatedData['permission_name'],
-     'manage_user' => $validatedData['manage_user'],
-     'manage_knowledge' => $validatedData['manage_knowledge'],
-     'manage_message' => $validatedData['manage_message'],
-     'manage_equipment' => $validatedData['manage_equipment'],
-     'manage_requipment' => $validatedData['manage_requipment'],
-     'manage_problem' => $validatedData['manage_problem'],
-     'manage_incident' => $validatedData['manage_incident'],
-     'manage_contact' => $validatedData['manage_contact'],
-     'manage_impact' => $validatedData['manage_impact'],
-     'manage_priority' => $validatedData['manage_priority'],
-     'manage_solution' => $validatedData['manage_solution'],
+     'ManageUser' => $validatedData['ManageUser'],
+     'ManageNews' => $validatedData['ManageNews'],
+     'ManageMessage' => $validatedData['ManageMessage'],
+     'ManageEquipment' => $validatedData['ManageEquipment'],
+     'ManageRequipment' => $validatedData['ManageRequipment'],
+     'ManageProblem' => $validatedData['ManageProblem'],
+     'ManageIncident' => $validatedData['ManageIncident'],
+     'ManageContact' => $validatedData['ManageContact'],
+     'ManageImpact' => $validatedData['ManageImpact'],
+     'ManagePriority' => $validatedData['ManagePriority'],
+     'ManageSolution' => $validatedData['ManageSolution'],
      'Report' => $validatedData['Report'],
    ]);
     }
 
     public function edit($id)
     {
-        $listdata = DB::table('permissions')->where('id', $id)->get();
+        $listdata = DB::table('permission')->whereNull('deleted_at')->orWhere('id', $id)->get();
 
         return $listdata->toJson();
     }
@@ -80,50 +71,51 @@ class PermissionController extends Controller
     public function update(Request $request, $id)
     {
         $validatedData = $request->validate([
-     'permission_name' => 'required',
-     'manage_user' => 'required',
-     'manage_knowledge' => 'required',
-     'manage_message' => 'required',
-     'manage_equipment' => 'required',
-     'manage_requipment' => 'required',
-     'manage_problem' => 'required',
-     'manage_incident' => 'required',
-     'manage_contact' => 'required',
-     'manage_impact' => 'required',
-     'manage_priority' => 'required',
-     'manage_solution' => 'required',
-     'Report' => 'required',
+     'permission_name' => 'required|max:255',
+     'ManageUser' => 'required|boolean',
+     'ManageNews' => 'required|boolean',
+     'ManageMessage' => 'required|boolean',
+     'ManageEquipment' => 'required|boolean',
+     'ManageRequipment' => 'required|boolean',
+     'ManageProblem' => 'required|boolean',
+     'ManageIncident' => 'required|boolean',
+     'ManageContact' => 'required|boolean',
+     'ManageImpact' => 'required|boolean',
+     'ManagePriority' => 'required|boolean',
+     'ManageSolution' => 'required|boolean',
+     'Report' => 'required|boolean',
    ]);
 
-        Permission::findOrFail($id)
+        PermissionModel::findOrFail($id)
             ->update([
               'permission_name' => $validatedData['permission_name'],
-              'manage_user' => $validatedData['manage_user'],
-              'manage_knowledge' => $validatedData['manage_knowledge'],
-              'manage_message' => $validatedData['manage_message'],
-              'manage_equipment' => $validatedData['manage_equipment'],
-              'manage_requipment' => $validatedData['manage_requipment'],
-              'manage_problem' => $validatedData['manage_problem'],
-              'manage_incident' => $validatedData['manage_incident'],
-              'manage_contact' => $validatedData['manage_contact'],
-              'manage_impact' => $validatedData['manage_impact'],
-              'manage_priority' => $validatedData['manage_priority'],
-              'manage_solution' => $validatedData['manage_solution'],
+              'ManageUser' => $validatedData['ManageUser'],
+              'ManageNews' => $validatedData['ManageNews'],
+              'ManageMessage' => $validatedData['ManageMessage'],
+              'ManageEquipment' => $validatedData['ManageEquipment'],
+              'ManageRequipment' => $validatedData['ManageRequipment'],
+              'ManageProblem' => $validatedData['ManageProblem'],
+              'ManageIncident' => $validatedData['ManageIncident'],
+              'ManageContact' => $validatedData['ManageContact'],
+              'ManageImpact' => $validatedData['ManageImpact'],
+              'ManagePriority' => $validatedData['ManagePriority'],
+              'ManageSolution' => $validatedData['ManageSolution'],
               'Report' => $validatedData['Report'],
           ]);
     }
 
     public function destroy($id)
     {
-        Permission::findOrFail($id)->delete();
+      PermissionModel::destroy($id);
+      return response()->json('delete successfully'.$id);
     }
 
     public function destroy_select(Request $request)
     {
-        Permission::destroy($request->foo);
+      PermissionModel::destroy($request->foo);
 
-        return response()->json([
-     'data' => 'delect successfully',
+      return response()->json([
+     'data' => $request->foo,
    ]);
-    }
+  }
 }

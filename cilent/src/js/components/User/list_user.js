@@ -1,10 +1,9 @@
 import axios from 'axios'
    import React, { Component } from 'react'
-   import { Link } from 'react-router-dom'
    import DataTable from "../DataTable";
    import clsx from 'clsx';
    import { makeStyles, useTheme } from '@material-ui/core/styles';
-   import Navigation from '../Navigation';
+   import HocValidateUser from "../../../HocValidateUser";
 
    const drawerWidth = 240;
 
@@ -76,30 +75,25 @@ import axios from 'axios'
 
 
      return (
-       <div className={classes.root}>
-         <Navigation />
-         <main className={classes.content}>
-           <div className={classes.toolbar} />
+       <div>
 
            <DataTable
+
                url="/api/user"
+               updateurl="/api/user/update"
                columns={columns}
                name={"user"}
                headname={" List User - ข้อมูลผู้ใช้งาน "}
                headTablename={"ตารางแสดงข้อมูลสมาชิก"}
                edit={"แก้ไข"}
                delete={"ลบ"}
-               deletefail={"ไม่สามารถลบข้อมูลผู้ใช้งานได้"}
-               deletesuccess={"ลบข้อมูลผู้ใช้งานสำเร็จ"}
-               addlink={"/manage_user/add_user"}
-               addbutton={"เพิ่มผู้ใช้งาน"}
-               delectselect={"ลบข้อมูลที่ถูกเลือก"}
+               addlink={"/AddUser"}
+               addbutton={"Add user"}
                 />
 
 
-         </main>
        </div>
      );
    }
 
-   export default ManageUser;
+   export default HocValidateUser(ManageUser);

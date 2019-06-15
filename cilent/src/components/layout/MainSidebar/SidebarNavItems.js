@@ -16,6 +16,7 @@ class SidebarNavItems extends React.Component {
   }
 
   componentWillMount() {
+
     Store.addChangeListener(this.onChange);
   }
 
@@ -24,20 +25,27 @@ class SidebarNavItems extends React.Component {
   }
 
   onChange() {
+
     this.setState({
       ...this.state,
       navItems: Store.getSidebarItems()
     });
   }
 
+
+
   render() {
     const { navItems: items } = this.state;
     return (
       <div className="nav-wrapper">
         <Nav className="nav--no-borders flex-column">
-          {items.map((item, idx) => (
-            <SidebarNavItem key={idx} item={item} />
-          ))}
+        {items.map((item, idx) => (
+
+           <SidebarNavItem key={idx} item={item} />
+         ))}
+
+
+
         </Nav>
       </div>
     )

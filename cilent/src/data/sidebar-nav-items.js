@@ -1,5 +1,21 @@
 export default function() {
-  return [
+
+  var permission = [
+    "ManageUser",
+    "ManageNews",
+    "ManageMessage",
+    "ManageEquipment",
+    "ManageRequipment",
+    "ManageProblem",
+    "ManageIncident",
+    "ManageContact",
+    "ManageImpact",
+    "ManagePriority",
+    "ManageSolution",
+    "Report"
+  ];
+
+  var array = [
     {
       title: "Blog Dashboard",
       to: "/blog-overview",
@@ -35,6 +51,26 @@ export default function() {
       title: "Errors",
       htmlBefore: '<i class="material-icons">error</i>',
       to: "/errors",
-    }
-  ];
+    },
+
+  ]
+
+  permission.map(item => {
+          if (sessionStorage[item] == "1") {
+            array.push({title: item,
+                        htmlBefore: '<i class="material-icons">table_chart</i>',
+                        to: "/"+item,
+                      });
+
+
+          }
+      }
+  )
+
+
+
+return array
+
+
+
 }

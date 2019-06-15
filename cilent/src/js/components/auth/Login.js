@@ -35,7 +35,6 @@ export default class Login extends Component {
   }
 
   handleCreateNewProject(event) {
-    alert(this.state.username + this.state.password );
     event.preventDefault()
 
     const { history } = this.props
@@ -51,23 +50,13 @@ export default class Login extends Component {
         // redirect to the homepage
         console.log(response.data);
 
-        sessionStorage.setItem("Token", response.data.token);
-
-        if(response.data.token != null){
-          alert("Token :"+sessionStorage.getItem("Token"));
+        if(response.data.data.token != null){
+          sessionStorage.setItem("Token", response.data.data.token);
           history.push('/Dashboard')
 
         }else{
           alert(response.data.error);
-
         }
-
-
-
-
-
-
-
       })
       .catch(error => {
     alert("username or password invalid");
@@ -116,7 +105,7 @@ export default class Login extends Component {
                    />
 						<span className="focus-input100"></span>
 						<span className="symbol-input100">
-							<i className="fa fa-lock" aria-hidden="true"> <FaKey/></i>
+							<i className="fa fa-lock" aria-hidden="true"> </i>
 						</span>
 					</div>
 

@@ -15,11 +15,24 @@ class PermissionModel extends Model
     public $primaryKey = 'id';
     public $timestamps = true;
 
+    protected $fillable = [
+            'permission_name',
+            'ManageUser',
+            'ManageNews',
+            'ManageMessage',
+            'ManageEquipment',
+            'ManageRequipment',
+            'ManageProblem',
+            'ManageIncident',
+            'ManageContact',
+            'ManageImpact',
+            'ManagePriority',
+            'ManageSolution',
+            'Report',
+    ];
+
     protected $softDelete = true;
 
-    protected $fillable = ['name',
-            'guard_name',
-    ];
 
     public function RoleHasPermission()
     {
