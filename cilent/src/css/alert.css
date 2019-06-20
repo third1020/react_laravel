@@ -3,6 +3,16 @@
  * please go to https://cdnjs.com/libraries/toastr.js and pick a certain version you want to use,
  * make sure you copy the url from the website since the url may change between versions.
  * */
+.mystyle {
+   width: 180px;
+
+ }
+
+ .mystyle {
+    width: 200px;
+
+  }
+
 .toast-title {
   font-weight: bold;
 }

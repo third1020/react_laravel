@@ -2,17 +2,37 @@ export default function() {
 
   var permission = [
     "ManageUser",
-    "ManageNews",
-    "ManageMessage",
+    "ManagePermission",
+    "ManagePersonContact",
+    "ManagePersonResponsible",
+
+
+    "ManageAddress",
+    "ManageCompany",
+    "ManageDepartment",
+    "ManageProvince",
+    "ManageDistrict",
+    "ManagePostalCode",
+    "ManageLocation",
+
     "ManageEquipment",
-    "ManageRequipment",
-    "ManageProblem",
-    "ManageIncident",
-    "ManageContact",
-    "ManageImpact",
+
+    "ManageRequestGeneral",
+    "ManageRequestIssuses",
+
+    "ManageNews",
+    "ManageSettingNews",
+
+    "ManageImage",
+
+    "ManageMessage",
+
+    "ManageModify",
+
     "ManagePriority",
-    "ManageSolution",
-    "Report"
+    "ManageImpact",
+
+    "Report",
   ];
 
   var array = [

@@ -24,6 +24,7 @@ class DimUserModel extends Authenticatable implements JWTSubject
     protected $softDelete = true;
 
     protected $fillable = [
+          
             'client_id',
             'token',
             'password',
@@ -35,6 +36,7 @@ class DimUserModel extends Authenticatable implements JWTSubject
             'image_show',
             'image_id',
             'permission_id',
+            'deleted_at'
     ];
 
     protected $hidden = [

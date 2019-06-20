@@ -38,13 +38,13 @@ use Illuminate\Support\Facades\Auth;
   Route::delete('/permission/delete_selected', 'Api\Permission\PermissionController@destroy_select');
 
 
-//ContactController
-  Route::get('/contact/index', 'Api\Contact\ContactController@index');
-  Route::post('/contact/store', 'Api\Contact\ContactController@store');
-  Route::get('/contact/update/{id}', 'Api\Contact\ContactController@edit');
-  Route::put('/contact/update/{id}', 'Api\Contact\ContactController@update');
-  Route::delete('/contact/delete/{id}', 'Api\Contact\ContactController@destroy');
-  Route::delete('/contact/delete_selected', 'Api\Contact\ContactController@destroy_select');
+//AddressController
+  Route::get('/address/index', 'Api\Address\AddressController@index');
+  Route::post('/address/store', 'Api\Address\AddressController@store');
+  Route::get('/address/update/{id}', 'Api\Address\AddressController@edit');
+  Route::put('/address/update/{id}', 'Api\Address\AddressController@update');
+  Route::delete('/address/delete/{id}', 'Api\Address\AddressController@destroy');
+  Route::delete('/address/delete_selected', 'Api\Address\AddressController@destroy_select');
 
 //EquipmentController
   Route::get('/equipment/index', 'Api\Equipment\EquipmentController@index');

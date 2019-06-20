@@ -11,112 +11,19 @@ import AddNewPost from "./views/AddNewPost";
 import Errors from "./views/Errors";
 import ComponentsOverview from "./views/ComponentsOverview";
 import Tables from "./views/Tables";
-import ManageUser from "./js/components/User/list_user";
-import Add_user from "./js/components/User/add_user";
 import BlogPosts from "./views/BlogPosts";
 
-var permission = [
-  "ManageUser",
-  "ManageNews",
-  "ManageMessage",
-  "ManageEquipment",
-  "ManageRequipment",
-  "ManageProblem",
-  "ManageIncident",
-  "ManageContact",
-  "ManageImpact",
-  "ManagePriority",
-  "ManageSolution",
-  "Report"
-];
+import ManageUser from "./js/components/User/list_user";
+import ManageAddress from "./js/components/ManageAddress/list_address";
+import ManagePermission from "./js/components/ManagePermission/list_permission";
+import Add_user from "./js/components/User/add_user";
+import Add_permission from "./js/components/ManagePermission/add_permission";
+
+
 export default [
 
   {
-    path: "/ManageNews",
-    layout: DefaultLayout,
-    component: Errors
-  },
-
-  {
-    path: "/ManageMessage",
-    layout: DefaultLayout,
-    component: Errors
-  },
-
-  {
-    path: "/ManageEquipment",
-    layout: DefaultLayout,
-    component: Errors
-  },
-
-  {
-    path: "/ManageRequipment",
-    layout: DefaultLayout,
-    component: Errors
-  },
-
-  {
-    path: "/ManageProblem",
-    layout: DefaultLayout,
-    component: Errors
-  },
-
-  {
-    path: "/ManageIncident",
-    layout: DefaultLayout,
-    component: Errors
-  },
-
-  {
-    path: "/ManageIncident",
-    layout: DefaultLayout,
-    component: Errors
-  },
-
-  {
-    path: "/ManageContact",
-    layout: DefaultLayout,
-    component: Errors
-  },
-
-  {
-    path: "/ManageContact",
-    layout: DefaultLayout,
-    component: Errors
-  },
-
-  {
-    path: "/ManageContact",
-    layout: DefaultLayout,
-    component: Errors
-  },
-
-  {
-    path: "/ManageContact",
-    layout: DefaultLayout,
-    component: Errors
-  },
-
-  {
-    path: "/ManageImpact",
-    layout: DefaultLayout,
-    component: Errors
-  },
-
-  {
-    path: "/ManagePriority",
-    layout: DefaultLayout,
-    component: Errors
-  },
-
-  {
-    path: "/ManageSolution",
-    layout: DefaultLayout,
-    component: Errors
-  },
-
-  {
-    path: "/Report",
+    path: "/errors",
     layout: DefaultLayout,
     component: Errors
   },
@@ -158,20 +65,37 @@ export default [
     component: Tables
   },
   {
+    path: "/blog-posts",
+    layout: DefaultLayout,
+    component: BlogPosts
+  },
+  {
     path: "/ManageUser",
     layout: DefaultLayout,
     component: ManageUser
   },
   {
+    path: "/ManagePermission",
+    layout: DefaultLayout,
+    component: ManagePermission
+  },
+  {
+    path: "/ManageAddress",
+    layout: DefaultLayout,
+    component: ManageAddress
+  },
+
+  {
     path: "/AddUser",
     layout: DefaultLayout,
     component: Add_user
   },
-
   {
-    path: "/blog-posts",
+    path: "/AddPermission",
     layout: DefaultLayout,
-    component: BlogPosts
+    component: Add_permission
   },
+
+
 
 ];

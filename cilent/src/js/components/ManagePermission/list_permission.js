@@ -79,16 +79,16 @@ import axios from 'axios'
 
            <DataTable
 
-               url="/api/user"
-               updateurl="/api/user/update"
+               url="/api/permission"
                columns={columns}
-               name={"user"}
-               headname={" List User - ข้อมูลผู้ใช้งาน "}
+               name={"permission"}
+               headname={" List Permission - ข้อมูลผู้ใช้งาน "}
                headTablename={"ตารางแสดงข้อมูลสมาชิก"}
                edit={"แก้ไข"}
                delete={"ลบ"}
-               addlink={"/AddUser"}
-               addbutton={"Add user"}
+               addlink={"/AddPermission"}
+               addbutton={"Add Permission"}
+               manage={"ManagePermission"}
                 />
 
 

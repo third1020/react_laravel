@@ -160,9 +160,10 @@ this.setState({
       }
 
       componentDidMount(){
+
         axios.get('api/permission/index').then(res => {
           this.setState({
-            getpermission : res.data.getpermission
+            getpermission : res.data
           })
         }).catch(err => {
           console.log(err);

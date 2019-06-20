@@ -9,33 +9,104 @@ use App\Traits\Uuids;
 class PermissionModel extends Model
 {
     use SoftDeletes;
-    use Uuids;
+
 
     protected $table = 'permission';
     public $primaryKey = 'id';
     public $timestamps = true;
 
     protected $fillable = [
+          
             'permission_name',
             'ManageUser',
-            'ManageNews',
-            'ManageMessage',
+            'ManageUserView',
+            'ManageUserEdit',
+            'ManageUserDelete',
+            'ManagePermission',
+            'ManagePermissionView',
+            'ManagePermissionEdit',
+            'ManagePermissionDelete',
+            'ManageAddress',
+            'ManageAddressView',
+            'ManageAddressEdit',
+            'ManageAddressDelete',
+            'ManageCompany',
+            'ManageCompanyView',
+            'ManageCompanyEdit',
+            'ManageCompanyDelete',
+            'ManageDepartment',
+            'ManageDepartmentView',
+            'ManageDepartmentEdit',
+            'ManageDepartmentDelete',
+            'ManageDistrict',
+            'ManageDistrictView',
+            'ManageDistrictEdit',
+            'ManageDistrictDelete',
             'ManageEquipment',
-            'ManageRequipment',
-            'ManageProblem',
-            'ManageIncident',
-            'ManageContact',
+            'ManageEquipmentView',
+            'ManageEquipmentEdit',
+            'ManageEquipmentDelete',
+            'ManageImage',
+            'ManageImageView',
+            'ManageImageEdit',
+            'ManageImageDelete',
             'ManageImpact',
+            'ManageImpactView',
+            'ManageImpactEdit',
+            'ManageImpactDelete',
+            'ManageLocation',
+            'ManageLocationView',
+            'ManageLocationEdit',
+            'ManageLocationDelete',
+            'ManageMessage',
+            'ManageMessageView',
+            'ManageMessageEdit',
+            'ManageMessageDelete',
+            'ManageModify',
+            'ManageModifyView',
+            'ManageModifyEdit',
+            'ManageModifyDelete',
+            'ManageNews',
+            'ManageNewsView',
+            'ManageNewsEdit',
+            'ManageNewsDelete',
+            'ManagePersonContact',
+            'ManagePersonContactView',
+            'ManagePersonContactEdit',
+            'ManagePersonContactDelete',
+            'ManagePersonResponsible',
+            'ManagePersonResponsibleView',
+            'ManagePersonResponsibleEdit',
+            'ManagePersonResponsibleDelete',
+            'ManagePostalCode',
+            'ManagePostalCodeView',
+            'ManagePostalCodeEdit',
+            'ManagePostalCodeDelete',
             'ManagePriority',
-            'ManageSolution',
-            'Report',
+            'ManagePriorityView',
+            'ManagePriorityEdit',
+            'ManagePriorityDelete',
+            'ManageProvince',
+            'ManageProvinceView',
+            'ManageProvinceEdit',
+            'ManageProvinceDelete',
+            'ManageRequestGeneral',
+            'ManageRequestGeneralView',
+            'ManageRequestGeneralEdit',
+            'ManageRequestGeneralDelete',
+            'ManageRequestIssuses',
+            'ManageRequestIssusesView',
+            'ManageRequestIssusesEdit',
+            'ManageRequestIssusesDelete',
+            'ManageSettingNews',
+            'ManageSettingNewsView',
+            'ManageSettingNewsEdit',
+            'ManageSettingNewsDelete',
+            'Report'
     ];
 
     protected $softDelete = true;
 
 
-    public function RoleHasPermission()
-    {
-        return $this->hasMany(RoleHasPermissionModel::class, 'id', 'permission_id');
-    }
+
 }

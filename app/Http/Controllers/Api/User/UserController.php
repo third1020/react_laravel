@@ -23,7 +23,6 @@ class UserController extends Controller
     public function index()
     {
       $getdata = DB::table('users')->whereNull('deleted_at')->get();
-
       return $getdata->toJson();
 
     }

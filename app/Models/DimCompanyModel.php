@@ -11,7 +11,7 @@ class DimCompanyModel extends Model
     use SoftDeletes;
     use Uuids;
 
-    protected $table = 'dim_person_responsible';
+    protected $table = 'dim_company';
     protected $softDelete = true;
 
     public $timestamps = true;

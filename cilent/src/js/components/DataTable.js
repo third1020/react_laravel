@@ -6,13 +6,13 @@ import { Link } from 'react-router-dom'
 import axios from 'axios';
 import DeleteIcon from '@material-ui/icons/Delete';
 import 'react-bootstrap-table/dist/react-bootstrap-table-all.min.css';
-import { FaPen,FaTrash,FaFileExcel,FaCheckDouble,FaCheckSquare,FaFilePdf,FaPlusSquare} from 'react-icons/fa';
+import { FaPen,FaTrash,FaFileExcel,FaCheckDouble,FaCheckSquare,FaFilePdf,FaPlusSquare,FaEye,FaRegEye} from 'react-icons/fa';
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 import { Container, Row, Col, Card, CardHeader, CardBody } from "shards-react";
 import PageTitle from "../../components/common/PageTitle";
 import jsPDF from 'jspdf';
-import SelectUpdateForm from './SelectUpdateForm';
+import SelectViewForm from './SelectViewForm';
 import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
 
@@ -142,12 +142,20 @@ createCustomPDF = () =>{
 
 
   createCustomDeleteButton = (onClick) => {
-    return (
-      <button onClick={onClick} className="mb-2 mr-2 btn btn-outline-danger rounded  " style={{ fontSize:'1.5 em'}}  >
-       <i style={{  fontSize:'1.5em',paddingRight:'5px'}} >  <FaTrash/></i>
-            Delete Select
-        </button>
-    );
+
+    if(sessionStorage.getItem(`${this.props.manage}Delete`) == true){
+      return (
+        <button onClick={onClick} className="mb-2 mr-2 btn btn-outline-danger rounded  " style={{ fontSize:'1.5 em'}}  >
+         <i style={{  fontSize:'1.5em',paddingRight:'5px'}} >  <FaTrash/></i>
+              Delete Select
+          </button>
+      );
+    }else{
+      return (
+        <p></p>
+      );
+    }
+
   }
 
   createCustomExportCSVButton = (onClick) => {
@@ -169,6 +177,28 @@ return (
 
 );
 }
+HandleView= (id) => {
+
+  confirmAlert({
+onClickOutside: () => { this.RefreshState();},
+customUI: ({ onClose }) => {
+return (
+<div style={{ height: '100%' ,width:'100%',left:50 }}>
+<SelectViewForm id={id} updateurl={this.props.url+'/update/'+id} ChooseUpdateForm={this.props.name} />
+<footer className="modal-footer">
+
+        <button type="button" className="btn btn-danger"   onClick={() => {
+            this.RefreshState();
+            onClose();
+          }}>ปิด</button>
+        </footer>
+</div>
+);
+}
+});
+
+
+}
 
   HandleUpdate = (id) => {
 
@@ -177,7 +207,7 @@ return (
 customUI: ({ onClose }) => {
 return (
   <div style={{ height: '100%' ,width:'100%',left:50 }}>
-  <SelectUpdateForm id={id} updateurl={this.props.updateurl+'/'+id} ChooseUpdateForm={this.props.name} />
+  <SelectViewForm id={id} updateurl={this.props.updateurl+'/update/'+id} ChooseUpdateForm={this.props.name} />
   <footer className="modal-footer">
 
           <button type="button" className="btn btn-danger"   onClick={() => {
@@ -255,15 +285,32 @@ return (
  priceFormatter = (cell, row) => {
 
 
-  return (<div>                <button  onClick={() => this.HandleUpdate(row.id)} className="btn btn-sm btn-warning" style={{color: '#fff' ,backgroundColor:'#ffab43',borderColor:'#ffab43'}}  >
-                                  <i style={{  fontSize:'1.2 em',color: ''}} ><FaPen/></i>
-                                    Update
-                                </button>
+  return (<div>
+                 {sessionStorage.getItem(`${this.props.manage}View`) == true ?(
+                   <button  onClick={() => this.HandleView(row.id)} className="btn btn-sm btn-success" style={{  fontSize:'0.75 em'}} >
+                         <i style={{  fontSize:'1.5 em'}} ><FaEye/></i>
+                           View
+                       </button>
+                 ):null}
 
-                                <button onClick={() =>this.HandleDelete(row.id)} className="btn btn-sm btn-danger" style={{  fontSize:'0.75 em'}} >
-                                  <i style={{  fontSize:'1.2 em'}} ><FaTrash/></i>
-                                      Delete
-                                  </button>
+                 {sessionStorage.getItem(`${this.props.manage}Edit`) == true ?(
+                   <button  onClick={() => this.HandleUpdate(row.id)} className="btn btn-sm btn-warning" style={{color: '#fff' ,backgroundColor:'#ffab43',borderColor:'#ffab43'}}  >
+                      <i style={{  fontSize:'1.2 em'}} ><FaPen/></i>
+                        Update
+                    </button>
+                 ):null}
+
+                 {sessionStorage.getItem(`${this.props.manage}Delete`) == true ?(
+                   <button onClick={() =>this.HandleDelete(row.id)} className="btn btn-sm btn-danger" style={{  fontSize:'0.75 em'}} >
+                     <i style={{  fontSize:'1.2 em'}} ><FaTrash/></i>
+                         Delete
+                     </button>
+                 ):null}
+
+
+
+
+
 
             </div>);
 }
@@ -351,8 +398,9 @@ const selectRow = {
          return  <TableHeaderColumn  dataField={colum} searchable={ false } isKey hidden >{colum}</TableHeaderColumn>
 
        }else if(colum == "Action"){
-          return <TableHeaderColumn width='200' dataFormat={ this.priceFormatter } dataField='action' headerAlign='center' dataAlign='center' ali export={ false }>Action</TableHeaderColumn>
-        }else{
+         if(sessionStorage.getItem(`${this.props.manage}View`) == 1 || sessionStorage.getItem(`${this.props.manage}Edit`) == 1 || sessionStorage.getItem(`${this.props.manage}Delete`) == 1){
+          return <TableHeaderColumn width='250' dataFormat={ this.priceFormatter } dataField='action' headerAlign='center' dataAlign='center' ali export={ false }>Action</TableHeaderColumn>
+        }}else{
 
           return <TableHeaderColumn tdStyle={ { whiteSpace: 'normal' } } dataField={colum} dataSort columnTitle>{colum}</TableHeaderColumn>
         }
@@ -382,6 +430,7 @@ DataTable.propTypes = {
   addlink:PropTypes.string,
   addbutton:PropTypes.string,
   columns:PropTypes.string,
+  manage:PropTypes.string
 
 };
 

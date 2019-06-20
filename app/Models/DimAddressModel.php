@@ -17,7 +17,8 @@ class DimAddressModel extends Model
 
     protected $softDelete = true;
 
-    protected $fillable = ['province_id',
+    protected $fillable = [
+            'province_id',
             'district_id',
             'sub_district_id',
             'postal_code_id',

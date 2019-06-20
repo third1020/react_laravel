@@ -80,7 +80,6 @@ import axios from 'axios'
            <DataTable
 
                url="/api/user"
-               updateurl="/api/user/update"
                columns={columns}
                name={"user"}
                headname={" List User - ข้อมูลผู้ใช้งาน "}
@@ -89,6 +88,7 @@ import axios from 'axios'
                delete={"ลบ"}
                addlink={"/AddUser"}
                addbutton={"Add user"}
+               manage={"ManageUser"}
                 />
 
 

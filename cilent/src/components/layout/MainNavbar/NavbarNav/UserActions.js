@@ -30,6 +30,7 @@ export default class UserActions extends React.Component {
   }
 
   logout() {
+    sessionStorage.clear()
     sessionStorage.removeItem('Token');
 
   }
