@@ -16,7 +16,6 @@ class PermissionModel extends Model
     public $timestamps = true;
 
     protected $fillable = [
-          
             'permission_name',
             'ManageUser',
             'ManageUserView',

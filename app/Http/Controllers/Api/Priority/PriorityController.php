@@ -3,89 +3,75 @@
 namespace App\Http\Controllers\Api\Priority;
 
 use Illuminate\Http\Request;
-use App\Http\Resources\PriorityResource;
-use App\Priority;
+use App\Http\Controllers\Controller;
+use App\Models\DimPriorityModel;
 use Illuminate\Support\Facades\DB;
+
 
 class PriorityController extends Controller
 {
-    protected $list;
+  public function index()
+  {
+    $getdata = DB::table('dim_priority')->whereNull('deleted_at')->get();
+    return $getdata->toJson();
+  }
 
-    public function __construct(Priority $list)
-    {
-        $this->list = $list;
-    }
+  public function store(Request $request)
+  {
+      $validatedData = $request->validate([
+     'client_id' => 'required',
+     'name' => 'required',
+     'value' => 'required'
 
-    public function index()
-    {
-        $getdata = DB::table('priorities')->get();
-
-        return $getdata->toJson();
-    }
-
-    public function getTable(Request $request)
-    {
-        $wordsearch = $request->search.'%';
-
-        $query = $this->list->where('id', 'like', $wordsearch)
-                                                 ->orwhere('priority_name', 'like', $wordsearch)
-                                                 ->orwhere('priority_status', 'like', $wordsearch)
-
-                                                 ->orwhere('created_at', 'like', $wordsearch)
-                                                 ->orderBy($request->column, $request->order);
-
-        $list = $query->paginate($request->per_page ?? 5);
-
-        return PriorityResource::collection($list);
-    }
-
-    public function store(Request $request)
-    {
-        $validatedData = $request->validate([
-     'priority_name' => 'required',
-     'priority_status' => 'required',
    ]);
 
-        Priority::create([
-     'priority_name' => $validatedData['priority_name'],
-     'priority_status' => $validatedData['priority_status'],
+      $datainsert = DimPriorityModel::create([
+     'client_id' => $validatedData['province_id'],
+     'name' => $validatedData['district_id'],
+     'value' => $validatedData['sub_district_id']
+
+
    ]);
 
-        return response()->json('User created!');
-    }
+      return response()->json(compact('datainsert'));
+  }
 
-    public function edit($id)
-    {
-        $listdata = DB::table('priorities')->where('id', $id)->get();
+  public function edit($id)
+  {
+      $user = DimPriorityModel::findOrFail($id);
 
-        return $listdata->toJson();
-    }
+      return response()->json([
+          'user' => $user,
+      ]);
+  }
 
-    public function update(Request $request, $id)
-    {
-        $validatedData = $request->validate([
-     'priority_name' => 'required',
-     'priority_status' => 'required',
+  public function update(Request $request, $id)
+  {
+      $validatedData = $request->validate([
+        'client_id' => 'required',
+        'name' => 'required',
+        'value' => 'required'
    ]);
 
-        Priority::findOrFail($id)
-            ->update([
-              'priority_name' => $validatedData['priority_name'],
-              'priority_status' => $validatedData['priority_status'],
-          ]);
-    }
-
-    public function destroy($id)
-    {
-        Priority::findOrFail($id)->delete();
-    }
-
-    public function destroy_select(Request $request)
-    {
-        Priority::destroy($request->foo);
-
-        return response()->json([
-     'data' => 'delect successfully',
+      $user = DimPriorityModel::where('id',$id)->update([
+        'client_id' => $validatedData['province_id'],
+        'name' => $validatedData['district_id'],
+        'value' => $validatedData['sub_district_id']
    ]);
-    }
+ }
+
+
+  public function destroy($id)
+  {
+        DimPriorityModel::destroy($id);
+        return response()->json('delete successfully'.$id);
+  }
+  public function destroy_select(Request $request)
+  {
+      DimPriorityModel::destroy($request->foo);
+
+      return response()->json([
+     'data' => $request->foo,
+   ]);
+  }
 }

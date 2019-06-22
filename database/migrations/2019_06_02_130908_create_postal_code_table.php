@@ -16,12 +16,13 @@ class CreatePostalCodeTable extends Migration
         Schema::create('postal_code', function (Blueprint $table) {
             $table->uuid('id');
             $table->primary('id');
-			
+
             $table->integer('code');
             $table->uuid('sub_district_id');
             $table->uuid('district_id');
             $table->uuid('province_id');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

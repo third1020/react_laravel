@@ -3,88 +3,74 @@
 namespace App\Http\Controllers\Api\Impact;
 
 use Illuminate\Http\Request;
-use App\Http\Resources\ImpactResource;
-use App\Impact;
+use App\Http\Controllers\Controller;
+use App\Models\DimImpactModel;
 use Illuminate\Support\Facades\DB;
 
 class ImpactController extends Controller
 {
-    protected $list;
+  public function index()
+  {
+    $getdata = DB::table('dim_impact')->whereNull('deleted_at')->get();
+    return $getdata->toJson();
+  }
 
-    public function __construct(Impact $list)
-    {
-        $this->list = $list;
-    }
+  public function store(Request $request)
+  {
+      $validatedData = $request->validate([
+     'client_id' => 'required',
+     'name' => 'required',
+     'value' => 'required',
 
-    public function index()
-    {
-        $getdata = DB::table('impacts')->get();
-
-        return $getdata->toJson();
-    }
-
-    public function getTable(Request $request)
-    {
-        $wordsearch = $request->search.'%';
-
-        $query = $this->list->where('id', 'like', $wordsearch)
-                                                 ->orwhere('impact_name', 'like', $wordsearch)
-                                                 ->orwhere('impact_value', 'like', $wordsearch)
-
-                                                 ->orderBy($request->column, $request->order);
-
-        $list = $query->paginate($request->per_page ?? 5);
-
-        return ImpactResource::collection($list);
-    }
-
-    public function store(Request $request)
-    {
-        $validatedData = $request->validate([
-     'impact_name' => 'required',
-     'impact_value' => 'required',
    ]);
 
-        Impact::create([
-     'impact_name' => $validatedData['impact_name'],
-     'impact_value' => $validatedData['impact_value'],
+      $datainsert = DimImpactModel::create([
+     'client_id' => $validatedData['client_id'],
+     'name' => $validatedData['name'],
+     'value' => $validatedData['value'],
+
+
    ]);
 
-        return response()->json('User created!');
-    }
+      return response()->json(compact('datainsert'));
+  }
 
-    public function edit($id)
-    {
-        $listdata = DB::table('impacts')->where('id', $id)->get();
+  public function edit($id)
+  {
+      $user = DimImpactModel::findOrFail($id);
 
-        return $listdata->toJson();
-    }
+      return response()->json([
+          'user' => $user,
+      ]);
+  }
 
-    public function update(Request $request, $id)
-    {
-        $validatedData = $request->validate([
-     'impact_name' => 'required',
-     'impact_value' => 'required',
+  public function update(Request $request, $id)
+  {
+      $validatedData = $request->validate([
+        'client_id' => 'required',
+        'name' => 'required',
+        'value' => 'required',
    ]);
 
-        Impact::findOrFail($id)
-            ->update([
-              'impact_name' => $validatedData['impact_name'],
-              'impact_value' => $validatedData['impact_value'],
-          ]);
-    }
-
-    public function destroy($id)
-    {
-        Impact::findOrFail($id)->delete();
-    }
-
-    public function destroy_select(Request $request)
-    {
-        Impact::destroy($request->foo);
-
-        return response()->json([
-     'data' => 'delect successfully',
+      $user = DimImpactModel::where('id',$id)->update([
+        'client_id' => $validatedData['client_id'],
+        'name' => $validatedData['name'],
+        'value' => $validatedData['value'],
    ]);
-    }
+  }
+
+
+  public function destroy($id)
+  {
+        DimImpactModel::destroy($id);
+        return response()->json('delete successfully'.$id);
+  }
+  public function destroy_select(Request $request)
+  {
+      DimImpactModel::destroy($request->foo);
+
+      return response()->json([
+     'data' => $request->foo,
+   ]);
+  }
 }

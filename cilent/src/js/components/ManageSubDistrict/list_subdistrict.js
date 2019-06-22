@@ -68,27 +68,26 @@ import axios from 'axios'
      },
    }));
 
-   function ManageUser() {
+   function ManageSubDistrict() {
 
      const classes = useStyles();
-     const columns = ['id','client_id', 'username', 'email','is_block','user_right','permission_id','Action'];
+     const columns = ['id','name', 'district_id','Action'];
 
 
      return (
        <div>
 
            <DataTable
-
-               url="/api/user"
-               updateurl="/api/user/update"
-               columns={columns}
-               name={"user"}
-               headname={" List User - ข้อมูลผู้ใช้งาน "}
-               headTablename={"ตารางแสดงข้อมูลสมาชิก"}
-               edit={"แก้ไข"}
-               delete={"ลบ"}
-               addlink={"/AddUser"}
-               addbutton={"Add user"}
+           url="/api/subdistrict"
+           columns={columns}
+           name={"subdistrict"}
+           headname={" List Sub District - ข้อมูลหมู่บ้าน"}
+           headTablename={"ตารางแสดงข้อมูลหมู่บ้าน"}
+           edit={"แก้ไข"}
+           delete={"ลบ"}
+           addlink={"/AddSubDistrict"}
+           addbutton={"Add SubDistrict"}
+           manage={"ManageSubDistrict"}
                 />
 
 
@@ -96,4 +95,4 @@ import axios from 'axios'
      );
    }
 
-   export default HocValidateUser(ManageUser);
+   export default HocValidateUser(ManageSubDistrict);

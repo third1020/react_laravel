@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\Api\Permission;
 
-use Illuminate\Support\Facades\DB;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\PermissionModel;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+
 
 class PermissionController extends Controller
 {

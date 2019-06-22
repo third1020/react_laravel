@@ -16,11 +16,12 @@ class CreateSubDistrictTable extends Migration
         Schema::create('sub_district', function (Blueprint $table) {
             $table->uuid('id');
             $table->primary('id');
-			
+
 			$table->string('name');
             $table->uuid('district_id');
-			
+
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

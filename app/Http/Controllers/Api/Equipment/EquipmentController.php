@@ -3,105 +3,73 @@
 namespace App\Http\Controllers\Api\Equipment;
 
 use Illuminate\Http\Request;
-use App\Http\Resources\EquipmentResource;
-use App\Equipment;
+use App\Http\Controllers\Controller;
+use App\Models\DimEquipmentModel;
 use Illuminate\Support\Facades\DB;
 
 class EquipmentController extends Controller
 {
-    protected $list;
+  public function index()
+  {
+    $getdata = DB::table('dim_equipment')->whereNull('deleted_at')->get();
+    return $getdata->toJson();
+  }
 
-    public function __construct(Equipment $list)
-    {
-        $this->list = $list;
-    }
-
-    public function index()
-    {
-        $getdata = DB::table('equipment')->get();
-
-        return $getdata->toJson();
-    }
-
-    public function getTable(Request $request)
-    {
-        $wordsearch = $request->search.'%';
-
-        $query = $this->list->where('id', 'like', $wordsearch)
-                                                 ->orwhere('equipment_name', 'like', $wordsearch)
-                                                 ->orwhere('equipment_number', 'like', $wordsearch)
-                                                 ->orwhere('contact_detail', 'like', $wordsearch)
-                                                 ->orwhere('created_at', 'like', $wordsearch)
-                                                 ->orderBy($request->column, $request->order);
-
-        $list = $query->paginate($request->per_page ?? 5);
-
-        return EquipmentResource::collection($list);
-    }
-
-    public function store(Request $request)
-    {
-        $validatedData = $request->validate([
-     'equipment_name' => 'required',
-     'equipment_detail' => 'required',
-     'equipment_number' => 'required',
-     'contact_detail' => 'required',
-     'equipment_type_id' => 'required',
-     'equipment_image' => 'required',
+  public function store(Request $request)
+  {
+      $validatedData = $request->validate([
+     'client_id' => 'required',
+     'location_id' => 'required',
+     'name' => 'required',
    ]);
 
-        Equipment::create([
-     'equipment_name' => $validatedData['equipment_name'],
-     'equipment_detail' => $validatedData['equipment_detail'],
-     'equipment_number' => $validatedData['equipment_number'],
-     'contact_detail' => $validatedData['contact_detail'],
-     'equipment_type_id' => $validatedData['equipment_type_id'],
-     'equipment_image' => $validatedData['equipment_image'],
+      $datainsert = DimEquipmentModel::create([
+     'client_id' => $validatedData['client_id'],
+     'location_id' => $validatedData['location_id'],
+     'name' => $validatedData['name'],
+
    ]);
 
-        return response()->json('User created!');
-    }
+      return response()->json(compact('datainsert'));
+  }
 
-    public function edit($id)
-    {
-        $listdata = DB::table('equipment')->where('id', $id)->get();
+  public function edit($id)
+  {
+      $user = DimEquipmentModel::findOrFail($id);
 
-        return $listdata->toJson();
-    }
+      return response()->json([
+          'user' => $user,
+      ]);
+  }
 
-    public function update(Request $request, $id)
-    {
-        $validatedData = $request->validate([
-     'equipment_name' => 'required',
-     'equipment_detail' => 'required',
-     'equipment_number' => 'required',
-     'contact_detail' => 'required',
-     'equipment_type_id' => 'required',
-     'equipment_image' => 'required',
+  public function update(Request $request, $id)
+  {
+      $validatedData = $request->validate([
+        'client_id' => 'required',
+        'location_id' => 'required',
+        'name' => 'required',
    ]);
 
-        Equipment::findOrFail($id)
-            ->update([
-              'equipment_name' => $validatedData['equipment_name'],
-              'equipment_detail' => $validatedData['equipment_detail'],
-              'equipment_number' => $validatedData['equipment_number'],
-              'contact_detail' => $validatedData['contact_detail'],
-              'equipment_type_id' => $validatedData['equipment_type_id'],
-              'equipment_image' => $validatedData['equipment_image'],
-          ]);
-    }
+      $user = DimEquipmentModel::where('id',$id)->update([
+        'client_id' => $validatedData['client_id'],
+        'location_id' => $validatedData['location_id'],
+        'name' => $validatedData['name'],
 
-    public function destroy($id)
-    {
-        Equipment::findOrFail($id)->delete();
-    }
-
-    public function destroy_select(Request $request)
-    {
-        Equipment::destroy($request->foo);
-
-        return response()->json([
-     'data' => 'delect successfully',
    ]);
-    }
+  }
+
+
+  public function destroy($id)
+  {
+        DimEquipmentModel::destroy($id);
+        return response()->json('delete successfully'.$id);
+  }
+  public function destroy_select(Request $request)
+  {
+      DimEquipmentModel::destroy($request->foo);
+
+      return response()->json([
+     'data' => $request->foo,
+   ]);
+  }
 }

@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 
 
 import "../../../css/login.css";
+import Swal from 'sweetalert2/dist/sweetalert2.js'
 
 
 import "../../../css/util.css";
@@ -60,9 +61,17 @@ export default class Login extends Component {
                 console.log(response)
 
                 if(response.status === 200){
+                  Swal.fire({
+                title: 'Loading...',
+                onBeforeOpen: () => { Swal.showLoading()}
+              }
+
+            )
                   axios.post('api/permission/getPermission',{
                     permission_id: response.data.user.permission_id
+
                   }).then(res => {
+
                     console.log(res.data);
                     sessionStorage.setItem('permission_name',res.data.getpermission.permission_name);
                     sessionStorage.setItem('ManageUser',res.data.getpermission.ManageUser);
@@ -171,7 +180,7 @@ export default class Login extends Component {
                     sessionStorage.setItem('ManageSettingNewsDelete',res.data.getpermission.ManageSettingNewsDelete);
 
                     sessionStorage.setItem('Report',res.data.getpermission.Report);
-                  
+
 
                     window.location.href = "/Dashboard"
 
@@ -181,6 +190,8 @@ export default class Login extends Component {
 
                   }).catch(err => {
                     console.log(err);
+
+
                   })
                 }
 
@@ -188,6 +199,7 @@ export default class Login extends Component {
 
               }).catch(err => {
                 console.log(err);
+
               })
 
 
@@ -195,11 +207,17 @@ export default class Login extends Component {
 
 
         }else{
+
           alert(response.data.error);
         }
       })
       .catch(error => {
-    alert("username or password invalid");
+        Swal.fire({
+          type: 'error',
+          title: 'Login error',
+          text: 'Incorrect username or password.'
+
+        })
       })
   }
 

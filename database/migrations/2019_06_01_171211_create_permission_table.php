@@ -18,7 +18,7 @@ class CreatePermissionTable extends Migration
           $table->bigIncrements('id')->comment('รหัสข้อมูลตาราง');
 
 
-			$table->string('permission_name')->comment('ชื่อสิทธิ์เข้าใช้');
+			$table->string('permission_name')->comment('ชื่อสิทธิ์เข้าใช้')->nullable();
 
       $table->boolean('ManageUser')->nullable()->default(false);
       $table->boolean('ManageUserView')->nullable()->default(false);

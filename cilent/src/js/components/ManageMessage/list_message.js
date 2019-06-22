@@ -71,24 +71,23 @@ import axios from 'axios'
    function ManageMessage() {
 
      const classes = useStyles();
-     const columns = ['id','client_id', 'tital', 'detail','status','user_right','permission_id','Action'];
+     const columns = ['id','tital', 'detail', 'status','Action'];
 
 
      return (
        <div>
 
            <DataTable
-
-               url="/api/user"
-               updateurl="/api/user/update"
-               columns={columns}
-               name={"user"}
-               headname={" List User - ข้อมูลผู้ใช้งาน "}
-               headTablename={"ตารางแสดงข้อมูลสมาชิก"}
-               edit={"แก้ไข"}
-               delete={"ลบ"}
-               addlink={"/AddUser"}
-               addbutton={"Add user"}
+           url="/api/message"
+           columns={columns}
+           name={"message"}
+           headname={" List Message - ข้อมูลข้อความ "}
+           headTablename={"ตารางแสดงข้อมูลข้อความ"}
+           edit={"แก้ไข"}
+           delete={"ลบ"}
+           addlink={"/AddMessage"}
+           addbutton={"Add Message"}
+           manage={"ManageMessage"}
                 />
 
 

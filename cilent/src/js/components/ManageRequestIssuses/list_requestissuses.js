@@ -68,26 +68,26 @@ import axios from 'axios'
      },
    }));
 
-   function ManagePostalCode() {
+   function ManageRequestIssuses() {
 
      const classes = useStyles();
-     const columns = ['id','code', 'district_id', 'sub_district_id','province_id','Action'];
+     const columns = ['id','name', 'status', 'auditor_user_id','approval_user_id','audit_timestamp','approval_timestamp','Action'];
 
 
      return (
        <div>
 
            <DataTable
-           url="/api/postalcode"
+           url="/api/requestissues"
            columns={columns}
-           name={"postalcode"}
-           headname={" List Postal Code - ข้อมูลรหัสไปรษณีย์ "}
-           headTablename={"ตารางแสดงข้อมูลรหัสไปรษณีย์"}
+           name={"requestissues"}
+           headname={" List Request Issues - ข้อมูลคำร้องปัญหา"}
+           headTablename={"ตารางแสดงข้อมูลคำร้องปัญหา"}
            edit={"แก้ไข"}
            delete={"ลบ"}
-           addlink={"/AddPostalCode"}
-           addbutton={"Add PostalCode"}
-           manage={"ManagePostalCode"}
+           addlink={"/AddRequestIssues"}
+           addbutton={"Add RequestIssues"}
+           manage={"ManageRequestIssues"}
                 />
 
 
@@ -95,4 +95,4 @@ import axios from 'axios'
      );
    }
 
-   export default HocValidateUser(ManagePostalCode);
+   export default HocValidateUser(ManageRequestIssuses);

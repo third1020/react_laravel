@@ -71,24 +71,23 @@ import axios from 'axios'
    function ManageNews() {
 
      const classes = useStyles();
-     const columns = ['id','client_id', 'setting_news_id', 'name','detail','Action'];
+     const columns = ['id','setting_news_id', 'name', 'detail','Action'];
 
 
      return (
        <div>
 
            <DataTable
-
-               url="/api/user"
-               updateurl="/api/user/update"
-               columns={columns}
-               name={"user"}
-               headname={" List User - ข้อมูลผู้ใช้งาน "}
-               headTablename={"ตารางแสดงข้อมูลสมาชิก"}
-               edit={"แก้ไข"}
-               delete={"ลบ"}
-               addlink={"/AddUser"}
-               addbutton={"Add user"}
+           url="/api/news"
+           columns={columns}
+           name={"news"}
+           headname={" List News - ข้อมูลข่าว "}
+           headTablename={"ตารางแสดงข้อมูลข่าว"}
+           edit={"แก้ไข"}
+           delete={"ลบ"}
+           addlink={"/AddNews"}
+           addbutton={"Add News"}
+           manage={"ManageNews"}
                 />
 
 

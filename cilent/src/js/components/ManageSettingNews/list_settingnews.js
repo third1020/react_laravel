@@ -68,27 +68,26 @@ import axios from 'axios'
      },
    }));
 
-   function ManageContact() {
+   function ManageSettingNews() {
 
      const classes = useStyles();
-     const columns = ['id','client_id', 'company_id', 'person_responsible_id','Action'];
+     const columns = ['id','name', 'is_close','Action'];
 
 
      return (
        <div>
 
            <DataTable
-
-               url="/api/user"
-               updateurl="/api/user/update"
-               columns={columns}
-               name={"user"}
-               headname={" List User - ข้อมูลผู้ใช้งาน "}
-               headTablename={"ตารางแสดงข้อมูลสมาชิก"}
-               edit={"แก้ไข"}
-               delete={"ลบ"}
-               addlink={"/AddUser"}
-               addbutton={"Add user"}
+           url="/api/settingnews"
+           columns={columns}
+           name={"settingnews"}
+           headname={" List Setting News - ข้อมูลตั้งค่าข่าว"}
+           headTablename={"ตารางแสดงข้อมูลตั้งค่าข่าว"}
+           edit={"แก้ไข"}
+           delete={"ลบ"}
+           addlink={"/AddSettingNews"}
+           addbutton={"Add SettingNews"}
+           manage={"ManageSettingNews"}
                 />
 
 
@@ -96,4 +95,4 @@ import axios from 'axios'
      );
    }
 
-   export default HocValidateUser(ManageContact);
+   export default HocValidateUser(ManageSettingNews);

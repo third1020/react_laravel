@@ -71,7 +71,7 @@ import axios from 'axios'
    function ManageImpact() {
 
      const classes = useStyles();
-     const columns = ['id','client_id', 'name', 'value','Action'];
+     const columns = ['id', 'name', 'value','Action'];
 
 
      return (
@@ -79,16 +79,16 @@ import axios from 'axios'
 
            <DataTable
 
-               url="/api/user"
-               updateurl="/api/user/update"
-               columns={columns}
-               name={"user"}
-               headname={" List User - ข้อมูลผู้ใช้งาน "}
-               headTablename={"ตารางแสดงข้อมูลสมาชิก"}
-               edit={"แก้ไข"}
-               delete={"ลบ"}
-               addlink={"/AddUser"}
-               addbutton={"Add user"}
+           url="/api/impact"
+           columns={columns}
+           name={"impact"}
+           headname={" List Impact - ข้อมูลผลกระทบ "}
+           headTablename={"ตารางแสดงข้อมูลผลกระทบ"}
+           edit={"แก้ไข"}
+           delete={"ลบ"}
+           addlink={"/AddImpact"}
+           addbutton={"Add Impact"}
+           manage={"ManageImpact"}
                 />
 
 

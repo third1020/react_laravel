@@ -16,10 +16,11 @@ class CreateProvinceTable extends Migration
         Schema::create('province', function (Blueprint $table) {
             $table->uuid('id')->comment('รหัสข้อมูลตาราง');
             $table->primary('id');
-			
+
 			$table->string('name')->comment('ชื่อ');
-			
+
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

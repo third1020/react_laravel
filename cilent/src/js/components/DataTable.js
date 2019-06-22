@@ -201,6 +201,7 @@ return (
 }
 
   HandleUpdate = (id) => {
+    alert(id);
 
     confirmAlert({
   onClickOutside: () => { this.RefreshState();},
@@ -331,10 +332,37 @@ RefreshState = () => {
 }
 
   componentDidMount(){
+
     axios.get(`${this.props.url}/index`).then(response => {
-      this.setState({
-        products: response.data
+      let data
+      Swal.fire({
+        title: 'Loading...',
+        html: 'กำลังโหลดข้อมูล',
+        timer: 2000,
+
+        onBeforeOpen: () => {
+          Swal.showLoading()
+
+            if(response.data[0] != null){
+              data = response.data
+              this.setState({
+                products : response.data
+              });
+              Swal.close()
+            }else{
+              Swal.fire(
+                  'Errors',
+                  'ไม่พบข้อมูล',
+                  'error'
+              )
+            }
+
+        }
       })
+
+
+
+
     }).catch(e =>{
       Swal.fire(
           'Errors',
@@ -348,6 +376,7 @@ RefreshState = () => {
   render() {
 
 const options = {
+noDataText: 'ข้อมูลว่างเปล่า' ,
 handleConfirmDeleteRow: this.customConfirm,
 defaultSortOrder: 'desc',
 exportCSVText: 'my_export',

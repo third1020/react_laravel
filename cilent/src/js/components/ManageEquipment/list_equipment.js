@@ -71,24 +71,23 @@ import axios from 'axios'
    function ManageEquipment() {
 
      const classes = useStyles();
-     const columns = ['id','client_id', 'location_id', 'name','Action'];
+     const columns = ['id', 'location_id', 'name','Action'];
 
 
      return (
        <div>
 
            <DataTable
-
-               url="/api/user"
-               updateurl="/api/user/update"
-               columns={columns}
-               name={"user"}
-               headname={" List User - ข้อมูลผู้ใช้งาน "}
-               headTablename={"ตารางแสดงข้อมูลสมาชิก"}
-               edit={"แก้ไข"}
-               delete={"ลบ"}
-               addlink={"/AddUser"}
-               addbutton={"Add user"}
+           url="/api/equipment"
+           columns={columns}
+           name={"equipment"}
+           headname={" List Equipment - ข้อมูลอุปกรณ์ "}
+           headTablename={"ตารางแสดงข้อมูลอุปกรณ์"}
+           edit={"แก้ไข"}
+           delete={"ลบ"}
+           addlink={"/AddEquipment"}
+           addbutton={"Add Equipment"}
+           manage={"ManageEquipment"}
                 />
 
 

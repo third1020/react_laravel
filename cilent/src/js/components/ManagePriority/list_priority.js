@@ -71,24 +71,23 @@ import axios from 'axios'
    function ManagePriority() {
 
      const classes = useStyles();
-     const columns = ['id','client_id', 'name', 'value','Action'];
+     const columns = ['id','name', 'value','Action'];
 
 
      return (
        <div>
 
            <DataTable
-
-               url="/api/user"
-               updateurl="/api/user/update"
-               columns={columns}
-               name={"user"}
-               headname={" List User - ข้อมูลผู้ใช้งาน "}
-               headTablename={"ตารางแสดงข้อมูลสมาชิก"}
-               edit={"แก้ไข"}
-               delete={"ลบ"}
-               addlink={"/AddUser"}
-               addbutton={"Add user"}
+           url="/api/priority"
+           columns={columns}
+           name={"priority"}
+           headname={" List Priority - ข้อมูลความสำคัญ "}
+           headTablename={"ตารางแสดงข้อมูลความสำคัญ"}
+           edit={"แก้ไข"}
+           delete={"ลบ"}
+           addlink={"/AddPriority"}
+           addbutton={"Add Priority"}
+           manage={"ManagePriority"}
                 />
 
 

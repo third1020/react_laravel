@@ -16,11 +16,12 @@ class CreateDistrictTable extends Migration
         Schema::create('district', function (Blueprint $table) {
             $table->uuid('id');
             $table->primary('id');
-			
+
 			$table->string('name');
             $table->uuid('province_id');
-			
+
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

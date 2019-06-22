@@ -68,26 +68,26 @@ import axios from 'axios'
      },
    }));
 
-   function ManagePostalCode() {
+   function ManagePersonContact() {
 
      const classes = useStyles();
-     const columns = ['id','code', 'district_id', 'sub_district_id','province_id','Action'];
+     const columns = ['id','company_id', 'person_responsible_id','Action'];
 
 
      return (
        <div>
 
            <DataTable
-           url="/api/postalcode"
+           url="/api/personcontact"
            columns={columns}
-           name={"postalcode"}
-           headname={" List Postal Code - ข้อมูลรหัสไปรษณีย์ "}
-           headTablename={"ตารางแสดงข้อมูลรหัสไปรษณีย์"}
+           name={"personcontact"}
+           headname={" List Person Contact - ข้อมูลผู้ติดต่อ "}
+           headTablename={"ตารางแสดงข้อมูลผู้ติดต่อ"}
            edit={"แก้ไข"}
            delete={"ลบ"}
-           addlink={"/AddPostalCode"}
-           addbutton={"Add PostalCode"}
-           manage={"ManagePostalCode"}
+           addlink={"/AddPersonContact"}
+           addbutton={"Add PersonContact"}
+           manage={"ManagePersonContact"}
                 />
 
 
@@ -95,4 +95,4 @@ import axios from 'axios'
      );
    }
 
-   export default HocValidateUser(ManagePostalCode);
+   export default HocValidateUser(ManagePersonContact);

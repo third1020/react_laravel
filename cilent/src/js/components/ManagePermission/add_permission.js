@@ -255,9 +255,10 @@ let container;
           ManageSettingNewsDelete: this.state.ManageSettingNewsDelete,
           Report: this.state.Report
         }
-        console.log(insertdata);
+
         axios.post('/api/permission/store', insertdata)
   .then(response => {
+    console.log(response.data);
     Swal.fire(
         'Successfully',
         'Add data successfully ',
@@ -1252,4 +1253,4 @@ let container;
       }
     }
 
-    export default HocValidateUser(Add_permission)
+    export default Add_permission

@@ -43,8 +43,27 @@ class ImageController extends Controller
           return response()->json(['link' => $url]);
         }
 
+    }
+
+    public function index()
+    {
+      $getdata = DB::table('dim_image')->whereNull('deleted_at')->get();
+      return $getdata->toJson();
+    }
 
 
+    public function destroy($id)
+    {
+          DimImageModel::destroy($id);
+          return response()->json('delete successfully'.$id);
+    }
+    public function destroy_select(Request $request)
+    {
+        DimImageModel::destroy($request->foo);
+
+        return response()->json([
+       'data' => $request->foo,
+     ]);
     }
 
 }

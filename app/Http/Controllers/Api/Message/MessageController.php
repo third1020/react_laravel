@@ -3,100 +3,77 @@
 namespace App\Http\Controllers\Api\Message;
 
 use Illuminate\Http\Request;
-use App\Http\Resources\MessageResource;
-use App\Message;
+use App\Http\Controllers\Controller;
+use App\Models\DimMessageModel;
 use Illuminate\Support\Facades\DB;
 
 class MessageController extends Controller
 {
-    protected $list;
+  public function index()
+  {
+    $getdata = DB::table('dim_message')->whereNull('deleted_at')->get();
+    return $getdata->toJson();
+  }
 
-    public function __construct(Message $list)
-    {
-        $this->list = $list;
-    }
+  public function store(Request $request)
+  {
+      $validatedData = $request->validate([
+     'client_id' => 'required',
+     'tital' => 'required',
+     'detail' => 'required',
+     'status' => 'required',
 
-    public function index()
-    {
-        $getdata = DB::table('messages')->get();
-
-        return $getdata->toJson();
-    }
-
-    public function getTable(Request $request)
-    {
-        $wordsearch = $request->search.'%';
-
-        $query = $this->list->where('id', 'like', $wordsearch)
-                                                 ->orwhere('message_title', 'like', $wordsearch)
-                                                 ->orwhere('message_from', 'like', $wordsearch)
-                                                 ->orwhere('message_to', 'like', $wordsearch)
-                                                 ->orwhere('status', 'like', $wordsearch)
-                                                 ->orwhere('created_at', 'like', $wordsearch)
-                                                 ->orderBy($request->column, $request->order);
-
-        $list = $query->paginate($request->per_page ?? 5);
-
-        return MessageResource::collection($list);
-    }
-
-    public function store(Request $request)
-    {
-        $validatedData = $request->validate([
-     'message_title' => 'required',
-     'message_message' => 'required',
-     'message_from' => 'required',
-     'message_to' => 'required',
    ]);
 
-        Message::create([
-     'message_title' => $validatedData['message_title'],
-     'message_message' => $validatedData['message_message'],
-     'message_from' => $validatedData['message_from'],
-     'message_to' => $validatedData['message_to'],
-     'status' => '0',
+      $datainsert = DimMessageModel::create([
+     'client_id' => $validatedData['client_id'],
+     'tital' => $validatedData['tital'],
+     'detail' => $validatedData['detail'],
+     'status' => $validatedData['status'],
+
    ]);
 
-        return response()->json('User created!');
-    }
+      return response()->json(compact('datainsert'));
+  }
 
-    public function edit($id)
-    {
-        $listdata = DB::table('messages')->where('id', $id)->get();
+  public function edit($id)
+  {
+      $user = DimMessageModel::findOrFail($id);
 
-        return $listdata->toJson();
-    }
+      return response()->json([
+          'user' => $user,
+      ]);
+  }
 
-    public function update(Request $request, $id)
-    {
-        $validatedData = $request->validate([
-     'message_title' => 'required',
-     'message_message' => 'required',
-     'message_from' => 'required',
-     'message_to' => 'required',
+  public function update(Request $request, $id)
+  {
+      $validatedData = $request->validate([
+        'client_id' => 'required',
+        'tital' => 'required',
+        'detail' => 'required',
+        'status' => 'required',
    ]);
 
-        Message::findOrFail($id)
-            ->update([
-              'message_title' => $validatedData['message_title'],
-              'message_message' => $validatedData['message_message'],
-              'message_from' => $validatedData['message_from'],
-              'message_to' => $validatedData['message_to'],
-              'status' => '0',
-          ]);
-    }
-
-    public function destroy($id)
-    {
-        Message::findOrFail($id)->delete();
-    }
-
-    public function destroy_select(Request $request)
-    {
-        Message::destroy($request->foo);
-
-        return response()->json([
-     'data' => 'delect successfully',
+      $user = DimMessageModel::where('id',$id)->update([
+        'client_id' => $validatedData['client_id'],
+        'tital' => $validatedData['tital'],
+        'detail' => $validatedData['detail'],
+        'status' => $validatedData['status'],
    ]);
-    }
+ }
+
+
+  public function destroy($id)
+  {
+        DimMessageModel::destroy($id);
+        return response()->json('delete successfully'.$id);
+  }
+  public function destroy_select(Request $request)
+  {
+      DimMessageModel::destroy($request->foo);
+
+      return response()->json([
+     'data' => $request->foo,
+   ]);
+  }
 }
