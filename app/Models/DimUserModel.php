@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use App\Traits\Uuids;
+
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -14,7 +14,7 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
 class DimUserModel extends Authenticatable implements JWTSubject
 {
     use SoftDeletes;
-    use Uuids;
+
     use Notifiable;
 
     protected $table = 'users';
@@ -24,7 +24,7 @@ class DimUserModel extends Authenticatable implements JWTSubject
     protected $softDelete = true;
 
     protected $fillable = [
-          
+
             'client_id',
             'token',
             'password',

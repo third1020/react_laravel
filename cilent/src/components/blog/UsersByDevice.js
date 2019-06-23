@@ -49,6 +49,7 @@ class UsersByDevice extends React.Component {
   render() {
     const { title } = this.props;
     return (
+      <Col lg="4" md="12" sm="12" className="mb-4">
       <Card small className="h-100">
         <CardHeader className="border-bottom">
           <h6 className="m-0">{title}</h6>
@@ -82,6 +83,7 @@ class UsersByDevice extends React.Component {
           </Row>
         </CardFooter>
       </Card>
+      </Col>
     );
   }
 }

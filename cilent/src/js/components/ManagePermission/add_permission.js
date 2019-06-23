@@ -1253,4 +1253,4 @@ let container;
       }
     }
 
-    export default Add_permission
+    export default HocValidateUser(Add_permission)

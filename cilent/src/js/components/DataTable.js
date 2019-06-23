@@ -201,26 +201,7 @@ class DataTable extends Component {
   }
 
   HandleUpdate = (id) => {
-    alert(id);
-
-    confirmAlert({
-      onClickOutside: () => { this.RefreshState(); },
-      customUI: ({ onClose }) => {
-        return (
-          <div style={{ height: '100%', width: '100%', left: 50 }}>
-            <SelectViewForm id={id} updateurl={this.props.updateurl + '/update/' + id} ChooseUpdateForm={this.props.name} />
-            <footer className="modal-footer">
-
-              <button type="button" className="btn btn-danger" onClick={() => {
-                this.RefreshState();
-                onClose();
-              }}>ปิด</button>
-            </footer>
-          </div>
-        );
-      }
-    });
-
+alert(id);
 
   }
 
@@ -413,7 +394,7 @@ class DataTable extends Component {
                     {
                       this.props.columns.map((colum, idx) => {
                         if (colum == "id") {
-                          return <TableHeaderColumn key={idx} dataField={colum} searchable={false} isKey  >{colum}</TableHeaderColumn>
+                          return <TableHeaderColumn key={idx} dataField={colum} searchable={false} isKey  hidden>{colum}</TableHeaderColumn>
 
                         } else if (colum == "Action") {
                           if (sessionStorage.getItem(`${this.props.manage}View`) == 1 || sessionStorage.getItem(`${this.props.manage}Edit`) == 1 || sessionStorage.getItem(`${this.props.manage}Delete`) == 1) {

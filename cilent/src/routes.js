@@ -37,6 +37,7 @@ import ManageSubDistrict from "./js/components/ManageSubDistrict/list_subdistric
 
 import Add_user from "./js/components/User/add_user";
 import Add_permission from "./js/components/ManagePermission/add_permission";
+import Report from "./js/components/Report/report_incident";
 
 
 export default [
@@ -198,6 +199,12 @@ export default [
     path: "/AddPermission",
     layout: DefaultLayout,
     component: Add_permission
+  },
+
+  {
+    path: "/Report",
+    layout: DefaultLayout,
+    component: Report
   },
 
 

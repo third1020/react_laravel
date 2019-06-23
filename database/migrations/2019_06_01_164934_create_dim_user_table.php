@@ -14,8 +14,8 @@ class CreateDimUserTable extends Migration
     public function up()
     {
         Schema::create('users', function (Blueprint $table) {
-            $table->uuid('id')->comment('รหัสข้อมูลตาราง');
-            $table->primary('id');
+            $table->bigIncrements('id')->comment('รหัสข้อมูลตาราง');
+          
 			$table->uuid('client_id')->nullable()->comment('รหัสข้อมูลผู้สร้าง');
       $table->string('username')->comment('ชื่อผู้ใช้งาน');
       $table->string('password')->comment('รหัสผ่าน');

@@ -79,7 +79,6 @@ this.setState({
         event.preventDefault()
         const { history } = this.props
 
-
         const formData = {
           image: this.state.image[this.state.image.length-1],
           client_id : this.state.client_id
@@ -98,10 +97,11 @@ this.setState({
           user_right: this.state.user_right,
           image_show: this.state.image_show,
           image_id: res.data.image_id,
-          client_id: this.state.client_id,
+          client_id: this.props.cilent_id,
           permission_id: this.state.permission_id,
 
         }
+        console.log(insertdata);
         axios.post('/api/user/store', insertdata)
   .then(response => {
     Swal.fire(
@@ -160,6 +160,7 @@ this.setState({
       }
 
       componentDidMount(){
+
 
         axios.get('api/permission/index').then(res => {
           this.setState({
@@ -337,4 +338,4 @@ this.setState({
       }
     }
 
-    export default Add_user
+    export default HocValidateUser(Add_user)

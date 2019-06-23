@@ -8,6 +8,7 @@ const HocValidateUser = (WrappedComponent) => {
         constructor(props) {
             super(props);
             this.state = {
+              cilent_id:'',
               permission_name : '',
               ManageUser : '',
               ManageNews : '',
@@ -34,9 +35,14 @@ const HocValidateUser = (WrappedComponent) => {
           console.log(response.data);
 
           if(response.status === 200){
+            this.setState({
+              cilent_id : response.data.user.id
+            });
             axios.post('api/permission/getPermission',{
               permission_id: response.data.user.permission_id
             }).then(res => {
+
+
               sessionStorage.setItem('permission_name',res.data.getpermission.permission_name);
               sessionStorage.setItem('ManageUser',res.data.getpermission.ManageUser);
               sessionStorage.setItem('ManagePermission',res.data.getpermission.ManagePermission);
@@ -84,11 +90,11 @@ const HocValidateUser = (WrappedComponent) => {
         }
 
         render() {
-            const {permission_name,ManageUser,ManageNews,ManageMessage,ManageEquipment,Report,
+            const {cilent_id,permission_name,ManageUser,ManageNews,ManageMessage,ManageEquipment,Report,
               ManageRequipment,ManageProblem,ManageIncident,ManageContact,ManageImpact,ManagePriority,ManageSolution} = this.state;
             return(
                 <div>
-                    <WrappedComponent{...this.props} permission_name={permission_name}  />
+                    <WrappedComponent{...this.props} permission_name={permission_name} cilent_id={cilent_id}  />
                 </div>
             )
         }
