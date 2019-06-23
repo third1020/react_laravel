@@ -32,51 +32,11 @@ class SidebarNavItems extends React.Component {
     });
   }
 
+  number = 0;
 
-
-  render() {
-    const { navItems: items } = this.state;
-    return (
-      <div className="nav-wrapper">
-        <Nav className="nav--no-borders flex-column">
-
-        {items.map((item, idx) => {
-
-          if(item.title == "ManageUser"){
-         return    <div><h4 style={{
-        borderTopStyle: 'solid',
-        borderTopWidth: "thin",
-        textTransform: "uppercase",
-        fontWeight: "600",
-        fontSize: "12px",
-        letterSpacing: "1px",
-        color: "rgb(138, 147, 165)",
-
-        padding: "10px 20px 0px",
-        margin: "10px 0px 0px"}}>User</h4>
-        <SidebarNavItem key={idx} item={item} />
-        </div>
-
-      }else if(item.title == "ManagePersonContact"){
-
-      return <div><h4 style={{
-       borderTopStyle: 'solid',
-       borderTopWidth: "thin",
-       textTransform: "uppercase",
-       fontWeight: "600",
-       fontSize: "12px",
-       letterSpacing: "1px",
-       color: "rgb(138, 147, 165)",
-
-       padding: "10px 20px 0px",
-       margin: "10px 0px 0px"}}>Person</h4>
-       <SidebarNavItem key={idx} item={item} />
-       </div>
-
-
-     }else if(item.title == "ManagePersonContact"){
-
-     return <div><h4 style={{
+  itemNav(nameNav, idx, item) {
+    this.number++;
+    return <div key={idx}><h4 style={{
       borderTopStyle: 'solid',
       borderTopWidth: "thin",
       textTransform: "uppercase",
@@ -84,187 +44,51 @@ class SidebarNavItems extends React.Component {
       fontSize: "12px",
       letterSpacing: "1px",
       color: "rgb(138, 147, 165)",
-
       padding: "10px 20px 0px",
-      margin: "10px 0px 0px"}}>Person</h4>
+      margin: "10px 0px 0px"
+    }}>{nameNav}</h4>
       <SidebarNavItem key={idx} item={item} />
-      </div>
+    </div>;
+  }
 
+  render() {
+    const { navItems: items } = this.state;
+    return (
+      <div className="nav-wrapper">
+        <Nav className="nav--no-borders flex-column">
 
-    }else if(item.title == "ManageAddress"){
-
-      return <div><h4 style={{
-       borderTopStyle: 'solid',
-       borderTopWidth: "thin",
-       textTransform: "uppercase",
-       fontWeight: "600",
-       fontSize: "12px",
-       letterSpacing: "1px",
-       color: "rgb(138, 147, 165)",
-       padding: "10px 20px 0px",
-       margin: "10px 0px 0px"}}>Address</h4>
-       <SidebarNavItem key={idx} item={item} />
-       </div>
-
-
-     }else if(item.title == "ManageEquipment"){
-
-       return <div><h4 style={{
-        borderTopStyle: 'solid',
-        borderTopWidth: "thin",
-        textTransform: "uppercase",
-        fontWeight: "600",
-        fontSize: "12px",
-        letterSpacing: "1px",
-        color: "rgb(138, 147, 165)",
-
-        padding: "10px 20px 0px",
-        margin: "10px 0px 0px"}}>Equipment</h4>
-        <SidebarNavItem key={idx} item={item} />
-        </div>
-
-
-      }else if(item.title == "ManageRequestGeneral"){
-
-        return <div><h4 style={{
-         borderTopStyle: 'solid',
-         borderTopWidth: "thin",
-         textTransform: "uppercase",
-         fontWeight: "600",
-         fontSize: "12px",
-         letterSpacing: "1px",
-         color: "rgb(138, 147, 165)",
-
-         padding: "10px 20px 0px",
-         margin: "10px 0px 0px"}}>Request</h4>
-         <SidebarNavItem key={idx} item={item} />
-         </div>
-
-
-       }else if(item.title == "ManageNews"){
-
-         return <div><h4 style={{
-          borderTopStyle: 'solid',
-          borderTopWidth: "thin",
-          textTransform: "uppercase",
-          fontWeight: "600",
-          fontSize: "12px",
-          letterSpacing: "1px",
-          color: "rgb(138, 147, 165)",
-
-          padding: "10px 20px 0px",
-          margin: "10px 0px 0px"}}>News</h4>
-          <SidebarNavItem key={idx} item={item} />
-          </div>
-
-
-        }else if(item.title == "ManageImage"){
-
-          return <div><h4 style={{
-           borderTopStyle: 'solid',
-           borderTopWidth: "thin",
-           textTransform: "uppercase",
-           fontWeight: "600",
-           fontSize: "12px",
-           letterSpacing: "1px",
-           color: "rgb(138, 147, 165)",
-
-           padding: "10px 20px 0px",
-           margin: "10px 0px 0px"}}>Image</h4>
-           <SidebarNavItem key={idx} item={item} />
-           </div>
-
-
-         }else if(item.title == "ManageMessage"){
-
-           return <div><h4 style={{
-            borderTopStyle: 'solid',
-            borderTopWidth: "thin",
-            textTransform: "uppercase",
-            fontWeight: "600",
-            fontSize: "12px",
-            letterSpacing: "1px",
-            color: "rgb(138, 147, 165)",
-
-            padding: "10px 20px 0px",
-            margin: "10px 0px 0px"}}>Message</h4>
-            <SidebarNavItem key={idx} item={item} />
-            </div>
-
-
-          }else if(item.title == "ManageModify"){
-
-            return <div><h4 style={{
-             borderTopStyle: 'solid',
-             borderTopWidth: "thin",
-             textTransform: "uppercase",
-             fontWeight: "600",
-             fontSize: "12px",
-             letterSpacing: "1px",
-             color: "rgb(138, 147, 165)",
-
-             padding: "10px 20px 0px",
-             margin: "10px 0px 0px"}}>Modify</h4>
-             <SidebarNavItem key={idx} item={item} />
-             </div>
-
-
-           }else if(item.title == "ManagePriority"){
-
-             return <div><h4 style={{
-              borderTopStyle: 'solid',
-              borderTopWidth: "thin",
-              textTransform: "uppercase",
-              fontWeight: "600",
-              fontSize: "12px",
-              letterSpacing: "1px",
-              color: "rgb(138, 147, 165)",
-
-              padding: "10px 20px 0px",
-              margin: "10px 0px 0px"}}>Priority</h4>
-              <SidebarNavItem key={idx} item={item} />
-              </div>
-
-
-            }else if(item.title == "ManageImpact"){
-
-              return <div><h4 style={{
-               borderTopStyle: 'solid',
-               borderTopWidth: "thin",
-               textTransform: "uppercase",
-               fontWeight: "600",
-               fontSize: "12px",
-               letterSpacing: "1px",
-               color: "rgb(138, 147, 165)",
-
-               padding: "10px 20px 0px",
-               margin: "10px 0px 0px"}}>Impact</h4>
-               <SidebarNavItem key={idx} item={item} />
-               </div>
-
-
-             }else if(item.title == "Report"){
-
-             return <div><h4 style={{
-              borderTopStyle: 'solid',
-              borderTopWidth: "thin",
-              textTransform: "uppercase",
-              fontWeight: "600",
-              fontSize: "12px",
-              letterSpacing: "1px",
-              color: "rgb(138, 147, 165)",
-
-              padding: "10px 20px 0px",
-              margin: "10px 0px 0px"}}>Report</h4>
-              <SidebarNavItem key={idx} item={item} />
-              </div>
-
-
-            }else{
-       return  <SidebarNavItem key={idx} item={item} />
-     }
-
-        })}
+          {items.map((item, idx) => {
+            switch (item.title) {
+              case 'ManageUser':
+                return this.itemNav("User", idx, item);
+              case 'ManagePersonContact':
+                return this.itemNav("Person", idx, item);;
+              // case 'ManagePersonContact':
+              //   return itemNav("Address", idx, item);;
+              case 'ManageAddress':
+                return this.itemNav("Address", idx, item);;
+              case 'ManageEquipment':
+                return this.itemNav("Equipment", idx, item);;
+              case 'ManageRequestGeneral':
+                return this.itemNav("News", idx, item);;
+              case 'ManageNews':
+                return this.itemNav("User", idx, item);;
+              case 'ManageImage':
+                return this.itemNav("Image", idx, item);;
+              case 'ManageMessage':
+                return this.itemNav("Message", idx, item);;
+              case 'ManageModify':
+                return this.itemNav("Modify", idx, item);;
+              case 'ManagePriority':
+                return this.itemNav("Priority", idx, item);;
+              case 'ManageImpact':
+                return this.itemNav("Impact", idx, item);;
+              case 'Report':
+                return this.itemNav("Report", idx, item);;
+              default :
+                return <SidebarNavItem key={idx} item={item} />;
+            }
+          })}
 
 
 
