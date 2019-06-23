@@ -56,7 +56,6 @@ class SidebarNavItems extends React.Component {
     return (
       <div className="nav-wrapper">
         <Nav className="nav--no-borders flex-column">
-
           {items.map((item, idx) => {
             switch (item.title) {
               case 'ManageUser':
@@ -89,9 +88,6 @@ class SidebarNavItems extends React.Component {
                 return <SidebarNavItem key={idx} item={item} />;
             }
           })}
-
-
-
         </Nav>
       </div>
     )
