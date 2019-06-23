@@ -62,29 +62,29 @@ class SidebarNavItems extends React.Component {
               case 'ManageUser':
                 return this.itemNav("User", idx, item);
               case 'ManagePersonContact':
-                return this.itemNav("Person", idx, item);;
+                return this.itemNav("Person", idx, item);
               // case 'ManagePersonContact':
               //   return itemNav("Address", idx, item);;
               case 'ManageAddress':
-                return this.itemNav("Address", idx, item);;
+                return this.itemNav("Address", idx, item);
               case 'ManageEquipment':
-                return this.itemNav("Equipment", idx, item);;
+                return this.itemNav("Equipment", idx, item);
               case 'ManageRequestGeneral':
-                return this.itemNav("News", idx, item);;
+                return this.itemNav("News", idx, item);
               case 'ManageNews':
-                return this.itemNav("User", idx, item);;
+                return this.itemNav("User", idx, item);
               case 'ManageImage':
-                return this.itemNav("Image", idx, item);;
+                return this.itemNav("Image", idx, item);
               case 'ManageMessage':
-                return this.itemNav("Message", idx, item);;
+                return this.itemNav("Message", idx, item);
               case 'ManageModify':
-                return this.itemNav("Modify", idx, item);;
+                return this.itemNav("Modify", idx, item);
               case 'ManagePriority':
-                return this.itemNav("Priority", idx, item);;
+                return this.itemNav("Priority", idx, item);
               case 'ManageImpact':
-                return this.itemNav("Impact", idx, item);;
+                return this.itemNav("Impact", idx, item);
               case 'Report':
-                return this.itemNav("Report", idx, item);;
+                return this.itemNav("Report", idx, item);
               default :
                 return <SidebarNavItem key={idx} item={item} />;
             }
