@@ -9,7 +9,7 @@ use App\Traits\Uuids;
 class PasswordResetsModel extends Model
 {
     use SoftDeletes;
-    use Uuids;
+
 
     protected $table = 'password_resets';
     protected $softDelete = true;

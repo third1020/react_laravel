@@ -1,5 +1,5 @@
-import axios from 'axios'
-   import React, { Component } from 'react'
+
+   import React from 'react';
    import DataTable from "../DataTable";
    import clsx from 'clsx';
    import { makeStyles, useTheme } from '@material-ui/core/styles';
@@ -78,9 +78,9 @@ import axios from 'axios'
        <div>
 
            <DataTable
-           url="/api/subdistrict"
+           url="/api/district"
            columns={columns}
-           name={"subdistrict"}
+           name={"district"}
            headname={" List District - ข้อมูลตำบล "}
            headTablename={"ตารางแสดงข้อมูลตำบล"}
            edit={"แก้ไข"}
@@ -88,6 +88,8 @@ import axios from 'axios'
            addlink={"/AddDistrict"}
            addbutton={"Add District"}
            manage={"ManageDistrict"}
+           updateurl={"UpdateDistrict"}
+           viewurl ={"ViewDistrict"}
                 />
 
 

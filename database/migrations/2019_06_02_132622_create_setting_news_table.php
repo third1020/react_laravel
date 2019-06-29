@@ -14,14 +14,13 @@ class CreateSettingNewsTable extends Migration
     public function up()
     {
         Schema::create('setting_news', function (Blueprint $table) {
-            $table->uuid('id')->comment('รหัสข้อมูลของตาราง');
-			$table->primary('id');
+        $table->bigIncrements('id')->comment('รหัสข้อมูลตาราง');
 			$table->uuid('client_id')->comment('รหัสข้อมูลผู้สร้าง');
-			
+
 			$table->string('name')->comment('ชื่อ');
-			
+
 			$table->enum('is_close', ['T', 'F'])->default('T')->comment('สถานะ');
-			
+
             $table->timestamps();
 			$table->softDeletes();
         });

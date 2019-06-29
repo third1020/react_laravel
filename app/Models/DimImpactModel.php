@@ -9,7 +9,7 @@ use App\Traits\Uuids;
 class DimImpactModel extends Model
 {
     use SoftDeletes;
-    use Uuids;
+
 
     protected $table = 'dim_impact';
     protected $softDelete = true;

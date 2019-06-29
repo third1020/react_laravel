@@ -1,349 +1,1604 @@
-import React, { Component } from 'react';
+import React, {
+    Component
+} from 'react';
 import ReactDOM from 'react-dom';
 import Select from 'react-select';
 import ImageUploader from 'react-images-upload';
-import Checkbox from 'react-simple-checkbox';
-import PropTypes from 'prop-types';
-
-
-
-
-import { Button , Form , Col, Row} from 'react-bootstrap';
+import {
+    ListGroup,
+    ListGroupItem,
+    Row,
+    Col,
+    Form,
+    FormInput,
+    FormGroup,
+    FormCheckbox,
+    FormSelect,
+    Button,
+    Container
+} from "shards-react";
+import Swal from 'sweetalert2'
 import axios from 'axios'
-import { ToastContainer } from "react-toastr";
+import {
+    ToastContainer
+} from "react-toastr";
 import "../../../css/alert.css";
 import "../../../css/animate.css";
+import HocValidateUser from "../../../HocValidateUser";
 let container;
 
 
 
-    class Update_permission extends Component {
-      constructor (props) {
+
+class Update_permission extends Component {
+    constructor(props) {
         super(props)
         this.state = {
-          permission_name	: '',
-          manage_user	: false,
-          manage_knowledge	: false,
-          manage_message	: false,
-          manage_equipment	: false,
-          manage_requipment	: false,
-          manage_problem	: false,
-          manage_incident	: false,
-          manage_contact	: false,
-          manage_impact	: false,
-          manage_priority	: false,
-          manage_solution	: false,
-          Report	: false,
+            permission_name: '',
+            user: true,
+            personcontact: false,
+            equipment: false,
+            request: false,
+            news: false,
+            image: false,
+            message: false,
+            modify: false,
+            report: false,
+            ManageUser: false,
+            ManageUserView: false,
+            ManageUserEdit: false,
+            ManageUserDelete: false,
+            ManagePermission: false,
+            ManagePermissionView: false,
+            ManagePermissionEdit: false,
+            ManagePermissionDelete: false,
+            ManageAddress: false,
+            ManageAddressView: false,
+            ManageAddressEdit: false,
+            ManageAddressDelete: false,
+            ManageCompany: false,
+            ManageCompanyView: false,
+            ManageCompanyEdit: false,
+            ManageCompanyDelete: false,
+            ManageDepartment: false,
+            ManageDepartmentView: false,
+            ManageDepartmentEdit: false,
+            ManageDepartmentDelete: false,
+            ManageDistrict: false,
+            ManageDistrictView: false,
+            ManageDistrictEdit: false,
+            ManageDistrictDelete: false,
+            ManageEquipment: false,
+            ManageEquipmentView: false,
+            ManageEquipmentEdit: false,
+            ManageEquipmentDelete: false,
+            ManageImage: false,
+            ManageImageView: false,
+            ManageImageEdit: false,
+            ManageImageDelete: false,
+            ManageImpact: false,
+            ManageImpactView: false,
+            ManageImpactEdit: false,
+            ManageImpactDelete: false,
+            ManageLocation: false,
+            ManageLocationView: false,
+            ManageLocationEdit: false,
+            ManageLocationDelete: false,
+            ManageMessage: false,
+            ManageMessageView: false,
+            ManageMessageEdit: false,
+            ManageMessageDelete: false,
+            ManageModify: false,
+            ManageModifyView: false,
+            ManageModifyEdit: false,
+            ManageModifyDelete: false,
+            ManageNews: false,
+            ManageNewsView: false,
+            ManageNewsEdit: false,
+            ManageNewsDelete: false,
+            ManagePersonContact: false,
+            ManagePersonContactView: false,
+            ManagePersonContactEdit: false,
+            ManagePersonContactDelete: false,
+            ManagePersonResponsible: false,
+            ManagePersonResponsibleView: false,
+            ManagePersonResponsibleEdit: false,
+            ManagePersonResponsibleDelete: false,
+            ManagePostalCode: false,
+            ManagePostalCodeView: false,
+            ManagePostalCodeEdit: false,
+            ManagePostalCodeDelete: false,
+            ManagePriority: false,
+            ManagePriorityView: false,
+            ManagePriorityEdit: false,
+            ManagePriorityDelete: false,
+            ManageProvince: false,
+            ManageProvinceView: false,
+            ManageProvinceEdit: false,
+            ManageProvinceDelete: false,
+            ManageRequestGeneral: false,
+            ManageRequestGeneralView: false,
+            ManageRequestGeneralEdit: false,
+            ManageRequestGeneralDelete: false,
+            ManageRequestIssuses: false,
+            ManageRequestIssusesView: false,
+            ManageRequestIssusesEdit: false,
+            ManageRequestIssusesDelete: false,
+            ManageSettingNews: false,
+            ManageSettingNewsView: false,
+            ManageSettingNewsEdit: false,
+            ManageSettingNewsDelete: false,
+            Report: false,
+            errors: []
+        };
 
-          errors: []
-        }
 
+        this.handleChange = this.handleChange.bind(this)
         this.handleFieldChange = this.handleFieldChange.bind(this)
-        this.handleCreate= this.handleCreate.bind(this)
+        this.handleCreate = this.handleCreate.bind(this)
         this.hasErrorFor = this.hasErrorFor.bind(this)
         this.renderErrorFor = this.renderErrorFor.bind(this)
-        this.handleCheckboxUserChange = this.handleCheckboxUserChange.bind(this)
-        this.handleCheckboxknowledgeChange = this.handleCheckboxknowledgeChange.bind(this)
-        this.handleCheckboxmessageChange = this.handleCheckboxmessageChange.bind(this)
-        this.handleCheckboxequipmentChange = this.handleCheckboxequipmentChange.bind(this)
-        this.handleCheckboxrequipmentChange = this.handleCheckboxrequipmentChange.bind(this)
-        this.handleCheckboxproblemChange = this.handleCheckboxproblemChange.bind(this)
-        this.handleCheckboxincidentChange = this.handleCheckboxincidentChange.bind(this)
-        this.handleCheckboxcontactChange = this.handleCheckboxcontactChange.bind(this)
-        this.handleCheckboximpactChange = this.handleCheckboximpactChange.bind(this)
-        this.handleCheckboxpriorityChange = this.handleCheckboxpriorityChange.bind(this)
-        this.handleCheckboxsolutionChange = this.handleCheckboxsolutionChange.bind(this)
-        this.handleCheckboxReportChange = this.handleCheckboxReportChange.bind(this)
 
 
-      }
-      handleCheckboxUserChange (event) {
+    }
+
+
+    handleFieldChange(event) {
         this.setState({
-        manage_user  : !this.state.manage_user
+            permission_name: event.target.value
         })
-      }
+    }
 
-      handleCheckboxknowledgeChange (event) {
+    handleChange(e, fruit) {
+        const newState = {};
+        newState[fruit] = !this.state[fruit];
         this.setState({
-        manage_knowledge  : !this.state.manage_knowledge
-        })
-      }
-
-      handleCheckboxmessageChange (event) {
-        this.setState({
-        manage_message  : !this.state.manage_message
-        })
-      }
-
-      handleCheckboxequipmentChange (event) {
-        this.setState({
-        manage_equipment  : !this.state.manage_equipment
-        })
-      }
-
-      handleCheckboxrequipmentChange (event) {
-        this.setState({
-        manage_requipment  : !this.state.manage_requipment
-        })
-      }
-
-      handleCheckboxproblemChange (event) {
-        this.setState({
-        manage_problem  : !this.state.manage_problem
-        })
-      }
-
-      handleCheckboxincidentChange (event) {
-        this.setState({
-        manage_incident  : !this.state.manage_incident
-        })
-      }
-
-      handleCheckboxcontactChange (event) {
-        this.setState({
-        manage_contact  : !this.state.manage_contact
-        })
-      }
-
-      handleCheckboximpactChange (event) {
-        this.setState({
-        manage_impact  : !this.state.manage_impact
-        })
-      }
-
-      handleCheckboxpriorityChange (event) {
-        this.setState({
-        manage_priority  : !this.state.manage_priority
-        })
-      }
-
-      handleCheckboxsolutionChange (event) {
-        this.setState({
-        manage_solution  : !this.state.manage_solution
-        })
-      }
-
-      handleCheckboxReportChange (event) {
-        this.setState({
-        Report  : !this.state.Report
-        })
-      }
+            ...this.state,
+            ...newState
+        });
 
 
 
+    }
 
-      handleFieldChange (event) {
-        this.setState({
-          [event.target.name]: event.target.value
-        })
-      }
-
-
-
-
-
-
-      handleCreate (event) {
-
-
-
+    handleCreate(event) {
         event.preventDefault()
-
-        const { history } = this.props
+        const {
+            history
+        } = this.props
 
         const insertdata = {
-
-          permission_name	: this.state.permission_name,
-          manage_user	: this.state.manage_user,
-          manage_knowledge	: this.state.manage_knowledge,
-          manage_message	: this.state.manage_message,
-          manage_equipment	: this.state.manage_equipment,
-          manage_requipment	: this.state.manage_requipment,
-          manage_problem	: this.state.manage_problem,
-          manage_incident	: this.state.manage_incident,
-          manage_contact	: this.state.manage_contact,
-          manage_impact	: this.state.manage_impact,
-          manage_priority	: this.state.manage_priority,
-          manage_solution	: this.state.manage_solution,
-          Report	: this.state.Report,
-
-
+            permission_name: this.state.permission_name,
+            user: this.state.user,
+            personcontact: this.state.personcontact,
+            equipment: this.state.equipment,
+            request: this.state.request,
+            news: this.state.news,
+            image: this.state.image,
+            message: this.state.message,
+            modify: this.state.modify,
+            report: this.state.report,
+            ManageUser: this.state.ManageUser,
+            ManageUserView: this.state.ManageUserView,
+            ManageUserEdit: this.state.ManageUserEdit,
+            ManageUserDelete: this.state.ManageUserDelete,
+            ManagePermission: this.state.ManagePermission,
+            ManagePermissionView: this.state.ManagePermissionView,
+            ManagePermissionEdit: this.state.ManagePermissionEdit,
+            ManagePermissionDelete: this.state.ManagePermissionDelete,
+            ManageAddress: this.state.ManageAddress,
+            ManageAddressView: this.state.ManageAddressView,
+            ManageAddressEdit: this.state.ManageAddressEdit,
+            ManageAddressDelete: this.state.ManageAddressDelete,
+            ManageCompany: this.state.ManageCompany,
+            ManageCompanyView: this.state.ManageCompanyView,
+            ManageCompanyEdit: this.state.ManageCompanyEdit,
+            ManageCompanyDelete: this.state.ManageCompanyDelete,
+            ManageDepartment: this.state.ManageDepartment,
+            ManageDepartmentView: this.state.ManageDepartmentView,
+            ManageDepartmentEdit: this.state.ManageDepartmentEdit,
+            ManageDepartmentDelete: this.state.ManageDepartmentDelete,
+            ManageDistrict: this.state.ManageDistrict,
+            ManageDistrictView: this.state.ManageDistrictView,
+            ManageDistrictEdit: this.state.ManageDistrictEdit,
+            ManageDistrictDelete: this.state.ManageDistrictDelete,
+            ManageEquipment: this.state.ManageEquipment,
+            ManageEquipmentView: this.state.ManageEquipmentView,
+            ManageEquipmentEdit: this.state.ManageEquipmentEdit,
+            ManageEquipmentDelete: this.state.ManageEquipmentDelete,
+            ManageImage: this.state.ManageImage,
+            ManageImageView: this.state.ManageImageView,
+            ManageImageEdit: this.state.ManageImageEdit,
+            ManageImageDelete: this.state.ManageImageDelete,
+            ManageImpact: this.state.ManageImpact,
+            ManageImpactView: this.state.ManageImpactView,
+            ManageImpactEdit: this.state.ManageImpactEdit,
+            ManageImpactDelete: this.state.ManageImpactDelete,
+            ManageLocation: this.state.ManageLocation,
+            ManageLocationView: this.state.ManageLocationView,
+            ManageLocationEdit: this.state.ManageLocationEdit,
+            ManageLocationDelete: this.state.ManageLocationDelete,
+            ManageMessage: this.state.ManageMessage,
+            ManageMessageView: this.state.ManageMessageView,
+            ManageMessageEdit: this.state.ManageMessageEdit,
+            ManageMessageDelete: this.state.ManageMessageDelete,
+            ManageModify: this.state.ManageModify,
+            ManageModifyView: this.state.ManageModifyView,
+            ManageModifyEdit: this.state.ManageModifyEdit,
+            ManageModifyDelete: this.state.ManageModifyDelete,
+            ManageNews: this.state.ManageNews,
+            ManageNewsView: this.state.ManageNewsView,
+            ManageNewsEdit: this.state.ManageNewsEdit,
+            ManageNewsDelete: this.state.ManageNewsDelete,
+            ManagePersonContact: this.state.ManagePersonContact,
+            ManagePersonContactView: this.state.ManagePersonContactView,
+            ManagePersonContactEdit: this.state.ManagePersonContactEdit,
+            ManagePersonContactDelete: this.state.ManagePersonContactDelete,
+            ManagePersonResponsible: this.state.ManagePersonResponsible,
+            ManagePersonResponsibleView: this.state.ManagePersonResponsibleView,
+            ManagePersonResponsibleEdit: this.state.ManagePersonResponsibleEdit,
+            ManagePersonResponsibleDelete: this.state.ManagePersonResponsibleDelete,
+            ManagePostalCode: this.state.ManagePostalCode,
+            ManagePostalCodeView: this.state.ManagePostalCodeView,
+            ManagePostalCodeEdit: this.state.ManagePostalCodeEdit,
+            ManagePostalCodeDelete: this.state.ManagePostalCodeDelete,
+            ManagePriority: this.state.ManagePriority,
+            ManagePriorityView: this.state.ManagePriorityView,
+            ManagePriorityEdit: this.state.ManagePriorityEdit,
+            ManagePriorityDelete: this.state.ManagePriorityDelete,
+            ManageProvince: this.state.ManageProvince,
+            ManageProvinceView: this.state.ManageProvinceView,
+            ManageProvinceEdit: this.state.ManageProvinceEdit,
+            ManageProvinceDelete: this.state.ManageProvinceDelete,
+            ManageRequestGeneral: this.state.ManageRequestGeneral,
+            ManageRequestGeneralView: this.state.ManageRequestGeneralView,
+            ManageRequestGeneralEdit: this.state.ManageRequestGeneralEdit,
+            ManageRequestGeneralDelete: this.state.ManageRequestGeneralDelete,
+            ManageRequestIssuses: this.state.ManageRequestIssuses,
+            ManageRequestIssusesView: this.state.ManageRequestIssusesView,
+            ManageRequestIssusesEdit: this.state.ManageRequestIssusesEdit,
+            ManageRequestIssusesDelete: this.state.ManageRequestIssusesDelete,
+            ManageSettingNews: this.state.ManageSettingNews,
+            ManageSettingNewsView: this.state.ManageSettingNewsView,
+            ManageSettingNewsEdit: this.state.ManageSettingNewsEdit,
+            ManageSettingNewsDelete: this.state.ManageSettingNewsDelete,
+            Report: this.state.Report
         }
 
-        axios.put(`/api/permission_update/${this.props.id}`, insertdata)
-          .then(response => {
+        console.log(insertdata);
 
-            container.success(`success `, `///title\\\\\\`, {
-                closeButton: true,
-                timeOut: 5000
-              })
-              window.scrollTo(0, 0);
+        axios.put(`/api/permission/update/${this.props.match.params.id}`, insertdata)
+            .then(response => {
+                console.log(response.data);
+                Swal.fire(
+                    'Successfully',
+                    'Add data successfully ',
+                    'success'
+                )
+                this.setState({
+                    permission_name: '',
+                    user: false,
+                    personcontact: false,
+                    equipment: false,
+                    request: false,
+                    news: false,
+                    image: false,
+                    message: false,
+                    modify: false,
+                    report: false,
+                    ManageUser: false,
+                    ManageUserView: false,
+                    ManageUserEdit: false,
+                    ManageUserDelete: false,
+                    ManagePermission: false,
+                    ManagePermissionView: false,
+                    ManagePermissionEdit: false,
+                    ManagePermissionDelete: false,
+                    ManageAddress: false,
+                    ManageAddressView: false,
+                    ManageAddressEdit: false,
+                    ManageAddressDelete: false,
+                    ManageCompany: false,
+                    ManageCompanyView: false,
+                    ManageCompanyEdit: false,
+                    ManageCompanyDelete: false,
+                    ManageDepartment: false,
+                    ManageDepartmentView: false,
+                    ManageDepartmentEdit: false,
+                    ManageDepartmentDelete: false,
+                    ManageDistrict: false,
+                    ManageDistrictView: false,
+                    ManageDistrictEdit: false,
+                    ManageDistrictDelete: false,
+                    ManageEquipment: false,
+                    ManageEquipmentView: false,
+                    ManageEquipmentEdit: false,
+                    ManageEquipmentDelete: false,
+                    ManageImage: false,
+                    ManageImageView: false,
+                    ManageImageEdit: false,
+                    ManageImageDelete: false,
+                    ManageImpact: false,
+                    ManageImpactView: false,
+                    ManageImpactEdit: false,
+                    ManageImpactDelete: false,
+                    ManageLocation: false,
+                    ManageLocationView: false,
+                    ManageLocationEdit: false,
+                    ManageLocationDelete: false,
+                    ManageMessage: false,
+                    ManageMessageView: false,
+                    ManageMessageEdit: false,
+                    ManageMessageDelete: false,
+                    ManageModify: false,
+                    ManageModifyView: false,
+                    ManageModifyEdit: false,
+                    ManageModifyDelete: false,
+                    ManageNews: false,
+                    ManageNewsView: false,
+                    ManageNewsEdit: false,
+                    ManageNewsDelete: false,
+                    ManagePersonContact: false,
+                    ManagePersonContactView: false,
+                    ManagePersonContactEdit: false,
+                    ManagePersonContactDelete: false,
+                    ManagePersonResponsible: false,
+                    ManagePersonResponsibleView: false,
+                    ManagePersonResponsibleEdit: false,
+                    ManagePersonResponsibleDelete: false,
+                    ManagePostalCode: false,
+                    ManagePostalCodeView: false,
+                    ManagePostalCodeEdit: false,
+                    ManagePostalCodeDelete: false,
+                    ManagePriority: false,
+                    ManagePriorityView: false,
+                    ManagePriorityEdit: false,
+                    ManagePriorityDelete: false,
+                    ManageProvince: false,
+                    ManageProvinceView: false,
+                    ManageProvinceEdit: false,
+                    ManageProvinceDelete: false,
+                    ManageRequestGeneral: false,
+                    ManageRequestGeneralView: false,
+                    ManageRequestGeneralEdit: false,
+                    ManageRequestGeneralDelete: false,
+                    ManageRequestIssuses: false,
+                    ManageRequestIssusesView: false,
+                    ManageRequestIssusesEdit: false,
+                    ManageRequestIssusesDelete: false,
+                    ManageSettingNews: false,
+                    ManageSettingNewsView: false,
+                    ManageSettingNewsEdit: false,
+                    ManageSettingNewsDelete: false,
+                    Report: false,
+                    errors: []
+                })
 
-          })
-          .catch(error => {
-            this.setState({
 
-              errors: error.response.data.errors
             })
+            .catch(error => {
+                this.setState({
+                    errors: error.response.data.errors
+                })
+                console.log(error.response.data.errors);
 
-            container.error(`errors`, `///title\\\\\\`, {
-                closeButton: true,
+                Swal.fire(
+                    'Errors',
+                    'check the value of a form field',
+                    'error'
+                )
 
-                timeOut: 5000,
-                extendedTimeOut: 2000
-              })
-            window.scrollTo(0, 0);
-          })
-
+            });
 
 
 
+    }
 
-      }
 
-      hasErrorFor (field) {
+    hasErrorFor(field) {
         return !!this.state.errors[field]
-      }
+    }
 
-      renderErrorFor (field) {
+    renderErrorFor(field) {
         if (this.hasErrorFor(field)) {
-          return (
-            <span className='invalid-feedback'>
-              <strong>{this.state.errors[field][0]}</strong>
-            </span>
-          )
+            return ( <
+                span className = 'invalid-feedback' >
+                <
+                strong > {
+                    this.state.errors[field][0]
+                } < /strong> <
+                /span>
+            )
         }
-      }
+    }
+    componentDidMount(){
+      axios.get(`/api/permission/update/${this.props.match.params.id}`).then(res => {
+        console.log(res.data.user);
+        this.setState({
 
 
+          permission_name: res.data.user.permission_name,
+          user: res.data.user.user,
+          personcontact: res.data.user.personcontact,
+          equipment: res.data.user.equipment,
+          request: res.data.user.request,
+          news: res.data.user.news,
+          image: res.data.user.image,
+          message: res.data.user.message,
+          modify: res.data.user.modify,
+          report: res.data.user.report,
+          ManageUser:res.data.user.ManageUser,
+          ManageUserView: res.data.user.ManageUserView,
+          ManageUserEdit: res.data.user.ManageUserEdit,
+          ManageUserDelete:res.data.user.ManageUserDelete,
+          ManagePermission: res.data.user.ManagePermission,
+          ManagePermissionView: res.data.user.ManagePermissionView,
+          ManagePermissionEdit: res.data.user.ManagePermissionEdit,
+          ManagePermissionDelete: res.data.user.ManagePermissionDelete,
+          ManageAddress: res.data.user.ManageAddress,
+          ManageAddressView: res.data.user.ManageAddressView,
+          ManageAddressEdit: res.data.user.ManageAddressEdit,
+          ManageAddressDelete: res.data.user.ManageAddressDelete,
+          ManageCompany: res.data.user.ManageCompany,
+          ManageCompanyView: res.data.user.ManageCompanyView,
+          ManageCompanyEdit: res.data.user.ManageCompanyEdit,
+          ManageCompanyDelete: res.data.user.ManageCompanyDelete,
+          ManageDepartment: res.data.user.ManageDepartment,
+          ManageDepartmentView: res.data.user.ManageDepartmentView,
+          ManageDepartmentEdit:res.data.user.ManageDepartmentEdit,
+          ManageDepartmentDelete: res.data.user.ManageDepartmentDelete,
+          ManageDistrict: res.data.user.ManageDistrict,
+          ManageDistrictView: res.data.user.ManageDistrictView,
+          ManageDistrictEdit: res.data.user.ManageDistrictEdit,
+          ManageDistrictDelete: res.data.user.ManageDistrictDelete,
+          ManageEquipment: res.data.user.ManageEquipment,
+          ManageEquipmentView: res.data.user.ManageEquipmentView,
+          ManageEquipmentEdit: res.data.user.ManageEquipmentEdit,
+          ManageEquipmentDelete: res.data.user.ManageEquipmentDelete,
+          ManageImage: res.data.user.ManageImage,
+          ManageImageView: res.data.user.ManageImageView,
+          ManageImageEdit: res.data.user.ManageImageEdit,
+          ManageImageDelete: res.data.user.ManageImageDelete,
+          ManageImpact:res.data.user.ManageImpact,
+          ManageImpactView: res.data.user.ManageImpactView,
+          ManageImpactEdit: res.data.user.ManageImpactEdit,
+          ManageImpactDelete: res.data.user.ManageImpactDelete,
+          ManageLocation: res.data.user.ManageLocation,
+          ManageLocationView: res.data.user.ManageLocationView,
+          ManageLocationEdit:res.data.user.ManageLocationEdit,
+          ManageLocationDelete:res.data.user.ManageLocationDelete,
+          ManageMessage: res.data.user.ManageMessage,
+          ManageMessageView: res.data.user.ManageMessageView,
+          ManageMessageEdit: res.data.user.ManageMessageEdit,
+          ManageMessageDelete: res.data.user.ManageMessageDelete,
+          ManageModify: res.data.user.ManageModify,
+          ManageModifyView: res.data.user.ManageModifyView,
+          ManageModifyEdit: res.data.user.ManageModifyEdit,
+          ManageModifyDelete: res.data.user.ManageModifyDelete,
+          ManageNews: res.data.user.ManageNews,
+          ManageNewsView: res.data.user.ManageNewsView,
+          ManageNewsEdit:res.data.user.ManageNewsEdit,
+          ManageNewsDelete: res.data.user.ManageNewsDelete,
+          ManagePersonContact: res.data.user.ManagePersonContact,
+          ManagePersonContactView: res.data.user.ManagePersonContactView,
+          ManagePersonContactEdit: res.data.user.ManagePersonContactEdit,
+          ManagePersonContactDelete: res.data.user.ManagePersonContactDelete,
+          ManagePersonResponsible: res.data.user.ManagePersonResponsible,
+          ManagePersonResponsibleView: res.data.user.ManagePersonResponsibleView,
+          ManagePersonResponsibleEdit:res.data.user.ManagePersonResponsibleEdit,
+          ManagePersonResponsibleDelete: res.data.user.ManagePersonResponsibleDelete,
+          ManagePostalCode: res.data.user.ManagePostalCode,
+          ManagePostalCodeView: res.data.user.ManagePostalCodeView,
+          ManagePostalCodeEdit: res.data.user.ManagePostalCodeEdit,
+          ManagePostalCodeDelete: res.data.user.ManagePostalCodeDelete,
+          ManagePriority: res.data.user.ManagePriority,
+          ManagePriorityView:res.data.user.ManagePriorityView,
+          ManagePriorityEdit:res.data.user.ManagePriorityEdit,
+          ManagePriorityDelete:res.data.user.ManagePriorityDelete,
+          ManageProvince: res.data.user.ManageProvince,
+          ManageProvinceView: res.data.user.ManageProvinceView,
+          ManageProvinceEdit: res.data.user.ManageProvinceEdit,
+          ManageProvinceDelete: res.data.user.ManageProvinceDelete,
+          ManageRequestGeneral: res.data.user.ManageRequestGeneral,
+          ManageRequestGeneralView: res.data.user.ManageRequestGeneralView,
+          ManageRequestGeneralEdit: res.data.user.ManageRequestGeneralEdit,
+          ManageRequestGeneralDelete:res.data.user.ManageRequestGeneralDelete,
+          ManageRequestIssuses: res.data.user.ManageRequestIssuses,
+          ManageRequestIssusesView: res.data.user.ManageRequestIssusesView,
+          ManageRequestIssusesEdit: res.data.user.ManageRequestIssusesEdit,
+          ManageRequestIssusesDelete: res.data.user.ManageRequestIssusesDelete,
+          ManageSettingNews: res.data.user.ManageSettingNews,
+          ManageSettingNewsView: res.data.user.ManageSettingNewsView,
+          ManageSettingNewsEdit: res.data.user.ManageSettingNewsEdit,
+          ManageSettingNewsDelete: res.data.user.ManageSettingNewsDelete,
+          Report: false,
 
-      componentWillMount () {
-
-        axios.get(`/api/permission/${this.props.id}`).then(response => {
-          this.setState({
-
-            permission_name	: response.data[0].permission_name,
-            manage_user	: response.data[0].manage_user,
-            manage_knowledge	:response.data[0].manage_knowledge,
-            manage_message	: response.data[0].manage_message,
-            manage_equipment	: response.data[0].manage_equipment,
-            manage_requipment	: response.data[0].manage_requipment,
-            manage_problem	: response.data[0].manage_problem,
-            manage_incident	: response.data[0].manage_incident,
-            manage_contact	: response.data[0].manage_contact,
-            manage_impact	: response.data[0].manage_impact,
-            manage_priority	: response.data[0].manage_priority,
-            manage_solution	: response.data[0].manage_solution,
-            Report	: response.data[0].Report
-
-
-
-          })
         })
 
+      }).catch(err =>{
+        console.log(err);
 
-      }
+      })
+    }
 
-      render () {
 
 
+
+
+    render() {
         return (
 
+            <
+            div style = {
+                {
+                    paddingTop: "30px"
+                }
+            } >
+            <
+            Container >
+            <
+            ListGroup flush >
+            <
+            ListGroupItem className = "p-3" >
+            <
+            Row >
+            <
+            Col >
+            <
+            Form onSubmit = {
+                this.handleCreate
+            } >
+            <
+            Row form >
+
+            <
+            Col md = "12"
+            className = "form-group" >
+
+            <
+            label htmlFor = "feEmailAddress" > Permission Name < /label> <
+            FormInput
+
+            name = 'permission_name'
+            className = {
+                `form-control ${this.hasErrorFor('permission_name') ? 'is-invalid' : ''}`
+            }
+            placeholder = "กรอกชื่อผู้ใช้"
+            type = 'text'
+            value = {
+                this.state.permission_name
+            }
+            onChange = {
+                this.handleFieldChange
+            }
+            /> {
+                this.renderErrorFor('permission_name')
+            } <
+            /Col> <
+            Col >
+            <
+            ListGroupItem className = "px-3 pb-3" >
+            <
+            FormCheckbox checked = {
+                this.state.ManageUser
+            }
+            onChange = {
+                e => this.handleChange(e, "ManageUser")
+            } >
+            User <
+            /FormCheckbox> {
+                this.state.ManageUser == true ? ( <
+                    Col >
+                    <
+                    div >
+                    <
+                    FormCheckbox inline checked = {
+                        this.state.ManageUser
+                    }
+                    onChange = {
+                        e => this.handleChange(e, "ManageUser")
+                    }
+                    className = "mystyle"
+
+                    >
+                    ManageUser <
+                    /FormCheckbox> <
+                    FormCheckbox inline checked = {
+                        this.state.ManageUserView
+                    }
+                    onChange = {
+                        e => this.handleChange(e, "ManageUserView")
+                    } >
+                    View <
+                    /FormCheckbox> <
+                    FormCheckbox inline checked = {
+                        this.state.ManageUserEdit
+                    }
+                    onChange = {
+                        e => this.handleChange(e, "ManageUserEdit")
+                    } >
+                    Edit <
+                    /FormCheckbox> <
+                    FormCheckbox inline checked = {
+                        this.state.ManageUserDelete
+                    }
+                    onChange = {
+                        e => this.handleChange(e, "ManageUserDelete")
+                    } >
+                    Delete <
+                    /FormCheckbox> <
+                    /div>
+
+                    <
+                    div >
+
+                    <
+                    FormCheckbox inline checked = {
+                        this.state.ManagePermission
+                    }
+                    onChange = {
+                        e => this.handleChange(e, "ManagePermission")
+                    }
+                    className = "mystyle" >
+                    ManagePermission <
+                    /FormCheckbox> <
+                    FormCheckbox inline checked = {
+                        this.state.ManagePermissionView
+                    }
+                    onChange = {
+                        e => this.handleChange(e, "ManagePermissionView")
+                    } >
+                    View <
+                    /FormCheckbox> <
+                    FormCheckbox inline checked = {
+                        this.state.ManagePermissionEdit
+                    }
+                    onChange = {
+                        e => this.handleChange(e, "ManagePermissionEdit")
+                    } >
+                    Edit <
+                    /FormCheckbox> <
+                    FormCheckbox inline checked = {
+                        this.state.ManagePermissionDelete
+                    }
+                    onChange = {
+                        e => this.handleChange(e, "ManagePermissionDelete")
+                    } >
+                    Delete <
+                    /FormCheckbox> <
+                    /div> <
+                    /Col>
+
+                ) : null
+            }
 
 
-            <div className='col-lg-12' style={{width:900,padding:40}}>
-                <div className='card'>
-                  <div className='card-header'>เพิ่มสิทธิ์ผู้ใช้งาน</div>
-                  <div className='card-body'>
-                    <form onSubmit={this.handleCreate}>
-                    <div className='form-group'>
-                      <label htmlFor='FullName'>ชื่อ-นามสกุล</label>
-                      <input
-                        id='permission_name'
-                        type='text'
-                        placeholder="กรอก ชื่อ-นามสกุล"
-                        className={`form-control ${this.hasErrorFor('permission_name') ? 'is-invalid' : ''}`}
-                        name='permission_name'
-                        value={this.state.permission_name}
-                        onChange={this.handleFieldChange}
-                      />
-                      {this.renderErrorFor('permission_name')}
+            <
+            FormCheckbox checked = {
+                this.state.ManagePersonContact
+            }
+            onChange = {
+                e => this.handleChange(e, "ManagePersonContact")
+            } >
+            Person <
+            /FormCheckbox> {
+                this.state.ManagePersonContact == true ? ( <
+                    Col >
+                    <
+                    div >
+                    <
+                    FormCheckbox inline checked = {
+                        this.state.ManagePersonContact
+                    }
+                    onChange = {
+                        e => this.handleChange(e, "ManagePersonContact")
+                    }
+                    className = "mystyle"
 
-                    </div>
+                    >
+                    ManageUser <
+                    /FormCheckbox> <
+                    FormCheckbox inline checked = {
+                        this.state.ManagePersonContactView
+                    }
+                    onChange = {
+                        e => this.handleChange(e, "ManagePersonContactView")
+                    } >
+                    View <
+                    /FormCheckbox> <
+                    FormCheckbox inline checked = {
+                        this.state.ManagePersonContactEdit
+                    }
+                    onChange = {
+                        e => this.handleChange(e, "ManagePersonContactEdit")
+                    } >
+                    Edit <
+                    /FormCheckbox> <
+                    FormCheckbox inline checked = {
+                        this.state.ManagePersonContactDelete
+                    }
+                    onChange = {
+                        e => this.handleChange(e, "ManagePersonContactDelete")
+                    } >
+                    Delete <
+                    /FormCheckbox> <
+                    /div>
 
-                      <div className='form-group'>
-                      <label>สิทธิ์การเข้าถึง User :</label>    <input type="checkbox" checked={this.state.manage_user} onChange={this.handleCheckboxUserChange}/>
-                      </div>
+                    <
+                    div >
 
-                      <div className='form-group'>
-                      <label>สิทธิ์การเข้าถึง News :</label>    <input type="checkbox" checked={this.state.manage_knowledge} onChange={this.handleCheckboxknowledgeChange}/>
-                      </div>
+                    <
+                    FormCheckbox inline checked = {
+                        this.state.ManagePersonResponsible
+                    }
+                    onChange = {
+                        e => this.handleChange(e, "ManagePersonResponsible")
+                    }
+                    className = "mystyle2" >
+                    ManagePersonResponsible <
+                    /FormCheckbox> <
+                    FormCheckbox inline checked = {
+                        this.state.ManagePersonResponsibleView
+                    }
+                    onChange = {
+                        e => this.handleChange(e, "ManagePersonResponsibleView")
+                    } >
+                    View <
+                    /FormCheckbox> <
+                    FormCheckbox inline checked = {
+                        this.state.ManagePersonResponsibleEdit
+                    }
+                    onChange = {
+                        e => this.handleChange(e, "ManagePersonResponsibleEdit")
+                    } >
+                    Edit <
+                    /FormCheckbox> <
+                    FormCheckbox inline checked = {
+                        this.state.ManagePersonResponsibleDelete
+                    }
+                    onChange = {
+                        e => this.handleChange(e, "ManagePersonResponsibleDelete")
+                    } >
+                    Delete <
+                    /FormCheckbox> <
+                    /div> <
+                    /Col>
 
-                      <div className='form-group'>
-                      <label>สิทธิ์การเข้าถึง Message :</label>    <input type="checkbox" checked={this.state.manage_message} onChange={this.handleCheckboxmessageChange}/>
-                      </div>
+                ) : null
+            }
 
-                      <div className='form-group'>
-                      <label>สิทธิ์การเข้าถึง Equipment :</label>    <input type="checkbox"  checked={this.state.manage_equipment} onChange={this.handleCheckboxequipmentChange}/>
-                      </div>
+            <
+            FormCheckbox checked = {
+                this.state.ManageAddress
+            }
+            onChange = {
+                e => this.handleChange(e, "ManageAddress")
+            } >
+            Address <
+            /FormCheckbox>
 
-                      <div className='form-group'>
-                      <label>สิทธิ์การเข้าถึง Request :</label>    <input type="checkbox" checked={this.state.manage_requipment} onChange={this.handleCheckboxrequipmentChange}/>
-                      </div>
+            {
+                this.state.ManageAddress == true ? ( <
+                    Col >
+                    <
+                    div >
+                    <
+                    FormCheckbox inline checked = {
+                        this.state.ManageAddress
+                    }
+                    onChange = {
+                        e => this.handleChange(e, "ManageAddress")
+                    }
+                    className = "mystyle"
 
-                      <div className='form-group'>
-                      <label>สิทธิ์การเข้าถึง Problems :</label>    <input type="checkbox"  checked={this.state.manage_problem} onChange={this.handleCheckboxproblemChange}/>
-                      </div>
+                    >
+                    ManageAddress <
+                    /FormCheckbox> <
+                    FormCheckbox inline checked = {
+                        this.state.ManageAddressView
+                    }
+                    onChange = {
+                        e => this.handleChange(e, "ManageAddressView")
+                    } >
+                    View <
+                    /FormCheckbox> <
+                    FormCheckbox inline checked = {
+                        this.state.ManageAddressEdit
+                    }
+                    onChange = {
+                        e => this.handleChange(e, "ManageAddressEdit")
+                    } >
+                    Edit <
+                    /FormCheckbox> <
+                    FormCheckbox inline checked = {
+                        this.state.ManageAddressDelete
+                    }
+                    onChange = {
+                        e => this.handleChange(e, "ManageAddressDelete")
+                    } >
+                    Delete <
+                    /FormCheckbox> <
+                    /div>
 
-                      <div className='form-group'>
-                      <label>สิทธิ์การเข้าถึง Incident :</label>    <input type="checkbox" checked={this.state.manage_incident} onChange={this.handleCheckboxincidentChange}/>
-                      </div>
+                    <
+                    div >
 
-                      <div className='form-group'>
-                      <label>สิทธิ์การเข้าถึง Contact :</label>    <input type="checkbox" checked={this.state.manage_contact} onChange={this.handleCheckboxcontactChange}/>
-                      </div>
+                    <
+                    FormCheckbox inline checked = {
+                        this.state.ManageCompany
+                    }
+                    onChange = {
+                        e => this.handleChange(e, "ManageCompany")
+                    }
+                    className = "mystyle" >
+                    ManageCompany <
+                    /FormCheckbox> <
+                    FormCheckbox inline checked = {
+                        this.state.ManageCompanyView
+                    }
+                    onChange = {
+                        e => this.handleChange(e, "ManageCompanyView")
+                    } >
+                    View <
+                    /FormCheckbox> <
+                    FormCheckbox inline checked = {
+                        this.state.ManageCompanyEdit
+                    }
+                    onChange = {
+                        e => this.handleChange(e, "ManageCompanyEdit")
+                    } >
+                    Edit <
+                    /FormCheckbox> <
+                    FormCheckbox inline checked = {
+                        this.state.ManageCompanyDelete
+                    }
+                    onChange = {
+                        e => this.handleChange(e, "ManageCompanyDelete")
+                    } >
+                    Delete <
+                    /FormCheckbox> <
+                    /div> <
+                    div >
 
-                      <div className='form-group'>
-                      <label>สิทธิ์การเข้าถึง Impact :</label>    <input type="checkbox" checked={this.state.manage_impact} onChange={this.handleCheckboximpactChange}/>
-                      </div>
+                    <
+                    FormCheckbox inline checked = {
+                        this.state.ManageDepartment
+                    }
+                    onChange = {
+                        e => this.handleChange(e, "ManageDepartment")
+                    }
+                    className = "mystyle" >
+                    ManageDepartment <
+                    /FormCheckbox> <
+                    FormCheckbox inline checked = {
+                        this.state.ManageDepartmentView
+                    }
+                    onChange = {
+                        e => this.handleChange(e, "ManageDepartmentView")
+                    } >
+                    View <
+                    /FormCheckbox> <
+                    FormCheckbox inline checked = {
+                        this.state.ManageDepartmentEdit
+                    }
+                    onChange = {
+                        e => this.handleChange(e, "ManageDepartmentEdit")
+                    } >
+                    Edit <
+                    /FormCheckbox> <
+                    FormCheckbox inline checked = {
+                        this.state.ManageDepartmentDelete
+                    }
+                    onChange = {
+                        e => this.handleChange(e, "ManageDepartmentDelete")
+                    } >
+                    Delete <
+                    /FormCheckbox> <
+                    /div>
 
-                      <div className='form-group'>
-                      <label>สิทธิ์การเข้าถึง Priority :</label>    <input type="checkbox" checked={this.state.manage_priority} onChange={this.handleCheckboxpriorityChange}/>
-                      </div>
+                    <
+                    div >
+                    <
+                    FormCheckbox inline checked = {
+                        this.state.ManageProvince
+                    }
+                    onChange = {
+                        e => this.handleChange(e, "ManageProvince")
+                    }
+                    className = "mystyle" >
+                    ManageProvince <
+                    /FormCheckbox> <
+                    FormCheckbox inline checked = {
+                        this.state.ManageProvinceView
+                    }
+                    onChange = {
+                        e => this.handleChange(e, "ManageProvinceView")
+                    } >
+                    View <
+                    /FormCheckbox> <
+                    FormCheckbox inline checked = {
+                        this.state.ManageProvinceEdit
+                    }
+                    onChange = {
+                        e => this.handleChange(e, "ManageProvinceEdit")
+                    } >
+                    Edit <
+                    /FormCheckbox> <
+                    FormCheckbox inline checked = {
+                        this.state.ManageProvinceDelete
+                    }
+                    onChange = {
+                        e => this.handleChange(e, "ManageProvinceDelete")
+                    } >
+                    Delete <
+                    /FormCheckbox> <
+                    /div>
 
-                      <div className='form-group'>
-                      <label>สิทธิ์การเข้าถึง Solution :</label>    <input type="checkbox" checked={this.state.manage_solution}  onChange={this.handleCheckboxsolutionChange}/>
-                      </div>
+                    <
+                    div >
+                    <
+                    FormCheckbox inline checked = {
+                        this.state.ManageDistrict
+                    }
+                    onChange = {
+                        e => this.handleChange(e, "ManageDistrict")
+                    }
+                    className = "mystyle" >
+                    ManageDistrict <
+                    /FormCheckbox> <
+                    FormCheckbox inline checked = {
+                        this.state.ManageDistrictView
+                    }
+                    onChange = {
+                        e => this.handleChange(e, "ManageDistrictView")
+                    } >
+                    View <
+                    /FormCheckbox> <
+                    FormCheckbox inline checked = {
+                        this.state.ManageDistrictEdit
+                    }
+                    onChange = {
+                        e => this.handleChange(e, "ManageDistrictEdit")
+                    } >
+                    Edit <
+                    /FormCheckbox> <
+                    FormCheckbox inline checked = {
+                        this.state.ManageDistrictDelete
+                    }
+                    onChange = {
+                        e => this.handleChange(e, "ManageDistrictDelete")
+                    } >
+                    Delete <
+                    /FormCheckbox> <
+                    /div>
 
-                      <div className='form-group'>
-                      <label>สิทธิ์การเข้าถึง Report :</label>    <input type="checkbox" checked={this.state.Report} onChange={this.handleCheckboxReportChange}/>
-                      </div>
+                    <
+                    div >
+                    <
+                    FormCheckbox inline checked = {
+                        this.state.ManagePostalCode
+                    }
+                    onChange = {
+                        e => this.handleChange(e, "ManagePostalCode")
+                    }
+                    className = "mystyle" >
+                    ManagePostalCode <
+                    /FormCheckbox> <
+                    FormCheckbox inline checked = {
+                        this.state.ManagePostalCodeView
+                    }
+                    onChange = {
+                        e => this.handleChange(e, "ManagePostalCodeView")
+                    } >
+                    View <
+                    /FormCheckbox> <
+                    FormCheckbox inline checked = {
+                        this.state.ManagePostalCodeEdit
+                    }
+                    onChange = {
+                        e => this.handleChange(e, "ManagePostalCodeEdit")
+                    } >
+                    Edit <
+                    /FormCheckbox> <
+                    FormCheckbox inline checked = {
+                        this.state.ManagePostalCodeDelete
+                    }
+                    onChange = {
+                        e => this.handleChange(e, "ManagePostalCodeDelete")
+                    } >
+                    Delete <
+                    /FormCheckbox> <
+                    /div>
+
+                    <
+                    div >
+                    <
+                    FormCheckbox inline checked = {
+                        this.state.ManageLocation
+                    }
+                    onChange = {
+                        e => this.handleChange(e, "ManageLocation")
+                    }
+                    className = "mystyle" >
+                    ManageLocation <
+                    /FormCheckbox> <
+                    FormCheckbox inline checked = {
+                        this.state.ManageLocationView
+                    }
+                    onChange = {
+                        e => this.handleChange(e, "ManageLocationView")
+                    } >
+                    View <
+                    /FormCheckbox> <
+                    FormCheckbox inline checked = {
+                        this.state.ManageLocationEdit
+                    }
+                    onChange = {
+                        e => this.handleChange(e, "ManageLocationEdit")
+                    } >
+                    Edit <
+                    /FormCheckbox> <
+                    FormCheckbox inline checked = {
+                        this.state.ManageLocationDelete
+                    }
+                    onChange = {
+                        e => this.handleChange(e, "ManageLocationDelete")
+                    } >
+                    Delete <
+                    /FormCheckbox> <
+                    /div>
+
+                    <
+                    /Col>
+
+                ) : null
+            }
+
+            <
+            FormCheckbox checked = {
+                this.state.ManageEquipment
+            }
+            onChange = {
+                e => this.handleChange(e, "ManageEquipment")
+            } >
+            Equipment <
+            /FormCheckbox> {
+                this.state.ManageEquipment ? ( <
+                    Col >
+
+                    <
+                    div >
+
+                    <
+                    FormCheckbox inline checked = {
+                        this.state.ManageEquipment
+                    }
+                    onChange = {
+                        e => this.handleChange(e, "ManageEquipment")
+                    }
+                    className = "mystyle" >
+                    ManageEquipment <
+                    /FormCheckbox> <
+                    FormCheckbox inline checked = {
+                        this.state.ManageEquipmentView
+                    }
+                    onChange = {
+                        e => this.handleChange(e, "ManageEquipmentView")
+                    } >
+                    View <
+                    /FormCheckbox> <
+                    FormCheckbox inline checked = {
+                        this.state.ManageEquipmentEdit
+                    }
+                    onChange = {
+                        e => this.handleChange(e, "ManageEquipmentEdit")
+                    } >
+                    Edit <
+                    /FormCheckbox> <
+                    FormCheckbox inline checked = {
+                        this.state.ManageEquipmentDelete
+                    }
+                    onChange = {
+                        e => this.handleChange(e, "ManageEquipmentDelete")
+                    } >
+                    Delete <
+                    /FormCheckbox> <
+                    /div> <
+                    /Col>
+                ) : null
+            }
+
+            <
+            FormCheckbox checked = {
+                this.state.ManageRequestGeneral
+            }
+            onChange = {
+                e => this.handleChange(e, "ManageRequestGeneral")
+            } >
+            Request <
+            /FormCheckbox> {
+                this.state.ManageRequestGeneral ? ( <
+                    Col >
+                    <
+                    div >
+                    <
+                    FormCheckbox inline checked = {
+                        this.state.ManageRequestGeneral
+                    }
+                    onChange = {
+                        e => this.handleChange(e, "ManageRequestGeneral")
+                    }
+                    className = "mystyle" >
+                    ManageRequestGeneral <
+                    /FormCheckbox> <
+                    FormCheckbox inline checked = {
+                        this.state.ManageRequestGeneralView
+                    }
+                    onChange = {
+                        e => this.handleChange(e, "ManageRequestGeneralView")
+                    } >
+                    View <
+                    /FormCheckbox> <
+                    FormCheckbox inline checked = {
+                        this.state.ManageRequestGeneralEdit
+                    }
+                    onChange = {
+                        e => this.handleChange(e, "ManageRequestGeneralEdit")
+                    } >
+                    Edit <
+                    /FormCheckbox> <
+                    FormCheckbox inline checked = {
+                        this.state.ManageRequestGeneralDelete
+                    }
+                    onChange = {
+                        e => this.handleChange(e, "ManageRequestGeneralDelete")
+                    } >
+                    Delete <
+                    /FormCheckbox> <
+                    /div>
+
+                    <
+                    div >
+                    <
+                    FormCheckbox inline checked = {
+                        this.state.ManageRequestIssuses
+                    }
+                    onChange = {
+                        e => this.handleChange(e, "ManageRequestIssuses")
+                    }
+                    className = "mystyle" >
+                    ManageRequestIssuses <
+                    /FormCheckbox> <
+                    FormCheckbox inline checked = {
+                        this.state.ManageRequestIssusesView
+                    }
+                    onChange = {
+                        e => this.handleChange(e, "ManageRequestIssusesView")
+                    } >
+                    View <
+                    /FormCheckbox> <
+                    FormCheckbox inline checked = {
+                        this.state.ManageRequestIssusesEdit
+                    }
+                    onChange = {
+                        e => this.handleChange(e, "ManageRequestIssusesEdit")
+                    } >
+                    Edit <
+                    /FormCheckbox> <
+                    FormCheckbox inline checked = {
+                        this.state.ManageRequestIssusesDelete
+                    }
+                    onChange = {
+                        e => this.handleChange(e, "ManageRequestIssusesDelete")
+                    } >
+                    Delete <
+                    /FormCheckbox> <
+                    /div> <
+                    /Col>
+                ) : null
+            } <
+            FormCheckbox checked = {
+                this.state.ManageNews
+            }
+            onChange = {
+                e => this.handleChange(e, "ManageNews")
+            } >
+            News <
+            /FormCheckbox>
+
+            {
+                this.state.ManageNews ? ( <
+                    Col >
+                    <
+                    div >
+                    <
+                    FormCheckbox inline checked = {
+                        this.state.ManageNews
+                    }
+                    onChange = {
+                        e => this.handleChange(e, "ManageNews")
+                    }
+                    className = "mystyle" >
+                    ManageNews <
+                    /FormCheckbox> <
+                    FormCheckbox inline checked = {
+                        this.state.ManageNewsView
+                    }
+                    onChange = {
+                        e => this.handleChange(e, "ManageNewsView")
+                    } >
+                    View <
+                    /FormCheckbox> <
+                    FormCheckbox inline checked = {
+                        this.state.ManageNewsEdit
+                    }
+                    onChange = {
+                        e => this.handleChange(e, "ManageNewsEdit")
+                    } >
+                    Edit <
+                    /FormCheckbox> <
+                    FormCheckbox inline checked = {
+                        this.state.ManageNewsDelete
+                    }
+                    onChange = {
+                        e => this.handleChange(e, "ManageNewsDelete")
+                    } >
+                    Delete <
+                    /FormCheckbox> <
+                    /div>
+
+                    <
+                    div >
+                    <
+                    FormCheckbox inline checked = {
+                        this.state.ManageSettingNews
+                    }
+                    onChange = {
+                        e => this.handleChange(e, "ManageSettingNews")
+                    }
+                    className = "mystyle" >
+                    ManageSettingNews <
+                    /FormCheckbox> <
+                    FormCheckbox inline checked = {
+                        this.state.ManageSettingNewsView
+                    }
+                    onChange = {
+                        e => this.handleChange(e, "ManageSettingNewsView")
+                    } >
+                    View <
+                    /FormCheckbox> <
+                    FormCheckbox inline checked = {
+                        this.state.ManageSettingNewsEdit
+                    }
+                    onChange = {
+                        e => this.handleChange(e, "ManageSettingNewsEdit")
+                    } >
+                    Edit <
+                    /FormCheckbox> <
+                    FormCheckbox inline checked = {
+                        this.state.ManageSettingNewsDelete
+                    }
+                    onChange = {
+                        e => this.handleChange(e, "ManageSettingNewsDelete")
+                    } >
+                    Delete <
+                    /FormCheckbox> <
+                    /div> <
+                    /Col>
+                ) : null
+            }
+
+            <
+            FormCheckbox checked = {
+                this.state.ManageImage
+            }
+            onChange = {
+                e => this.handleChange(e, "ManageImage")
+            } >
+            Image <
+            /FormCheckbox>
+
+            {
+                this.state.ManageImage == true ? ( <
+                    Col >
+                    <
+                    div >
+                    <
+                    FormCheckbox inline checked = {
+                        this.state.ManageImage
+                    }
+                    onChange = {
+                        e => this.handleChange(e, "ManageImage")
+                    }
+                    className = "mystyle" >
+                    ManageImage <
+                    /FormCheckbox> <
+                    FormCheckbox inline checked = {
+                        this.state.ManageImageView
+                    }
+                    onChange = {
+                        e => this.handleChange(e, "ManageImageView")
+                    } >
+                    View <
+                    /FormCheckbox> <
+                    FormCheckbox inline checked = {
+                        this.state.ManageImageEdit
+                    }
+                    onChange = {
+                        e => this.handleChange(e, "ManageImageEdit")
+                    } >
+                    Edit <
+                    /FormCheckbox> <
+                    FormCheckbox inline checked = {
+                        this.state.ManageImageDelete
+                    }
+                    onChange = {
+                        e => this.handleChange(e, "ManageImageDelete")
+                    } >
+                    Delete <
+                    /FormCheckbox> <
+                    /div>
+
+                    <
+                    /Col>
+                ) : null
+            } <
+            FormCheckbox checked = {
+                this.state.ManageMessage
+            }
+            onChange = {
+                e => this.handleChange(e, "ManageMessage")
+            } >
+            Message <
+            /FormCheckbox>
+
+            {
+                this.state.ManageMessage == true ? ( <
+                    Col >
+                    <
+                    div >
+                    <
+                    FormCheckbox inline checked = {
+                        this.state.ManageMessage
+                    }
+                    onChange = {
+                        e => this.handleChange(e, "ManageMessage")
+                    }
+                    className = "mystyle" >
+                    ManageMessage <
+                    /FormCheckbox> <
+                    FormCheckbox inline checked = {
+                        this.state.ManageMessageView
+                    }
+                    onChange = {
+                        e => this.handleChange(e, "ManageMessageView")
+                    } >
+                    View <
+                    /FormCheckbox> <
+                    FormCheckbox inline checked = {
+                        this.state.ManageMessageEdit
+                    }
+                    onChange = {
+                        e => this.handleChange(e, "ManageMessageEdit")
+                    } >
+                    Edit <
+                    /FormCheckbox> <
+                    FormCheckbox inline checked = {
+                        this.state.ManageMessageDelete
+                    }
+                    onChange = {
+                        e => this.handleChange(e, "ManageMessageDelete")
+                    } >
+                    Delete <
+                    /FormCheckbox> <
+                    /div>
+
+                    <
+                    /Col>
+                ) : null
+            }
+
+            <
+            FormCheckbox checked = {
+                this.state.ManageModify
+            }
+            onChange = {
+                e => this.handleChange(e, "ManageModify")
+            } >
+            Modify <
+            /FormCheckbox>
+
+            {
+                this.state.ManageModify == true ? ( <
+                    Col >
+                    <
+                    div >
+                    <
+                    FormCheckbox inline checked = {
+                        this.state.ManageModify
+                    }
+                    onChange = {
+                        e => this.handleChange(e, "ManageModify")
+                    }
+                    className = "mystyle" >
+                    ManageModify <
+                    /FormCheckbox> <
+                    FormCheckbox inline checked = {
+                        this.state.ManageModifyView
+                    }
+                    onChange = {
+                        e => this.handleChange(e, "ManageModifyView")
+                    } >
+                    View <
+                    /FormCheckbox> <
+                    FormCheckbox inline checked = {
+                        this.state.ManageModifyEdit
+                    }
+                    onChange = {
+                        e => this.handleChange(e, "ManageModifyEdit")
+                    } >
+                    Edit <
+                    /FormCheckbox> <
+                    FormCheckbox inline checked = {
+                        this.state.ManageModifyDelete
+                    }
+                    onChange = {
+                        e => this.handleChange(e, "ManageModifyDelete")
+                    } >
+                    Delete <
+                    /FormCheckbox> <
+                    /div>
+
+                    <
+                    /Col>
+                ) : null
+            }
+
+            <
+            FormCheckbox checked = {
+                this.state.ManagePriority
+            }
+            onChange = {
+                e => this.handleChange(e, "ManagePriority")
+            } >
+            Priority <
+            /FormCheckbox>
+
+            {
+                this.state.ManagePriority == true ? ( <
+                    Col >
+                    <
+                    div >
+                    <
+                    FormCheckbox inline checked = {
+                        this.state.ManagePriority
+                    }
+                    onChange = {
+                        e => this.handleChange(e, "ManagePriority")
+                    }
+                    className = "mystyle" >
+                    ManagePriority <
+                    /FormCheckbox> <
+                    FormCheckbox inline checked = {
+                        this.state.ManagePriorityView
+                    }
+                    onChange = {
+                        e => this.handleChange(e, "ManagePriorityView")
+                    } >
+                    View <
+                    /FormCheckbox> <
+                    FormCheckbox inline checked = {
+                        this.state.ManagePriorityEdit
+                    }
+                    onChange = {
+                        e => this.handleChange(e, "ManagePriorityEdit")
+                    } >
+                    Edit <
+                    /FormCheckbox> <
+                    FormCheckbox inline checked = {
+                        this.state.ManagePriorityDelete
+                    }
+                    onChange = {
+                        e => this.handleChange(e, "ManagePriorityDelete")
+                    } >
+                    Delete <
+                    /FormCheckbox> <
+                    /div>
+
+                    <
+                    /Col>
+                ) : null
+            }
+
+            <
+            FormCheckbox checked = {
+                this.state.ManageImpact
+            }
+            onChange = {
+                e => this.handleChange(e, "ManageImpact")
+            } >
+            Impact <
+            /FormCheckbox>
+
+            {
+                this.state.ManageImpact == true ? ( <
+                    Col >
+                    <
+                    div >
+                    <
+                    FormCheckbox inline checked = {
+                        this.state.ManageImpact
+                    }
+                    onChange = {
+                        e => this.handleChange(e, "ManageImpact")
+                    }
+                    className = "mystyle" >
+                    ManageMessage <
+                    /FormCheckbox> <
+                    FormCheckbox inline checked = {
+                        this.state.ManageImpactView
+                    }
+                    onChange = {
+                        e => this.handleChange(e, "ManageImpactView")
+                    } >
+                    View <
+                    /FormCheckbox> <
+                    FormCheckbox inline checked = {
+                        this.state.ManageImpactEdit
+                    }
+                    onChange = {
+                        e => this.handleChange(e, "ManageImpactEdit")
+                    } >
+                    Edit <
+                    /FormCheckbox> <
+                    FormCheckbox inline checked = {
+                        this.state.ManageImpactDelete
+                    }
+                    onChange = {
+                        e => this.handleChange(e, "ManageImpactDelete")
+                    } >
+                    Delete <
+                    /FormCheckbox> <
+                    /div>
+
+                    <
+                    /Col>
+                ) : null
+            }
+
+            <
+            FormCheckbox checked = {
+                this.state.Report
+            }
+            onChange = {
+                e => this.handleChange(e, "Report")
+            } >
+            Report <
+            /FormCheckbox>
+
+            <
+            /ListGroupItem> <
+            /Col>
+
+            <
+            /Row> <
+            Button type = "submit" > Create New Permission < /Button> <
+            /Form> <
+            /Col>
+
+            <
+            /Row> <
+            /ListGroupItem> <
+            /ListGroup> <
+            /Container> <
+            /div>
 
 
 
-
-                      <button className='btn btn-primary' > Create</button>
-                    </form>
-
-                    <ToastContainer
-                      ref={ref => container = ref}
-                      className="toast-top-right"
-                    />
-
-
-
-
-                  </div>
-                </div>
-              </div>
 
 
         )
-      }
     }
-    Update_permission.propTypes = {
-      id: PropTypes.number,
+}
 
-    };
-
-    export default Update_permission
+export default Update_permission

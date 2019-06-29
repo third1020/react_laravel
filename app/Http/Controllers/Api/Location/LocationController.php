@@ -68,8 +68,7 @@ class LocationController extends Controller
         'address_latitude' => 'required',
         'address_longitude' => 'required',
         'address_id' => 'required',
-        'image_show' => 'required',
-        'image_id' => 'required',
+
    ]);
 
       $user = DimLocationModel::where('id',$id)->update([
@@ -81,8 +80,7 @@ class LocationController extends Controller
         'address_latitude' => $validatedData['address_latitude'],
         'address_longitude' => $validatedData['address_longitude'],
         'address_id' => $validatedData['address_id'],
-        'image_show' => $validatedData['image_show'],
-        'image_id' => $validatedData['image_id'],
+        
    ]);
  }
 

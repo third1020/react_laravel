@@ -5,7 +5,8 @@ import { Container, Row, Col } from "shards-react";
 import PageTitle from "../../../components/common/PageTitle";
 import SmallStats from "../../../components/common/SmallStats";
 import UsersOverview from "./UsersOverview";
-import UsersByDevice from "./UsersByDevice";
+import ReportGeneral from "./ReportGeneral";
+import ReportIssues from "./ReportIssues";
 import NewDraft from "../../../components/blog/NewDraft";
 import Discussions from "../../../components/blog/Discussions";
 import TopReferrals from "../../../components/common/TopReferrals";
@@ -22,34 +23,24 @@ const Report = ({ smallStats }) => (
     </Row>
 
     {/* Small Stats Blocks */}
-    <Row>
-      {smallStats.map((stats, idx) => (
-        <Col className="col-lg mb-4" key={idx} {...stats.attrs}>
-          <SmallStats
-            id={`small-stats-${idx}`}
-            variation="1"
-            chartData={stats.datasets}
-            chartLabels={stats.chartLabels}
-            label={stats.label}
-            value={stats.value}
-            percentage={stats.percentage}
-            increase={stats.increase}
-            decrease={stats.decrease}
-          />
-        </Col>
-      ))}
-    </Row>
 
     <Row>
       {/* Users Overview */}
 
         <UsersOverview />
 
+    </Row>
+
+    <Row>
+      {/* Users Overview */}
+
+        <ReportGeneral />
+
 
       {/* Users by Device */}
 
-        <UsersByDevice />
-    
+        <ReportIssues />
+
 
     </Row>
 

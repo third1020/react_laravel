@@ -14,8 +14,7 @@ class CreateSubDistrictTable extends Migration
     public function up()
     {
         Schema::create('sub_district', function (Blueprint $table) {
-            $table->uuid('id');
-            $table->primary('id');
+          $table->bigIncrements('id')->comment('รหัสข้อมูลตาราง');
 
 			$table->string('name');
             $table->uuid('district_id');

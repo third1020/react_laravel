@@ -9,7 +9,7 @@ use App\Traits\Uuids;
 class FactPersonContactModel extends Model
 {
     use SoftDeletes;
-    use Uuids;
+
 
     protected $table = 'fact_person_contact';
     protected $softDelete = true;

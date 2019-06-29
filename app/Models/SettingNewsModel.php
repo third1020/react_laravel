@@ -9,7 +9,7 @@ use App\Traits\Uuids;
 class SettingNewsModel extends Model
 {
     use SoftDeletes;
-    use Uuids;
+
 
     protected $table = 'setting_news';
     public $primaryKey = 'id';

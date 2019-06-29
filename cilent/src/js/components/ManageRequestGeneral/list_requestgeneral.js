@@ -1,5 +1,5 @@
-import axios from 'axios'
-   import React, { Component } from 'react'
+
+   import React from 'react';
    import DataTable from "../DataTable";
    import clsx from 'clsx';
    import { makeStyles, useTheme } from '@material-ui/core/styles';
@@ -71,7 +71,7 @@ import axios from 'axios'
    function ManageRequestGeneral() {
 
      const classes = useStyles();
-     const columns = ['id','request_general_id', 'equipment_id', 'return_date','receive_date','request_time','Action'];
+     const columns = ['id','name', 'status', 'auditor_user_id','approval_user_id','audit_timestamp','approval_timestamp','Action'];
 
 
      return (
@@ -88,6 +88,8 @@ import axios from 'axios'
            addlink={"/AddRequestGeneral"}
            addbutton={"Add RequestGeneral"}
            manage={"ManageRequestGeneral"}
+           updateurl={"UpdateRequestGeneral"}
+           viewurl ={"ViewRequestGeneral"}
                 />
 
 

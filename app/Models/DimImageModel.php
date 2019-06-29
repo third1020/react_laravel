@@ -9,7 +9,7 @@ use App\Traits\Uuids;
 class DimImageModel extends Model
 {
     use SoftDeletes;
-    use Uuids;
+
 
     protected $table = 'dim_image';
     public $primaryKey = 'id';

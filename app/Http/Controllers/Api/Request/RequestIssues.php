@@ -19,21 +19,19 @@ class RequestIssues extends Controller
   public function store(Request $request)
   {
       $validatedData = $request->validate([
-     'client_id' => 'required',
+
      'name' => 'required',
      'status' => 'required',
      'auditor_user_id' => 'required',
      'approval_user_id' => 'required',
-     'audit_timestamp' => 'required',
-     'approval_timestamp' => 'required',
-     'auditor_user_id' => 'required',
-     'auditor_user_id' => 'required',
+     'audit_timestamp' => 'required|date',
+     'approval_timestamp' => 'required|date'
 
 
    ]);
 
       $datainsert = DimRequestIssuesModel::create([
-     'client_id' => $validatedData['client_id'],
+  
      'name' => $validatedData['name'],
      'status' => $validatedData['status'],
      'auditor_user_id' => $validatedData['auditor_user_id'],

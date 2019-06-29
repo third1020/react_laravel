@@ -45,6 +45,7 @@ class ImageController extends Controller
 
     }
 
+
     public function index()
     {
       $getdata = DB::table('dim_image')->whereNull('deleted_at')->get();

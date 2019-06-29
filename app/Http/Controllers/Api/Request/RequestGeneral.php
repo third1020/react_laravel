@@ -24,8 +24,8 @@ class RequestGeneral extends Controller
      'status' => 'required',
      'auditor_user_id' => 'required',
      'approval_user_id' => 'required',
-     'audit_timestamp' => 'required',
-     'approval_timestamp' => 'required'
+     'audit_timestamp' => 'required|date',
+     'approval_timestamp' => 'required|date'
 
    ]);
 

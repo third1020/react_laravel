@@ -1,5 +1,5 @@
-import axios from 'axios'
-   import React, { Component } from 'react'
+
+   import React from 'react';
    import DataTable from "../DataTable";
    import clsx from 'clsx';
    import { makeStyles, useTheme } from '@material-ui/core/styles';
@@ -89,6 +89,8 @@ import axios from 'axios'
            addlink={"/AddModify"}
            addbutton={"Add Modify"}
            manage={"ManageModify"}
+           updateurl={"UpdateModify"}
+           viewurl ={"ViewModify"}
                 />
 
 

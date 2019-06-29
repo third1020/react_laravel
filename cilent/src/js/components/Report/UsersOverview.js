@@ -8,9 +8,8 @@ import { Row, Col, Card, CardHeader, CardBody, Button,
   InputGroupText } from "shards-react";
 import classNames from "classnames";
 
-import RangeDatePicker from "./RangeDatePicker";
 import {
-  Label, LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip, ReferenceArea,Legend
+   LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip,Legend
 } from 'recharts';
 import "../../../assets/range-date-picker.css";
 
@@ -27,7 +26,12 @@ class UsersOverview extends React.Component {
           numday:28,
           name:"test",
           getrequestgeneral:[],
-          data : []
+          getrequestissues:[],
+          width: window.innerWidth,
+          data : [
+            {name:"", คำร้องทั่วไป:0},
+            {name:"", คำร้องปัญหาต่างๆ:0}
+          ]
         };
 
 
@@ -62,6 +66,8 @@ class UsersOverview extends React.Component {
  }
 
   ChangeFormatTime(){
+
+
     this.setState({
       data : []
     })
@@ -71,7 +77,8 @@ class UsersOverview extends React.Component {
       dt = new Date(this.state.startDate),
       count = 0;
 
-      let reportfilter = [];
+      let reportGeneral = []
+      let reportIssues = []
       let formatted_endDate
       let formatted_startDate
 
@@ -112,55 +119,88 @@ class UsersOverview extends React.Component {
 
            for (let i = 0; i < this.state.getrequestgeneral.length; i++) {
              if(formatted_startDate< this.state.getrequestgeneral[i].created_at &&  this.state.getrequestgeneral[i].created_at <  formatted_endDate){
-               reportfilter.push(this.state.getrequestgeneral[i]);
-                }
+               reportGeneral.push(this.state.getrequestgeneral[i]);
+
             }
-     }
+        }
+
+        for (let i = 0; i < this.state.getrequestissues.length; i++) {
+        if(formatted_startDate< this.state.getrequestissues[i].created_at &&  this.state.getrequestissues[i].created_at <  formatted_endDate){
+          reportIssues.push(this.state.getrequestissues[i]);
+
+
+           }
+        }
+
+  }
+
+     console.log(reportIssues);
 
 
 var num = 0,
-    setdata = [],
-    pending = 0,
-    approve = 0,
-    auditor = 0,
-    rejected = 0;
+    setdata = [];
+    // pending = 0,
+    // approve = 0,
+    // auditor = 0,
+    // rejected = 0;
 
-reportfilter.map(item => {
-  console.log(item);
-  if(item.status == "Pending"){
-    pending++
-  }else if(item.status == "Approve"){
-     approve++
-  }else if(item.status == "Auditor"){
-     auditor++
-  }else if(item.status == "Rejected"){
-     rejected++
-  }
-})
+// reportGeneral.map(item => {
+//
+//   if(item.status == "Pending"){
+//     pending++
+//   }else if(item.status == "Approve"){
+//      approve++
+//   }else if(item.status == "Auditor"){
+//      auditor++
+//   }else if(item.status == "Rejected"){
+//      rejected++
+//   }
+// })
 
-console.log(rejected);
 var countrequestgenaral = []
+var countrequestissues = []
 
 for(let i =0; i < count; i++){
 
-  var daymonth = this.appendLeadingZeroes(arr[i].getDate()) + "/"
+  var daymonthgeneral = this.appendLeadingZeroes(arr[i].getDate()) + "/"
   + this.appendLeadingZeroes(arr[i].getMonth()+ 1)
 
-  const valuegenaral = reportfilter.filter(item =>{
+  const valuegenaral = reportGeneral.filter(item =>{
 
-    var daydb = new Date(item.created_at)
-    var dayformatdb =  this.appendLeadingZeroes(daydb.getDate()) + "/"
-    + this.appendLeadingZeroes(daydb.getMonth()+ 1)
+    var daydbrequestgeneral = new Date(item.created_at)
+    var dayformatdb =  this.appendLeadingZeroes(daydbrequestgeneral.getDate()) + "/"
+    + this.appendLeadingZeroes(daydbrequestgeneral.getMonth()+ 1)
 
-   return daymonth == dayformatdb
+   return daymonthgeneral == dayformatdb
 
     }
   );
 
-  setdata.push({name:  daymonth,
-              Genaral: valuegenaral.length
+      var daymonthissues = this.appendLeadingZeroes(arr[i].getDate()) + "/"
+      + this.appendLeadingZeroes(arr[i].getMonth()+ 1)
+
+  const valueissues = reportIssues.filter(item =>{
+
+
+    var daydbrequestissues = new Date(item.created_at)
+    var dayformatdb =  this.appendLeadingZeroes(daydbrequestissues.getDate()) + "/"
+    + this.appendLeadingZeroes(daydbrequestissues.getMonth()+ 1)
+
+   return daymonthissues == dayformatdb
+
+    }
+  );
+
+  setdata.push({name:  daymonthgeneral,
+              คำร้องทั่วไป: valuegenaral.length,
+              คำร้องปัญหาต่างๆ: valueissues.length
+
 
             });
+
+
+
+
 
      }
 
@@ -192,17 +232,28 @@ for(let i =0; i < count; i++){
       console.log(err);
     })
 
+    axios.get('/api/requestissues/index')
+    .then(res => {
+      this.setState({
+        getrequestissues: res.data
+      });
+    }).catch(err =>{
+      console.log(err);
+    })
+
   }
 
   render() {
     const { title } = this.props;
     const { className } = this.props;
     const classes = classNames(className, "d-flex", "my-auto", "date-range");
+    const { width } = this.state ;
     return (
-      <Col lg="8" md="12" sm="12" className="mb-4">
+      <Col xl ="12" lg="12" md="12" sm="12" className="mb-4">
+
       <Card small className="h-100">
         <CardHeader className="border-bottom">
-          <h6 className="m-0">{title}</h6>
+          <h6 className="m-0">ดูรายงานคำร้อง</h6>
         </CardHeader>
         <CardBody className="pt-0">
           <Row className="border-bottom py-2 bg-light">
@@ -229,30 +280,31 @@ for(let i =0; i < count; i++){
                   <i className="material-icons">&#xE916;</i>
                 </InputGroupText>
               </InputGroupAddon>
-            </InputGroup>
-            </Col>
-            <Col>
+
               <Button
                 size="sm"
                 className="d-flex btn-white ml-auto mr-auto ml-sm-auto mr-sm-0 mt-3 mt-sm-0"
                 onClick={this.ChangeFormatTime}
               >
-                View Full Report &rarr;
+                ค้นหารายงานคำร้อง &rarr;
               </Button>
+
+            </InputGroup>
             </Col>
+
           </Row>
 
 
       {this.state.data == '' ?(<div><h4>กรุณากำหนดช่วงเวลาในการ</h4></div>):(
-        <LineChart  width={650} height={400} data={this.state.data} onChange={this.ChangeFormatTime}
+        <LineChart  width={window.innerWidth*3/4} height={400} data={this.state.data} onChange={this.ChangeFormatTime}
         margin={{top: 50, right: 10, left: 5, bottom: 5}}>
    <XAxis dataKey="name"/>
    <YAxis/>
    <CartesianGrid strokeDasharray="3 3"/>
    <Tooltip/>
    <Legend />
-   <Line type="monotone" dataKey="Issuses" stroke="#ef0909" activeDot={{r: 8}}/>
-   <Line type="monotone" dataKey="Genaral" stroke="#0be232" />
+   <Line type="monotone" dataKey="คำร้องปัญหาต่างๆ" stroke="#ef0909" activeDot={{r: 8}}/>
+   <Line type="monotone" dataKey="คำร้องทั่วไป" stroke="#0be232" />
   </LineChart>
       )}
 

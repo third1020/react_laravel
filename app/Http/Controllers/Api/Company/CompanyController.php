@@ -46,18 +46,16 @@ class CompanyController extends Controller
   public function update(Request $request, $id)
   {
       $validatedData = $request->validate([
-        'province_id' => 'required',
-        'district_id' => 'required',
-        'sub_district_id' => 'required',
-        'postal_code_id' => 'required',
+        'client_id' => 'required',
+        'name' => 'required',
+        'location_id' => 'required',
    ]);
 
       $user = DimCompanyModel::where('id',$id)->update([
 
-        'province_id' => $validatedData['province_id'],
-        'district_id' => $validatedData['district_id'],
-        'sub_district_id' => $validatedData['sub_district_id'],
-        'postal_code_id' => $validatedData['postal_code_id'],
+        'client_id' => $validatedData['client_id'],
+        'name' => $validatedData['name'],
+        'location_id' => $validatedData['location_id'],
 
 
    ]);

@@ -214,9 +214,13 @@ class PermissionController extends Controller
 
     public function edit($id)
     {
-        $listdata = DB::table('permission')->whereNull('deleted_at')->orWhere('id', $id)->get();
+        $listdata = DB::table('permission')->whereNull('deleted_at')->get();
 
-        return $listdata->toJson();
+        $user = PermissionModel::findOrFail($id);
+
+        return response()->json([
+            'user' => $user,
+        ]);
     }
 
     public function update(Request $request, $id)

@@ -9,7 +9,7 @@ use App\Traits\Uuids;
 class DimLocationModel extends Model
 {
     use SoftDeletes;
-    use Uuids;
+
 
     protected $table = 'dim_location';
     public $primaryKey = 'id';

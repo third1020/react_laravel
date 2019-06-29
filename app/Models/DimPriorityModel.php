@@ -9,7 +9,7 @@ use App\Traits\Uuids;
 class DimPriorityModel extends Model
 {
     use SoftDeletes;
-    use Uuids;
+    
 
     protected $table = 'dim_priority';
     protected $softDelete = true;

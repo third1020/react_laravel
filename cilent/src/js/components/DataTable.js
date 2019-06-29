@@ -1,4 +1,4 @@
-import { BootstrapTable, TableHeaderColumn, DeleteButton, ExportCSVButton, ButtonGroup } from 'react-bootstrap-table';
+import { BootstrapTable, TableHeaderColumn, ButtonGroup } from 'react-bootstrap-table';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import ScriptTag from 'react-script-tag';
@@ -15,6 +15,7 @@ import jsPDF from 'jspdf';
 import SelectViewForm from './SelectViewForm';
 import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
+import { createBrowserHistory } from 'history';
 
 
 class DataTable extends Component {
@@ -109,7 +110,9 @@ class DataTable extends Component {
   createCustomButtonGroup = props => {
     return (
       <ButtonGroup className='my-custom-class' sizeClass='btn-group-sm'>
-        <Link to={this.props.addlink}>
+        <Link  to={{
+    pathname: this.props.addlink
+  }}>
           <button
             className={`mb-2 mr-2 btn btn-success rounded`}>
             <i style={{ fontSize: '1.5em', paddingRight: '5px' }} >
@@ -200,10 +203,6 @@ class DataTable extends Component {
 
   }
 
-  HandleUpdate = (id) => {
-alert(id);
-
-  }
 
   HandleDelete = (row) => {
     const swalWithBootstrapButtons = Swal.mixin({
@@ -265,21 +264,27 @@ alert(id);
   }
 
   priceFormatter = (cell, row) => {
-
-
     return (<div>
       {sessionStorage.getItem(`${this.props.manage}View`) == true ? (
-        <button onClick={() => this.HandleView(row.id)} className="btn btn-sm btn-success" style={{ fontSize: '0.75 em' }} >
+        <Link  to={{
+    pathname: `${this.props.viewurl}/${row.id}`
+  }}>
+        <button className="btn btn-sm btn-success" style={{ fontSize: '0.75 em' }} >
           <i style={{ fontSize: '1.5 em' }} ><FaEye /></i>
           View
                        </button>
+      </Link>
       ) : null}
 
       {sessionStorage.getItem(`${this.props.manage}Edit`) == true ? (
-        <button onClick={() => this.HandleUpdate(row.id)} className="btn btn-sm btn-warning" style={{ color: '#fff', backgroundColor: '#ffab43', borderColor: '#ffab43' }}  >
+        <Link  to={{
+    pathname: `${this.props.updateurl}/${row.id}`
+  }}>
+        <button className="btn btn-sm btn-warning" style={{ color: '#fff', backgroundColor: '#ffab43', borderColor: '#ffab43' }}  >
           <i style={{ fontSize: '1.2 em' }} ><FaPen /></i>
           Update
                     </button>
+        </Link>
       ) : null}
 
       {sessionStorage.getItem(`${this.props.manage}Delete`) == true ? (
@@ -398,7 +403,7 @@ alert(id);
 
                         } else if (colum == "Action") {
                           if (sessionStorage.getItem(`${this.props.manage}View`) == 1 || sessionStorage.getItem(`${this.props.manage}Edit`) == 1 || sessionStorage.getItem(`${this.props.manage}Delete`) == 1) {
-                            return <TableHeaderColumn width='250' dataFormat={this.priceFormatter} dataField='action' headerAlign='center' dataAlign='center' ali export={false}>Action</TableHeaderColumn>
+                            return <TableHeaderColumn key={idx} width='250' dataFormat={this.priceFormatter} dataField='action' headerAlign='center' dataAlign='center' ali export={false}>Action</TableHeaderColumn>
                           }
                         } else {
 
@@ -429,7 +434,9 @@ DataTable.propTypes = {
   addlink: PropTypes.string,
   addbutton: PropTypes.string,
   columns: PropTypes.array,
-  manage: PropTypes.string
+  manage: PropTypes.string,
+  updateurl:PropTypes.string,
+  viewurl:PropTypes.string
 };
 
 export default DataTable

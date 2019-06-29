@@ -9,7 +9,7 @@ use App\Traits\Uuids;
 class FactEquipmentModel extends Model
 {
     use SoftDeletes;
-    use Uuids;
+    
 
     protected $table = 'fact_equipment';
     protected $softDelete = true;

@@ -9,7 +9,7 @@ use App\Traits\Uuids;
 class DimAddressModel extends Model
 {
     use SoftDeletes;
-    use Uuids;
+
 
     protected $table = 'dim_address';
     public $primaryKey = 'id';

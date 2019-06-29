@@ -14,13 +14,12 @@ class CreateFactNewsTable extends Migration
     public function up()
     {
         Schema::create('fact_news', function (Blueprint $table) {
-            $table->uuid('id')->comment('รหัสข้อมูลของตาราง');
-			$table->primary('id');
+      $table->bigIncrements('id')->comment('รหัสข้อมูลตาราง');
 			$table->uuid('client_id')->comment('รหัสข้อมูลผู้สร้าง');
 			$table->uuid('news_id')->comment('รหัสข้อมูลข่าวสาร');
-			
+
 			$table->text('comment')->comment('ข้อคิดเห็น');
-			
+
             $table->timestamps();
 			$table->softDeletes();
         });

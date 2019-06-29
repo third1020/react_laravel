@@ -14,12 +14,11 @@ class CreateFactPersonContactTable extends Migration
     public function up()
     {
         Schema::create('fact_person_contact', function (Blueprint $table) {
-            $table->uuid('id')->comment('รหัสข้อมูลตาราง');
-			$table->primary('id');
+          $table->bigIncrements('id')->comment('รหัสข้อมูลตาราง');
 			$table->uuid('client_id')->comment('รหัสข้อมูลผู้สร้าง');
 			$table->uuid('person_contact_id')->comment('รหัสข้อมูลผู้ติดต่อ');
 			$table->integer('document_number')->unsigned()->comment('เลขเอกสาร');
-			
+
 			$table->string('first_name')->comment('ชื่อจริง');
             $table->string('last_name')->comment('นามสกุล');
             $table->string('nick_name')->comment('ชื่อเล่น');
@@ -29,7 +28,7 @@ class CreateFactPersonContactTable extends Migration
 			$table->string('id_employee')->comment('เลขประจำตัวพนักงาน');
 
 			$table->uuid('location_id')->comment('รหัสข้อมูลตำเหน่ง');
-			
+
             $table->timestamps();
 			$table->softDeletes();
         });

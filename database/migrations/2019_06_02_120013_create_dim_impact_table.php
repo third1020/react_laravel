@@ -14,13 +14,12 @@ class CreateDimImpactTable extends Migration
     public function up()
     {
         Schema::create('dim_impact', function (Blueprint $table) {
-            $table->uuid('id')->comment('รหัสข้อมูลตาราง');
-			$table->primary('id');
+          $table->bigIncrements('id')->comment('รหัสข้อมูลตาราง');
 			$table->uuid('client_id')->comment('รหัสข้อมูลผู้สร้าง');
-			
+
 			$table->string('name')->comment('ชื่อ ผลกระทบ');
 			$table->enum('value', ['High', 'Medium', 'Low', 'None'])->default('None')->comment('ตัวเลือก ระดับ ผลกระทบ');
-			
+
             $table->timestamps();
 			$table->softDeletes();
         });

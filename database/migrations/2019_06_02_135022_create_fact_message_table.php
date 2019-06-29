@@ -14,13 +14,12 @@ class CreateFactMessageTable extends Migration
     public function up()
     {
         Schema::create('fact_message', function (Blueprint $table) {
-            $table->uuid('id')->comment('รหัสข้อมูลของตาราง');
-			$table->primary('id');
+          $table->bigIncrements('id')->comment('รหัสข้อมูลตาราง');
 			$table->uuid('client_id')->comment('รหัสข้อมูลผู้สร้าง');
 			$table->uuid('message_id')->comment('รหัสข้อมูลข้อความ');
-			
+
 			$table->text('comment')->comment('ความคิดเห็น');
-			
+
             $table->timestamps();
 			$table->softDeletes();
         });

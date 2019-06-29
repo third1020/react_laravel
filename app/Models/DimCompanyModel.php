@@ -9,7 +9,7 @@ use App\Traits\Uuids;
 class DimCompanyModel extends Model
 {
     use SoftDeletes;
-    use Uuids;
+
 
     protected $table = 'dim_company';
     protected $softDelete = true;

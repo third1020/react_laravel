@@ -13,16 +13,15 @@ class CreateDimAddressTable extends Migration
      */
     public function up()
     {
-		
+
         Schema::create('dim_address', function (Blueprint $table) {
-            $table->uuid('id')->comment('รหัสข้อมูลตาราง');
-			$table->primary('id');
-			
+          $table->bigIncrements('id')->comment('รหัสข้อมูลตาราง');
+
 			$table->uuid('province_id')->comment('รหัสข้อมูลจังหวัด');
 			$table->uuid('district_id')->comment('รหัสข้อมูลอำเภอ');
 			$table->uuid('sub_district_id')->comment('รหัสข้อมูลตำบล');
 			$table->uuid('postal_code_id')->comment('รหัสข้อมูลรหัสไปรษณีย์');
-			
+
             $table->timestamps();
 			$table->softDeletes();
         });

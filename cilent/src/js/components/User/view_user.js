@@ -129,7 +129,7 @@ let container;
       }
 
       componentDidMount () {
-        axios.get(`${this.props.updateurl}`).then(res => {
+        axios.get(`/api/user/update/${this.props.match.params.id}`).then(res => {
           this.setState({
             username: res.data.user.username,
             email: res.data.user.email,
@@ -175,7 +175,7 @@ let container;
                         {this.renderErrorFor('username')}
                       </Col>
 
-                
+
 
 
                     </Row>
@@ -288,4 +288,4 @@ let container;
       }
     }
 
-    export default View_user
+    export default HocValidateUser(View_user)

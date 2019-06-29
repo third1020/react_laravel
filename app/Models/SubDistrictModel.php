@@ -9,7 +9,7 @@ use App\Traits\Uuids;
 class SubDistrictModel extends Model
 {
     use SoftDeletes;
-    use Uuids;
+
 
     protected $table = 'sub_district';
     public $primaryKey = 'id';

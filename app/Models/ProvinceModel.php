@@ -9,7 +9,7 @@ use App\Traits\Uuids;
 class ProvinceModel extends Model
 {
     use SoftDeletes;
-    use Uuids;
+  
 
     protected $table = 'province';
     public $primaryKey = 'id';

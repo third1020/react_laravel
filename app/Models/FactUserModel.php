@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class FactUserModel extends Model
 {
     use SoftDeletes;
-    use Uuids;
+
 
     protected $table = 'fact_user';
     public $primaryKey = 'id';

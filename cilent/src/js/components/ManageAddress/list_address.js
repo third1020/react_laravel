@@ -1,5 +1,5 @@
-import axios from 'axios'
-   import React, { Component } from 'react'
+
+   import React from 'react';
    import DataTable from "../DataTable";
    import clsx from 'clsx';
    import { makeStyles, useTheme } from '@material-ui/core/styles';
@@ -76,11 +76,8 @@ import axios from 'axios'
 
      return (
        <div>
-
            <DataTable
-
                url="/api/address"
-               updateurl="/api/address/update"
                columns={columns}
                name={"address"}
                headname={" List Address - ข้อมูลที่อยู่ "}
@@ -89,9 +86,10 @@ import axios from 'axios'
                delete={"ลบ"}
                addlink={"/AddAddress"}
                addbutton={"Add Address"}
+               manage={"ManageAddress"}
+               updateurl={"UpdateAddress"}
+               viewurl ={"ViewAddress"}
                 />
-
-
        </div>
      );
    }

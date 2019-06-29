@@ -14,15 +14,14 @@ class CreateDimMessageTable extends Migration
     public function up()
     {
         Schema::create('dim_message', function (Blueprint $table) {
-            $table->uuid('id')->comment('รหัสข้อมูลของตาราง');
-			$table->primary('id');
+          $table->bigIncrements('id')->comment('รหัสข้อมูลตาราง');
 			$table->uuid('client_id')->comment('รหัสข้อมูลผู้สร้าง');
-			
+
 			$table->string('tital')->comment('หัวข้อ');
 			$table->text('detail')->comment('รายละเอียด');
-			
+
 			$table->enum('status', ['O', 'C'])->default('O')->comment('สถานะ O=Open, C=Close');
-			
+
             $table->timestamps();
 			$table->softDeletes();
         });

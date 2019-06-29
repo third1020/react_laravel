@@ -25,12 +25,12 @@ use Illuminate\Support\Facades\Auth;
 
 
 //image
-  Route::post('uploadImage', 'Api\Image\ImageController@uploadImage');
+  Route::post('/uploadImage', 'Api\Image\ImageController@uploadImage');
   Route::get('/image/index', 'Api\Image\ImageController@index');
   Route::delete('/image/delete/{id}', 'Api\Image\ImageController@destroy');
   Route::delete('/image/delete_selected', 'Api\Image\ImageController@destroy_select');
 
-//permission
+//permissionu
 
   Route::get('/permission/index', 'Api\Permission\PermissionController@index');
   Route::post('/permission/getPermission', 'Api\Permission\PermissionController@getPermission');
@@ -171,12 +171,20 @@ use Illuminate\Support\Facades\Auth;
     Route::delete('/requestgeneral/delete_selected', 'Api\Request\RequestGeneral@destroy_select');
 
     //RequestController
-        Route::get('/requestissues/index', 'Api\Request\RequestIssues@index');
-        Route::post('/requestissues/store', 'Api\Request\RequestIssues@store');
-        Route::get('/requestissues/update/{id}', 'Api\Request\RequestIssues@edit');
-        Route::put('/requestissues/update/{id}', 'Api\Request\RequestIssues@update');
-        Route::delete('/requestissues/delete/{id}', 'Api\Request\RequestIssues@destroy');
-        Route::delete('/requestissues/delete_selected', 'Api\Request\RequestIssues@destroy_select');
+    Route::get('/requestissues/index', 'Api\Request\RequestIssues@index');
+    Route::post('/requestissues/store', 'Api\Request\RequestIssues@store');
+    Route::get('/requestissues/update/{id}', 'Api\Request\RequestIssues@edit');
+    Route::put('/requestissues/update/{id}', 'Api\Request\RequestIssues@update');
+    Route::delete('/requestissues/delete/{id}', 'Api\Request\RequestIssues@destroy');
+    Route::delete('/requestissues/delete_selected', 'Api\Request\RequestIssues@destroy_select');
+
+  //SubDistrictController
+    Route::get('/district/index', 'Api\District\DistrictController@index');
+    Route::post('/district/store', 'Api\District\DistrictController@store');
+    Route::get('/district/update/{id}', 'Api\District\DistrictController@edit');
+    Route::put('/district/update/{id}', 'Api\District\DistrictController@update');
+    Route::delete('/district/delete/{id}', 'Api\District\DistrictController@destroy');
+    Route::delete('/district/delete_selected', 'Api\District\DistrictController@destroy_select');
 
 //SubDistrictController
     Route::get('/subdistrict/index', 'Api\SubDistrict\SubDistrictController@index');

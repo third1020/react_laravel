@@ -8,7 +8,7 @@ import Swal from 'sweetalert2/dist/sweetalert2.js'
 
 import "../../../css/util.css";
 import IMG from "../../../images/img-01.png"
-import {FaUserAlt,FaKey } from 'react-icons/fa';
+import {FaUserAlt } from 'react-icons/fa';
 
 
 export default class Login extends Component {

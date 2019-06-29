@@ -14,9 +14,7 @@ class CreatePostalCodeTable extends Migration
     public function up()
     {
         Schema::create('postal_code', function (Blueprint $table) {
-            $table->uuid('id');
-            $table->primary('id');
-
+          $table->bigIncrements('id')->comment('รหัสข้อมูลตาราง');
             $table->integer('code');
             $table->uuid('sub_district_id');
             $table->uuid('district_id');

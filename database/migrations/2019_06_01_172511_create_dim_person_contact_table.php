@@ -14,13 +14,12 @@ class CreateDimPersonContactTable extends Migration
     public function up()
     {
         Schema::create('dim_person_contact', function (Blueprint $table) {
-            $table->uuid('id')->comment('รหัสข้อมูลตาราง');
-			$table->primary('id');
+          $table->bigIncrements('id')->comment('รหัสข้อมูลตาราง');
 			$table->uuid('client_id')->comment('รหัสข้อมูลผู้สร้าง');
-			
+
 			$table->uuid('company_id')->comment('รหัสข้อมูลบริษัท');
 			$table->uuid('person_responsible_id')->comment('รหัสข้อมูลผู้รับผิดชอบ');
-			
+
             $table->timestamps();
 			$table->softDeletes();
         });

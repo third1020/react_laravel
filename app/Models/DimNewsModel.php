@@ -9,9 +9,9 @@ use App\Traits\Uuids;
 class DimNewsModel extends Model
 {
     use SoftDeletes;
-    use Uuids;
 
-    protected $table = 'fact_news';
+
+    protected $table = 'dim_news';
     protected $softDelete = true;
 
     public $timestamps = true;

@@ -40,18 +40,7 @@ export default class SelectViewForm extends Component {
 
           { this.props.ChooseUpdateForm == "user" ? (<View_user id={this.props.id} updateurl={this.props.updateurl}/>) :null }
 
-
-
-
-
           </div>
-
-
-
-
-
-
-
         );
     }
 }

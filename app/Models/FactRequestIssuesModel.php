@@ -9,7 +9,7 @@ use App\Traits\Uuids;
 class FactRequestIssuesModel extends Model
 {
     use SoftDeletes;
-    use Uuids;
+  
 
     protected $table = 'dim_request_general';
     protected $softDelete = true;

@@ -69,9 +69,9 @@ class SidebarNavItems extends React.Component {
               case 'ManageEquipment':
                 return this.itemNav("Equipment", idx, item);
               case 'ManageRequestGeneral':
-                return this.itemNav("News", idx, item);
+                return this.itemNav("Request", idx, item);
               case 'ManageNews':
-                return this.itemNav("User", idx, item);
+                return this.itemNav("News", idx, item);
               case 'ManageImage':
                 return this.itemNav("Image", idx, item);
               case 'ManageMessage':

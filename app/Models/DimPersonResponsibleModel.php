@@ -9,7 +9,7 @@ use App\Traits\Uuids;
 class DimPersonResponsibleModel extends Model
 {
     use SoftDeletes;
-    use Uuids;
+    
 
     protected $table = 'dim_person_responsible';
     protected $softDelete = true;

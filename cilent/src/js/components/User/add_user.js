@@ -37,7 +37,7 @@ let container;
           image_show: 'default',
           image_id: '1',
           image: [],
-          client_id: '1',
+          client_id: this.props.client_id,
           permission_id: '1',
           getpermission: [],
           errors: []
@@ -81,10 +81,10 @@ this.setState({
 
         const formData = {
           image: this.state.image[this.state.image.length-1],
-          client_id : this.state.client_id
+          client_id : this.props.client_id
         }
 
-        console.log(this.state.client_id);
+        console.log(formData);
 
       axios.post('/api/uploadImage',formData)
       .then(res => {
@@ -97,7 +97,7 @@ this.setState({
           user_right: this.state.user_right,
           image_show: this.state.image_show,
           image_id: res.data.image_id,
-          client_id: this.props.cilent_id,
+          client_id: this.props.client_id,
           permission_id: this.state.permission_id,
 
         }

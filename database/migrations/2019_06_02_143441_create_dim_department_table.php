@@ -14,12 +14,11 @@ class CreateDimDepartmentTable extends Migration
     public function up()
     {
         Schema::create('dim_department', function (Blueprint $table) {
-            $table->uuid('id')->comment('รหัสข้อมูลตาราง');
-			$table->primary('id');
+          $table->bigIncrements('id')->comment('รหัสข้อมูลตาราง');
 			$table->uuid('client_id')->comment('รหัสข้อมูลผู้สร้าง');
-			
+
 			$table->string('name')->comment('ชื่อแผนก');
-			
+
             $table->timestamps();
 			$table->softDeletes();
         });

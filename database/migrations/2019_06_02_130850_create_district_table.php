@@ -14,8 +14,7 @@ class CreateDistrictTable extends Migration
     public function up()
     {
         Schema::create('district', function (Blueprint $table) {
-            $table->uuid('id');
-            $table->primary('id');
+          $table->bigIncrements('id')->comment('รหัสข้อมูลตาราง');
 
 			$table->string('name');
             $table->uuid('province_id');

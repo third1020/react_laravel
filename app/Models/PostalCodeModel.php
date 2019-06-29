@@ -9,7 +9,7 @@ use App\Traits\Uuids;
 class PostalCodeModel extends Model
 {
     use SoftDeletes;
-    use Uuids;
+
 
     protected $table = 'postal_code';
     public $primaryKey = 'id';

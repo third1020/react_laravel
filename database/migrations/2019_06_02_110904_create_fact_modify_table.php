@@ -14,15 +14,14 @@ class CreateFactModifyTable extends Migration
     public function up()
     {
         Schema::create('fact_modify', function (Blueprint $table) {
-            $table->uuid('id')->comment('รหัสข้อมูลตาราง');
-			$table->primary('id');
+          $table->bigIncrements('id')->comment('รหัสข้อมูลตาราง');
 			$table->uuid('client_id')->comment('รหัสข้อมูลผู้สร้าาง');
 			$table->uuid('modify_id')->comment('รหัสข้อมูลการแก้ไข');
-			
-			
+
+
 			$table->text('comment')->comment('ข้อคิดเห็น');
 			$table->bigInteger('price')->comment('ราคา');
-			
+
             $table->timestamps();
 			$table->softDeletes();
         });
