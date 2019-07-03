@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class CreateDimImageTable extends Migration
 {
@@ -16,13 +16,20 @@ class CreateDimImageTable extends Migration
         Schema::create('dim_image', function (Blueprint $table) {
             $table->bigIncrements('id')->comment('รหัสข้อมูลตาราง');
 
-			$table->uuid('client_id')->comment('รหัสข้อมูลผู้สร้าง');
+            $table->uuid('client_id')->comment('รหัสข้อมูลผู้สร้าง');
 
-			$table->text('image')->nullable();
+            $table->text('image')->nullable();
 
             $table->timestamps();
-			$table->softDeletes();
+            $table->softDeletes();
         });
+
+        DB::table('dim_image')->insert(
+            array(
+                'client_id' => 'admin',
+                'image' => 'images/img/image-not-found.png',
+            )
+        );
     }
 
     /**
