@@ -77,9 +77,7 @@ class UsersOverview extends React.Component {
     // They can still be triggered on hover.
     const buoMeta = BlogUsersOverview.getDatasetMeta(0);
     buoMeta.data[0]._model.radius = 0;
-    buoMeta.data[
-      this.props.chartData.datasets[0].data.length - 1
-    ]._model.radius = 0;
+    buoMeta.data[this.props.chartData.datasets[0].data.length - 1]._model.radius = 0;
 
     // Render the chart.
     BlogUsersOverview.render();
@@ -106,11 +104,7 @@ class UsersOverview extends React.Component {
               </Button>
             </Col>
           </Row>
-          <canvas
-            height="120"
-            ref={this.canvasRef}
-            style={{ maxWidth: "100% !important" }}
-          />
+          <canvas height="120" ref={this.canvasRef} style={{ maxWidth: "100% !important" }} />
         </CardBody>
       </Card>
     );

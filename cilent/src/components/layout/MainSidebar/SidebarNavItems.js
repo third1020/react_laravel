@@ -6,7 +6,7 @@ import { Store } from "../../../flux";
 
 class SidebarNavItems extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
 
     this.state = {
       navItems: Store.getSidebarItems()
@@ -16,7 +16,6 @@ class SidebarNavItems extends React.Component {
   }
 
   componentWillMount() {
-
     Store.addChangeListener(this.onChange);
   }
 
@@ -25,7 +24,6 @@ class SidebarNavItems extends React.Component {
   }
 
   onChange() {
-
     this.setState({
       ...this.state,
       navItems: Store.getSidebarItems()
@@ -36,19 +34,26 @@ class SidebarNavItems extends React.Component {
 
   itemNav(nameNav, idx, item) {
     this.number++;
-    return <div key={idx}><h4 style={{
-      borderTopStyle: 'solid',
-      borderTopWidth: "thin",
-      textTransform: "uppercase",
-      fontWeight: "600",
-      fontSize: "12px",
-      letterSpacing: "1px",
-      color: "rgb(138, 147, 165)",
-      padding: "10px 20px 0px",
-      margin: "10px 0px 0px"
-    }}>{nameNav}</h4>
-      <SidebarNavItem key={idx} item={item} />
-    </div>;
+    return (
+      <div key={idx}>
+        <h4
+          style={{
+            borderTopStyle: "solid",
+            borderTopWidth: "thin",
+            textTransform: "uppercase",
+            fontWeight: "600",
+            fontSize: "12px",
+            letterSpacing: "1px",
+            color: "rgb(138, 147, 165)",
+            padding: "10px 20px 0px",
+            margin: "10px 0px 0px"
+          }}
+        >
+          {nameNav}
+        </h4>
+        <SidebarNavItem key={idx} item={item} />
+      </div>
+    );
   }
 
   render() {
@@ -58,39 +63,39 @@ class SidebarNavItems extends React.Component {
         <Nav className="nav--no-borders flex-column">
           {items.map((item, idx) => {
             switch (item.title) {
-              case 'ManageUser':
+              case "ManageUser":
                 return this.itemNav("User", idx, item);
-              case 'ManagePersonContact':
+              case "ManagePersonContact":
                 return this.itemNav("Person", idx, item);
               // case 'ManagePersonContact':
               //   return itemNav("Address", idx, item);;
-              case 'ManageAddress':
+              case "ManageAddress":
                 return this.itemNav("Address", idx, item);
-              case 'ManageEquipment':
+              case "ManageEquipment":
                 return this.itemNav("Equipment", idx, item);
-              case 'ManageRequestGeneral':
+              case "ManageRequestGeneral":
                 return this.itemNav("Request", idx, item);
-              case 'ManageNews':
+              case "ManageNews":
                 return this.itemNav("News", idx, item);
-              case 'ManageImage':
+              case "ManageImage":
                 return this.itemNav("Image", idx, item);
-              case 'ManageMessage':
+              case "ManageMessage":
                 return this.itemNav("Message", idx, item);
-              case 'ManageModify':
+              case "ManageModify":
                 return this.itemNav("Modify", idx, item);
-              case 'ManagePriority':
+              case "ManagePriority":
                 return this.itemNav("Priority", idx, item);
-              case 'ManageImpact':
+              case "ManageImpact":
                 return this.itemNav("Impact", idx, item);
-              case 'Report':
+              case "Report":
                 return this.itemNav("Report", idx, item);
-              default :
+              default:
                 return <SidebarNavItem key={idx} item={item} />;
             }
           })}
         </Nav>
       </div>
-    )
+    );
   }
 }
 

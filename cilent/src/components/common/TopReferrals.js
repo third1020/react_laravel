@@ -24,9 +24,7 @@ const TopReferrals = ({ title, referralData }) => (
         {referralData.map((item, idx) => (
           <ListGroupItem key={idx} className="d-flex px-3">
             <span className="text-semibold text-fiord-blue">{item.title}</span>
-            <span className="ml-auto text-right text-semibold text-reagent-gray">
-              {item.value}
-            </span>
+            <span className="ml-auto text-right text-semibold text-reagent-gray">{item.value}</span>
           </ListGroupItem>
         ))}
       </ListGroup>
@@ -36,12 +34,7 @@ const TopReferrals = ({ title, referralData }) => (
       <Row>
         {/* Time Span */}
         <Col>
-          <FormSelect
-            size="sm"
-            value="last-week"
-            style={{ maxWidth: "130px" }}
-            onChange={() => {}}
-          >
+          <FormSelect size="sm" value="last-week" style={{ maxWidth: "130px" }} onChange={() => {}}>
             <option value="last-week">Last Week</option>
             <option value="today">Today</option>
             <option value="last-month">Last Month</option>

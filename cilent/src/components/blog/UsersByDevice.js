@@ -1,14 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {
-  Row,
-  Col,
-  FormSelect,
-  Card,
-  CardHeader,
-  CardBody,
-  CardFooter
-} from "shards-react";
+import { Row, Col, FormSelect, Card, CardHeader, CardBody, CardFooter } from "shards-react";
 
 import Chart from "../../utils/chart";
 
@@ -50,39 +42,35 @@ class UsersByDevice extends React.Component {
     const { title } = this.props;
     return (
       <Col lg="4" md="12" sm="12" className="mb-4">
-      <Card small className="h-100">
-        <CardHeader className="border-bottom">
-          <h6 className="m-0">{title}</h6>
-        </CardHeader>
-        <CardBody className="d-flex py-0">
-          <canvas
-            height="220"
-            ref={this.canvasRef}
-            className="blog-users-by-device m-auto"
-          />
-        </CardBody>
-        <CardFooter className="border-top">
-          <Row>
-            <Col>
-              <FormSelect
-                size="sm"
-                value="last-week"
-                style={{ maxWidth: "130px" }}
-                onChange={() => {}}
-              >
-                <option value="last-week">Last Week</option>
-                <option value="today">Today</option>
-                <option value="last-month">Last Month</option>
-                <option value="last-year">Last Year</option>
-              </FormSelect>
-            </Col>
-            <Col className="text-right view-report">
-              {/* eslint-disable-next-line */}
-              <a href="#">View full report &rarr;</a>
-            </Col>
-          </Row>
-        </CardFooter>
-      </Card>
+        <Card small className="h-100">
+          <CardHeader className="border-bottom">
+            <h6 className="m-0">{title}</h6>
+          </CardHeader>
+          <CardBody className="d-flex py-0">
+            <canvas height="220" ref={this.canvasRef} className="blog-users-by-device m-auto" />
+          </CardBody>
+          <CardFooter className="border-top">
+            <Row>
+              <Col>
+                <FormSelect
+                  size="sm"
+                  value="last-week"
+                  style={{ maxWidth: "130px" }}
+                  onChange={() => {}}
+                >
+                  <option value="last-week">Last Week</option>
+                  <option value="today">Today</option>
+                  <option value="last-month">Last Month</option>
+                  <option value="last-year">Last Year</option>
+                </FormSelect>
+              </Col>
+              <Col className="text-right view-report">
+                {/* eslint-disable-next-line */}
+                <a href="#">View full report &rarr;</a>
+              </Col>
+            </Row>
+          </CardFooter>
+        </Card>
       </Col>
     );
   }
@@ -114,11 +102,7 @@ UsersByDevice.defaultProps = {
       {
         hoverBorderColor: "#ffffff",
         data: [68.3, 24.2, 7.5],
-        backgroundColor: [
-          "rgba(0,123,255,0.9)",
-          "rgba(0,123,255,0.5)",
-          "rgba(0,123,255,0.3)"
-        ]
+        backgroundColor: ["rgba(0,123,255,0.9)", "rgba(0,123,255,0.5)", "rgba(0,123,255,0.3)"]
       }
     ],
     labels: ["Desktop", "Tablet", "Mobile"]

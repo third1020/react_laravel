@@ -21,10 +21,7 @@ export default class Notifications extends React.Component {
   render() {
     return (
       <NavItem className="border-right dropdown notifications">
-        <NavLink
-          className="nav-link-icon text-center"
-          onClick={this.toggleNotifications}
-        >
+        <NavLink className="nav-link-icon text-center" onClick={this.toggleNotifications}>
           <div className="nav-link-icon__wrapper">
             <i className="material-icons">&#xE7F4;</i>
             <Badge pill theme="danger">
@@ -32,10 +29,7 @@ export default class Notifications extends React.Component {
             </Badge>
           </div>
         </NavLink>
-        <Collapse
-          open={this.state.visible}
-          className="dropdown-menu dropdown-menu-small"
-        >
+        <Collapse open={this.state.visible} className="dropdown-menu dropdown-menu-small">
           <DropdownItem>
             <div className="notification__icon-wrapper">
               <div className="notification__icon">
@@ -45,9 +39,11 @@ export default class Notifications extends React.Component {
             <div className="notification__content">
               <span className="notification__category">Analytics</span>
               <p>
-                Your website’s active users count increased by{" "}
-                <span className="text-success text-semibold">28%</span> in the
-                last week. Great job!
+                Your website’s active users count increased by
+                {" "}
+                <span className="text-success text-semibold">28%</span>
+                {' '}
+in the last week. Great job!
               </p>
             </div>
           </DropdownItem>
@@ -60,9 +56,10 @@ export default class Notifications extends React.Component {
             <div className="notification__content">
               <span className="notification__category">Sales</span>
               <p>
-                Last week your store’s sales count decreased by{" "}
-                <span className="text-danger text-semibold">5.52%</span>. It
-                could have been worse!
+                Last week your store’s sales count decreased by
+                {" "}
+                <span className="text-danger text-semibold">5.52%</span>
+. It could have been worse!
               </p>
             </div>
           </DropdownItem>

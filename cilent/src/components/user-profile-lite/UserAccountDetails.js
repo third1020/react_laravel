@@ -86,11 +86,7 @@ const UserAccountDetails = ({ title }) => (
                 {/* City */}
                 <Col md="6" className="form-group">
                   <label htmlFor="feCity">City</label>
-                  <FormInput
-                    id="feCity"
-                    placeholder="City"
-                    onChange={() => {}}
-                  />
+                  <FormInput id="feCity" placeholder="City" onChange={() => {}} />
                 </Col>
                 {/* State */}
                 <Col md="4" className="form-group">
@@ -103,11 +99,7 @@ const UserAccountDetails = ({ title }) => (
                 {/* Zip Code */}
                 <Col md="2" className="form-group">
                   <label htmlFor="feZipCode">Zip</label>
-                  <FormInput
-                    id="feZipCode"
-                    placeholder="Zip"
-                    onChange={() => {}}
-                  />
+                  <FormInput id="feZipCode" placeholder="Zip" onChange={() => {}} />
                 </Col>
               </Row>
               <Row form>

@@ -1,14 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {
-  Card,
-  CardHeader,
-  CardBody,
-  CardFooter,
-  Col,
-  Row,
-  FormSelect
-} from "shards-react";
+import { Card, CardHeader, CardBody, CardFooter, Col, Row, FormSelect } from "shards-react";
 
 class CountryReports extends React.Component {
   constructor(props) {
@@ -49,11 +41,7 @@ class CountryReports extends React.Component {
               {countries.map((country, idx) => (
                 <tr key={idx}>
                   <td>
-                    <img
-                      className="country-flag mr-1"
-                      src={country.flag}
-                      alt={country.title}
-                    />
+                    <img className="country-flag mr-1" src={country.flag} alt={country.title} />
                     {country.title}
                   </td>
                   <td className="text-right">{country.visitorsAmount}</td>

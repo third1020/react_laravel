@@ -82,24 +82,16 @@ class SmallStats extends React.Component {
   render() {
     const { variation, label, value, percentage, increase } = this.props;
 
-    const cardClasses = classNames(
-      "stats-small",
-      variation && `stats-small--${variation}`
-    );
+    const cardClasses = classNames("stats-small", variation && `stats-small--${variation}`);
 
-    const cardBodyClasses = classNames(
-      variation === "1" ? "p-0 d-flex" : "px-0 pb-0"
-    );
+    const cardBodyClasses = classNames(variation === "1" ? "p-0 d-flex" : "px-0 pb-0");
 
     const innerWrapperClasses = classNames(
       "d-flex",
       variation === "1" ? "flex-column m-auto" : "px-3"
     );
 
-    const dataFieldClasses = classNames(
-      "stats-small__data",
-      variation === "1" && "text-center"
-    );
+    const dataFieldClasses = classNames("stats-small__data", variation === "1" && "text-center");
 
     const labelClasses = classNames(
       "stats-small__label",

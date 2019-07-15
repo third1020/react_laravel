@@ -31,12 +31,17 @@ const Discussions = ({ title, discussions }) => (
             <div className="blog-comments__meta text-mutes">
               <a className="text-secondary" href={discussion.author.url}>
                 {discussion.author.name}
-              </a>{" "}
-              on{" "}
+              </a>
+              {" "}
+              on
+              {" "}
               <a className="text-secondary" href={discussion.post.url}>
                 {discussion.post.title}
               </a>
-              <span className="text-mutes">- {discussion.date}</span>
+              <span className="text-mutes">
+-
+                {discussion.date}
+              </span>
             </div>
 
             {/* Content :: Body */}
@@ -48,19 +53,22 @@ const Discussions = ({ title, discussions }) => (
                 <Button theme="white">
                   <span className="text-success">
                     <i className="material-icons">check</i>
-                  </span>{" "}
+                  </span>
+                  {" "}
                   Approve
                 </Button>
                 <Button theme="white">
                   <span className="text-danger">
                     <i className="material-icons">clear</i>
-                  </span>{" "}
+                  </span>
+                  {" "}
                   Reject
                 </Button>
                 <Button theme="white">
                   <span className="text-light">
                     <i className="material-icons">more_vert</i>
-                  </span>{" "}
+                  </span>
+                  {" "}
                   Edit
                 </Button>
               </ButtonGroup>

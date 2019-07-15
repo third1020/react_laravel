@@ -1,11 +1,6 @@
 import React from "react";
 import classNames from "classnames";
-import {
-  InputGroup,
-  DatePicker,
-  InputGroupAddon,
-  InputGroupText
-} from "shards-react";
+import { InputGroup, DatePicker, InputGroupAddon, InputGroupText } from "shards-react";
 
 import "../../assets/range-date-picker.css";
 
