@@ -1,56 +1,67 @@
 export default function() {
-    var permission = [
-        "ManageUser",
-        "ManagePermission",
-        "ManagePersonContact",
-        "ManagePersonResponsible",
 
-        "ManageAddress",
-        "ManageCompany",
-        "ManageDepartment",
-        "ManageProvince",
-        "ManageDistrict",
-        "ManagePostalCode",
-        "ManageLocation",
+  var permission = [
+    "ManageUser",
+    "ManagePermission",
+    "ManagePersonContact",
+    "ManagePersonResponsible",
 
-        "ManageEquipment",
 
-        "ManageRequestGeneral",
-        "ManageRequestIssuses",
+    "ManageAddress",
+    "ManageCompany",
+    "ManageDepartment",
+    "ManageProvince",
+    "ManageDistrict",
+    "ManagePostalCode",
+    "ManageLocation",
 
-        "ManageNews",
-        "ManageSettingNews",
+    "ManageEquipment",
 
-        "ManageImage",
+    "ManageRequestGeneral",
+    "ManageRequestIssuses",
 
-        "ManageMessage",
+    "ManageNews",
+    "ManageSettingNews",
 
-        "ManageModify",
+    "ManageImage",
 
-        "ManagePriority",
-        "ManageImpact",
+    "ManageMessage",
 
-        "Report"
-    ];
+    "ManageModify",
 
-    var array = [
-        {
-            title: "Blog Dashboard",
-            to: "/blog-overview",
-            htmlBefore: '<i class="material-icons">edit</i>',
-            htmlAfter: ""
-        }
-    ];
+    "ManagePriority",
+    "ManageImpact",
 
-    permission.map(item => {
-        if (sessionStorage[item] == "1") {
-            array.push({
-                title: item,
-                htmlBefore: '<i class="material-icons">table_chart</i>',
-                to: "/" + item
-            });
-        }
-    });
+    "Report",
+  ];
 
-    return array;
+  var array = [
+    {
+      title: "Blog Dashboard",
+      to: "/blog-overview",
+      htmlBefore: '<i class="material-icons">edit</i>',
+      htmlAfter: ""
+    },
+
+
+  ]
+
+  permission.map(item => {
+          if (sessionStorage[item] == "1") {
+            array.push({title: item,
+                        htmlBefore: '<i class="material-icons">table_chart</i>',
+                        to: "/"+item,
+                      });
+
+
+          }
+      }
+  )
+
+
+
+return array
+
+
+
 }

@@ -1,7 +1,9 @@
-import React, { Component } from "react";
-import ReactDOM from "react-dom";
-import Select from "react-select";
-import ImageUploader from "react-images-upload";
+import React, {
+    Component
+} from 'react';
+import ReactDOM from 'react-dom';
+import Select from 'react-select';
+import ImageUploader from 'react-images-upload';
 import {
     ListGroup,
     ListGroupItem,
@@ -15,19 +17,24 @@ import {
     Button,
     Container
 } from "shards-react";
-import Swal from "sweetalert2";
-import axios from "axios";
-import { ToastContainer } from "react-toastr";
+import Swal from 'sweetalert2'
+import axios from 'axios'
+import {
+    ToastContainer
+} from "react-toastr";
 import "../../../css/alert.css";
 import "../../../css/animate.css";
 import HocValidateUser from "../../../HocValidateUser";
 let container;
 
+
+
+
 class Update_permission extends Component {
     constructor(props) {
-        super(props);
+        super(props)
         this.state = {
-            permission_name: "",
+            permission_name: '',
             user: true,
             personcontact: false,
             equipment: false,
@@ -125,17 +132,21 @@ class Update_permission extends Component {
             errors: []
         };
 
-        this.handleChange = this.handleChange.bind(this);
-        this.handleFieldChange = this.handleFieldChange.bind(this);
-        this.handleCreate = this.handleCreate.bind(this);
-        this.hasErrorFor = this.hasErrorFor.bind(this);
-        this.renderErrorFor = this.renderErrorFor.bind(this);
+
+        this.handleChange = this.handleChange.bind(this)
+        this.handleFieldChange = this.handleFieldChange.bind(this)
+        this.handleCreate = this.handleCreate.bind(this)
+        this.hasErrorFor = this.hasErrorFor.bind(this)
+        this.renderErrorFor = this.renderErrorFor.bind(this)
+
+
     }
+
 
     handleFieldChange(event) {
         this.setState({
             permission_name: event.target.value
-        });
+        })
     }
 
     handleChange(e, fruit) {
@@ -145,11 +156,16 @@ class Update_permission extends Component {
             ...this.state,
             ...newState
         });
+
+
+
     }
 
     handleCreate(event) {
-        event.preventDefault();
-        const { history } = this.props;
+        event.preventDefault()
+        const {
+            history
+        } = this.props
 
         const insertdata = {
             permission_name: this.state.permission_name,
@@ -221,8 +237,7 @@ class Update_permission extends Component {
             ManagePersonResponsible: this.state.ManagePersonResponsible,
             ManagePersonResponsibleView: this.state.ManagePersonResponsibleView,
             ManagePersonResponsibleEdit: this.state.ManagePersonResponsibleEdit,
-            ManagePersonResponsibleDelete: this.state
-                .ManagePersonResponsibleDelete,
+            ManagePersonResponsibleDelete: this.state.ManagePersonResponsibleDelete,
             ManagePostalCode: this.state.ManagePostalCode,
             ManagePostalCodeView: this.state.ManagePostalCodeView,
             ManagePostalCodeEdit: this.state.ManagePostalCodeEdit,
@@ -248,20 +263,20 @@ class Update_permission extends Component {
             ManageSettingNewsEdit: this.state.ManageSettingNewsEdit,
             ManageSettingNewsDelete: this.state.ManageSettingNewsDelete,
             Report: this.state.Report
-        };
+        }
 
         console.log(insertdata);
 
-        axios
-            .put(
-                `/api/permission/update/${this.props.match.params.id}`,
-                insertdata
-            )
+        axios.put(`/api/permission/update/${this.props.match.params.id}`, insertdata)
             .then(response => {
                 console.log(response.data);
-                Swal.fire("Successfully", "Add data successfully ", "success");
+                Swal.fire(
+                    'Successfully',
+                    'Add data successfully ',
+                    'success'
+                )
                 this.setState({
-                    permission_name: "",
+                    permission_name: '',
                     user: false,
                     personcontact: false,
                     equipment: false,
@@ -357,1846 +372,1233 @@ class Update_permission extends Component {
                     ManageSettingNewsDelete: false,
                     Report: false,
                     errors: []
-                });
+                })
+
+
             })
             .catch(error => {
                 this.setState({
                     errors: error.response.data.errors
-                });
+                })
                 console.log(error.response.data.errors);
 
-                Swal.fire("Errors", "check the value of a form field", "error");
+                Swal.fire(
+                    'Errors',
+                    'check the value of a form field',
+                    'error'
+                )
+
             });
+
+
+
     }
 
+
     hasErrorFor(field) {
-        return !!this.state.errors[field];
+        return !!this.state.errors[field]
     }
 
     renderErrorFor(field) {
         if (this.hasErrorFor(field)) {
-            return (
-                <span className="invalid-feedback">
-                    <strong> {this.state.errors[field][0]} </strong>{" "}
-                </span>
-            );
+            return ( <
+                span className = 'invalid-feedback' >
+                <
+                strong > {
+                    this.state.errors[field][0]
+                } < /strong> <
+                /span>
+            )
         }
     }
-    componentDidMount() {
-        axios
-            .get(`/api/permission/update/${this.props.match.params.id}`)
-            .then(res => {
-                console.log(res.data.user);
-                this.setState({
-                    permission_name: res.data.user.permission_name,
-                    user: res.data.user.user,
-                    personcontact: res.data.user.personcontact,
-                    equipment: res.data.user.equipment,
-                    request: res.data.user.request,
-                    news: res.data.user.news,
-                    image: res.data.user.image,
-                    message: res.data.user.message,
-                    modify: res.data.user.modify,
-                    report: res.data.user.report,
-                    ManageUser: res.data.user.ManageUser,
-                    ManageUserView: res.data.user.ManageUserView,
-                    ManageUserEdit: res.data.user.ManageUserEdit,
-                    ManageUserDelete: res.data.user.ManageUserDelete,
-                    ManagePermission: res.data.user.ManagePermission,
-                    ManagePermissionView: res.data.user.ManagePermissionView,
-                    ManagePermissionEdit: res.data.user.ManagePermissionEdit,
-                    ManagePermissionDelete:
-                        res.data.user.ManagePermissionDelete,
-                    ManageAddress: res.data.user.ManageAddress,
-                    ManageAddressView: res.data.user.ManageAddressView,
-                    ManageAddressEdit: res.data.user.ManageAddressEdit,
-                    ManageAddressDelete: res.data.user.ManageAddressDelete,
-                    ManageCompany: res.data.user.ManageCompany,
-                    ManageCompanyView: res.data.user.ManageCompanyView,
-                    ManageCompanyEdit: res.data.user.ManageCompanyEdit,
-                    ManageCompanyDelete: res.data.user.ManageCompanyDelete,
-                    ManageDepartment: res.data.user.ManageDepartment,
-                    ManageDepartmentView: res.data.user.ManageDepartmentView,
-                    ManageDepartmentEdit: res.data.user.ManageDepartmentEdit,
-                    ManageDepartmentDelete:
-                        res.data.user.ManageDepartmentDelete,
-                    ManageDistrict: res.data.user.ManageDistrict,
-                    ManageDistrictView: res.data.user.ManageDistrictView,
-                    ManageDistrictEdit: res.data.user.ManageDistrictEdit,
-                    ManageDistrictDelete: res.data.user.ManageDistrictDelete,
-                    ManageEquipment: res.data.user.ManageEquipment,
-                    ManageEquipmentView: res.data.user.ManageEquipmentView,
-                    ManageEquipmentEdit: res.data.user.ManageEquipmentEdit,
-                    ManageEquipmentDelete: res.data.user.ManageEquipmentDelete,
-                    ManageImage: res.data.user.ManageImage,
-                    ManageImageView: res.data.user.ManageImageView,
-                    ManageImageEdit: res.data.user.ManageImageEdit,
-                    ManageImageDelete: res.data.user.ManageImageDelete,
-                    ManageImpact: res.data.user.ManageImpact,
-                    ManageImpactView: res.data.user.ManageImpactView,
-                    ManageImpactEdit: res.data.user.ManageImpactEdit,
-                    ManageImpactDelete: res.data.user.ManageImpactDelete,
-                    ManageLocation: res.data.user.ManageLocation,
-                    ManageLocationView: res.data.user.ManageLocationView,
-                    ManageLocationEdit: res.data.user.ManageLocationEdit,
-                    ManageLocationDelete: res.data.user.ManageLocationDelete,
-                    ManageMessage: res.data.user.ManageMessage,
-                    ManageMessageView: res.data.user.ManageMessageView,
-                    ManageMessageEdit: res.data.user.ManageMessageEdit,
-                    ManageMessageDelete: res.data.user.ManageMessageDelete,
-                    ManageModify: res.data.user.ManageModify,
-                    ManageModifyView: res.data.user.ManageModifyView,
-                    ManageModifyEdit: res.data.user.ManageModifyEdit,
-                    ManageModifyDelete: res.data.user.ManageModifyDelete,
-                    ManageNews: res.data.user.ManageNews,
-                    ManageNewsView: res.data.user.ManageNewsView,
-                    ManageNewsEdit: res.data.user.ManageNewsEdit,
-                    ManageNewsDelete: res.data.user.ManageNewsDelete,
-                    ManagePersonContact: res.data.user.ManagePersonContact,
-                    ManagePersonContactView:
-                        res.data.user.ManagePersonContactView,
-                    ManagePersonContactEdit:
-                        res.data.user.ManagePersonContactEdit,
-                    ManagePersonContactDelete:
-                        res.data.user.ManagePersonContactDelete,
-                    ManagePersonResponsible:
-                        res.data.user.ManagePersonResponsible,
-                    ManagePersonResponsibleView:
-                        res.data.user.ManagePersonResponsibleView,
-                    ManagePersonResponsibleEdit:
-                        res.data.user.ManagePersonResponsibleEdit,
-                    ManagePersonResponsibleDelete:
-                        res.data.user.ManagePersonResponsibleDelete,
-                    ManagePostalCode: res.data.user.ManagePostalCode,
-                    ManagePostalCodeView: res.data.user.ManagePostalCodeView,
-                    ManagePostalCodeEdit: res.data.user.ManagePostalCodeEdit,
-                    ManagePostalCodeDelete:
-                        res.data.user.ManagePostalCodeDelete,
-                    ManagePriority: res.data.user.ManagePriority,
-                    ManagePriorityView: res.data.user.ManagePriorityView,
-                    ManagePriorityEdit: res.data.user.ManagePriorityEdit,
-                    ManagePriorityDelete: res.data.user.ManagePriorityDelete,
-                    ManageProvince: res.data.user.ManageProvince,
-                    ManageProvinceView: res.data.user.ManageProvinceView,
-                    ManageProvinceEdit: res.data.user.ManageProvinceEdit,
-                    ManageProvinceDelete: res.data.user.ManageProvinceDelete,
-                    ManageRequestGeneral: res.data.user.ManageRequestGeneral,
-                    ManageRequestGeneralView:
-                        res.data.user.ManageRequestGeneralView,
-                    ManageRequestGeneralEdit:
-                        res.data.user.ManageRequestGeneralEdit,
-                    ManageRequestGeneralDelete:
-                        res.data.user.ManageRequestGeneralDelete,
-                    ManageRequestIssuses: res.data.user.ManageRequestIssuses,
-                    ManageRequestIssusesView:
-                        res.data.user.ManageRequestIssusesView,
-                    ManageRequestIssusesEdit:
-                        res.data.user.ManageRequestIssusesEdit,
-                    ManageRequestIssusesDelete:
-                        res.data.user.ManageRequestIssusesDelete,
-                    ManageSettingNews: res.data.user.ManageSettingNews,
-                    ManageSettingNewsView: res.data.user.ManageSettingNewsView,
-                    ManageSettingNewsEdit: res.data.user.ManageSettingNewsEdit,
-                    ManageSettingNewsDelete:
-                        res.data.user.ManageSettingNewsDelete,
-                    Report: false
-                });
-            })
-            .catch(err => {
-                console.log(err);
-            });
+    componentDidMount(){
+      axios.get(`/api/permission/update/${this.props.match.params.id}`).then(res => {
+        console.log(res.data.user);
+        this.setState({
+
+
+          permission_name: res.data.user.permission_name,
+          user: res.data.user.user,
+          personcontact: res.data.user.personcontact,
+          equipment: res.data.user.equipment,
+          request: res.data.user.request,
+          news: res.data.user.news,
+          image: res.data.user.image,
+          message: res.data.user.message,
+          modify: res.data.user.modify,
+          report: res.data.user.report,
+          ManageUser:res.data.user.ManageUser,
+          ManageUserView: res.data.user.ManageUserView,
+          ManageUserEdit: res.data.user.ManageUserEdit,
+          ManageUserDelete:res.data.user.ManageUserDelete,
+          ManagePermission: res.data.user.ManagePermission,
+          ManagePermissionView: res.data.user.ManagePermissionView,
+          ManagePermissionEdit: res.data.user.ManagePermissionEdit,
+          ManagePermissionDelete: res.data.user.ManagePermissionDelete,
+          ManageAddress: res.data.user.ManageAddress,
+          ManageAddressView: res.data.user.ManageAddressView,
+          ManageAddressEdit: res.data.user.ManageAddressEdit,
+          ManageAddressDelete: res.data.user.ManageAddressDelete,
+          ManageCompany: res.data.user.ManageCompany,
+          ManageCompanyView: res.data.user.ManageCompanyView,
+          ManageCompanyEdit: res.data.user.ManageCompanyEdit,
+          ManageCompanyDelete: res.data.user.ManageCompanyDelete,
+          ManageDepartment: res.data.user.ManageDepartment,
+          ManageDepartmentView: res.data.user.ManageDepartmentView,
+          ManageDepartmentEdit:res.data.user.ManageDepartmentEdit,
+          ManageDepartmentDelete: res.data.user.ManageDepartmentDelete,
+          ManageDistrict: res.data.user.ManageDistrict,
+          ManageDistrictView: res.data.user.ManageDistrictView,
+          ManageDistrictEdit: res.data.user.ManageDistrictEdit,
+          ManageDistrictDelete: res.data.user.ManageDistrictDelete,
+          ManageEquipment: res.data.user.ManageEquipment,
+          ManageEquipmentView: res.data.user.ManageEquipmentView,
+          ManageEquipmentEdit: res.data.user.ManageEquipmentEdit,
+          ManageEquipmentDelete: res.data.user.ManageEquipmentDelete,
+          ManageImage: res.data.user.ManageImage,
+          ManageImageView: res.data.user.ManageImageView,
+          ManageImageEdit: res.data.user.ManageImageEdit,
+          ManageImageDelete: res.data.user.ManageImageDelete,
+          ManageImpact:res.data.user.ManageImpact,
+          ManageImpactView: res.data.user.ManageImpactView,
+          ManageImpactEdit: res.data.user.ManageImpactEdit,
+          ManageImpactDelete: res.data.user.ManageImpactDelete,
+          ManageLocation: res.data.user.ManageLocation,
+          ManageLocationView: res.data.user.ManageLocationView,
+          ManageLocationEdit:res.data.user.ManageLocationEdit,
+          ManageLocationDelete:res.data.user.ManageLocationDelete,
+          ManageMessage: res.data.user.ManageMessage,
+          ManageMessageView: res.data.user.ManageMessageView,
+          ManageMessageEdit: res.data.user.ManageMessageEdit,
+          ManageMessageDelete: res.data.user.ManageMessageDelete,
+          ManageModify: res.data.user.ManageModify,
+          ManageModifyView: res.data.user.ManageModifyView,
+          ManageModifyEdit: res.data.user.ManageModifyEdit,
+          ManageModifyDelete: res.data.user.ManageModifyDelete,
+          ManageNews: res.data.user.ManageNews,
+          ManageNewsView: res.data.user.ManageNewsView,
+          ManageNewsEdit:res.data.user.ManageNewsEdit,
+          ManageNewsDelete: res.data.user.ManageNewsDelete,
+          ManagePersonContact: res.data.user.ManagePersonContact,
+          ManagePersonContactView: res.data.user.ManagePersonContactView,
+          ManagePersonContactEdit: res.data.user.ManagePersonContactEdit,
+          ManagePersonContactDelete: res.data.user.ManagePersonContactDelete,
+          ManagePersonResponsible: res.data.user.ManagePersonResponsible,
+          ManagePersonResponsibleView: res.data.user.ManagePersonResponsibleView,
+          ManagePersonResponsibleEdit:res.data.user.ManagePersonResponsibleEdit,
+          ManagePersonResponsibleDelete: res.data.user.ManagePersonResponsibleDelete,
+          ManagePostalCode: res.data.user.ManagePostalCode,
+          ManagePostalCodeView: res.data.user.ManagePostalCodeView,
+          ManagePostalCodeEdit: res.data.user.ManagePostalCodeEdit,
+          ManagePostalCodeDelete: res.data.user.ManagePostalCodeDelete,
+          ManagePriority: res.data.user.ManagePriority,
+          ManagePriorityView:res.data.user.ManagePriorityView,
+          ManagePriorityEdit:res.data.user.ManagePriorityEdit,
+          ManagePriorityDelete:res.data.user.ManagePriorityDelete,
+          ManageProvince: res.data.user.ManageProvince,
+          ManageProvinceView: res.data.user.ManageProvinceView,
+          ManageProvinceEdit: res.data.user.ManageProvinceEdit,
+          ManageProvinceDelete: res.data.user.ManageProvinceDelete,
+          ManageRequestGeneral: res.data.user.ManageRequestGeneral,
+          ManageRequestGeneralView: res.data.user.ManageRequestGeneralView,
+          ManageRequestGeneralEdit: res.data.user.ManageRequestGeneralEdit,
+          ManageRequestGeneralDelete:res.data.user.ManageRequestGeneralDelete,
+          ManageRequestIssuses: res.data.user.ManageRequestIssuses,
+          ManageRequestIssusesView: res.data.user.ManageRequestIssusesView,
+          ManageRequestIssusesEdit: res.data.user.ManageRequestIssusesEdit,
+          ManageRequestIssusesDelete: res.data.user.ManageRequestIssusesDelete,
+          ManageSettingNews: res.data.user.ManageSettingNews,
+          ManageSettingNewsView: res.data.user.ManageSettingNewsView,
+          ManageSettingNewsEdit: res.data.user.ManageSettingNewsEdit,
+          ManageSettingNewsDelete: res.data.user.ManageSettingNewsDelete,
+          Report: false,
+
+        })
+
+      }).catch(err =>{
+        console.log(err);
+
+      })
     }
+
+
+
+
 
     render() {
         return (
-            <div
-                style={{
+
+            <
+            div style = {
+                {
                     paddingTop: "30px"
-                }}
-            >
-                <Container>
-                    <ListGroup flush>
-                        <ListGroupItem className="p-3">
-                            <Row>
-                                <Col>
-                                    <Form onSubmit={this.handleCreate}>
-                                        <Row form>
-                                            <Col md="12" className="form-group">
-                                                <label htmlFor="feEmailAddress">
-                                                    {" "}
-                                                    Permission Name{" "}
-                                                </label>{" "}
-                                                <FormInput
-                                                    name="permission_name"
-                                                    className={`form-control ${
-                                                        this.hasErrorFor(
-                                                            "permission_name"
-                                                        )
-                                                            ? "is-invalid"
-                                                            : ""
-                                                    }`}
-                                                    placeholder="กรอกชื่อผู้ใช้"
-                                                    type="text"
-                                                    value={
-                                                        this.state
-                                                            .permission_name
-                                                    }
-                                                    onChange={
-                                                        this.handleFieldChange
-                                                    }
-                                                />{" "}
-                                                {this.renderErrorFor(
-                                                    "permission_name"
-                                                )}{" "}
-                                            </Col>{" "}
-                                            <Col>
-                                                <ListGroupItem className="px-3 pb-3">
-                                                    <FormCheckbox
-                                                        checked={
-                                                            this.state
-                                                                .ManageUser
-                                                        }
-                                                        onChange={e =>
-                                                            this.handleChange(
-                                                                e,
-                                                                "ManageUser"
-                                                            )
-                                                        }
-                                                    >
-                                                        User{" "}
-                                                    </FormCheckbox>{" "}
-                                                    {this.state.ManageUser ==
-                                                    true ? (
-                                                        <Col>
-                                                            <div>
-                                                                <FormCheckbox
-                                                                    inline
-                                                                    checked={
-                                                                        this
-                                                                            .state
-                                                                            .ManageUser
-                                                                    }
-                                                                    onChange={e =>
-                                                                        this.handleChange(
-                                                                            e,
-                                                                            "ManageUser"
-                                                                        )
-                                                                    }
-                                                                    className="mystyle"
-                                                                >
-                                                                    ManageUser{" "}
-                                                                </FormCheckbox>{" "}
-                                                                <FormCheckbox
-                                                                    inline
-                                                                    checked={
-                                                                        this
-                                                                            .state
-                                                                            .ManageUserView
-                                                                    }
-                                                                    onChange={e =>
-                                                                        this.handleChange(
-                                                                            e,
-                                                                            "ManageUserView"
-                                                                        )
-                                                                    }
-                                                                >
-                                                                    View{" "}
-                                                                </FormCheckbox>{" "}
-                                                                <FormCheckbox
-                                                                    inline
-                                                                    checked={
-                                                                        this
-                                                                            .state
-                                                                            .ManageUserEdit
-                                                                    }
-                                                                    onChange={e =>
-                                                                        this.handleChange(
-                                                                            e,
-                                                                            "ManageUserEdit"
-                                                                        )
-                                                                    }
-                                                                >
-                                                                    Edit{" "}
-                                                                </FormCheckbox>{" "}
-                                                                <FormCheckbox
-                                                                    inline
-                                                                    checked={
-                                                                        this
-                                                                            .state
-                                                                            .ManageUserDelete
-                                                                    }
-                                                                    onChange={e =>
-                                                                        this.handleChange(
-                                                                            e,
-                                                                            "ManageUserDelete"
-                                                                        )
-                                                                    }
-                                                                >
-                                                                    Delete{" "}
-                                                                </FormCheckbox>{" "}
-                                                            </div>
-                                                            <div>
-                                                                <FormCheckbox
-                                                                    inline
-                                                                    checked={
-                                                                        this
-                                                                            .state
-                                                                            .ManagePermission
-                                                                    }
-                                                                    onChange={e =>
-                                                                        this.handleChange(
-                                                                            e,
-                                                                            "ManagePermission"
-                                                                        )
-                                                                    }
-                                                                    className="mystyle"
-                                                                >
-                                                                    ManagePermission{" "}
-                                                                </FormCheckbox>{" "}
-                                                                <FormCheckbox
-                                                                    inline
-                                                                    checked={
-                                                                        this
-                                                                            .state
-                                                                            .ManagePermissionView
-                                                                    }
-                                                                    onChange={e =>
-                                                                        this.handleChange(
-                                                                            e,
-                                                                            "ManagePermissionView"
-                                                                        )
-                                                                    }
-                                                                >
-                                                                    View{" "}
-                                                                </FormCheckbox>{" "}
-                                                                <FormCheckbox
-                                                                    inline
-                                                                    checked={
-                                                                        this
-                                                                            .state
-                                                                            .ManagePermissionEdit
-                                                                    }
-                                                                    onChange={e =>
-                                                                        this.handleChange(
-                                                                            e,
-                                                                            "ManagePermissionEdit"
-                                                                        )
-                                                                    }
-                                                                >
-                                                                    Edit{" "}
-                                                                </FormCheckbox>{" "}
-                                                                <FormCheckbox
-                                                                    inline
-                                                                    checked={
-                                                                        this
-                                                                            .state
-                                                                            .ManagePermissionDelete
-                                                                    }
-                                                                    onChange={e =>
-                                                                        this.handleChange(
-                                                                            e,
-                                                                            "ManagePermissionDelete"
-                                                                        )
-                                                                    }
-                                                                >
-                                                                    Delete{" "}
-                                                                </FormCheckbox>{" "}
-                                                            </div>{" "}
-                                                        </Col>
-                                                    ) : null}
-                                                    <FormCheckbox
-                                                        checked={
-                                                            this.state
-                                                                .ManagePersonContact
-                                                        }
-                                                        onChange={e =>
-                                                            this.handleChange(
-                                                                e,
-                                                                "ManagePersonContact"
-                                                            )
-                                                        }
-                                                    >
-                                                        Person{" "}
-                                                    </FormCheckbox>{" "}
-                                                    {this.state
-                                                        .ManagePersonContact ==
-                                                    true ? (
-                                                        <Col>
-                                                            <div>
-                                                                <FormCheckbox
-                                                                    inline
-                                                                    checked={
-                                                                        this
-                                                                            .state
-                                                                            .ManagePersonContact
-                                                                    }
-                                                                    onChange={e =>
-                                                                        this.handleChange(
-                                                                            e,
-                                                                            "ManagePersonContact"
-                                                                        )
-                                                                    }
-                                                                    className="mystyle"
-                                                                >
-                                                                    ManageUser{" "}
-                                                                </FormCheckbox>{" "}
-                                                                <FormCheckbox
-                                                                    inline
-                                                                    checked={
-                                                                        this
-                                                                            .state
-                                                                            .ManagePersonContactView
-                                                                    }
-                                                                    onChange={e =>
-                                                                        this.handleChange(
-                                                                            e,
-                                                                            "ManagePersonContactView"
-                                                                        )
-                                                                    }
-                                                                >
-                                                                    View{" "}
-                                                                </FormCheckbox>{" "}
-                                                                <FormCheckbox
-                                                                    inline
-                                                                    checked={
-                                                                        this
-                                                                            .state
-                                                                            .ManagePersonContactEdit
-                                                                    }
-                                                                    onChange={e =>
-                                                                        this.handleChange(
-                                                                            e,
-                                                                            "ManagePersonContactEdit"
-                                                                        )
-                                                                    }
-                                                                >
-                                                                    Edit{" "}
-                                                                </FormCheckbox>{" "}
-                                                                <FormCheckbox
-                                                                    inline
-                                                                    checked={
-                                                                        this
-                                                                            .state
-                                                                            .ManagePersonContactDelete
-                                                                    }
-                                                                    onChange={e =>
-                                                                        this.handleChange(
-                                                                            e,
-                                                                            "ManagePersonContactDelete"
-                                                                        )
-                                                                    }
-                                                                >
-                                                                    Delete{" "}
-                                                                </FormCheckbox>{" "}
-                                                            </div>
-                                                            <div>
-                                                                <FormCheckbox
-                                                                    inline
-                                                                    checked={
-                                                                        this
-                                                                            .state
-                                                                            .ManagePersonResponsible
-                                                                    }
-                                                                    onChange={e =>
-                                                                        this.handleChange(
-                                                                            e,
-                                                                            "ManagePersonResponsible"
-                                                                        )
-                                                                    }
-                                                                    className="mystyle2"
-                                                                >
-                                                                    ManagePersonResponsible{" "}
-                                                                </FormCheckbox>{" "}
-                                                                <FormCheckbox
-                                                                    inline
-                                                                    checked={
-                                                                        this
-                                                                            .state
-                                                                            .ManagePersonResponsibleView
-                                                                    }
-                                                                    onChange={e =>
-                                                                        this.handleChange(
-                                                                            e,
-                                                                            "ManagePersonResponsibleView"
-                                                                        )
-                                                                    }
-                                                                >
-                                                                    View{" "}
-                                                                </FormCheckbox>{" "}
-                                                                <FormCheckbox
-                                                                    inline
-                                                                    checked={
-                                                                        this
-                                                                            .state
-                                                                            .ManagePersonResponsibleEdit
-                                                                    }
-                                                                    onChange={e =>
-                                                                        this.handleChange(
-                                                                            e,
-                                                                            "ManagePersonResponsibleEdit"
-                                                                        )
-                                                                    }
-                                                                >
-                                                                    Edit{" "}
-                                                                </FormCheckbox>{" "}
-                                                                <FormCheckbox
-                                                                    inline
-                                                                    checked={
-                                                                        this
-                                                                            .state
-                                                                            .ManagePersonResponsibleDelete
-                                                                    }
-                                                                    onChange={e =>
-                                                                        this.handleChange(
-                                                                            e,
-                                                                            "ManagePersonResponsibleDelete"
-                                                                        )
-                                                                    }
-                                                                >
-                                                                    Delete{" "}
-                                                                </FormCheckbox>{" "}
-                                                            </div>{" "}
-                                                        </Col>
-                                                    ) : null}
-                                                    <FormCheckbox
-                                                        checked={
-                                                            this.state
-                                                                .ManageAddress
-                                                        }
-                                                        onChange={e =>
-                                                            this.handleChange(
-                                                                e,
-                                                                "ManageAddress"
-                                                            )
-                                                        }
-                                                    >
-                                                        Address{" "}
-                                                    </FormCheckbox>
-                                                    {this.state.ManageAddress ==
-                                                    true ? (
-                                                        <Col>
-                                                            <div>
-                                                                <FormCheckbox
-                                                                    inline
-                                                                    checked={
-                                                                        this
-                                                                            .state
-                                                                            .ManageAddress
-                                                                    }
-                                                                    onChange={e =>
-                                                                        this.handleChange(
-                                                                            e,
-                                                                            "ManageAddress"
-                                                                        )
-                                                                    }
-                                                                    className="mystyle"
-                                                                >
-                                                                    ManageAddress{" "}
-                                                                </FormCheckbox>{" "}
-                                                                <FormCheckbox
-                                                                    inline
-                                                                    checked={
-                                                                        this
-                                                                            .state
-                                                                            .ManageAddressView
-                                                                    }
-                                                                    onChange={e =>
-                                                                        this.handleChange(
-                                                                            e,
-                                                                            "ManageAddressView"
-                                                                        )
-                                                                    }
-                                                                >
-                                                                    View{" "}
-                                                                </FormCheckbox>{" "}
-                                                                <FormCheckbox
-                                                                    inline
-                                                                    checked={
-                                                                        this
-                                                                            .state
-                                                                            .ManageAddressEdit
-                                                                    }
-                                                                    onChange={e =>
-                                                                        this.handleChange(
-                                                                            e,
-                                                                            "ManageAddressEdit"
-                                                                        )
-                                                                    }
-                                                                >
-                                                                    Edit{" "}
-                                                                </FormCheckbox>{" "}
-                                                                <FormCheckbox
-                                                                    inline
-                                                                    checked={
-                                                                        this
-                                                                            .state
-                                                                            .ManageAddressDelete
-                                                                    }
-                                                                    onChange={e =>
-                                                                        this.handleChange(
-                                                                            e,
-                                                                            "ManageAddressDelete"
-                                                                        )
-                                                                    }
-                                                                >
-                                                                    Delete{" "}
-                                                                </FormCheckbox>{" "}
-                                                            </div>
-                                                            <div>
-                                                                <FormCheckbox
-                                                                    inline
-                                                                    checked={
-                                                                        this
-                                                                            .state
-                                                                            .ManageCompany
-                                                                    }
-                                                                    onChange={e =>
-                                                                        this.handleChange(
-                                                                            e,
-                                                                            "ManageCompany"
-                                                                        )
-                                                                    }
-                                                                    className="mystyle"
-                                                                >
-                                                                    ManageCompany{" "}
-                                                                </FormCheckbox>{" "}
-                                                                <FormCheckbox
-                                                                    inline
-                                                                    checked={
-                                                                        this
-                                                                            .state
-                                                                            .ManageCompanyView
-                                                                    }
-                                                                    onChange={e =>
-                                                                        this.handleChange(
-                                                                            e,
-                                                                            "ManageCompanyView"
-                                                                        )
-                                                                    }
-                                                                >
-                                                                    View{" "}
-                                                                </FormCheckbox>{" "}
-                                                                <FormCheckbox
-                                                                    inline
-                                                                    checked={
-                                                                        this
-                                                                            .state
-                                                                            .ManageCompanyEdit
-                                                                    }
-                                                                    onChange={e =>
-                                                                        this.handleChange(
-                                                                            e,
-                                                                            "ManageCompanyEdit"
-                                                                        )
-                                                                    }
-                                                                >
-                                                                    Edit{" "}
-                                                                </FormCheckbox>{" "}
-                                                                <FormCheckbox
-                                                                    inline
-                                                                    checked={
-                                                                        this
-                                                                            .state
-                                                                            .ManageCompanyDelete
-                                                                    }
-                                                                    onChange={e =>
-                                                                        this.handleChange(
-                                                                            e,
-                                                                            "ManageCompanyDelete"
-                                                                        )
-                                                                    }
-                                                                >
-                                                                    Delete{" "}
-                                                                </FormCheckbox>{" "}
-                                                            </div>{" "}
-                                                            <div>
-                                                                <FormCheckbox
-                                                                    inline
-                                                                    checked={
-                                                                        this
-                                                                            .state
-                                                                            .ManageDepartment
-                                                                    }
-                                                                    onChange={e =>
-                                                                        this.handleChange(
-                                                                            e,
-                                                                            "ManageDepartment"
-                                                                        )
-                                                                    }
-                                                                    className="mystyle"
-                                                                >
-                                                                    ManageDepartment{" "}
-                                                                </FormCheckbox>{" "}
-                                                                <FormCheckbox
-                                                                    inline
-                                                                    checked={
-                                                                        this
-                                                                            .state
-                                                                            .ManageDepartmentView
-                                                                    }
-                                                                    onChange={e =>
-                                                                        this.handleChange(
-                                                                            e,
-                                                                            "ManageDepartmentView"
-                                                                        )
-                                                                    }
-                                                                >
-                                                                    View{" "}
-                                                                </FormCheckbox>{" "}
-                                                                <FormCheckbox
-                                                                    inline
-                                                                    checked={
-                                                                        this
-                                                                            .state
-                                                                            .ManageDepartmentEdit
-                                                                    }
-                                                                    onChange={e =>
-                                                                        this.handleChange(
-                                                                            e,
-                                                                            "ManageDepartmentEdit"
-                                                                        )
-                                                                    }
-                                                                >
-                                                                    Edit{" "}
-                                                                </FormCheckbox>{" "}
-                                                                <FormCheckbox
-                                                                    inline
-                                                                    checked={
-                                                                        this
-                                                                            .state
-                                                                            .ManageDepartmentDelete
-                                                                    }
-                                                                    onChange={e =>
-                                                                        this.handleChange(
-                                                                            e,
-                                                                            "ManageDepartmentDelete"
-                                                                        )
-                                                                    }
-                                                                >
-                                                                    Delete{" "}
-                                                                </FormCheckbox>{" "}
-                                                            </div>
-                                                            <div>
-                                                                <FormCheckbox
-                                                                    inline
-                                                                    checked={
-                                                                        this
-                                                                            .state
-                                                                            .ManageProvince
-                                                                    }
-                                                                    onChange={e =>
-                                                                        this.handleChange(
-                                                                            e,
-                                                                            "ManageProvince"
-                                                                        )
-                                                                    }
-                                                                    className="mystyle"
-                                                                >
-                                                                    ManageProvince{" "}
-                                                                </FormCheckbox>{" "}
-                                                                <FormCheckbox
-                                                                    inline
-                                                                    checked={
-                                                                        this
-                                                                            .state
-                                                                            .ManageProvinceView
-                                                                    }
-                                                                    onChange={e =>
-                                                                        this.handleChange(
-                                                                            e,
-                                                                            "ManageProvinceView"
-                                                                        )
-                                                                    }
-                                                                >
-                                                                    View{" "}
-                                                                </FormCheckbox>{" "}
-                                                                <FormCheckbox
-                                                                    inline
-                                                                    checked={
-                                                                        this
-                                                                            .state
-                                                                            .ManageProvinceEdit
-                                                                    }
-                                                                    onChange={e =>
-                                                                        this.handleChange(
-                                                                            e,
-                                                                            "ManageProvinceEdit"
-                                                                        )
-                                                                    }
-                                                                >
-                                                                    Edit{" "}
-                                                                </FormCheckbox>{" "}
-                                                                <FormCheckbox
-                                                                    inline
-                                                                    checked={
-                                                                        this
-                                                                            .state
-                                                                            .ManageProvinceDelete
-                                                                    }
-                                                                    onChange={e =>
-                                                                        this.handleChange(
-                                                                            e,
-                                                                            "ManageProvinceDelete"
-                                                                        )
-                                                                    }
-                                                                >
-                                                                    Delete{" "}
-                                                                </FormCheckbox>{" "}
-                                                            </div>
-                                                            <div>
-                                                                <FormCheckbox
-                                                                    inline
-                                                                    checked={
-                                                                        this
-                                                                            .state
-                                                                            .ManageDistrict
-                                                                    }
-                                                                    onChange={e =>
-                                                                        this.handleChange(
-                                                                            e,
-                                                                            "ManageDistrict"
-                                                                        )
-                                                                    }
-                                                                    className="mystyle"
-                                                                >
-                                                                    ManageDistrict{" "}
-                                                                </FormCheckbox>{" "}
-                                                                <FormCheckbox
-                                                                    inline
-                                                                    checked={
-                                                                        this
-                                                                            .state
-                                                                            .ManageDistrictView
-                                                                    }
-                                                                    onChange={e =>
-                                                                        this.handleChange(
-                                                                            e,
-                                                                            "ManageDistrictView"
-                                                                        )
-                                                                    }
-                                                                >
-                                                                    View{" "}
-                                                                </FormCheckbox>{" "}
-                                                                <FormCheckbox
-                                                                    inline
-                                                                    checked={
-                                                                        this
-                                                                            .state
-                                                                            .ManageDistrictEdit
-                                                                    }
-                                                                    onChange={e =>
-                                                                        this.handleChange(
-                                                                            e,
-                                                                            "ManageDistrictEdit"
-                                                                        )
-                                                                    }
-                                                                >
-                                                                    Edit{" "}
-                                                                </FormCheckbox>{" "}
-                                                                <FormCheckbox
-                                                                    inline
-                                                                    checked={
-                                                                        this
-                                                                            .state
-                                                                            .ManageDistrictDelete
-                                                                    }
-                                                                    onChange={e =>
-                                                                        this.handleChange(
-                                                                            e,
-                                                                            "ManageDistrictDelete"
-                                                                        )
-                                                                    }
-                                                                >
-                                                                    Delete{" "}
-                                                                </FormCheckbox>{" "}
-                                                            </div>
-                                                            <div>
-                                                                <FormCheckbox
-                                                                    inline
-                                                                    checked={
-                                                                        this
-                                                                            .state
-                                                                            .ManagePostalCode
-                                                                    }
-                                                                    onChange={e =>
-                                                                        this.handleChange(
-                                                                            e,
-                                                                            "ManagePostalCode"
-                                                                        )
-                                                                    }
-                                                                    className="mystyle"
-                                                                >
-                                                                    ManagePostalCode{" "}
-                                                                </FormCheckbox>{" "}
-                                                                <FormCheckbox
-                                                                    inline
-                                                                    checked={
-                                                                        this
-                                                                            .state
-                                                                            .ManagePostalCodeView
-                                                                    }
-                                                                    onChange={e =>
-                                                                        this.handleChange(
-                                                                            e,
-                                                                            "ManagePostalCodeView"
-                                                                        )
-                                                                    }
-                                                                >
-                                                                    View{" "}
-                                                                </FormCheckbox>{" "}
-                                                                <FormCheckbox
-                                                                    inline
-                                                                    checked={
-                                                                        this
-                                                                            .state
-                                                                            .ManagePostalCodeEdit
-                                                                    }
-                                                                    onChange={e =>
-                                                                        this.handleChange(
-                                                                            e,
-                                                                            "ManagePostalCodeEdit"
-                                                                        )
-                                                                    }
-                                                                >
-                                                                    Edit{" "}
-                                                                </FormCheckbox>{" "}
-                                                                <FormCheckbox
-                                                                    inline
-                                                                    checked={
-                                                                        this
-                                                                            .state
-                                                                            .ManagePostalCodeDelete
-                                                                    }
-                                                                    onChange={e =>
-                                                                        this.handleChange(
-                                                                            e,
-                                                                            "ManagePostalCodeDelete"
-                                                                        )
-                                                                    }
-                                                                >
-                                                                    Delete{" "}
-                                                                </FormCheckbox>{" "}
-                                                            </div>
-                                                            <div>
-                                                                <FormCheckbox
-                                                                    inline
-                                                                    checked={
-                                                                        this
-                                                                            .state
-                                                                            .ManageLocation
-                                                                    }
-                                                                    onChange={e =>
-                                                                        this.handleChange(
-                                                                            e,
-                                                                            "ManageLocation"
-                                                                        )
-                                                                    }
-                                                                    className="mystyle"
-                                                                >
-                                                                    ManageLocation{" "}
-                                                                </FormCheckbox>{" "}
-                                                                <FormCheckbox
-                                                                    inline
-                                                                    checked={
-                                                                        this
-                                                                            .state
-                                                                            .ManageLocationView
-                                                                    }
-                                                                    onChange={e =>
-                                                                        this.handleChange(
-                                                                            e,
-                                                                            "ManageLocationView"
-                                                                        )
-                                                                    }
-                                                                >
-                                                                    View{" "}
-                                                                </FormCheckbox>{" "}
-                                                                <FormCheckbox
-                                                                    inline
-                                                                    checked={
-                                                                        this
-                                                                            .state
-                                                                            .ManageLocationEdit
-                                                                    }
-                                                                    onChange={e =>
-                                                                        this.handleChange(
-                                                                            e,
-                                                                            "ManageLocationEdit"
-                                                                        )
-                                                                    }
-                                                                >
-                                                                    Edit{" "}
-                                                                </FormCheckbox>{" "}
-                                                                <FormCheckbox
-                                                                    inline
-                                                                    checked={
-                                                                        this
-                                                                            .state
-                                                                            .ManageLocationDelete
-                                                                    }
-                                                                    onChange={e =>
-                                                                        this.handleChange(
-                                                                            e,
-                                                                            "ManageLocationDelete"
-                                                                        )
-                                                                    }
-                                                                >
-                                                                    Delete{" "}
-                                                                </FormCheckbox>{" "}
-                                                            </div>
-                                                        </Col>
-                                                    ) : null}
-                                                    <FormCheckbox
-                                                        checked={
-                                                            this.state
-                                                                .ManageEquipment
-                                                        }
-                                                        onChange={e =>
-                                                            this.handleChange(
-                                                                e,
-                                                                "ManageEquipment"
-                                                            )
-                                                        }
-                                                    >
-                                                        Equipment{" "}
-                                                    </FormCheckbox>{" "}
-                                                    {this.state
-                                                        .ManageEquipment ? (
-                                                        <Col>
-                                                            <div>
-                                                                <FormCheckbox
-                                                                    inline
-                                                                    checked={
-                                                                        this
-                                                                            .state
-                                                                            .ManageEquipment
-                                                                    }
-                                                                    onChange={e =>
-                                                                        this.handleChange(
-                                                                            e,
-                                                                            "ManageEquipment"
-                                                                        )
-                                                                    }
-                                                                    className="mystyle"
-                                                                >
-                                                                    ManageEquipment{" "}
-                                                                </FormCheckbox>{" "}
-                                                                <FormCheckbox
-                                                                    inline
-                                                                    checked={
-                                                                        this
-                                                                            .state
-                                                                            .ManageEquipmentView
-                                                                    }
-                                                                    onChange={e =>
-                                                                        this.handleChange(
-                                                                            e,
-                                                                            "ManageEquipmentView"
-                                                                        )
-                                                                    }
-                                                                >
-                                                                    View{" "}
-                                                                </FormCheckbox>{" "}
-                                                                <FormCheckbox
-                                                                    inline
-                                                                    checked={
-                                                                        this
-                                                                            .state
-                                                                            .ManageEquipmentEdit
-                                                                    }
-                                                                    onChange={e =>
-                                                                        this.handleChange(
-                                                                            e,
-                                                                            "ManageEquipmentEdit"
-                                                                        )
-                                                                    }
-                                                                >
-                                                                    Edit{" "}
-                                                                </FormCheckbox>{" "}
-                                                                <FormCheckbox
-                                                                    inline
-                                                                    checked={
-                                                                        this
-                                                                            .state
-                                                                            .ManageEquipmentDelete
-                                                                    }
-                                                                    onChange={e =>
-                                                                        this.handleChange(
-                                                                            e,
-                                                                            "ManageEquipmentDelete"
-                                                                        )
-                                                                    }
-                                                                >
-                                                                    Delete{" "}
-                                                                </FormCheckbox>{" "}
-                                                            </div>{" "}
-                                                        </Col>
-                                                    ) : null}
-                                                    <FormCheckbox
-                                                        checked={
-                                                            this.state
-                                                                .ManageRequestGeneral
-                                                        }
-                                                        onChange={e =>
-                                                            this.handleChange(
-                                                                e,
-                                                                "ManageRequestGeneral"
-                                                            )
-                                                        }
-                                                    >
-                                                        Request{" "}
-                                                    </FormCheckbox>{" "}
-                                                    {this.state
-                                                        .ManageRequestGeneral ? (
-                                                        <Col>
-                                                            <div>
-                                                                <FormCheckbox
-                                                                    inline
-                                                                    checked={
-                                                                        this
-                                                                            .state
-                                                                            .ManageRequestGeneral
-                                                                    }
-                                                                    onChange={e =>
-                                                                        this.handleChange(
-                                                                            e,
-                                                                            "ManageRequestGeneral"
-                                                                        )
-                                                                    }
-                                                                    className="mystyle"
-                                                                >
-                                                                    ManageRequestGeneral{" "}
-                                                                </FormCheckbox>{" "}
-                                                                <FormCheckbox
-                                                                    inline
-                                                                    checked={
-                                                                        this
-                                                                            .state
-                                                                            .ManageRequestGeneralView
-                                                                    }
-                                                                    onChange={e =>
-                                                                        this.handleChange(
-                                                                            e,
-                                                                            "ManageRequestGeneralView"
-                                                                        )
-                                                                    }
-                                                                >
-                                                                    View{" "}
-                                                                </FormCheckbox>{" "}
-                                                                <FormCheckbox
-                                                                    inline
-                                                                    checked={
-                                                                        this
-                                                                            .state
-                                                                            .ManageRequestGeneralEdit
-                                                                    }
-                                                                    onChange={e =>
-                                                                        this.handleChange(
-                                                                            e,
-                                                                            "ManageRequestGeneralEdit"
-                                                                        )
-                                                                    }
-                                                                >
-                                                                    Edit{" "}
-                                                                </FormCheckbox>{" "}
-                                                                <FormCheckbox
-                                                                    inline
-                                                                    checked={
-                                                                        this
-                                                                            .state
-                                                                            .ManageRequestGeneralDelete
-                                                                    }
-                                                                    onChange={e =>
-                                                                        this.handleChange(
-                                                                            e,
-                                                                            "ManageRequestGeneralDelete"
-                                                                        )
-                                                                    }
-                                                                >
-                                                                    Delete{" "}
-                                                                </FormCheckbox>{" "}
-                                                            </div>
-                                                            <div>
-                                                                <FormCheckbox
-                                                                    inline
-                                                                    checked={
-                                                                        this
-                                                                            .state
-                                                                            .ManageRequestIssuses
-                                                                    }
-                                                                    onChange={e =>
-                                                                        this.handleChange(
-                                                                            e,
-                                                                            "ManageRequestIssuses"
-                                                                        )
-                                                                    }
-                                                                    className="mystyle"
-                                                                >
-                                                                    ManageRequestIssuses{" "}
-                                                                </FormCheckbox>{" "}
-                                                                <FormCheckbox
-                                                                    inline
-                                                                    checked={
-                                                                        this
-                                                                            .state
-                                                                            .ManageRequestIssusesView
-                                                                    }
-                                                                    onChange={e =>
-                                                                        this.handleChange(
-                                                                            e,
-                                                                            "ManageRequestIssusesView"
-                                                                        )
-                                                                    }
-                                                                >
-                                                                    View{" "}
-                                                                </FormCheckbox>{" "}
-                                                                <FormCheckbox
-                                                                    inline
-                                                                    checked={
-                                                                        this
-                                                                            .state
-                                                                            .ManageRequestIssusesEdit
-                                                                    }
-                                                                    onChange={e =>
-                                                                        this.handleChange(
-                                                                            e,
-                                                                            "ManageRequestIssusesEdit"
-                                                                        )
-                                                                    }
-                                                                >
-                                                                    Edit{" "}
-                                                                </FormCheckbox>{" "}
-                                                                <FormCheckbox
-                                                                    inline
-                                                                    checked={
-                                                                        this
-                                                                            .state
-                                                                            .ManageRequestIssusesDelete
-                                                                    }
-                                                                    onChange={e =>
-                                                                        this.handleChange(
-                                                                            e,
-                                                                            "ManageRequestIssusesDelete"
-                                                                        )
-                                                                    }
-                                                                >
-                                                                    Delete{" "}
-                                                                </FormCheckbox>{" "}
-                                                            </div>{" "}
-                                                        </Col>
-                                                    ) : null}{" "}
-                                                    <FormCheckbox
-                                                        checked={
-                                                            this.state
-                                                                .ManageNews
-                                                        }
-                                                        onChange={e =>
-                                                            this.handleChange(
-                                                                e,
-                                                                "ManageNews"
-                                                            )
-                                                        }
-                                                    >
-                                                        News{" "}
-                                                    </FormCheckbox>
-                                                    {this.state.ManageNews ? (
-                                                        <Col>
-                                                            <div>
-                                                                <FormCheckbox
-                                                                    inline
-                                                                    checked={
-                                                                        this
-                                                                            .state
-                                                                            .ManageNews
-                                                                    }
-                                                                    onChange={e =>
-                                                                        this.handleChange(
-                                                                            e,
-                                                                            "ManageNews"
-                                                                        )
-                                                                    }
-                                                                    className="mystyle"
-                                                                >
-                                                                    ManageNews{" "}
-                                                                </FormCheckbox>{" "}
-                                                                <FormCheckbox
-                                                                    inline
-                                                                    checked={
-                                                                        this
-                                                                            .state
-                                                                            .ManageNewsView
-                                                                    }
-                                                                    onChange={e =>
-                                                                        this.handleChange(
-                                                                            e,
-                                                                            "ManageNewsView"
-                                                                        )
-                                                                    }
-                                                                >
-                                                                    View{" "}
-                                                                </FormCheckbox>{" "}
-                                                                <FormCheckbox
-                                                                    inline
-                                                                    checked={
-                                                                        this
-                                                                            .state
-                                                                            .ManageNewsEdit
-                                                                    }
-                                                                    onChange={e =>
-                                                                        this.handleChange(
-                                                                            e,
-                                                                            "ManageNewsEdit"
-                                                                        )
-                                                                    }
-                                                                >
-                                                                    Edit{" "}
-                                                                </FormCheckbox>{" "}
-                                                                <FormCheckbox
-                                                                    inline
-                                                                    checked={
-                                                                        this
-                                                                            .state
-                                                                            .ManageNewsDelete
-                                                                    }
-                                                                    onChange={e =>
-                                                                        this.handleChange(
-                                                                            e,
-                                                                            "ManageNewsDelete"
-                                                                        )
-                                                                    }
-                                                                >
-                                                                    Delete{" "}
-                                                                </FormCheckbox>{" "}
-                                                            </div>
-                                                            <div>
-                                                                <FormCheckbox
-                                                                    inline
-                                                                    checked={
-                                                                        this
-                                                                            .state
-                                                                            .ManageSettingNews
-                                                                    }
-                                                                    onChange={e =>
-                                                                        this.handleChange(
-                                                                            e,
-                                                                            "ManageSettingNews"
-                                                                        )
-                                                                    }
-                                                                    className="mystyle"
-                                                                >
-                                                                    ManageSettingNews{" "}
-                                                                </FormCheckbox>{" "}
-                                                                <FormCheckbox
-                                                                    inline
-                                                                    checked={
-                                                                        this
-                                                                            .state
-                                                                            .ManageSettingNewsView
-                                                                    }
-                                                                    onChange={e =>
-                                                                        this.handleChange(
-                                                                            e,
-                                                                            "ManageSettingNewsView"
-                                                                        )
-                                                                    }
-                                                                >
-                                                                    View{" "}
-                                                                </FormCheckbox>{" "}
-                                                                <FormCheckbox
-                                                                    inline
-                                                                    checked={
-                                                                        this
-                                                                            .state
-                                                                            .ManageSettingNewsEdit
-                                                                    }
-                                                                    onChange={e =>
-                                                                        this.handleChange(
-                                                                            e,
-                                                                            "ManageSettingNewsEdit"
-                                                                        )
-                                                                    }
-                                                                >
-                                                                    Edit{" "}
-                                                                </FormCheckbox>{" "}
-                                                                <FormCheckbox
-                                                                    inline
-                                                                    checked={
-                                                                        this
-                                                                            .state
-                                                                            .ManageSettingNewsDelete
-                                                                    }
-                                                                    onChange={e =>
-                                                                        this.handleChange(
-                                                                            e,
-                                                                            "ManageSettingNewsDelete"
-                                                                        )
-                                                                    }
-                                                                >
-                                                                    Delete{" "}
-                                                                </FormCheckbox>{" "}
-                                                            </div>{" "}
-                                                        </Col>
-                                                    ) : null}
-                                                    <FormCheckbox
-                                                        checked={
-                                                            this.state
-                                                                .ManageImage
-                                                        }
-                                                        onChange={e =>
-                                                            this.handleChange(
-                                                                e,
-                                                                "ManageImage"
-                                                            )
-                                                        }
-                                                    >
-                                                        Image{" "}
-                                                    </FormCheckbox>
-                                                    {this.state.ManageImage ==
-                                                    true ? (
-                                                        <Col>
-                                                            <div>
-                                                                <FormCheckbox
-                                                                    inline
-                                                                    checked={
-                                                                        this
-                                                                            .state
-                                                                            .ManageImage
-                                                                    }
-                                                                    onChange={e =>
-                                                                        this.handleChange(
-                                                                            e,
-                                                                            "ManageImage"
-                                                                        )
-                                                                    }
-                                                                    className="mystyle"
-                                                                >
-                                                                    ManageImage{" "}
-                                                                </FormCheckbox>{" "}
-                                                                <FormCheckbox
-                                                                    inline
-                                                                    checked={
-                                                                        this
-                                                                            .state
-                                                                            .ManageImageView
-                                                                    }
-                                                                    onChange={e =>
-                                                                        this.handleChange(
-                                                                            e,
-                                                                            "ManageImageView"
-                                                                        )
-                                                                    }
-                                                                >
-                                                                    View{" "}
-                                                                </FormCheckbox>{" "}
-                                                                <FormCheckbox
-                                                                    inline
-                                                                    checked={
-                                                                        this
-                                                                            .state
-                                                                            .ManageImageEdit
-                                                                    }
-                                                                    onChange={e =>
-                                                                        this.handleChange(
-                                                                            e,
-                                                                            "ManageImageEdit"
-                                                                        )
-                                                                    }
-                                                                >
-                                                                    Edit{" "}
-                                                                </FormCheckbox>{" "}
-                                                                <FormCheckbox
-                                                                    inline
-                                                                    checked={
-                                                                        this
-                                                                            .state
-                                                                            .ManageImageDelete
-                                                                    }
-                                                                    onChange={e =>
-                                                                        this.handleChange(
-                                                                            e,
-                                                                            "ManageImageDelete"
-                                                                        )
-                                                                    }
-                                                                >
-                                                                    Delete{" "}
-                                                                </FormCheckbox>{" "}
-                                                            </div>
-                                                        </Col>
-                                                    ) : null}{" "}
-                                                    <FormCheckbox
-                                                        checked={
-                                                            this.state
-                                                                .ManageMessage
-                                                        }
-                                                        onChange={e =>
-                                                            this.handleChange(
-                                                                e,
-                                                                "ManageMessage"
-                                                            )
-                                                        }
-                                                    >
-                                                        Message{" "}
-                                                    </FormCheckbox>
-                                                    {this.state.ManageMessage ==
-                                                    true ? (
-                                                        <Col>
-                                                            <div>
-                                                                <FormCheckbox
-                                                                    inline
-                                                                    checked={
-                                                                        this
-                                                                            .state
-                                                                            .ManageMessage
-                                                                    }
-                                                                    onChange={e =>
-                                                                        this.handleChange(
-                                                                            e,
-                                                                            "ManageMessage"
-                                                                        )
-                                                                    }
-                                                                    className="mystyle"
-                                                                >
-                                                                    ManageMessage{" "}
-                                                                </FormCheckbox>{" "}
-                                                                <FormCheckbox
-                                                                    inline
-                                                                    checked={
-                                                                        this
-                                                                            .state
-                                                                            .ManageMessageView
-                                                                    }
-                                                                    onChange={e =>
-                                                                        this.handleChange(
-                                                                            e,
-                                                                            "ManageMessageView"
-                                                                        )
-                                                                    }
-                                                                >
-                                                                    View{" "}
-                                                                </FormCheckbox>{" "}
-                                                                <FormCheckbox
-                                                                    inline
-                                                                    checked={
-                                                                        this
-                                                                            .state
-                                                                            .ManageMessageEdit
-                                                                    }
-                                                                    onChange={e =>
-                                                                        this.handleChange(
-                                                                            e,
-                                                                            "ManageMessageEdit"
-                                                                        )
-                                                                    }
-                                                                >
-                                                                    Edit{" "}
-                                                                </FormCheckbox>{" "}
-                                                                <FormCheckbox
-                                                                    inline
-                                                                    checked={
-                                                                        this
-                                                                            .state
-                                                                            .ManageMessageDelete
-                                                                    }
-                                                                    onChange={e =>
-                                                                        this.handleChange(
-                                                                            e,
-                                                                            "ManageMessageDelete"
-                                                                        )
-                                                                    }
-                                                                >
-                                                                    Delete{" "}
-                                                                </FormCheckbox>{" "}
-                                                            </div>
-                                                        </Col>
-                                                    ) : null}
-                                                    <FormCheckbox
-                                                        checked={
-                                                            this.state
-                                                                .ManageModify
-                                                        }
-                                                        onChange={e =>
-                                                            this.handleChange(
-                                                                e,
-                                                                "ManageModify"
-                                                            )
-                                                        }
-                                                    >
-                                                        Modify{" "}
-                                                    </FormCheckbox>
-                                                    {this.state.ManageModify ==
-                                                    true ? (
-                                                        <Col>
-                                                            <div>
-                                                                <FormCheckbox
-                                                                    inline
-                                                                    checked={
-                                                                        this
-                                                                            .state
-                                                                            .ManageModify
-                                                                    }
-                                                                    onChange={e =>
-                                                                        this.handleChange(
-                                                                            e,
-                                                                            "ManageModify"
-                                                                        )
-                                                                    }
-                                                                    className="mystyle"
-                                                                >
-                                                                    ManageModify{" "}
-                                                                </FormCheckbox>{" "}
-                                                                <FormCheckbox
-                                                                    inline
-                                                                    checked={
-                                                                        this
-                                                                            .state
-                                                                            .ManageModifyView
-                                                                    }
-                                                                    onChange={e =>
-                                                                        this.handleChange(
-                                                                            e,
-                                                                            "ManageModifyView"
-                                                                        )
-                                                                    }
-                                                                >
-                                                                    View{" "}
-                                                                </FormCheckbox>{" "}
-                                                                <FormCheckbox
-                                                                    inline
-                                                                    checked={
-                                                                        this
-                                                                            .state
-                                                                            .ManageModifyEdit
-                                                                    }
-                                                                    onChange={e =>
-                                                                        this.handleChange(
-                                                                            e,
-                                                                            "ManageModifyEdit"
-                                                                        )
-                                                                    }
-                                                                >
-                                                                    Edit{" "}
-                                                                </FormCheckbox>{" "}
-                                                                <FormCheckbox
-                                                                    inline
-                                                                    checked={
-                                                                        this
-                                                                            .state
-                                                                            .ManageModifyDelete
-                                                                    }
-                                                                    onChange={e =>
-                                                                        this.handleChange(
-                                                                            e,
-                                                                            "ManageModifyDelete"
-                                                                        )
-                                                                    }
-                                                                >
-                                                                    Delete{" "}
-                                                                </FormCheckbox>{" "}
-                                                            </div>
-                                                        </Col>
-                                                    ) : null}
-                                                    <FormCheckbox
-                                                        checked={
-                                                            this.state
-                                                                .ManagePriority
-                                                        }
-                                                        onChange={e =>
-                                                            this.handleChange(
-                                                                e,
-                                                                "ManagePriority"
-                                                            )
-                                                        }
-                                                    >
-                                                        Priority{" "}
-                                                    </FormCheckbox>
-                                                    {this.state
-                                                        .ManagePriority ==
-                                                    true ? (
-                                                        <Col>
-                                                            <div>
-                                                                <FormCheckbox
-                                                                    inline
-                                                                    checked={
-                                                                        this
-                                                                            .state
-                                                                            .ManagePriority
-                                                                    }
-                                                                    onChange={e =>
-                                                                        this.handleChange(
-                                                                            e,
-                                                                            "ManagePriority"
-                                                                        )
-                                                                    }
-                                                                    className="mystyle"
-                                                                >
-                                                                    ManagePriority{" "}
-                                                                </FormCheckbox>{" "}
-                                                                <FormCheckbox
-                                                                    inline
-                                                                    checked={
-                                                                        this
-                                                                            .state
-                                                                            .ManagePriorityView
-                                                                    }
-                                                                    onChange={e =>
-                                                                        this.handleChange(
-                                                                            e,
-                                                                            "ManagePriorityView"
-                                                                        )
-                                                                    }
-                                                                >
-                                                                    View{" "}
-                                                                </FormCheckbox>{" "}
-                                                                <FormCheckbox
-                                                                    inline
-                                                                    checked={
-                                                                        this
-                                                                            .state
-                                                                            .ManagePriorityEdit
-                                                                    }
-                                                                    onChange={e =>
-                                                                        this.handleChange(
-                                                                            e,
-                                                                            "ManagePriorityEdit"
-                                                                        )
-                                                                    }
-                                                                >
-                                                                    Edit{" "}
-                                                                </FormCheckbox>{" "}
-                                                                <FormCheckbox
-                                                                    inline
-                                                                    checked={
-                                                                        this
-                                                                            .state
-                                                                            .ManagePriorityDelete
-                                                                    }
-                                                                    onChange={e =>
-                                                                        this.handleChange(
-                                                                            e,
-                                                                            "ManagePriorityDelete"
-                                                                        )
-                                                                    }
-                                                                >
-                                                                    Delete{" "}
-                                                                </FormCheckbox>{" "}
-                                                            </div>
-                                                        </Col>
-                                                    ) : null}
-                                                    <FormCheckbox
-                                                        checked={
-                                                            this.state
-                                                                .ManageImpact
-                                                        }
-                                                        onChange={e =>
-                                                            this.handleChange(
-                                                                e,
-                                                                "ManageImpact"
-                                                            )
-                                                        }
-                                                    >
-                                                        Impact{" "}
-                                                    </FormCheckbox>
-                                                    {this.state.ManageImpact ==
-                                                    true ? (
-                                                        <Col>
-                                                            <div>
-                                                                <FormCheckbox
-                                                                    inline
-                                                                    checked={
-                                                                        this
-                                                                            .state
-                                                                            .ManageImpact
-                                                                    }
-                                                                    onChange={e =>
-                                                                        this.handleChange(
-                                                                            e,
-                                                                            "ManageImpact"
-                                                                        )
-                                                                    }
-                                                                    className="mystyle"
-                                                                >
-                                                                    ManageMessage{" "}
-                                                                </FormCheckbox>{" "}
-                                                                <FormCheckbox
-                                                                    inline
-                                                                    checked={
-                                                                        this
-                                                                            .state
-                                                                            .ManageImpactView
-                                                                    }
-                                                                    onChange={e =>
-                                                                        this.handleChange(
-                                                                            e,
-                                                                            "ManageImpactView"
-                                                                        )
-                                                                    }
-                                                                >
-                                                                    View{" "}
-                                                                </FormCheckbox>{" "}
-                                                                <FormCheckbox
-                                                                    inline
-                                                                    checked={
-                                                                        this
-                                                                            .state
-                                                                            .ManageImpactEdit
-                                                                    }
-                                                                    onChange={e =>
-                                                                        this.handleChange(
-                                                                            e,
-                                                                            "ManageImpactEdit"
-                                                                        )
-                                                                    }
-                                                                >
-                                                                    Edit{" "}
-                                                                </FormCheckbox>{" "}
-                                                                <FormCheckbox
-                                                                    inline
-                                                                    checked={
-                                                                        this
-                                                                            .state
-                                                                            .ManageImpactDelete
-                                                                    }
-                                                                    onChange={e =>
-                                                                        this.handleChange(
-                                                                            e,
-                                                                            "ManageImpactDelete"
-                                                                        )
-                                                                    }
-                                                                >
-                                                                    Delete{" "}
-                                                                </FormCheckbox>{" "}
-                                                            </div>
-                                                        </Col>
-                                                    ) : null}
-                                                    <FormCheckbox
-                                                        checked={
-                                                            this.state.Report
-                                                        }
-                                                        onChange={e =>
-                                                            this.handleChange(
-                                                                e,
-                                                                "Report"
-                                                            )
-                                                        }
-                                                    >
-                                                        Report{" "}
-                                                    </FormCheckbox>
-                                                </ListGroupItem>{" "}
-                                            </Col>
-                                        </Row>{" "}
-                                        <Button type="submit">
-                                            {" "}
-                                            Create New Permission{" "}
-                                        </Button>{" "}
-                                    </Form>{" "}
-                                </Col>
-                            </Row>{" "}
-                        </ListGroupItem>{" "}
-                    </ListGroup>{" "}
-                </Container>{" "}
-            </div>
-        );
+                }
+            } >
+            <
+            Container >
+            <
+            ListGroup flush >
+            <
+            ListGroupItem className = "p-3" >
+            <
+            Row >
+            <
+            Col >
+            <
+            Form onSubmit = {
+                this.handleCreate
+            } >
+            <
+            Row form >
+
+            <
+            Col md = "12"
+            className = "form-group" >
+
+            <
+            label htmlFor = "feEmailAddress" > Permission Name < /label> <
+            FormInput
+
+            name = 'permission_name'
+            className = {
+                `form-control ${this.hasErrorFor('permission_name') ? 'is-invalid' : ''}`
+            }
+            placeholder = "กรอกชื่อผู้ใช้"
+            type = 'text'
+            value = {
+                this.state.permission_name
+            }
+            onChange = {
+                this.handleFieldChange
+            }
+            /> {
+                this.renderErrorFor('permission_name')
+            } <
+            /Col> <
+            Col >
+            <
+            ListGroupItem className = "px-3 pb-3" >
+            <
+            FormCheckbox checked = {
+                this.state.ManageUser
+            }
+            onChange = {
+                e => this.handleChange(e, "ManageUser")
+            } >
+            User <
+            /FormCheckbox> {
+                this.state.ManageUser == true ? ( <
+                    Col >
+                    <
+                    div >
+                    <
+                    FormCheckbox inline checked = {
+                        this.state.ManageUser
+                    }
+                    onChange = {
+                        e => this.handleChange(e, "ManageUser")
+                    }
+                    className = "mystyle"
+
+                    >
+                    ManageUser <
+                    /FormCheckbox> <
+                    FormCheckbox inline checked = {
+                        this.state.ManageUserView
+                    }
+                    onChange = {
+                        e => this.handleChange(e, "ManageUserView")
+                    } >
+                    View <
+                    /FormCheckbox> <
+                    FormCheckbox inline checked = {
+                        this.state.ManageUserEdit
+                    }
+                    onChange = {
+                        e => this.handleChange(e, "ManageUserEdit")
+                    } >
+                    Edit <
+                    /FormCheckbox> <
+                    FormCheckbox inline checked = {
+                        this.state.ManageUserDelete
+                    }
+                    onChange = {
+                        e => this.handleChange(e, "ManageUserDelete")
+                    } >
+                    Delete <
+                    /FormCheckbox> <
+                    /div>
+
+                    <
+                    div >
+
+                    <
+                    FormCheckbox inline checked = {
+                        this.state.ManagePermission
+                    }
+                    onChange = {
+                        e => this.handleChange(e, "ManagePermission")
+                    }
+                    className = "mystyle" >
+                    ManagePermission <
+                    /FormCheckbox> <
+                    FormCheckbox inline checked = {
+                        this.state.ManagePermissionView
+                    }
+                    onChange = {
+                        e => this.handleChange(e, "ManagePermissionView")
+                    } >
+                    View <
+                    /FormCheckbox> <
+                    FormCheckbox inline checked = {
+                        this.state.ManagePermissionEdit
+                    }
+                    onChange = {
+                        e => this.handleChange(e, "ManagePermissionEdit")
+                    } >
+                    Edit <
+                    /FormCheckbox> <
+                    FormCheckbox inline checked = {
+                        this.state.ManagePermissionDelete
+                    }
+                    onChange = {
+                        e => this.handleChange(e, "ManagePermissionDelete")
+                    } >
+                    Delete <
+                    /FormCheckbox> <
+                    /div> <
+                    /Col>
+
+                ) : null
+            }
+
+
+            <
+            FormCheckbox checked = {
+                this.state.ManagePersonContact
+            }
+            onChange = {
+                e => this.handleChange(e, "ManagePersonContact")
+            } >
+            Person <
+            /FormCheckbox> {
+                this.state.ManagePersonContact == true ? ( <
+                    Col >
+                    <
+                    div >
+                    <
+                    FormCheckbox inline checked = {
+                        this.state.ManagePersonContact
+                    }
+                    onChange = {
+                        e => this.handleChange(e, "ManagePersonContact")
+                    }
+                    className = "mystyle"
+
+                    >
+                    ManageUser <
+                    /FormCheckbox> <
+                    FormCheckbox inline checked = {
+                        this.state.ManagePersonContactView
+                    }
+                    onChange = {
+                        e => this.handleChange(e, "ManagePersonContactView")
+                    } >
+                    View <
+                    /FormCheckbox> <
+                    FormCheckbox inline checked = {
+                        this.state.ManagePersonContactEdit
+                    }
+                    onChange = {
+                        e => this.handleChange(e, "ManagePersonContactEdit")
+                    } >
+                    Edit <
+                    /FormCheckbox> <
+                    FormCheckbox inline checked = {
+                        this.state.ManagePersonContactDelete
+                    }
+                    onChange = {
+                        e => this.handleChange(e, "ManagePersonContactDelete")
+                    } >
+                    Delete <
+                    /FormCheckbox> <
+                    /div>
+
+                    <
+                    div >
+
+                    <
+                    FormCheckbox inline checked = {
+                        this.state.ManagePersonResponsible
+                    }
+                    onChange = {
+                        e => this.handleChange(e, "ManagePersonResponsible")
+                    }
+                    className = "mystyle2" >
+                    ManagePersonResponsible <
+                    /FormCheckbox> <
+                    FormCheckbox inline checked = {
+                        this.state.ManagePersonResponsibleView
+                    }
+                    onChange = {
+                        e => this.handleChange(e, "ManagePersonResponsibleView")
+                    } >
+                    View <
+                    /FormCheckbox> <
+                    FormCheckbox inline checked = {
+                        this.state.ManagePersonResponsibleEdit
+                    }
+                    onChange = {
+                        e => this.handleChange(e, "ManagePersonResponsibleEdit")
+                    } >
+                    Edit <
+                    /FormCheckbox> <
+                    FormCheckbox inline checked = {
+                        this.state.ManagePersonResponsibleDelete
+                    }
+                    onChange = {
+                        e => this.handleChange(e, "ManagePersonResponsibleDelete")
+                    } >
+                    Delete <
+                    /FormCheckbox> <
+                    /div> <
+                    /Col>
+
+                ) : null
+            }
+
+            <
+            FormCheckbox checked = {
+                this.state.ManageAddress
+            }
+            onChange = {
+                e => this.handleChange(e, "ManageAddress")
+            } >
+            Address <
+            /FormCheckbox>
+
+            {
+                this.state.ManageAddress == true ? ( <
+                    Col >
+                    <
+                    div >
+                    <
+                    FormCheckbox inline checked = {
+                        this.state.ManageAddress
+                    }
+                    onChange = {
+                        e => this.handleChange(e, "ManageAddress")
+                    }
+                    className = "mystyle"
+
+                    >
+                    ManageAddress <
+                    /FormCheckbox> <
+                    FormCheckbox inline checked = {
+                        this.state.ManageAddressView
+                    }
+                    onChange = {
+                        e => this.handleChange(e, "ManageAddressView")
+                    } >
+                    View <
+                    /FormCheckbox> <
+                    FormCheckbox inline checked = {
+                        this.state.ManageAddressEdit
+                    }
+                    onChange = {
+                        e => this.handleChange(e, "ManageAddressEdit")
+                    } >
+                    Edit <
+                    /FormCheckbox> <
+                    FormCheckbox inline checked = {
+                        this.state.ManageAddressDelete
+                    }
+                    onChange = {
+                        e => this.handleChange(e, "ManageAddressDelete")
+                    } >
+                    Delete <
+                    /FormCheckbox> <
+                    /div>
+
+                    <
+                    div >
+
+                    <
+                    FormCheckbox inline checked = {
+                        this.state.ManageCompany
+                    }
+                    onChange = {
+                        e => this.handleChange(e, "ManageCompany")
+                    }
+                    className = "mystyle" >
+                    ManageCompany <
+                    /FormCheckbox> <
+                    FormCheckbox inline checked = {
+                        this.state.ManageCompanyView
+                    }
+                    onChange = {
+                        e => this.handleChange(e, "ManageCompanyView")
+                    } >
+                    View <
+                    /FormCheckbox> <
+                    FormCheckbox inline checked = {
+                        this.state.ManageCompanyEdit
+                    }
+                    onChange = {
+                        e => this.handleChange(e, "ManageCompanyEdit")
+                    } >
+                    Edit <
+                    /FormCheckbox> <
+                    FormCheckbox inline checked = {
+                        this.state.ManageCompanyDelete
+                    }
+                    onChange = {
+                        e => this.handleChange(e, "ManageCompanyDelete")
+                    } >
+                    Delete <
+                    /FormCheckbox> <
+                    /div> <
+                    div >
+
+                    <
+                    FormCheckbox inline checked = {
+                        this.state.ManageDepartment
+                    }
+                    onChange = {
+                        e => this.handleChange(e, "ManageDepartment")
+                    }
+                    className = "mystyle" >
+                    ManageDepartment <
+                    /FormCheckbox> <
+                    FormCheckbox inline checked = {
+                        this.state.ManageDepartmentView
+                    }
+                    onChange = {
+                        e => this.handleChange(e, "ManageDepartmentView")
+                    } >
+                    View <
+                    /FormCheckbox> <
+                    FormCheckbox inline checked = {
+                        this.state.ManageDepartmentEdit
+                    }
+                    onChange = {
+                        e => this.handleChange(e, "ManageDepartmentEdit")
+                    } >
+                    Edit <
+                    /FormCheckbox> <
+                    FormCheckbox inline checked = {
+                        this.state.ManageDepartmentDelete
+                    }
+                    onChange = {
+                        e => this.handleChange(e, "ManageDepartmentDelete")
+                    } >
+                    Delete <
+                    /FormCheckbox> <
+                    /div>
+
+                    <
+                    div >
+                    <
+                    FormCheckbox inline checked = {
+                        this.state.ManageProvince
+                    }
+                    onChange = {
+                        e => this.handleChange(e, "ManageProvince")
+                    }
+                    className = "mystyle" >
+                    ManageProvince <
+                    /FormCheckbox> <
+                    FormCheckbox inline checked = {
+                        this.state.ManageProvinceView
+                    }
+                    onChange = {
+                        e => this.handleChange(e, "ManageProvinceView")
+                    } >
+                    View <
+                    /FormCheckbox> <
+                    FormCheckbox inline checked = {
+                        this.state.ManageProvinceEdit
+                    }
+                    onChange = {
+                        e => this.handleChange(e, "ManageProvinceEdit")
+                    } >
+                    Edit <
+                    /FormCheckbox> <
+                    FormCheckbox inline checked = {
+                        this.state.ManageProvinceDelete
+                    }
+                    onChange = {
+                        e => this.handleChange(e, "ManageProvinceDelete")
+                    } >
+                    Delete <
+                    /FormCheckbox> <
+                    /div>
+
+                    <
+                    div >
+                    <
+                    FormCheckbox inline checked = {
+                        this.state.ManageDistrict
+                    }
+                    onChange = {
+                        e => this.handleChange(e, "ManageDistrict")
+                    }
+                    className = "mystyle" >
+                    ManageDistrict <
+                    /FormCheckbox> <
+                    FormCheckbox inline checked = {
+                        this.state.ManageDistrictView
+                    }
+                    onChange = {
+                        e => this.handleChange(e, "ManageDistrictView")
+                    } >
+                    View <
+                    /FormCheckbox> <
+                    FormCheckbox inline checked = {
+                        this.state.ManageDistrictEdit
+                    }
+                    onChange = {
+                        e => this.handleChange(e, "ManageDistrictEdit")
+                    } >
+                    Edit <
+                    /FormCheckbox> <
+                    FormCheckbox inline checked = {
+                        this.state.ManageDistrictDelete
+                    }
+                    onChange = {
+                        e => this.handleChange(e, "ManageDistrictDelete")
+                    } >
+                    Delete <
+                    /FormCheckbox> <
+                    /div>
+
+                    <
+                    div >
+                    <
+                    FormCheckbox inline checked = {
+                        this.state.ManagePostalCode
+                    }
+                    onChange = {
+                        e => this.handleChange(e, "ManagePostalCode")
+                    }
+                    className = "mystyle" >
+                    ManagePostalCode <
+                    /FormCheckbox> <
+                    FormCheckbox inline checked = {
+                        this.state.ManagePostalCodeView
+                    }
+                    onChange = {
+                        e => this.handleChange(e, "ManagePostalCodeView")
+                    } >
+                    View <
+                    /FormCheckbox> <
+                    FormCheckbox inline checked = {
+                        this.state.ManagePostalCodeEdit
+                    }
+                    onChange = {
+                        e => this.handleChange(e, "ManagePostalCodeEdit")
+                    } >
+                    Edit <
+                    /FormCheckbox> <
+                    FormCheckbox inline checked = {
+                        this.state.ManagePostalCodeDelete
+                    }
+                    onChange = {
+                        e => this.handleChange(e, "ManagePostalCodeDelete")
+                    } >
+                    Delete <
+                    /FormCheckbox> <
+                    /div>
+
+                    <
+                    div >
+                    <
+                    FormCheckbox inline checked = {
+                        this.state.ManageLocation
+                    }
+                    onChange = {
+                        e => this.handleChange(e, "ManageLocation")
+                    }
+                    className = "mystyle" >
+                    ManageLocation <
+                    /FormCheckbox> <
+                    FormCheckbox inline checked = {
+                        this.state.ManageLocationView
+                    }
+                    onChange = {
+                        e => this.handleChange(e, "ManageLocationView")
+                    } >
+                    View <
+                    /FormCheckbox> <
+                    FormCheckbox inline checked = {
+                        this.state.ManageLocationEdit
+                    }
+                    onChange = {
+                        e => this.handleChange(e, "ManageLocationEdit")
+                    } >
+                    Edit <
+                    /FormCheckbox> <
+                    FormCheckbox inline checked = {
+                        this.state.ManageLocationDelete
+                    }
+                    onChange = {
+                        e => this.handleChange(e, "ManageLocationDelete")
+                    } >
+                    Delete <
+                    /FormCheckbox> <
+                    /div>
+
+                    <
+                    /Col>
+
+                ) : null
+            }
+
+            <
+            FormCheckbox checked = {
+                this.state.ManageEquipment
+            }
+            onChange = {
+                e => this.handleChange(e, "ManageEquipment")
+            } >
+            Equipment <
+            /FormCheckbox> {
+                this.state.ManageEquipment ? ( <
+                    Col >
+
+                    <
+                    div >
+
+                    <
+                    FormCheckbox inline checked = {
+                        this.state.ManageEquipment
+                    }
+                    onChange = {
+                        e => this.handleChange(e, "ManageEquipment")
+                    }
+                    className = "mystyle" >
+                    ManageEquipment <
+                    /FormCheckbox> <
+                    FormCheckbox inline checked = {
+                        this.state.ManageEquipmentView
+                    }
+                    onChange = {
+                        e => this.handleChange(e, "ManageEquipmentView")
+                    } >
+                    View <
+                    /FormCheckbox> <
+                    FormCheckbox inline checked = {
+                        this.state.ManageEquipmentEdit
+                    }
+                    onChange = {
+                        e => this.handleChange(e, "ManageEquipmentEdit")
+                    } >
+                    Edit <
+                    /FormCheckbox> <
+                    FormCheckbox inline checked = {
+                        this.state.ManageEquipmentDelete
+                    }
+                    onChange = {
+                        e => this.handleChange(e, "ManageEquipmentDelete")
+                    } >
+                    Delete <
+                    /FormCheckbox> <
+                    /div> <
+                    /Col>
+                ) : null
+            }
+
+            <
+            FormCheckbox checked = {
+                this.state.ManageRequestGeneral
+            }
+            onChange = {
+                e => this.handleChange(e, "ManageRequestGeneral")
+            } >
+            Request <
+            /FormCheckbox> {
+                this.state.ManageRequestGeneral ? ( <
+                    Col >
+                    <
+                    div >
+                    <
+                    FormCheckbox inline checked = {
+                        this.state.ManageRequestGeneral
+                    }
+                    onChange = {
+                        e => this.handleChange(e, "ManageRequestGeneral")
+                    }
+                    className = "mystyle" >
+                    ManageRequestGeneral <
+                    /FormCheckbox> <
+                    FormCheckbox inline checked = {
+                        this.state.ManageRequestGeneralView
+                    }
+                    onChange = {
+                        e => this.handleChange(e, "ManageRequestGeneralView")
+                    } >
+                    View <
+                    /FormCheckbox> <
+                    FormCheckbox inline checked = {
+                        this.state.ManageRequestGeneralEdit
+                    }
+                    onChange = {
+                        e => this.handleChange(e, "ManageRequestGeneralEdit")
+                    } >
+                    Edit <
+                    /FormCheckbox> <
+                    FormCheckbox inline checked = {
+                        this.state.ManageRequestGeneralDelete
+                    }
+                    onChange = {
+                        e => this.handleChange(e, "ManageRequestGeneralDelete")
+                    } >
+                    Delete <
+                    /FormCheckbox> <
+                    /div>
+
+                    <
+                    div >
+                    <
+                    FormCheckbox inline checked = {
+                        this.state.ManageRequestIssuses
+                    }
+                    onChange = {
+                        e => this.handleChange(e, "ManageRequestIssuses")
+                    }
+                    className = "mystyle" >
+                    ManageRequestIssuses <
+                    /FormCheckbox> <
+                    FormCheckbox inline checked = {
+                        this.state.ManageRequestIssusesView
+                    }
+                    onChange = {
+                        e => this.handleChange(e, "ManageRequestIssusesView")
+                    } >
+                    View <
+                    /FormCheckbox> <
+                    FormCheckbox inline checked = {
+                        this.state.ManageRequestIssusesEdit
+                    }
+                    onChange = {
+                        e => this.handleChange(e, "ManageRequestIssusesEdit")
+                    } >
+                    Edit <
+                    /FormCheckbox> <
+                    FormCheckbox inline checked = {
+                        this.state.ManageRequestIssusesDelete
+                    }
+                    onChange = {
+                        e => this.handleChange(e, "ManageRequestIssusesDelete")
+                    } >
+                    Delete <
+                    /FormCheckbox> <
+                    /div> <
+                    /Col>
+                ) : null
+            } <
+            FormCheckbox checked = {
+                this.state.ManageNews
+            }
+            onChange = {
+                e => this.handleChange(e, "ManageNews")
+            } >
+            News <
+            /FormCheckbox>
+
+            {
+                this.state.ManageNews ? ( <
+                    Col >
+                    <
+                    div >
+                    <
+                    FormCheckbox inline checked = {
+                        this.state.ManageNews
+                    }
+                    onChange = {
+                        e => this.handleChange(e, "ManageNews")
+                    }
+                    className = "mystyle" >
+                    ManageNews <
+                    /FormCheckbox> <
+                    FormCheckbox inline checked = {
+                        this.state.ManageNewsView
+                    }
+                    onChange = {
+                        e => this.handleChange(e, "ManageNewsView")
+                    } >
+                    View <
+                    /FormCheckbox> <
+                    FormCheckbox inline checked = {
+                        this.state.ManageNewsEdit
+                    }
+                    onChange = {
+                        e => this.handleChange(e, "ManageNewsEdit")
+                    } >
+                    Edit <
+                    /FormCheckbox> <
+                    FormCheckbox inline checked = {
+                        this.state.ManageNewsDelete
+                    }
+                    onChange = {
+                        e => this.handleChange(e, "ManageNewsDelete")
+                    } >
+                    Delete <
+                    /FormCheckbox> <
+                    /div>
+
+                    <
+                    div >
+                    <
+                    FormCheckbox inline checked = {
+                        this.state.ManageSettingNews
+                    }
+                    onChange = {
+                        e => this.handleChange(e, "ManageSettingNews")
+                    }
+                    className = "mystyle" >
+                    ManageSettingNews <
+                    /FormCheckbox> <
+                    FormCheckbox inline checked = {
+                        this.state.ManageSettingNewsView
+                    }
+                    onChange = {
+                        e => this.handleChange(e, "ManageSettingNewsView")
+                    } >
+                    View <
+                    /FormCheckbox> <
+                    FormCheckbox inline checked = {
+                        this.state.ManageSettingNewsEdit
+                    }
+                    onChange = {
+                        e => this.handleChange(e, "ManageSettingNewsEdit")
+                    } >
+                    Edit <
+                    /FormCheckbox> <
+                    FormCheckbox inline checked = {
+                        this.state.ManageSettingNewsDelete
+                    }
+                    onChange = {
+                        e => this.handleChange(e, "ManageSettingNewsDelete")
+                    } >
+                    Delete <
+                    /FormCheckbox> <
+                    /div> <
+                    /Col>
+                ) : null
+            }
+
+            <
+            FormCheckbox checked = {
+                this.state.ManageImage
+            }
+            onChange = {
+                e => this.handleChange(e, "ManageImage")
+            } >
+            Image <
+            /FormCheckbox>
+
+            {
+                this.state.ManageImage == true ? ( <
+                    Col >
+                    <
+                    div >
+                    <
+                    FormCheckbox inline checked = {
+                        this.state.ManageImage
+                    }
+                    onChange = {
+                        e => this.handleChange(e, "ManageImage")
+                    }
+                    className = "mystyle" >
+                    ManageImage <
+                    /FormCheckbox> <
+                    FormCheckbox inline checked = {
+                        this.state.ManageImageView
+                    }
+                    onChange = {
+                        e => this.handleChange(e, "ManageImageView")
+                    } >
+                    View <
+                    /FormCheckbox> <
+                    FormCheckbox inline checked = {
+                        this.state.ManageImageEdit
+                    }
+                    onChange = {
+                        e => this.handleChange(e, "ManageImageEdit")
+                    } >
+                    Edit <
+                    /FormCheckbox> <
+                    FormCheckbox inline checked = {
+                        this.state.ManageImageDelete
+                    }
+                    onChange = {
+                        e => this.handleChange(e, "ManageImageDelete")
+                    } >
+                    Delete <
+                    /FormCheckbox> <
+                    /div>
+
+                    <
+                    /Col>
+                ) : null
+            } <
+            FormCheckbox checked = {
+                this.state.ManageMessage
+            }
+            onChange = {
+                e => this.handleChange(e, "ManageMessage")
+            } >
+            Message <
+            /FormCheckbox>
+
+            {
+                this.state.ManageMessage == true ? ( <
+                    Col >
+                    <
+                    div >
+                    <
+                    FormCheckbox inline checked = {
+                        this.state.ManageMessage
+                    }
+                    onChange = {
+                        e => this.handleChange(e, "ManageMessage")
+                    }
+                    className = "mystyle" >
+                    ManageMessage <
+                    /FormCheckbox> <
+                    FormCheckbox inline checked = {
+                        this.state.ManageMessageView
+                    }
+                    onChange = {
+                        e => this.handleChange(e, "ManageMessageView")
+                    } >
+                    View <
+                    /FormCheckbox> <
+                    FormCheckbox inline checked = {
+                        this.state.ManageMessageEdit
+                    }
+                    onChange = {
+                        e => this.handleChange(e, "ManageMessageEdit")
+                    } >
+                    Edit <
+                    /FormCheckbox> <
+                    FormCheckbox inline checked = {
+                        this.state.ManageMessageDelete
+                    }
+                    onChange = {
+                        e => this.handleChange(e, "ManageMessageDelete")
+                    } >
+                    Delete <
+                    /FormCheckbox> <
+                    /div>
+
+                    <
+                    /Col>
+                ) : null
+            }
+
+            <
+            FormCheckbox checked = {
+                this.state.ManageModify
+            }
+            onChange = {
+                e => this.handleChange(e, "ManageModify")
+            } >
+            Modify <
+            /FormCheckbox>
+
+            {
+                this.state.ManageModify == true ? ( <
+                    Col >
+                    <
+                    div >
+                    <
+                    FormCheckbox inline checked = {
+                        this.state.ManageModify
+                    }
+                    onChange = {
+                        e => this.handleChange(e, "ManageModify")
+                    }
+                    className = "mystyle" >
+                    ManageModify <
+                    /FormCheckbox> <
+                    FormCheckbox inline checked = {
+                        this.state.ManageModifyView
+                    }
+                    onChange = {
+                        e => this.handleChange(e, "ManageModifyView")
+                    } >
+                    View <
+                    /FormCheckbox> <
+                    FormCheckbox inline checked = {
+                        this.state.ManageModifyEdit
+                    }
+                    onChange = {
+                        e => this.handleChange(e, "ManageModifyEdit")
+                    } >
+                    Edit <
+                    /FormCheckbox> <
+                    FormCheckbox inline checked = {
+                        this.state.ManageModifyDelete
+                    }
+                    onChange = {
+                        e => this.handleChange(e, "ManageModifyDelete")
+                    } >
+                    Delete <
+                    /FormCheckbox> <
+                    /div>
+
+                    <
+                    /Col>
+                ) : null
+            }
+
+            <
+            FormCheckbox checked = {
+                this.state.ManagePriority
+            }
+            onChange = {
+                e => this.handleChange(e, "ManagePriority")
+            } >
+            Priority <
+            /FormCheckbox>
+
+            {
+                this.state.ManagePriority == true ? ( <
+                    Col >
+                    <
+                    div >
+                    <
+                    FormCheckbox inline checked = {
+                        this.state.ManagePriority
+                    }
+                    onChange = {
+                        e => this.handleChange(e, "ManagePriority")
+                    }
+                    className = "mystyle" >
+                    ManagePriority <
+                    /FormCheckbox> <
+                    FormCheckbox inline checked = {
+                        this.state.ManagePriorityView
+                    }
+                    onChange = {
+                        e => this.handleChange(e, "ManagePriorityView")
+                    } >
+                    View <
+                    /FormCheckbox> <
+                    FormCheckbox inline checked = {
+                        this.state.ManagePriorityEdit
+                    }
+                    onChange = {
+                        e => this.handleChange(e, "ManagePriorityEdit")
+                    } >
+                    Edit <
+                    /FormCheckbox> <
+                    FormCheckbox inline checked = {
+                        this.state.ManagePriorityDelete
+                    }
+                    onChange = {
+                        e => this.handleChange(e, "ManagePriorityDelete")
+                    } >
+                    Delete <
+                    /FormCheckbox> <
+                    /div>
+
+                    <
+                    /Col>
+                ) : null
+            }
+
+            <
+            FormCheckbox checked = {
+                this.state.ManageImpact
+            }
+            onChange = {
+                e => this.handleChange(e, "ManageImpact")
+            } >
+            Impact <
+            /FormCheckbox>
+
+            {
+                this.state.ManageImpact == true ? ( <
+                    Col >
+                    <
+                    div >
+                    <
+                    FormCheckbox inline checked = {
+                        this.state.ManageImpact
+                    }
+                    onChange = {
+                        e => this.handleChange(e, "ManageImpact")
+                    }
+                    className = "mystyle" >
+                    ManageMessage <
+                    /FormCheckbox> <
+                    FormCheckbox inline checked = {
+                        this.state.ManageImpactView
+                    }
+                    onChange = {
+                        e => this.handleChange(e, "ManageImpactView")
+                    } >
+                    View <
+                    /FormCheckbox> <
+                    FormCheckbox inline checked = {
+                        this.state.ManageImpactEdit
+                    }
+                    onChange = {
+                        e => this.handleChange(e, "ManageImpactEdit")
+                    } >
+                    Edit <
+                    /FormCheckbox> <
+                    FormCheckbox inline checked = {
+                        this.state.ManageImpactDelete
+                    }
+                    onChange = {
+                        e => this.handleChange(e, "ManageImpactDelete")
+                    } >
+                    Delete <
+                    /FormCheckbox> <
+                    /div>
+
+                    <
+                    /Col>
+                ) : null
+            }
+
+            <
+            FormCheckbox checked = {
+                this.state.Report
+            }
+            onChange = {
+                e => this.handleChange(e, "Report")
+            } >
+            Report <
+            /FormCheckbox>
+
+            <
+            /ListGroupItem> <
+            /Col>
+
+            <
+            /Row> <
+            Button type = "submit" > Create New Permission < /Button> <
+            /Form> <
+            /Col>
+
+            <
+            /Row> <
+            /ListGroupItem> <
+            /ListGroup> <
+            /Container> <
+            /div>
+
+
+
+
+
+        )
     }
 }
 
-export default Update_permission;
+export default Update_permission
