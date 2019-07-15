@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import ReactDOM from "react-dom";
+import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 
 import {
     ListGroup,
@@ -13,13 +13,13 @@ import {
     FormSelect,
     Button,
     Container
-} from "shards-react";
-import Swal from "sweetalert2";
-import axios from "axios";
-import { ToastContainer } from "react-toastr";
-import "../../../css/alert.css";
-import "../../../css/animate.css";
-import HocValidateUser from "../../../HocValidateUser";
+} from 'shards-react';
+import Swal from 'sweetalert2';
+import axios from 'axios';
+import { ToastContainer } from 'react-toastr';
+import '../../../css/alert.css';
+import '../../../css/animate.css';
+import HocValidateUser from '../../../HocValidateUser';
 let container;
 
 class View_PersonContact extends Component {
@@ -27,8 +27,8 @@ class View_PersonContact extends Component {
         super(props);
         this.state = {
             client_id: this.props.client_id,
-            company_id: "",
-            person_responsible_id: "",
+            company_id: '',
+            person_responsible_id: '',
             getcompany: [],
             getpersonresponsible: [],
             errors: []
@@ -62,7 +62,7 @@ class View_PersonContact extends Component {
                 insertdata
             )
             .then(response => {
-                Swal.fire("Successfully", "Add data successfully ", "success");
+                Swal.fire('Successfully', 'Add data successfully ', 'success');
 
                 this.setState({
                     errors: []
@@ -74,7 +74,7 @@ class View_PersonContact extends Component {
                 });
                 console.log(error.response.data.errors);
 
-                Swal.fire("Errors", "check the value of a form field", "error");
+                Swal.fire('Errors', 'check the value of a form field', 'error');
             });
     }
 
@@ -94,7 +94,7 @@ class View_PersonContact extends Component {
 
     componentDidMount() {
         axios
-            .get("/api/company/index")
+            .get('/api/company/index')
             .then(res => {
                 this.setState({
                     getcompany: res.data
@@ -108,7 +108,7 @@ class View_PersonContact extends Component {
             });
 
         axios
-            .get("/api/personresponsible/index")
+            .get('/api/personresponsible/index')
             .then(res => {
                 this.setState({
                     getpersonresponsible: res.data
@@ -140,7 +140,7 @@ class View_PersonContact extends Component {
     render() {
         const { getpersonresponsible, getcompany } = this.state;
         return (
-            <div style={{ paddingTop: "30px" }}>
+            <div style={{ paddingTop: '30px' }}>
                 <Container>
                     <ListGroup flush>
                         <ListGroupItem className="p-3">
@@ -157,10 +157,10 @@ class View_PersonContact extends Component {
                                                     name="person_responsible_id"
                                                     className={`form-control ${
                                                         this.hasErrorFor(
-                                                            "person_responsible_id"
+                                                            'person_responsible_id'
                                                         )
-                                                            ? "is-invalid"
-                                                            : ""
+                                                            ? 'is-invalid'
+                                                            : ''
                                                     }`}
                                                     value={
                                                         this.state
@@ -193,7 +193,7 @@ class View_PersonContact extends Component {
                                                     )}
                                                 </FormSelect>
                                                 {this.renderErrorFor(
-                                                    "person_responsible_id"
+                                                    'person_responsible_id'
                                                 )}
                                             </Col>
 
@@ -206,10 +206,10 @@ class View_PersonContact extends Component {
                                                     name="company_id"
                                                     className={`form-control ${
                                                         this.hasErrorFor(
-                                                            "company_id"
+                                                            'company_id'
                                                         )
-                                                            ? "is-invalid"
-                                                            : ""
+                                                            ? 'is-invalid'
+                                                            : ''
                                                     }`}
                                                     value={
                                                         this.state.company_id
@@ -238,7 +238,7 @@ class View_PersonContact extends Component {
                                                     )}
                                                 </FormSelect>
                                                 {this.renderErrorFor(
-                                                    "company_id"
+                                                    'company_id'
                                                 )}
                                             </Col>
                                         </Row>

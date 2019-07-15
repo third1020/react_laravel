@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import ImageUploader from "react-images-upload";
+import React, { Component } from 'react';
+import ImageUploader from 'react-images-upload';
 import {
     ListGroup,
     ListGroupItem,
@@ -12,14 +12,14 @@ import {
     FormSelect,
     Button,
     Container
-} from "shards-react";
-import Swal from "sweetalert2";
-import axios from "axios";
-import { ToastContainer } from "react-toastr";
-import "../../../css/alert.css";
-import "../../../css/animate.css";
-import HocValidateUser from "../../../HocValidateUser";
-import { Map, InfoWindow, Marker, GoogleApiWrapper } from "google-maps-react";
+} from 'shards-react';
+import Swal from 'sweetalert2';
+import axios from 'axios';
+import { ToastContainer } from 'react-toastr';
+import '../../../css/alert.css';
+import '../../../css/animate.css';
+import HocValidateUser from '../../../HocValidateUser';
+import { Map, InfoWindow, Marker, GoogleApiWrapper } from 'google-maps-react';
 let container;
 
 class Update_Location extends Component {
@@ -27,15 +27,15 @@ class Update_Location extends Component {
         super(props);
         this.state = {
             client_id: this.props.client_id,
-            name: "",
-            address_1: "",
-            address_2: "",
-            address_3: "",
+            name: '',
+            address_1: '',
+            address_2: '',
+            address_3: '',
             address_latitude: 13.75398,
             address_longitude: 100.50144,
-            address_id: "",
-            image_id: "1",
-            image_show: "default",
+            address_id: '',
+            image_id: '1',
+            image_show: 'default',
             image: [],
             getpermission: [],
             getaddress: [],
@@ -121,7 +121,7 @@ class Update_Location extends Component {
                 insertdata
             )
             .then(response => {
-                Swal.fire("Successfully", "Add data successfully ", "success");
+                Swal.fire('Successfully', 'Add data successfully ', 'success');
             })
             .catch(error => {
                 this.setState({
@@ -129,7 +129,7 @@ class Update_Location extends Component {
                 });
                 console.log(error.response.data.errors);
 
-                Swal.fire("Errors", "check the value of a form field", "error");
+                Swal.fire('Errors', 'check the value of a form field', 'error');
             });
     }
 
@@ -149,7 +149,7 @@ class Update_Location extends Component {
 
     componentDidMount() {
         axios
-            .get("/api/address/index")
+            .get('/api/address/index')
             .then(res => {
                 this.setState({
                     getaddress: res.data
@@ -185,13 +185,13 @@ class Update_Location extends Component {
     render() {
         const { getaddress } = this.state;
         const style = {
-            width: "95%",
-            height: "95%",
-            marginLeft: "20px"
+            width: '95%',
+            height: '95%',
+            marginLeft: '20px'
         };
 
         return (
-            <div style={{ paddingTop: "30px" }}>
+            <div style={{ paddingTop: '30px' }}>
                 <Container>
                     <ListGroup flush>
                         <ListGroupItem className="p-3">
@@ -207,9 +207,9 @@ class Update_Location extends Component {
                                                     id="name"
                                                     name="name"
                                                     className={`form-control ${
-                                                        this.hasErrorFor("name")
-                                                            ? "is-invalid"
-                                                            : ""
+                                                        this.hasErrorFor('name')
+                                                            ? 'is-invalid'
+                                                            : ''
                                                     }`}
                                                     placeholder="กรอกชื่อผู้ใช้"
                                                     type="text"
@@ -218,7 +218,7 @@ class Update_Location extends Component {
                                                         this.handleFieldChange
                                                     }
                                                 />
-                                                {this.renderErrorFor("name")}
+                                                {this.renderErrorFor('name')}
                                             </Col>
                                         </Row>
 
@@ -232,10 +232,10 @@ class Update_Location extends Component {
                                                     name="address_1"
                                                     className={`form-control ${
                                                         this.hasErrorFor(
-                                                            "address_1"
+                                                            'address_1'
                                                         )
-                                                            ? "is-invalid"
-                                                            : ""
+                                                            ? 'is-invalid'
+                                                            : ''
                                                     }`}
                                                     placeholder="กรอกชื่อผู้ใช้"
                                                     type="text"
@@ -245,7 +245,7 @@ class Update_Location extends Component {
                                                     }
                                                 />
                                                 {this.renderErrorFor(
-                                                    "address_1"
+                                                    'address_1'
                                                 )}
                                             </Col>
                                             <Col md="6" className="form-group">
@@ -257,10 +257,10 @@ class Update_Location extends Component {
                                                     name="address_2"
                                                     className={`form-control ${
                                                         this.hasErrorFor(
-                                                            "address_2"
+                                                            'address_2'
                                                         )
-                                                            ? "is-invalid"
-                                                            : ""
+                                                            ? 'is-invalid'
+                                                            : ''
                                                     }`}
                                                     placeholder="กรอกชื่อผู้ใช้"
                                                     type="text"
@@ -270,7 +270,7 @@ class Update_Location extends Component {
                                                     }
                                                 />
                                                 {this.renderErrorFor(
-                                                    "address_2"
+                                                    'address_2'
                                                 )}
                                             </Col>
                                             <Col md="6" className="form-group">
@@ -282,10 +282,10 @@ class Update_Location extends Component {
                                                     name="address_3"
                                                     className={`form-control ${
                                                         this.hasErrorFor(
-                                                            "address_3"
+                                                            'address_3'
                                                         )
-                                                            ? "is-invalid"
-                                                            : ""
+                                                            ? 'is-invalid'
+                                                            : ''
                                                     }`}
                                                     placeholder="กรอกชื่อผู้ใช้"
                                                     type="text"
@@ -295,7 +295,7 @@ class Update_Location extends Component {
                                                     }
                                                 />
                                                 {this.renderErrorFor(
-                                                    "address_3"
+                                                    'address_3'
                                                 )}
                                             </Col>
                                         </Row>
@@ -336,10 +336,10 @@ class Update_Location extends Component {
                                                     name="address_id"
                                                     className={`form-control ${
                                                         this.hasErrorFor(
-                                                            "address_id"
+                                                            'address_id'
                                                         )
-                                                            ? "is-invalid"
-                                                            : ""
+                                                            ? 'is-invalid'
+                                                            : ''
                                                     }`}
                                                     value={
                                                         this.state.address_id
@@ -366,7 +366,7 @@ class Update_Location extends Component {
                                                     )}
                                                 </FormSelect>
                                                 {this.renderErrorFor(
-                                                    "location_id"
+                                                    'location_id'
                                                 )}
                                             </Col>
                                         </Row>
@@ -377,7 +377,7 @@ class Update_Location extends Component {
                                                 </label>
                                                 <div
                                                     style={{
-                                                        width: "100%",
+                                                        width: '100%',
                                                         height: 400
                                                     }}
                                                 >
@@ -458,5 +458,5 @@ class Update_Location extends Component {
 }
 
 export default GoogleApiWrapper({
-    apiKey: "AIzaSyDnmGzOiSJeXAFo2uFsEDOa92cYcT7waO0"
+    apiKey: 'AIzaSyDnmGzOiSJeXAFo2uFsEDOa92cYcT7waO0'
 })(HocValidateUser(Update_Location));

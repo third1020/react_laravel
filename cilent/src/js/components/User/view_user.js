@@ -1,7 +1,7 @@
-import React, { Component } from "react";
-import ReactDOM from "react-dom";
-import Select from "react-select";
-import ImageUploader from "react-images-upload";
+import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
+import Select from 'react-select';
+import ImageUploader from 'react-images-upload';
 import {
     ListGroup,
     ListGroupItem,
@@ -14,13 +14,13 @@ import {
     FormSelect,
     Button,
     Container
-} from "shards-react";
-import Swal from "sweetalert2";
-import axios from "axios";
-import { ToastContainer } from "react-toastr";
-import "../../../css/alert.css";
-import "../../../css/animate.css";
-import HocValidateUser from "../../../HocValidateUser";
+} from 'shards-react';
+import Swal from 'sweetalert2';
+import axios from 'axios';
+import { ToastContainer } from 'react-toastr';
+import '../../../css/alert.css';
+import '../../../css/animate.css';
+import HocValidateUser from '../../../HocValidateUser';
 
 let container;
 
@@ -28,16 +28,16 @@ class View_user extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            checkboxpassword: "",
-            username: "",
-            password: "",
-            email: "",
-            is_block: "block",
-            user_right: "admin",
-            image_show: "default",
-            image_id: "1",
-            client_id: "1",
-            permission_id: "1",
+            checkboxpassword: '',
+            username: '',
+            password: '',
+            email: '',
+            is_block: 'block',
+            user_right: 'admin',
+            image_show: 'default',
+            image_id: '1',
+            client_id: '1',
+            permission_id: '1',
             errors: []
         };
 
@@ -87,15 +87,15 @@ class View_user extends Component {
             .put(`${this.props.updateurl}`, insertdata)
             .then(response => {
                 Swal.fire(
-                    "Successfully",
-                    "Update data successfully ",
-                    "success"
+                    'Successfully',
+                    'Update data successfully ',
+                    'success'
                 );
             })
             .catch(error => {
                 console.log(error.response.data.errors);
 
-                Swal.fire("Errors", "check the value of a form field", "error");
+                Swal.fire('Errors', 'check the value of a form field', 'error');
                 this.setState({
                     errors: error.response.data.errors
                 });
@@ -140,7 +140,7 @@ class View_user extends Component {
 
     render() {
         return (
-            <div style={{ paddingTop: "30px" }}>
+            <div style={{ paddingTop: '30px' }}>
                 <Container>
                     <ListGroup flush>
                         <ListGroupItem className="p-3">
@@ -157,10 +157,10 @@ class View_user extends Component {
                                                     name="username"
                                                     className={`form-control ${
                                                         this.hasErrorFor(
-                                                            "username"
+                                                            'username'
                                                         )
-                                                            ? "is-invalid"
-                                                            : ""
+                                                            ? 'is-invalid'
+                                                            : ''
                                                     }`}
                                                     placeholder="กรอกชื่อผู้ใช้"
                                                     type="text"
@@ -171,7 +171,7 @@ class View_user extends Component {
                                                     disabled
                                                 />
                                                 {this.renderErrorFor(
-                                                    "username"
+                                                    'username'
                                                 )}
                                             </Col>
                                         </Row>
@@ -185,10 +185,10 @@ class View_user extends Component {
                                                         id="email"
                                                         className={`form-control ${
                                                             this.hasErrorFor(
-                                                                "email"
+                                                                'email'
                                                             )
-                                                                ? "is-invalid"
-                                                                : ""
+                                                                ? 'is-invalid'
+                                                                : ''
                                                         }`}
                                                         placeholder="กรอกอีเมล"
                                                         type="email"
@@ -201,7 +201,7 @@ class View_user extends Component {
                                                         disabled
                                                     />
                                                     {this.renderErrorFor(
-                                                        "email"
+                                                        'email'
                                                     )}
                                                 </FormGroup>
                                             </Col>

@@ -1,7 +1,7 @@
-import React, { Component } from "react";
-import ReactDOM from "react-dom";
-import Select from "react-select";
-import ImageUploader from "react-images-upload";
+import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
+import Select from 'react-select';
+import ImageUploader from 'react-images-upload';
 import {
     ListGroup,
     ListGroupItem,
@@ -14,29 +14,29 @@ import {
     FormSelect,
     Button,
     Container
-} from "shards-react";
-import Swal from "sweetalert2";
-import axios from "axios";
-import { ToastContainer } from "react-toastr";
-import "../../../css/alert.css";
-import "../../../css/animate.css";
-import HocValidateUser from "../../../HocValidateUser";
+} from 'shards-react';
+import Swal from 'sweetalert2';
+import axios from 'axios';
+import { ToastContainer } from 'react-toastr';
+import '../../../css/alert.css';
+import '../../../css/animate.css';
+import HocValidateUser from '../../../HocValidateUser';
 let container;
 
 class Add_user extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            username: "",
-            password: "",
-            email: "",
-            is_block: "block",
-            user_right: "admin",
-            image_show: "default",
-            image_id: "1",
+            username: '',
+            password: '',
+            email: '',
+            is_block: 'block',
+            user_right: 'admin',
+            image_show: 'default',
+            image_id: '1',
             image: [],
             client_id: this.props.client_id,
-            permission_id: "1",
+            permission_id: '1',
             getpermission: [],
             errors: []
         };
@@ -79,7 +79,7 @@ class Add_user extends Component {
         console.log(formData);
 
         axios
-            .post("/api/uploadImage", formData)
+            .post('/api/uploadImage', formData)
             .then(res => {
                 const insertdata = {
                     username: this.state.username,
@@ -94,24 +94,24 @@ class Add_user extends Component {
                 };
                 console.log(insertdata);
                 axios
-                    .post("/api/user/store", insertdata)
+                    .post('/api/user/store', insertdata)
                     .then(response => {
                         Swal.fire(
-                            "Successfully",
-                            "Add data successfully ",
-                            "success"
+                            'Successfully',
+                            'Add data successfully ',
+                            'success'
                         );
 
                         this.setState({
-                            username: "",
-                            password: "",
-                            email: "",
-                            is_block: "",
-                            user_right: "",
-                            image_show: "",
-                            image_id: "",
-                            client_id: "",
-                            permission_id: "",
+                            username: '',
+                            password: '',
+                            email: '',
+                            is_block: '',
+                            user_right: '',
+                            image_show: '',
+                            image_id: '',
+                            client_id: '',
+                            permission_id: '',
                             errors: []
                         });
                     })
@@ -122,9 +122,9 @@ class Add_user extends Component {
                         console.log(error.response.data.errors);
 
                         Swal.fire(
-                            "Errors",
-                            "check the value of a form field",
-                            "error"
+                            'Errors',
+                            'check the value of a form field',
+                            'error'
                         );
                     });
             })
@@ -149,7 +149,7 @@ class Add_user extends Component {
 
     componentDidMount() {
         axios
-            .get("api/permission/index")
+            .get('api/permission/index')
             .then(res => {
                 this.setState({
                     getpermission: res.data
@@ -166,7 +166,7 @@ class Add_user extends Component {
     render() {
         const { getpermission } = this.state;
         return (
-            <div style={{ paddingTop: "30px" }}>
+            <div style={{ paddingTop: '30px' }}>
                 <Container>
                     <ListGroup flush>
                         <ListGroupItem className="p-3">
@@ -183,10 +183,10 @@ class Add_user extends Component {
                                                     name="username"
                                                     className={`form-control ${
                                                         this.hasErrorFor(
-                                                            "username"
+                                                            'username'
                                                         )
-                                                            ? "is-invalid"
-                                                            : ""
+                                                            ? 'is-invalid'
+                                                            : ''
                                                     }`}
                                                     placeholder="กรอกชื่อผู้ใช้"
                                                     type="text"
@@ -196,7 +196,7 @@ class Add_user extends Component {
                                                     }
                                                 />
                                                 {this.renderErrorFor(
-                                                    "username"
+                                                    'username'
                                                 )}
                                             </Col>
                                             <Col md="6">
@@ -208,10 +208,10 @@ class Add_user extends Component {
                                                     name="password"
                                                     className={`form-control ${
                                                         this.hasErrorFor(
-                                                            "password"
+                                                            'password'
                                                         )
-                                                            ? "is-invalid"
-                                                            : ""
+                                                            ? 'is-invalid'
+                                                            : ''
                                                     }`}
                                                     placeholder="กรอกรหัสผ่าน"
                                                     type="password"
@@ -221,7 +221,7 @@ class Add_user extends Component {
                                                     }
                                                 />
                                                 {this.renderErrorFor(
-                                                    "password"
+                                                    'password'
                                                 )}
                                             </Col>
                                         </Row>
@@ -235,10 +235,10 @@ class Add_user extends Component {
                                                         id="email"
                                                         className={`form-control ${
                                                             this.hasErrorFor(
-                                                                "email"
+                                                                'email'
                                                             )
-                                                                ? "is-invalid"
-                                                                : ""
+                                                                ? 'is-invalid'
+                                                                : ''
                                                         }`}
                                                         placeholder="กรอกอีเมล"
                                                         type="email"
@@ -250,7 +250,7 @@ class Add_user extends Component {
                                                         }
                                                     />
                                                     {this.renderErrorFor(
-                                                        "email"
+                                                        'email'
                                                     )}
                                                 </FormGroup>
                                             </Col>
@@ -309,10 +309,10 @@ class Add_user extends Component {
                                                     name="permission_id"
                                                     className={`form-control ${
                                                         this.hasErrorFor(
-                                                            "permission_id"
+                                                            'permission_id'
                                                         )
-                                                            ? "is-invalid"
-                                                            : ""
+                                                            ? 'is-invalid'
+                                                            : ''
                                                     }`}
                                                     value={
                                                         this.state.permission_id
@@ -336,7 +336,7 @@ class Add_user extends Component {
                                                     )}
                                                 </FormSelect>
                                                 {this.renderErrorFor(
-                                                    "permission_id"
+                                                    'permission_id'
                                                 )}
                                             </Col>
                                         </Row>
@@ -379,10 +379,10 @@ class Add_user extends Component {
                                                     <input
                                                         className={`form-control ${
                                                             this.hasErrorFor(
-                                                                "image"
+                                                                'image'
                                                             )
-                                                                ? "is-invalid"
-                                                                : ""
+                                                                ? 'is-invalid'
+                                                                : ''
                                                         }`}
                                                         hidden
                                                     />
@@ -393,10 +393,10 @@ class Add_user extends Component {
                                                         buttonText="เลือกรูปภาพ"
                                                         onChange={this.onDrop}
                                                         imgExtension={[
-                                                            ".jpg",
-                                                            ".gif",
-                                                            ".png",
-                                                            ".gif"
+                                                            '.jpg',
+                                                            '.gif',
+                                                            '.png',
+                                                            '.gif'
                                                         ]}
                                                         maxFileSize={2020215}
                                                         singleImage={true}
@@ -406,7 +406,7 @@ class Add_user extends Component {
                                                         fileTypeError="ประเภทไฟล์ไม่ถูกต้อง"
                                                     />
                                                     {this.renderErrorFor(
-                                                        "image"
+                                                        'image'
                                                     )}
                                                 </div>
                                             </Col>

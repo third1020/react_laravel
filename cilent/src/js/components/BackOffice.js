@@ -1,6 +1,6 @@
-import React from "react";
-import Typography from "@material-ui/core/Typography";
-import Navigation from "./Navigation";
+import React from 'react';
+import Typography from '@material-ui/core/Typography';
+import Navigation from './Navigation';
 
 function BackOffice() {
     const [setOpen] = React.useState(false);

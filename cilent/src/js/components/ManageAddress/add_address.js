@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 import {
     ListGroup,
     ListGroupItem,
@@ -11,23 +11,23 @@ import {
     FormSelect,
     Button,
     Container
-} from "shards-react";
-import Swal from "sweetalert2";
-import axios from "axios";
-import { ToastContainer } from "react-toastr";
-import "../../../css/alert.css";
-import "../../../css/animate.css";
-import HocValidateUser from "../../../HocValidateUser";
+} from 'shards-react';
+import Swal from 'sweetalert2';
+import axios from 'axios';
+import { ToastContainer } from 'react-toastr';
+import '../../../css/alert.css';
+import '../../../css/animate.css';
+import HocValidateUser from '../../../HocValidateUser';
 let container;
 
 class Add_address extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            province_id: "",
-            district_id: "",
-            sub_district_id: "",
-            postal_code_id: "",
+            province_id: '',
+            district_id: '',
+            sub_district_id: '',
+            postal_code_id: '',
 
             getprovince: [],
             getdistrict: [],
@@ -60,15 +60,15 @@ class Add_address extends Component {
         };
 
         axios
-            .post("/api/address/store", insertdata)
+            .post('/api/address/store', insertdata)
             .then(response => {
-                Swal.fire("Successfully", "Add data successfully ", "success");
+                Swal.fire('Successfully', 'Add data successfully ', 'success');
 
                 this.setState({
-                    province_id: "",
-                    district_id: "",
-                    sub_district_id: "",
-                    postal_code_id: "",
+                    province_id: '',
+                    district_id: '',
+                    sub_district_id: '',
+                    postal_code_id: '',
                     errors: []
                 });
             })
@@ -78,7 +78,7 @@ class Add_address extends Component {
                 });
                 console.log(error.response.data.errors);
 
-                Swal.fire("Errors", "check the value of a form field", "error");
+                Swal.fire('Errors', 'check the value of a form field', 'error');
             });
     }
 
@@ -98,7 +98,7 @@ class Add_address extends Component {
 
     componentDidMount() {
         axios
-            .get("/api/province/index")
+            .get('/api/province/index')
             .then(res => {
                 this.setState({
                     getprovince: res.data
@@ -112,7 +112,7 @@ class Add_address extends Component {
             });
 
         axios
-            .get("/api/district/index")
+            .get('/api/district/index')
             .then(res => {
                 this.setState({
                     getdistrict: res.data
@@ -126,7 +126,7 @@ class Add_address extends Component {
             });
 
         axios
-            .get("/api/subdistrict/index")
+            .get('/api/subdistrict/index')
             .then(res => {
                 this.setState({
                     getsub_district: res.data
@@ -140,7 +140,7 @@ class Add_address extends Component {
             });
 
         axios
-            .get("/api/postalcode/index")
+            .get('/api/postalcode/index')
             .then(res => {
                 this.setState({
                     getpostal_code: res.data
@@ -162,7 +162,7 @@ class Add_address extends Component {
             getpostal_code
         } = this.state;
         return (
-            <div style={{ paddingTop: "30px" }}>
+            <div style={{ paddingTop: '30px' }}>
                 <Container>
                     <ListGroup flush>
                         <ListGroupItem className="p-3">
@@ -179,10 +179,10 @@ class Add_address extends Component {
                                                     name="province_id"
                                                     className={`form-control ${
                                                         this.hasErrorFor(
-                                                            "province_id"
+                                                            'province_id'
                                                         )
-                                                            ? "is-invalid"
-                                                            : ""
+                                                            ? 'is-invalid'
+                                                            : ''
                                                     }`}
                                                     value={
                                                         this.state.province_id
@@ -211,7 +211,7 @@ class Add_address extends Component {
                                                     )}
                                                 </FormSelect>
                                                 {this.renderErrorFor(
-                                                    "province_id"
+                                                    'province_id'
                                                 )}
                                             </Col>
 
@@ -224,10 +224,10 @@ class Add_address extends Component {
                                                     name="district_id"
                                                     className={`form-control ${
                                                         this.hasErrorFor(
-                                                            "district_id"
+                                                            'district_id'
                                                         )
-                                                            ? "is-invalid"
-                                                            : ""
+                                                            ? 'is-invalid'
+                                                            : ''
                                                     }`}
                                                     value={
                                                         this.state.district_id
@@ -256,7 +256,7 @@ class Add_address extends Component {
                                                     )}
                                                 </FormSelect>
                                                 {this.renderErrorFor(
-                                                    "district_id"
+                                                    'district_id'
                                                 )}
                                             </Col>
                                         </Row>
@@ -271,10 +271,10 @@ class Add_address extends Component {
                                                     name="sub_district_id"
                                                     className={`form-control ${
                                                         this.hasErrorFor(
-                                                            "sub_district_id"
+                                                            'sub_district_id'
                                                         )
-                                                            ? "is-invalid"
-                                                            : ""
+                                                            ? 'is-invalid'
+                                                            : ''
                                                     }`}
                                                     value={
                                                         this.state
@@ -307,7 +307,7 @@ class Add_address extends Component {
                                                     )}
                                                 </FormSelect>
                                                 {this.renderErrorFor(
-                                                    "sub_district_id"
+                                                    'sub_district_id'
                                                 )}
                                             </Col>
 
@@ -320,10 +320,10 @@ class Add_address extends Component {
                                                     name="postal_code_id"
                                                     className={`form-control ${
                                                         this.hasErrorFor(
-                                                            "postal_code_id"
+                                                            'postal_code_id'
                                                         )
-                                                            ? "is-invalid"
-                                                            : ""
+                                                            ? 'is-invalid'
+                                                            : ''
                                                     }`}
                                                     value={
                                                         this.state
@@ -356,7 +356,7 @@ class Add_address extends Component {
                                                     )}
                                                 </FormSelect>
                                                 {this.renderErrorFor(
-                                                    "postal_code_id"
+                                                    'postal_code_id'
                                                 )}
                                             </Col>
                                         </Row>

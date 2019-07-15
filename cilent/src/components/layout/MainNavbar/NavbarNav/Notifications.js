@@ -1,5 +1,5 @@
-import React from "react";
-import { NavItem, NavLink, Badge, Collapse, DropdownItem } from "shards-react";
+import React from 'react';
+import { NavItem, NavLink, Badge, Collapse, DropdownItem } from 'shards-react';
 
 export default class Notifications extends React.Component {
     constructor(props) {
@@ -47,10 +47,10 @@ export default class Notifications extends React.Component {
                                 Analytics
                             </span>
                             <p>
-                                Your website’s active users count increased by{" "}
+                                Your website’s active users count increased by{' '}
                                 <span className="text-success text-semibold">
                                     28%
-                                </span>{" "}
+                                </span>{' '}
                                 in the last week. Great job!
                             </p>
                         </div>
@@ -66,7 +66,7 @@ export default class Notifications extends React.Component {
                                 Sales
                             </span>
                             <p>
-                                Last week your store’s sales count decreased by{" "}
+                                Last week your store’s sales count decreased by{' '}
                                 <span className="text-danger text-semibold">
                                     5.52%
                                 </span>

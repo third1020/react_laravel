@@ -1,6 +1,6 @@
-"use strict";
+'use strict';
 
-Object.defineProperty(exports, "__esModule", {
+Object.defineProperty(exports, '__esModule', {
     value: true
 });
 exports.default = undefined;
@@ -11,7 +11,7 @@ var _createClass = (function() {
             var descriptor = props[i];
             descriptor.enumerable = descriptor.enumerable || false;
             descriptor.configurable = true;
-            if ("value" in descriptor) descriptor.writable = true;
+            if ('value' in descriptor) descriptor.writable = true;
             Object.defineProperty(target, descriptor.key, descriptor);
         }
     }
@@ -26,15 +26,15 @@ var _class, _temp2;
 
 exports.confirmAlert = confirmAlert;
 
-var _react = require("react");
+var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _propTypes = require("prop-types");
+var _propTypes = require('prop-types');
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _reactDom = require("react-dom");
+var _reactDom = require('react-dom');
 
 function _interopRequireDefault(obj) {
     return obj && obj.__esModule ? obj : { default: obj };
@@ -42,7 +42,7 @@ function _interopRequireDefault(obj) {
 
 function _classCallCheck(instance, Constructor) {
     if (!(instance instanceof Constructor)) {
-        throw new TypeError("Cannot call a class as a function");
+        throw new TypeError('Cannot call a class as a function');
     }
 }
 
@@ -52,15 +52,15 @@ function _possibleConstructorReturn(self, call) {
             "this hasn't been initialised - super() hasn't been called"
         );
     }
-    return call && (typeof call === "object" || typeof call === "function")
+    return call && (typeof call === 'object' || typeof call === 'function')
         ? call
         : self;
 }
 
 function _inherits(subClass, superClass) {
-    if (typeof superClass !== "function" && superClass !== null) {
+    if (typeof superClass !== 'function' && superClass !== null) {
         throw new TypeError(
-            "Super expression must either be null or a function, not " +
+            'Super expression must either be null or a function, not ' +
                 typeof superClass
         );
     }
@@ -145,14 +145,14 @@ var ReactConfirmAlert =
                     }),
                     (_this.componentDidMount = function() {
                         document.addEventListener(
-                            "keydown",
+                            'keydown',
                             _this.keyboardClose,
                             false
                         );
                     }),
                     (_this.componentWillUnmount = function() {
                         document.removeEventListener(
-                            "keydown",
+                            'keydown',
                             _this.keyboardClose,
                             false
                         );
@@ -179,7 +179,7 @@ var ReactConfirmAlert =
 
         _createClass(ReactConfirmAlert, [
             {
-                key: "render",
+                key: 'render',
                 value: function render() {
                     var _this2 = this;
 
@@ -191,39 +191,39 @@ var ReactConfirmAlert =
                         customUI = _props.customUI;
 
                     return _react2.default.createElement(
-                        "div",
+                        'div',
                         {
-                            className: "react-confirm-alert-overlay",
+                            className: 'react-confirm-alert-overlay',
                             ref: function ref(dom) {
                                 return (_this2.overlay = dom);
                             },
                             onClick: this.handleClickOverlay
                         },
                         _react2.default.createElement(
-                            "div",
-                            { className: "react-confirm-alert" },
+                            'div',
+                            { className: 'react-confirm-alert' },
                             customUI
                                 ? this.renderCustomUI()
                                 : _react2.default.createElement(
-                                      "div",
-                                      { className: "react-confirm-alert-body" },
+                                      'div',
+                                      { className: 'react-confirm-alert-body' },
                                       title &&
                                           _react2.default.createElement(
-                                              "h1",
+                                              'h1',
                                               null,
                                               title
                                           ),
                                       message,
                                       childrenElement(),
                                       _react2.default.createElement(
-                                          "div",
+                                          'div',
                                           {
                                               className:
-                                                  "react-confirm-alert-button-group"
+                                                  'react-confirm-alert-button-group'
                                           },
                                           buttons.map(function(button, i) {
                                               return _react2.default.createElement(
-                                                  "button",
+                                                  'button',
                                                   {
                                                       key: i,
                                                       onClick: function onClick() {
@@ -260,13 +260,13 @@ var ReactConfirmAlert =
     (_class.defaultProps = {
         buttons: [
             {
-                label: "Cancel",
+                label: 'Cancel',
                 onClick: function onClick() {
                     return null;
                 }
             },
             {
-                label: "Confirm",
+                label: 'Confirm',
                 onClick: function onClick() {
                     return null;
                 }
@@ -292,32 +292,32 @@ exports.default = ReactConfirmAlert;
 
 function createSVGBlurReconfirm() {
     // If has svg ignore to create the svg
-    var svg = document.getElementById("react-confirm-alert-firm-svg");
+    var svg = document.getElementById('react-confirm-alert-firm-svg');
     if (svg) return;
-    var svgNS = "http://www.w3.org/2000/svg";
-    var feGaussianBlur = document.createElementNS(svgNS, "feGaussianBlur");
-    feGaussianBlur.setAttribute("stdDeviation", "0.3");
+    var svgNS = 'http://www.w3.org/2000/svg';
+    var feGaussianBlur = document.createElementNS(svgNS, 'feGaussianBlur');
+    feGaussianBlur.setAttribute('stdDeviation', '0.3');
 
-    var filter = document.createElementNS(svgNS, "filter");
-    filter.setAttribute("id", "gaussian-blur");
+    var filter = document.createElementNS(svgNS, 'filter');
+    filter.setAttribute('id', 'gaussian-blur');
     filter.appendChild(feGaussianBlur);
 
-    var svgElem = document.createElementNS(svgNS, "svg");
-    svgElem.setAttribute("id", "react-confirm-alert-firm-svg");
-    svgElem.setAttribute("class", "react-confirm-alert-svg");
+    var svgElem = document.createElementNS(svgNS, 'svg');
+    svgElem.setAttribute('id', 'react-confirm-alert-firm-svg');
+    svgElem.setAttribute('class', 'react-confirm-alert-svg');
     svgElem.appendChild(filter);
 
     document.body.appendChild(svgElem);
 }
 
 function removeSVGBlurReconfirm() {
-    var svg = document.getElementById("react-confirm-alert-firm-svg");
+    var svg = document.getElementById('react-confirm-alert-firm-svg');
     svg.parentNode.removeChild(svg);
-    document.body.children[0].classList.remove("react-confirm-alert-blur");
+    document.body.children[0].classList.remove('react-confirm-alert-blur');
 }
 
 function createElementReconfirm(properties) {
-    var divTarget = document.getElementById("react-confirm-alert");
+    var divTarget = document.getElementById('react-confirm-alert');
     if (divTarget) {
         // Rerender - the mounted ReactConfirmAlert
         (0, _reactDom.render)(
@@ -326,9 +326,9 @@ function createElementReconfirm(properties) {
         );
     } else {
         // Mount the ReactConfirmAlert component
-        document.body.children[0].classList.add("react-confirm-alert-blur");
-        divTarget = document.createElement("div");
-        divTarget.id = "react-confirm-alert";
+        document.body.children[0].classList.add('react-confirm-alert-blur');
+        divTarget = document.createElement('div');
+        divTarget.id = 'react-confirm-alert';
         document.body.appendChild(divTarget);
         (0, _reactDom.render)(
             _react2.default.createElement(ReactConfirmAlert, properties),
@@ -338,17 +338,17 @@ function createElementReconfirm(properties) {
 }
 
 function removeElementReconfirm() {
-    var target = document.getElementById("react-confirm-alert");
+    var target = document.getElementById('react-confirm-alert');
     (0, _reactDom.unmountComponentAtNode)(target);
     target.parentNode.removeChild(target);
 }
 
 function addBodyClass() {
-    document.body.classList.add("react-confirm-alert-body-element");
+    document.body.classList.add('react-confirm-alert-body-element');
 }
 
 function removeBodyClass() {
-    document.body.classList.remove("react-confirm-alert-body-element");
+    document.body.classList.remove('react-confirm-alert-body-element');
 }
 
 function confirmAlert(properties) {

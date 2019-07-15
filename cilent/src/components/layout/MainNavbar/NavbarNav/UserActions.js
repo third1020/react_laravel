@@ -1,5 +1,5 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React from 'react';
+import { Link } from 'react-router-dom';
 import {
     Dropdown,
     DropdownToggle,
@@ -8,7 +8,7 @@ import {
     Collapse,
     NavItem,
     NavLink
-} from "shards-react";
+} from 'shards-react';
 
 export default class UserActions extends React.Component {
     constructor(props) {
@@ -30,7 +30,7 @@ export default class UserActions extends React.Component {
 
     logout() {
         sessionStorage.clear();
-        sessionStorage.removeItem("Token");
+        sessionStorage.removeItem('Token');
     }
 
     render() {
@@ -43,9 +43,9 @@ export default class UserActions extends React.Component {
                 >
                     <img
                         className="user-avatar rounded-circle mr-2"
-                        src={require("./../../../../images/avatars/3.jpg")}
+                        src={require('./../../../../images/avatars/3.jpg')}
                         alt="User Avatar"
-                    />{" "}
+                    />{' '}
                     <span className="d-none d-md-inline-block">
                         Sierra Brooks
                     </span>
@@ -71,10 +71,10 @@ export default class UserActions extends React.Component {
                     <DropdownItem divider />
                     <DropdownItem className="text-danger">
                         <Link to="/" onClick={() => this.logout()}>
-                            {" "}
+                            {' '}
                             <i className="material-icons text-danger">
                                 &#xE879;
-                            </i>{" "}
+                            </i>{' '}
                             Logout
                         </Link>
                     </DropdownItem>

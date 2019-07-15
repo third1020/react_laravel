@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import {
     Row,
     Col,
@@ -7,12 +7,12 @@ import {
     CardHeader,
     CardBody,
     CardFooter
-} from "shards-react";
+} from 'shards-react';
 
-import { PieChart, Pie, Cell } from "recharts";
-import axios from "axios";
+import { PieChart, Pie, Cell } from 'recharts';
+import axios from 'axios';
 
-const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
+const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
 
 const RADIAN = Math.PI / 180;
 const renderCustomizedLabel = ({
@@ -32,7 +32,7 @@ const renderCustomizedLabel = ({
             x={x}
             y={y}
             fill="white"
-            textAnchor={x > cx ? "start" : "end"}
+            textAnchor={x > cx ? 'start' : 'end'}
             dominantBaseline="central"
         >
             {`${(percent * 100).toFixed(0)}%`}
@@ -41,17 +41,17 @@ const renderCustomizedLabel = ({
 };
 
 class ReportIssues extends React.Component {
-    static jsfiddleUrl = "https://jsfiddle.net/alidingling/c9pL8k61/";
+    static jsfiddleUrl = 'https://jsfiddle.net/alidingling/c9pL8k61/';
     constructor(props) {
         super(props);
         this.state = {
             data: [
-                { name: "Pending", value: 0 },
-                { name: "Approve", value: 0 },
-                { name: "Auditor", value: 0 },
-                { name: "Rejected", value: 0 }
+                { name: 'Pending', value: 0 },
+                { name: 'Approve', value: 0 },
+                { name: 'Auditor', value: 0 },
+                { name: 'Rejected', value: 0 }
             ],
-            date: "All"
+            date: 'All'
         };
     }
 
@@ -60,21 +60,21 @@ class ReportIssues extends React.Component {
             date: event.target.value
         });
 
-        let dt = "";
+        let dt = '';
         var today = new Date();
-        var filterDate = "";
+        var filterDate = '';
 
         axios
-            .get("/api/requestissues/index")
+            .get('/api/requestissues/index')
             .then(res => {
-                if (this.state.date == "last-month") {
+                if (this.state.date == 'last-month') {
                     filterDate = res.data.filter(item => {
                         dt = new Date(item.created_at);
                         today = new Date();
 
-                        var datetime = dt.getMonth() + "/" + dt.getFullYear();
+                        var datetime = dt.getMonth() + '/' + dt.getFullYear();
                         var todaytime =
-                            today.getMonth() + "/" + today.getFullYear();
+                            today.getMonth() + '/' + today.getFullYear();
 
                         return datetime == todaytime;
                     });
@@ -88,23 +88,23 @@ class ReportIssues extends React.Component {
                     rejected = 0;
 
                 filterDate.map(item => {
-                    if (item.status == "Pending") {
+                    if (item.status == 'Pending') {
                         padding++;
-                    } else if (item.status == "Approve") {
+                    } else if (item.status == 'Approve') {
                         approve++;
-                    } else if (item.status == "Auditor") {
+                    } else if (item.status == 'Auditor') {
                         auditor++;
-                    } else if (item.status == "Rejected") {
+                    } else if (item.status == 'Rejected') {
                         rejected++;
                     }
                 });
 
                 this.setState({
                     data: [
-                        { name: "Pending", value: padding },
-                        { name: "Approve", value: approve },
-                        { name: "Auditor", value: auditor },
-                        { name: "Rejected", value: rejected }
+                        { name: 'Pending', value: padding },
+                        { name: 'Approve', value: approve },
+                        { name: 'Auditor', value: auditor },
+                        { name: 'Rejected', value: rejected }
                     ]
                 });
             })
@@ -115,7 +115,7 @@ class ReportIssues extends React.Component {
 
     componentDidMount() {
         axios
-            .get("/api/requestissues/index")
+            .get('/api/requestissues/index')
             .then(res => {
                 console.log(res.data);
 
@@ -125,23 +125,23 @@ class ReportIssues extends React.Component {
                     rejected = 0;
 
                 res.data.map(item => {
-                    if (item.status == "Pending") {
+                    if (item.status == 'Pending') {
                         padding++;
-                    } else if (item.status == "Approve") {
+                    } else if (item.status == 'Approve') {
                         approve++;
-                    } else if (item.status == "Auditor") {
+                    } else if (item.status == 'Auditor') {
                         auditor++;
-                    } else if (item.status == "Rejected") {
+                    } else if (item.status == 'Rejected') {
                         rejected++;
                     }
                 });
 
                 this.setState({
                     data: [
-                        { name: "Pending", value: padding },
-                        { name: "Approve", value: approve },
-                        { name: "Auditor", value: auditor },
-                        { name: "Rejected", value: rejected }
+                        { name: 'Pending', value: padding },
+                        { name: 'Approve', value: approve },
+                        { name: 'Auditor', value: auditor },
+                        { name: 'Rejected', value: rejected }
                     ]
                 });
             })
@@ -180,17 +180,17 @@ class ReportIssues extends React.Component {
                             </Pie>
                         </PieChart>
                     </CardBody>
-                    <center style={{ marginBottom: "20px", marginTop: "50px" }}>
-                        <h5 style={{ color: "#0088FE" }}>
+                    <center style={{ marginBottom: '20px', marginTop: '50px' }}>
+                        <h5 style={{ color: '#0088FE' }}>
                             Pending {this.state.data[0].value}
                         </h5>
-                        <h5 style={{ color: "#00C49F" }}>
+                        <h5 style={{ color: '#00C49F' }}>
                             Approve {this.state.data[1].value}
                         </h5>
-                        <h5 style={{ color: "#FFBB28" }}>
+                        <h5 style={{ color: '#FFBB28' }}>
                             Auditor {this.state.data[2].value}
                         </h5>
-                        <h5 style={{ color: "#FF8042" }}>
+                        <h5 style={{ color: '#FF8042' }}>
                             Rejected {this.state.data[3].value}
                         </h5>
                     </center>
@@ -201,7 +201,7 @@ class ReportIssues extends React.Component {
                                 <FormSelect
                                     size="sm"
                                     value={this.state.date}
-                                    style={{ maxWidth: "130px" }}
+                                    style={{ maxWidth: '130px' }}
                                     onChange={this.SelectDate}
                                 >
                                     <option value="All">ทั้งหมด</option>

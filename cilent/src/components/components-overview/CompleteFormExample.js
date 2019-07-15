@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import {
     ListGroup,
     ListGroupItem,
@@ -10,7 +10,7 @@ import {
     FormCheckbox,
     FormSelect,
     Button
-} from "shards-react";
+} from 'shards-react';
 
 const CompleteFormExample = () => (
     <ListGroup flush>

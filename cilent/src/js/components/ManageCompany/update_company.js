@@ -1,6 +1,6 @@
-import React, { Component } from "react";
-import ReactDOM from "react-dom";
-import Select from "react-select";
+import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
+import Select from 'react-select';
 import {
     ListGroup,
     ListGroupItem,
@@ -13,13 +13,13 @@ import {
     FormSelect,
     Button,
     Container
-} from "shards-react";
-import Swal from "sweetalert2";
-import axios from "axios";
-import { ToastContainer } from "react-toastr";
-import "../../../css/alert.css";
-import "../../../css/animate.css";
-import HocValidateUser from "../../../HocValidateUser";
+} from 'shards-react';
+import Swal from 'sweetalert2';
+import axios from 'axios';
+import { ToastContainer } from 'react-toastr';
+import '../../../css/alert.css';
+import '../../../css/animate.css';
+import HocValidateUser from '../../../HocValidateUser';
 let container;
 
 class Update_company extends Component {
@@ -27,8 +27,8 @@ class Update_company extends Component {
         super(props);
         this.state = {
             client_id: this.props.client_id,
-            name: "",
-            location_id: "",
+            name: '',
+            location_id: '',
 
             getlocation: [],
             errors: []
@@ -62,7 +62,7 @@ class Update_company extends Component {
                 insertdata
             )
             .then(response => {
-                Swal.fire("Successfully", "Add data successfully ", "success");
+                Swal.fire('Successfully', 'Add data successfully ', 'success');
 
                 this.setState({
                     errors: []
@@ -74,7 +74,7 @@ class Update_company extends Component {
                 });
                 console.log(error.response.data.errors);
 
-                Swal.fire("Errors", "check the value of a form field", "error");
+                Swal.fire('Errors', 'check the value of a form field', 'error');
             });
     }
 
@@ -106,7 +106,7 @@ class Update_company extends Component {
             });
 
         axios
-            .get("/api/location/index")
+            .get('/api/location/index')
             .then(res => {
                 this.setState({
                     getlocation: res.data
@@ -123,7 +123,7 @@ class Update_company extends Component {
     render() {
         const { getlocation } = this.state;
         return (
-            <div style={{ paddingTop: "30px" }}>
+            <div style={{ paddingTop: '30px' }}>
                 <Container>
                     <ListGroup flush>
                         <ListGroupItem className="p-3">
@@ -139,9 +139,9 @@ class Update_company extends Component {
                                                     id="name"
                                                     name="name"
                                                     className={`form-control ${
-                                                        this.hasErrorFor("name")
-                                                            ? "is-invalid"
-                                                            : ""
+                                                        this.hasErrorFor('name')
+                                                            ? 'is-invalid'
+                                                            : ''
                                                     }`}
                                                     placeholder="กรอกชื่อผู้ใช้"
                                                     type="text"
@@ -150,7 +150,7 @@ class Update_company extends Component {
                                                         this.handleFieldChange
                                                     }
                                                 />
-                                                {this.renderErrorFor("name")}
+                                                {this.renderErrorFor('name')}
                                             </Col>
                                         </Row>
 
@@ -164,10 +164,10 @@ class Update_company extends Component {
                                                     name="location_id"
                                                     className={`form-control ${
                                                         this.hasErrorFor(
-                                                            "location_id"
+                                                            'location_id'
                                                         )
-                                                            ? "is-invalid"
-                                                            : ""
+                                                            ? 'is-invalid'
+                                                            : ''
                                                     }`}
                                                     value={
                                                         this.state.location_id
@@ -196,7 +196,7 @@ class Update_company extends Component {
                                                     )}
                                                 </FormSelect>
                                                 {this.renderErrorFor(
-                                                    "location_id"
+                                                    'location_id'
                                                 )}
                                             </Col>
                                         </Row>

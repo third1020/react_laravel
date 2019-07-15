@@ -4,11 +4,11 @@
  |--------------------------------------------------------------------------
  */
 
-"use strict";
+'use strict';
 (function($) {
     $(document).ready(function() {
         // Slider example 1
-        $("#slider-example-1").customSlider({
+        $('#slider-example-1').customSlider({
             start: 85,
             connect: [true, false],
             tooltips: true,
@@ -19,7 +19,7 @@
         });
 
         // Slider example 2
-        $("#slider-example-2").customSlider({
+        $('#slider-example-2').customSlider({
             start: 15,
             connect: [false, true],
             range: {
@@ -29,7 +29,7 @@
         });
 
         // Slider example 3
-        $("#slider-example-3").customSlider({
+        $('#slider-example-3').customSlider({
             start: [35, 65],
             range: {
                 min: 0,
@@ -37,7 +37,7 @@
             },
             connect: true,
             pips: {
-                mode: "positions",
+                mode: 'positions',
                 values: [0, 25, 50, 75, 100],
                 density: 5
             }

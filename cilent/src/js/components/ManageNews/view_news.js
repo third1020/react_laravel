@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import ReactDOM from "react-dom";
+import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 import {
     ListGroup,
     ListGroupItem,
@@ -12,17 +12,17 @@ import {
     FormSelect,
     Button,
     Container
-} from "shards-react";
-import Swal from "sweetalert2";
-import axios from "axios";
+} from 'shards-react';
+import Swal from 'sweetalert2';
+import axios from 'axios';
 
-import HocValidateUser from "../../../HocValidateUser";
+import HocValidateUser from '../../../HocValidateUser';
 
-import "../../../css/froala-editor/froala_style.min.css";
-import "../../../css/froala-editor/froala_editor.pkgd.min.css";
+import '../../../css/froala-editor/froala_style.min.css';
+import '../../../css/froala-editor/froala_editor.pkgd.min.css';
 
-import FroalaEditor from "react-froala-wysiwyg";
-import FroalaEditorImg from "react-froala-wysiwyg/FroalaEditorImg";
+import FroalaEditor from 'react-froala-wysiwyg';
+import FroalaEditorImg from 'react-froala-wysiwyg/FroalaEditorImg';
 
 let container;
 
@@ -30,8 +30,8 @@ class View_News extends Component {
     constructor(props) {
         super(props);
         this.config = {
-            reactIgnoreAttrs: ["tmpattr"],
-            placeholderText: "กรอกรายละเอียดข้อความ",
+            reactIgnoreAttrs: ['tmpattr'],
+            placeholderText: 'กรอกรายละเอียดข้อความ',
             heightMin: 250,
             heightMax: 400,
             autoFocus: true,
@@ -41,206 +41,206 @@ class View_News extends Component {
             imageUpload: true,
             videoUpload: true,
             pluginsEnabled: [
-                "align",
-                "charCounter",
-                "codeBeautifier",
-                "codeView",
-                "colors",
-                "draggable",
-                "embedly",
-                "emoticons",
-                "entities",
-                "file",
-                "fontFamily",
-                "fontSize",
-                "fullscreen",
-                "image",
-                "imageManager",
-                "inlineStyle",
-                "lineBreaker",
-                "link",
-                "lists",
-                "paragraphFormat",
-                "paragraphStyle",
-                "quickInsert",
-                "quote",
-                "save",
-                "table",
-                "url",
-                "video",
-                "wordPaste"
+                'align',
+                'charCounter',
+                'codeBeautifier',
+                'codeView',
+                'colors',
+                'draggable',
+                'embedly',
+                'emoticons',
+                'entities',
+                'file',
+                'fontFamily',
+                'fontSize',
+                'fullscreen',
+                'image',
+                'imageManager',
+                'inlineStyle',
+                'lineBreaker',
+                'link',
+                'lists',
+                'paragraphFormat',
+                'paragraphStyle',
+                'quickInsert',
+                'quote',
+                'save',
+                'table',
+                'url',
+                'video',
+                'wordPaste'
             ],
             toolbarButtons: [
-                "bold",
-                "italic",
-                "underline",
-                "strikeThrough",
-                "subscript",
-                "superscript",
-                "|",
-                "fontFamily",
-                "fontSize",
-                "color",
-                "inlineStyle",
-                "paragraphStyle",
-                "|",
-                "paragraphFormat",
-                "align",
-                "formatOL",
-                "formatUL",
-                "outdent",
-                "indent",
-                "quote",
-                "check",
-                "|",
-                "insertLink",
-                "insertImage",
-                "embedly",
-                "insertFile",
-                "insertTable",
-                "|",
-                "emoticons",
-                "specialCharacters",
-                "insertHR",
-                "selectAll",
-                "clearFormatting",
-                "|",
-                "spellChecker",
-                "help",
-                "html",
-                "|",
-                "undo",
-                "redo"
+                'bold',
+                'italic',
+                'underline',
+                'strikeThrough',
+                'subscript',
+                'superscript',
+                '|',
+                'fontFamily',
+                'fontSize',
+                'color',
+                'inlineStyle',
+                'paragraphStyle',
+                '|',
+                'paragraphFormat',
+                'align',
+                'formatOL',
+                'formatUL',
+                'outdent',
+                'indent',
+                'quote',
+                'check',
+                '|',
+                'insertLink',
+                'insertImage',
+                'embedly',
+                'insertFile',
+                'insertTable',
+                '|',
+                'emoticons',
+                'specialCharacters',
+                'insertHR',
+                'selectAll',
+                'clearFormatting',
+                '|',
+                'spellChecker',
+                'help',
+                'html',
+                '|',
+                'undo',
+                'redo'
             ],
             toolbarButtonsMD: [
-                "bold",
-                "italic",
-                "underline",
-                "strikeThrough",
-                "subscript",
-                "superscript",
-                "|",
-                "fontFamily",
-                "fontSize",
-                "color",
-                "inlineStyle",
-                "paragraphStyle",
-                "|",
-                "paragraphFormat",
-                "align",
-                "formatOL",
-                "formatUL",
-                "outdent",
-                "indent",
-                "quote",
-                "check",
-                "|",
-                "insertLink",
-                "insertImage",
-                "embedly",
-                "insertFile",
-                "insertTable",
-                "|",
-                "emoticons",
-                "specialCharacters",
-                "insertHR",
-                "selectAll",
-                "clearFormatting",
-                "|",
-                "spellChecker",
-                "help",
-                "html",
-                "|",
-                "undo",
-                "redo"
+                'bold',
+                'italic',
+                'underline',
+                'strikeThrough',
+                'subscript',
+                'superscript',
+                '|',
+                'fontFamily',
+                'fontSize',
+                'color',
+                'inlineStyle',
+                'paragraphStyle',
+                '|',
+                'paragraphFormat',
+                'align',
+                'formatOL',
+                'formatUL',
+                'outdent',
+                'indent',
+                'quote',
+                'check',
+                '|',
+                'insertLink',
+                'insertImage',
+                'embedly',
+                'insertFile',
+                'insertTable',
+                '|',
+                'emoticons',
+                'specialCharacters',
+                'insertHR',
+                'selectAll',
+                'clearFormatting',
+                '|',
+                'spellChecker',
+                'help',
+                'html',
+                '|',
+                'undo',
+                'redo'
             ],
             toolbarButtonsSM: [
-                "bold",
-                "italic",
-                "underline",
-                "strikeThrough",
-                "|",
-                "fontFamily",
-                "fontSize",
-                "color",
-                "|",
-                "align",
-                "formatOL",
-                "formatUL",
-                "outdent",
-                "indent",
-                "quote",
-                "check",
-                "|",
-                "insertLink",
-                "insertImage",
-                "embedly",
-                "insertFile",
-                "insertTable",
-                "|",
-                "emoticons",
-                "specialCharacters",
-                "insertHR",
-                "selectAll",
-                "clearFormatting",
-                "|",
-                "spellChecker",
-                "help",
-                "html",
-                "|",
-                "undo",
-                "redo"
+                'bold',
+                'italic',
+                'underline',
+                'strikeThrough',
+                '|',
+                'fontFamily',
+                'fontSize',
+                'color',
+                '|',
+                'align',
+                'formatOL',
+                'formatUL',
+                'outdent',
+                'indent',
+                'quote',
+                'check',
+                '|',
+                'insertLink',
+                'insertImage',
+                'embedly',
+                'insertFile',
+                'insertTable',
+                '|',
+                'emoticons',
+                'specialCharacters',
+                'insertHR',
+                'selectAll',
+                'clearFormatting',
+                '|',
+                'spellChecker',
+                'help',
+                'html',
+                '|',
+                'undo',
+                'redo'
             ],
             toolbarButtonsXS: [
-                "bold",
-                "italic",
-                "underline",
-                "|",
-                "fontFamily",
-                "fontSize",
-                "color",
-                "|",
-                "align",
-                "formatOL",
-                "formatUL",
-                "outdent",
-                "indent",
-                "check",
-                "|",
-                "insertLink",
-                "insertImage",
-                "insertFile",
-                "insertTable",
-                "|",
-                "insertHR",
-                "selectAll",
-                "clearFormatting",
-                "|",
-                "spellChecker",
-                "|",
-                "undo",
-                "redo"
+                'bold',
+                'italic',
+                'underline',
+                '|',
+                'fontFamily',
+                'fontSize',
+                'color',
+                '|',
+                'align',
+                'formatOL',
+                'formatUL',
+                'outdent',
+                'indent',
+                'check',
+                '|',
+                'insertLink',
+                'insertImage',
+                'insertFile',
+                'insertTable',
+                '|',
+                'insertHR',
+                'selectAll',
+                'clearFormatting',
+                '|',
+                'spellChecker',
+                '|',
+                'undo',
+                'redo'
             ],
-            imageUploadParam: "file",
-            imageUploadURL: "/api/uploadImage",
-            imageUploadMethod: "POST",
+            imageUploadParam: 'file',
+            imageUploadURL: '/api/uploadImage',
+            imageUploadMethod: 'POST',
             // Set max image size to 5MB.
             imageMaxSize: 5 * 1024 * 1024,
             // Allow to upload PNG and JPG.
-            imageAllowedTypes: ["jpeg", "jpg", "png"],
-            fileUploadParam: "file",
-            fileUploadURL: "/api/uploadImage",
-            fileUploadMethod: "POST",
+            imageAllowedTypes: ['jpeg', 'jpg', 'png'],
+            fileUploadParam: 'file',
+            fileUploadURL: '/api/uploadImage',
+            fileUploadMethod: 'POST',
             fileMaxSize: 20 * 1024 * 1024, // 10MB
             events: {
-                "image.beforeUpload": function(images) {
+                'image.beforeUpload': function(images) {
                     // Return false if you want to stop the image upload.
                     console.log(images[0]);
-                    if (images[0] !== "") {
+                    if (images[0] !== '') {
                         return true;
                     }
                 },
-                "image.inserted": function($img, response) {
+                'image.inserted': function($img, response) {
                     // Image was inserted in the editor.
                     console.log($img[0]);
                     console.log(response);
@@ -249,9 +249,9 @@ class View_News extends Component {
         };
         this.state = {
             client_id: this.props.client_id,
-            name: "",
-            detail: "",
-            setting_news_id: "",
+            name: '',
+            detail: '',
+            setting_news_id: '',
             getsetting_news: [],
             errors: []
         };
@@ -290,11 +290,11 @@ class View_News extends Component {
         axios
             .put(`/api/news/update/${this.props.match.params.id}`, insertdata)
             .then(response => {
-                Swal.fire("Successfully", "Add data successfully ", "success");
+                Swal.fire('Successfully', 'Add data successfully ', 'success');
 
                 this.setState({
-                    tital: "",
-                    detail: "",
+                    tital: '',
+                    detail: '',
                     errors: []
                 });
             })
@@ -304,7 +304,7 @@ class View_News extends Component {
                 });
                 console.log(error.response.data.errors);
 
-                Swal.fire("Errors", "check the value of a form field", "error");
+                Swal.fire('Errors', 'check the value of a form field', 'error');
             });
     }
 
@@ -324,7 +324,7 @@ class View_News extends Component {
 
     componentDidMount() {
         axios
-            .get("/api/settingnews/index")
+            .get('/api/settingnews/index')
             .then(res => {
                 this.setState({
                     getsetting_news: res.data
@@ -354,7 +354,7 @@ class View_News extends Component {
     render() {
         const { getsetting_news } = this.state;
         return (
-            <div style={{ paddingTop: "30px" }}>
+            <div style={{ paddingTop: '30px' }}>
                 <Container>
                     <ListGroup flush>
                         <ListGroupItem className="p-3">
@@ -370,9 +370,9 @@ class View_News extends Component {
                                                     id="name"
                                                     name="name"
                                                     className={`form-control ${
-                                                        this.hasErrorFor("name")
-                                                            ? "is-invalid"
-                                                            : ""
+                                                        this.hasErrorFor('name')
+                                                            ? 'is-invalid'
+                                                            : ''
                                                     }`}
                                                     placeholder="กรอกชื่อผู้ใช้"
                                                     type="text"
@@ -381,7 +381,7 @@ class View_News extends Component {
                                                         this.handleFieldChange
                                                     }
                                                 />
-                                                {this.renderErrorFor("name")}
+                                                {this.renderErrorFor('name')}
                                             </Col>
                                         </Row>
                                         <Row form>
@@ -394,10 +394,10 @@ class View_News extends Component {
                                                     <FroalaEditor
                                                         className={`form-control ${
                                                             this.hasErrorFor(
-                                                                "detail"
+                                                                'detail'
                                                             )
-                                                                ? "is-invalid"
-                                                                : ""
+                                                                ? 'is-invalid'
+                                                                : ''
                                                         }`}
                                                         tag="textarea"
                                                         config={this.config}
@@ -410,7 +410,7 @@ class View_News extends Component {
                                                         }
                                                     />
                                                     {this.renderErrorFor(
-                                                        "detail"
+                                                        'detail'
                                                     )}
                                                 </div>
                                             </Col>
@@ -426,10 +426,10 @@ class View_News extends Component {
                                                     name="setting_news_id"
                                                     className={`form-control ${
                                                         this.hasErrorFor(
-                                                            "setting_news_id"
+                                                            'setting_news_id'
                                                         )
-                                                            ? "is-invalid"
-                                                            : ""
+                                                            ? 'is-invalid'
+                                                            : ''
                                                     }`}
                                                     value={
                                                         this.state
@@ -462,7 +462,7 @@ class View_News extends Component {
                                                     )}
                                                 </FormSelect>
                                                 {this.renderErrorFor(
-                                                    "setting_news_id"
+                                                    'setting_news_id'
                                                 )}
                                             </Col>
                                         </Row>

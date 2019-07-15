@@ -1,5 +1,5 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React from 'react';
+import PropTypes from 'prop-types';
 import {
     Card,
     CardHeader,
@@ -9,7 +9,7 @@ import {
     FormInput,
     FormTextarea,
     Button
-} from "shards-react";
+} from 'shards-react';
 
 const NewDraft = ({ title }) => (
     <Card small className="h-100">
@@ -49,7 +49,7 @@ NewDraft.propTypes = {
 };
 
 NewDraft.defaultProps = {
-    title: "New Draft"
+    title: 'New Draft'
 };
 
 export default NewDraft;

@@ -1,53 +1,53 @@
 export default function() {
     var permission = [
-        "ManageUser",
-        "ManagePermission",
-        "ManagePersonContact",
-        "ManagePersonResponsible",
+        'ManageUser',
+        'ManagePermission',
+        'ManagePersonContact',
+        'ManagePersonResponsible',
 
-        "ManageAddress",
-        "ManageCompany",
-        "ManageDepartment",
-        "ManageProvince",
-        "ManageDistrict",
-        "ManagePostalCode",
-        "ManageLocation",
+        'ManageAddress',
+        'ManageCompany',
+        'ManageDepartment',
+        'ManageProvince',
+        'ManageDistrict',
+        'ManagePostalCode',
+        'ManageLocation',
 
-        "ManageEquipment",
+        'ManageEquipment',
 
-        "ManageRequestGeneral",
-        "ManageRequestIssuses",
+        'ManageRequestGeneral',
+        'ManageRequestIssuses',
 
-        "ManageNews",
-        "ManageSettingNews",
+        'ManageNews',
+        'ManageSettingNews',
 
-        "ManageImage",
+        'ManageImage',
 
-        "ManageMessage",
+        'ManageMessage',
 
-        "ManageModify",
+        'ManageModify',
 
-        "ManagePriority",
-        "ManageImpact",
+        'ManagePriority',
+        'ManageImpact',
 
-        "Report"
+        'Report'
     ];
 
     var array = [
         {
-            title: "Blog Dashboard",
-            to: "/blog-overview",
+            title: 'Blog Dashboard',
+            to: '/blog-overview',
             htmlBefore: '<i class="material-icons">edit</i>',
-            htmlAfter: ""
+            htmlAfter: ''
         }
     ];
 
     permission.map(item => {
-        if (sessionStorage[item] == "1") {
+        if (sessionStorage[item] == '1') {
             array.push({
                 title: item,
                 htmlBefore: '<i class="material-icons">table_chart</i>',
-                to: "/" + item
+                to: '/' + item
             });
         }
     });

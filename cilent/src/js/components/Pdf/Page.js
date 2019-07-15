@@ -1,13 +1,13 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 
-import Script from "react-load-script";
-import jsPDF from "jspdf";
+import Script from 'react-load-script';
+import jsPDF from 'jspdf';
 
 class Page extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            id: ""
+            id: ''
         };
 
         this.CreatePdf = this.CreatePdf.bind(this);
@@ -16,8 +16,8 @@ class Page extends Component {
     CreatePdf() {
         var doc = new jsPDF();
 
-        doc.text("Hello world!", 10, 10);
-        doc.save("a4.pdf");
+        doc.text('Hello world!', 10, 10);
+        doc.save('a4.pdf');
     }
 
     render() {

@@ -1,7 +1,7 @@
-import React, { Component } from "react";
-import ReactDOM from "react-dom";
-import Select from "react-select";
-import ImageUploader from "react-images-upload";
+import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
+import Select from 'react-select';
+import ImageUploader from 'react-images-upload';
 import {
     ListGroup,
     ListGroupItem,
@@ -14,20 +14,20 @@ import {
     FormSelect,
     Button,
     Container
-} from "shards-react";
-import Swal from "sweetalert2";
-import axios from "axios";
-import { ToastContainer } from "react-toastr";
-import "../../../css/alert.css";
-import "../../../css/animate.css";
-import HocValidateUser from "../../../HocValidateUser";
+} from 'shards-react';
+import Swal from 'sweetalert2';
+import axios from 'axios';
+import { ToastContainer } from 'react-toastr';
+import '../../../css/alert.css';
+import '../../../css/animate.css';
+import HocValidateUser from '../../../HocValidateUser';
 let container;
 
 class Add_permission extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            permission_name: "",
+            permission_name: '',
             user: false,
             personcontact: false,
             equipment: false,
@@ -253,12 +253,12 @@ class Add_permission extends Component {
         console.log(insertdata);
 
         axios
-            .post("/api/permission/store", insertdata)
+            .post('/api/permission/store', insertdata)
             .then(response => {
                 console.log(response.data);
-                Swal.fire("Successfully", "Add data successfully ", "success");
+                Swal.fire('Successfully', 'Add data successfully ', 'success');
                 this.setState({
-                    permission_name: "",
+                    permission_name: '',
                     user: false,
                     personcontact: false,
                     equipment: false,
@@ -362,7 +362,7 @@ class Add_permission extends Component {
                 });
                 console.log(error.response.data.errors);
 
-                Swal.fire("Errors", "check the value of a form field", "error");
+                Swal.fire('Errors', 'check the value of a form field', 'error');
             });
     }
 
@@ -374,7 +374,7 @@ class Add_permission extends Component {
         if (this.hasErrorFor(field)) {
             return (
                 <span className="invalid-feedback">
-                    <strong> {this.state.errors[field][0]} </strong>{" "}
+                    <strong> {this.state.errors[field][0]} </strong>{' '}
                 </span>
             );
         }
@@ -384,7 +384,7 @@ class Add_permission extends Component {
         return (
             <div
                 style={{
-                    paddingTop: "30px"
+                    paddingTop: '30px'
                 }}
             >
                 <Container>
@@ -396,17 +396,17 @@ class Add_permission extends Component {
                                         <Row form>
                                             <Col md="12" className="form-group">
                                                 <label htmlFor="feEmailAddress">
-                                                    {" "}
-                                                    Permission Name{" "}
-                                                </label>{" "}
+                                                    {' '}
+                                                    Permission Name{' '}
+                                                </label>{' '}
                                                 <FormInput
                                                     name="permission_name"
                                                     className={`form-control ${
                                                         this.hasErrorFor(
-                                                            "permission_name"
+                                                            'permission_name'
                                                         )
-                                                            ? "is-invalid"
-                                                            : ""
+                                                            ? 'is-invalid'
+                                                            : ''
                                                     }`}
                                                     placeholder="กรอกชื่อผู้ใช้"
                                                     type="text"
@@ -417,11 +417,11 @@ class Add_permission extends Component {
                                                     onChange={
                                                         this.handleFieldChange
                                                     }
-                                                />{" "}
+                                                />{' '}
                                                 {this.renderErrorFor(
-                                                    "permission_name"
-                                                )}{" "}
-                                            </Col>{" "}
+                                                    'permission_name'
+                                                )}{' '}
+                                            </Col>{' '}
                                             <Col>
                                                 <ListGroupItem className="px-3 pb-3">
                                                     <FormCheckbox
@@ -432,12 +432,12 @@ class Add_permission extends Component {
                                                         onChange={e =>
                                                             this.handleChange(
                                                                 e,
-                                                                "ManageUser"
+                                                                'ManageUser'
                                                             )
                                                         }
                                                     >
-                                                        User{" "}
-                                                    </FormCheckbox>{" "}
+                                                        User{' '}
+                                                    </FormCheckbox>{' '}
                                                     {this.state.ManageUser ==
                                                     true ? (
                                                         <Col>
@@ -452,13 +452,13 @@ class Add_permission extends Component {
                                                                     onChange={e =>
                                                                         this.handleChange(
                                                                             e,
-                                                                            "ManageUser"
+                                                                            'ManageUser'
                                                                         )
                                                                     }
                                                                     className="mystyle"
                                                                 >
-                                                                    ManageUser{" "}
-                                                                </FormCheckbox>{" "}
+                                                                    ManageUser{' '}
+                                                                </FormCheckbox>{' '}
                                                                 <FormCheckbox
                                                                     inline
                                                                     checked={
@@ -469,12 +469,12 @@ class Add_permission extends Component {
                                                                     onChange={e =>
                                                                         this.handleChange(
                                                                             e,
-                                                                            "ManageUserView"
+                                                                            'ManageUserView'
                                                                         )
                                                                     }
                                                                 >
-                                                                    View{" "}
-                                                                </FormCheckbox>{" "}
+                                                                    View{' '}
+                                                                </FormCheckbox>{' '}
                                                                 <FormCheckbox
                                                                     inline
                                                                     checked={
@@ -485,12 +485,12 @@ class Add_permission extends Component {
                                                                     onChange={e =>
                                                                         this.handleChange(
                                                                             e,
-                                                                            "ManageUserEdit"
+                                                                            'ManageUserEdit'
                                                                         )
                                                                     }
                                                                 >
-                                                                    Edit{" "}
-                                                                </FormCheckbox>{" "}
+                                                                    Edit{' '}
+                                                                </FormCheckbox>{' '}
                                                                 <FormCheckbox
                                                                     inline
                                                                     checked={
@@ -501,12 +501,12 @@ class Add_permission extends Component {
                                                                     onChange={e =>
                                                                         this.handleChange(
                                                                             e,
-                                                                            "ManageUserDelete"
+                                                                            'ManageUserDelete'
                                                                         )
                                                                     }
                                                                 >
-                                                                    Delete{" "}
-                                                                </FormCheckbox>{" "}
+                                                                    Delete{' '}
+                                                                </FormCheckbox>{' '}
                                                             </div>
                                                             <div>
                                                                 <FormCheckbox
@@ -519,13 +519,13 @@ class Add_permission extends Component {
                                                                     onChange={e =>
                                                                         this.handleChange(
                                                                             e,
-                                                                            "ManagePermission"
+                                                                            'ManagePermission'
                                                                         )
                                                                     }
                                                                     className="mystyle"
                                                                 >
-                                                                    ManagePermission{" "}
-                                                                </FormCheckbox>{" "}
+                                                                    ManagePermission{' '}
+                                                                </FormCheckbox>{' '}
                                                                 <FormCheckbox
                                                                     inline
                                                                     checked={
@@ -536,12 +536,12 @@ class Add_permission extends Component {
                                                                     onChange={e =>
                                                                         this.handleChange(
                                                                             e,
-                                                                            "ManagePermissionView"
+                                                                            'ManagePermissionView'
                                                                         )
                                                                     }
                                                                 >
-                                                                    View{" "}
-                                                                </FormCheckbox>{" "}
+                                                                    View{' '}
+                                                                </FormCheckbox>{' '}
                                                                 <FormCheckbox
                                                                     inline
                                                                     checked={
@@ -552,12 +552,12 @@ class Add_permission extends Component {
                                                                     onChange={e =>
                                                                         this.handleChange(
                                                                             e,
-                                                                            "ManagePermissionEdit"
+                                                                            'ManagePermissionEdit'
                                                                         )
                                                                     }
                                                                 >
-                                                                    Edit{" "}
-                                                                </FormCheckbox>{" "}
+                                                                    Edit{' '}
+                                                                </FormCheckbox>{' '}
                                                                 <FormCheckbox
                                                                     inline
                                                                     checked={
@@ -568,13 +568,13 @@ class Add_permission extends Component {
                                                                     onChange={e =>
                                                                         this.handleChange(
                                                                             e,
-                                                                            "ManagePermissionDelete"
+                                                                            'ManagePermissionDelete'
                                                                         )
                                                                     }
                                                                 >
-                                                                    Delete{" "}
-                                                                </FormCheckbox>{" "}
-                                                            </div>{" "}
+                                                                    Delete{' '}
+                                                                </FormCheckbox>{' '}
+                                                            </div>{' '}
                                                         </Col>
                                                     ) : null}
                                                     <FormCheckbox
@@ -585,12 +585,12 @@ class Add_permission extends Component {
                                                         onChange={e =>
                                                             this.handleChange(
                                                                 e,
-                                                                "ManagePersonContact"
+                                                                'ManagePersonContact'
                                                             )
                                                         }
                                                     >
-                                                        Person{" "}
-                                                    </FormCheckbox>{" "}
+                                                        Person{' '}
+                                                    </FormCheckbox>{' '}
                                                     {this.state
                                                         .ManagePersonContact ==
                                                     true ? (
@@ -606,13 +606,13 @@ class Add_permission extends Component {
                                                                     onChange={e =>
                                                                         this.handleChange(
                                                                             e,
-                                                                            "ManagePersonContact"
+                                                                            'ManagePersonContact'
                                                                         )
                                                                     }
                                                                     className="mystyle"
                                                                 >
-                                                                    ManageUser{" "}
-                                                                </FormCheckbox>{" "}
+                                                                    ManageUser{' '}
+                                                                </FormCheckbox>{' '}
                                                                 <FormCheckbox
                                                                     inline
                                                                     checked={
@@ -623,12 +623,12 @@ class Add_permission extends Component {
                                                                     onChange={e =>
                                                                         this.handleChange(
                                                                             e,
-                                                                            "ManagePersonContactView"
+                                                                            'ManagePersonContactView'
                                                                         )
                                                                     }
                                                                 >
-                                                                    View{" "}
-                                                                </FormCheckbox>{" "}
+                                                                    View{' '}
+                                                                </FormCheckbox>{' '}
                                                                 <FormCheckbox
                                                                     inline
                                                                     checked={
@@ -639,12 +639,12 @@ class Add_permission extends Component {
                                                                     onChange={e =>
                                                                         this.handleChange(
                                                                             e,
-                                                                            "ManagePersonContactEdit"
+                                                                            'ManagePersonContactEdit'
                                                                         )
                                                                     }
                                                                 >
-                                                                    Edit{" "}
-                                                                </FormCheckbox>{" "}
+                                                                    Edit{' '}
+                                                                </FormCheckbox>{' '}
                                                                 <FormCheckbox
                                                                     inline
                                                                     checked={
@@ -655,12 +655,12 @@ class Add_permission extends Component {
                                                                     onChange={e =>
                                                                         this.handleChange(
                                                                             e,
-                                                                            "ManagePersonContactDelete"
+                                                                            'ManagePersonContactDelete'
                                                                         )
                                                                     }
                                                                 >
-                                                                    Delete{" "}
-                                                                </FormCheckbox>{" "}
+                                                                    Delete{' '}
+                                                                </FormCheckbox>{' '}
                                                             </div>
                                                             <div>
                                                                 <FormCheckbox
@@ -673,13 +673,13 @@ class Add_permission extends Component {
                                                                     onChange={e =>
                                                                         this.handleChange(
                                                                             e,
-                                                                            "ManagePersonResponsible"
+                                                                            'ManagePersonResponsible'
                                                                         )
                                                                     }
                                                                     className="mystyle2"
                                                                 >
-                                                                    ManagePersonResponsible{" "}
-                                                                </FormCheckbox>{" "}
+                                                                    ManagePersonResponsible{' '}
+                                                                </FormCheckbox>{' '}
                                                                 <FormCheckbox
                                                                     inline
                                                                     checked={
@@ -690,12 +690,12 @@ class Add_permission extends Component {
                                                                     onChange={e =>
                                                                         this.handleChange(
                                                                             e,
-                                                                            "ManagePersonResponsibleView"
+                                                                            'ManagePersonResponsibleView'
                                                                         )
                                                                     }
                                                                 >
-                                                                    View{" "}
-                                                                </FormCheckbox>{" "}
+                                                                    View{' '}
+                                                                </FormCheckbox>{' '}
                                                                 <FormCheckbox
                                                                     inline
                                                                     checked={
@@ -706,12 +706,12 @@ class Add_permission extends Component {
                                                                     onChange={e =>
                                                                         this.handleChange(
                                                                             e,
-                                                                            "ManagePersonResponsibleEdit"
+                                                                            'ManagePersonResponsibleEdit'
                                                                         )
                                                                     }
                                                                 >
-                                                                    Edit{" "}
-                                                                </FormCheckbox>{" "}
+                                                                    Edit{' '}
+                                                                </FormCheckbox>{' '}
                                                                 <FormCheckbox
                                                                     inline
                                                                     checked={
@@ -722,13 +722,13 @@ class Add_permission extends Component {
                                                                     onChange={e =>
                                                                         this.handleChange(
                                                                             e,
-                                                                            "ManagePersonResponsibleDelete"
+                                                                            'ManagePersonResponsibleDelete'
                                                                         )
                                                                     }
                                                                 >
-                                                                    Delete{" "}
-                                                                </FormCheckbox>{" "}
-                                                            </div>{" "}
+                                                                    Delete{' '}
+                                                                </FormCheckbox>{' '}
+                                                            </div>{' '}
                                                         </Col>
                                                     ) : null}
                                                     <FormCheckbox
@@ -739,11 +739,11 @@ class Add_permission extends Component {
                                                         onChange={e =>
                                                             this.handleChange(
                                                                 e,
-                                                                "ManageAddress"
+                                                                'ManageAddress'
                                                             )
                                                         }
                                                     >
-                                                        Address{" "}
+                                                        Address{' '}
                                                     </FormCheckbox>
                                                     {this.state.ManageAddress ==
                                                     true ? (
@@ -759,13 +759,13 @@ class Add_permission extends Component {
                                                                     onChange={e =>
                                                                         this.handleChange(
                                                                             e,
-                                                                            "ManageAddress"
+                                                                            'ManageAddress'
                                                                         )
                                                                     }
                                                                     className="mystyle"
                                                                 >
-                                                                    ManageAddress{" "}
-                                                                </FormCheckbox>{" "}
+                                                                    ManageAddress{' '}
+                                                                </FormCheckbox>{' '}
                                                                 <FormCheckbox
                                                                     inline
                                                                     checked={
@@ -776,12 +776,12 @@ class Add_permission extends Component {
                                                                     onChange={e =>
                                                                         this.handleChange(
                                                                             e,
-                                                                            "ManageAddressView"
+                                                                            'ManageAddressView'
                                                                         )
                                                                     }
                                                                 >
-                                                                    View{" "}
-                                                                </FormCheckbox>{" "}
+                                                                    View{' '}
+                                                                </FormCheckbox>{' '}
                                                                 <FormCheckbox
                                                                     inline
                                                                     checked={
@@ -792,12 +792,12 @@ class Add_permission extends Component {
                                                                     onChange={e =>
                                                                         this.handleChange(
                                                                             e,
-                                                                            "ManageAddressEdit"
+                                                                            'ManageAddressEdit'
                                                                         )
                                                                     }
                                                                 >
-                                                                    Edit{" "}
-                                                                </FormCheckbox>{" "}
+                                                                    Edit{' '}
+                                                                </FormCheckbox>{' '}
                                                                 <FormCheckbox
                                                                     inline
                                                                     checked={
@@ -808,12 +808,12 @@ class Add_permission extends Component {
                                                                     onChange={e =>
                                                                         this.handleChange(
                                                                             e,
-                                                                            "ManageAddressDelete"
+                                                                            'ManageAddressDelete'
                                                                         )
                                                                     }
                                                                 >
-                                                                    Delete{" "}
-                                                                </FormCheckbox>{" "}
+                                                                    Delete{' '}
+                                                                </FormCheckbox>{' '}
                                                             </div>
                                                             <div>
                                                                 <FormCheckbox
@@ -826,13 +826,13 @@ class Add_permission extends Component {
                                                                     onChange={e =>
                                                                         this.handleChange(
                                                                             e,
-                                                                            "ManageCompany"
+                                                                            'ManageCompany'
                                                                         )
                                                                     }
                                                                     className="mystyle"
                                                                 >
-                                                                    ManageCompany{" "}
-                                                                </FormCheckbox>{" "}
+                                                                    ManageCompany{' '}
+                                                                </FormCheckbox>{' '}
                                                                 <FormCheckbox
                                                                     inline
                                                                     checked={
@@ -843,12 +843,12 @@ class Add_permission extends Component {
                                                                     onChange={e =>
                                                                         this.handleChange(
                                                                             e,
-                                                                            "ManageCompanyView"
+                                                                            'ManageCompanyView'
                                                                         )
                                                                     }
                                                                 >
-                                                                    View{" "}
-                                                                </FormCheckbox>{" "}
+                                                                    View{' '}
+                                                                </FormCheckbox>{' '}
                                                                 <FormCheckbox
                                                                     inline
                                                                     checked={
@@ -859,12 +859,12 @@ class Add_permission extends Component {
                                                                     onChange={e =>
                                                                         this.handleChange(
                                                                             e,
-                                                                            "ManageCompanyEdit"
+                                                                            'ManageCompanyEdit'
                                                                         )
                                                                     }
                                                                 >
-                                                                    Edit{" "}
-                                                                </FormCheckbox>{" "}
+                                                                    Edit{' '}
+                                                                </FormCheckbox>{' '}
                                                                 <FormCheckbox
                                                                     inline
                                                                     checked={
@@ -875,13 +875,13 @@ class Add_permission extends Component {
                                                                     onChange={e =>
                                                                         this.handleChange(
                                                                             e,
-                                                                            "ManageCompanyDelete"
+                                                                            'ManageCompanyDelete'
                                                                         )
                                                                     }
                                                                 >
-                                                                    Delete{" "}
-                                                                </FormCheckbox>{" "}
-                                                            </div>{" "}
+                                                                    Delete{' '}
+                                                                </FormCheckbox>{' '}
+                                                            </div>{' '}
                                                             <div>
                                                                 <FormCheckbox
                                                                     inline
@@ -893,13 +893,13 @@ class Add_permission extends Component {
                                                                     onChange={e =>
                                                                         this.handleChange(
                                                                             e,
-                                                                            "ManageDepartment"
+                                                                            'ManageDepartment'
                                                                         )
                                                                     }
                                                                     className="mystyle"
                                                                 >
-                                                                    ManageDepartment{" "}
-                                                                </FormCheckbox>{" "}
+                                                                    ManageDepartment{' '}
+                                                                </FormCheckbox>{' '}
                                                                 <FormCheckbox
                                                                     inline
                                                                     checked={
@@ -910,12 +910,12 @@ class Add_permission extends Component {
                                                                     onChange={e =>
                                                                         this.handleChange(
                                                                             e,
-                                                                            "ManageDepartmentView"
+                                                                            'ManageDepartmentView'
                                                                         )
                                                                     }
                                                                 >
-                                                                    View{" "}
-                                                                </FormCheckbox>{" "}
+                                                                    View{' '}
+                                                                </FormCheckbox>{' '}
                                                                 <FormCheckbox
                                                                     inline
                                                                     checked={
@@ -926,12 +926,12 @@ class Add_permission extends Component {
                                                                     onChange={e =>
                                                                         this.handleChange(
                                                                             e,
-                                                                            "ManageDepartmentEdit"
+                                                                            'ManageDepartmentEdit'
                                                                         )
                                                                     }
                                                                 >
-                                                                    Edit{" "}
-                                                                </FormCheckbox>{" "}
+                                                                    Edit{' '}
+                                                                </FormCheckbox>{' '}
                                                                 <FormCheckbox
                                                                     inline
                                                                     checked={
@@ -942,12 +942,12 @@ class Add_permission extends Component {
                                                                     onChange={e =>
                                                                         this.handleChange(
                                                                             e,
-                                                                            "ManageDepartmentDelete"
+                                                                            'ManageDepartmentDelete'
                                                                         )
                                                                     }
                                                                 >
-                                                                    Delete{" "}
-                                                                </FormCheckbox>{" "}
+                                                                    Delete{' '}
+                                                                </FormCheckbox>{' '}
                                                             </div>
                                                             <div>
                                                                 <FormCheckbox
@@ -960,13 +960,13 @@ class Add_permission extends Component {
                                                                     onChange={e =>
                                                                         this.handleChange(
                                                                             e,
-                                                                            "ManageProvince"
+                                                                            'ManageProvince'
                                                                         )
                                                                     }
                                                                     className="mystyle"
                                                                 >
-                                                                    ManageProvince{" "}
-                                                                </FormCheckbox>{" "}
+                                                                    ManageProvince{' '}
+                                                                </FormCheckbox>{' '}
                                                                 <FormCheckbox
                                                                     inline
                                                                     checked={
@@ -977,12 +977,12 @@ class Add_permission extends Component {
                                                                     onChange={e =>
                                                                         this.handleChange(
                                                                             e,
-                                                                            "ManageProvinceView"
+                                                                            'ManageProvinceView'
                                                                         )
                                                                     }
                                                                 >
-                                                                    View{" "}
-                                                                </FormCheckbox>{" "}
+                                                                    View{' '}
+                                                                </FormCheckbox>{' '}
                                                                 <FormCheckbox
                                                                     inline
                                                                     checked={
@@ -993,12 +993,12 @@ class Add_permission extends Component {
                                                                     onChange={e =>
                                                                         this.handleChange(
                                                                             e,
-                                                                            "ManageProvinceEdit"
+                                                                            'ManageProvinceEdit'
                                                                         )
                                                                     }
                                                                 >
-                                                                    Edit{" "}
-                                                                </FormCheckbox>{" "}
+                                                                    Edit{' '}
+                                                                </FormCheckbox>{' '}
                                                                 <FormCheckbox
                                                                     inline
                                                                     checked={
@@ -1009,12 +1009,12 @@ class Add_permission extends Component {
                                                                     onChange={e =>
                                                                         this.handleChange(
                                                                             e,
-                                                                            "ManageProvinceDelete"
+                                                                            'ManageProvinceDelete'
                                                                         )
                                                                     }
                                                                 >
-                                                                    Delete{" "}
-                                                                </FormCheckbox>{" "}
+                                                                    Delete{' '}
+                                                                </FormCheckbox>{' '}
                                                             </div>
                                                             <div>
                                                                 <FormCheckbox
@@ -1027,13 +1027,13 @@ class Add_permission extends Component {
                                                                     onChange={e =>
                                                                         this.handleChange(
                                                                             e,
-                                                                            "ManageDistrict"
+                                                                            'ManageDistrict'
                                                                         )
                                                                     }
                                                                     className="mystyle"
                                                                 >
-                                                                    ManageDistrict{" "}
-                                                                </FormCheckbox>{" "}
+                                                                    ManageDistrict{' '}
+                                                                </FormCheckbox>{' '}
                                                                 <FormCheckbox
                                                                     inline
                                                                     checked={
@@ -1044,12 +1044,12 @@ class Add_permission extends Component {
                                                                     onChange={e =>
                                                                         this.handleChange(
                                                                             e,
-                                                                            "ManageDistrictView"
+                                                                            'ManageDistrictView'
                                                                         )
                                                                     }
                                                                 >
-                                                                    View{" "}
-                                                                </FormCheckbox>{" "}
+                                                                    View{' '}
+                                                                </FormCheckbox>{' '}
                                                                 <FormCheckbox
                                                                     inline
                                                                     checked={
@@ -1060,12 +1060,12 @@ class Add_permission extends Component {
                                                                     onChange={e =>
                                                                         this.handleChange(
                                                                             e,
-                                                                            "ManageDistrictEdit"
+                                                                            'ManageDistrictEdit'
                                                                         )
                                                                     }
                                                                 >
-                                                                    Edit{" "}
-                                                                </FormCheckbox>{" "}
+                                                                    Edit{' '}
+                                                                </FormCheckbox>{' '}
                                                                 <FormCheckbox
                                                                     inline
                                                                     checked={
@@ -1076,12 +1076,12 @@ class Add_permission extends Component {
                                                                     onChange={e =>
                                                                         this.handleChange(
                                                                             e,
-                                                                            "ManageDistrictDelete"
+                                                                            'ManageDistrictDelete'
                                                                         )
                                                                     }
                                                                 >
-                                                                    Delete{" "}
-                                                                </FormCheckbox>{" "}
+                                                                    Delete{' '}
+                                                                </FormCheckbox>{' '}
                                                             </div>
                                                             <div>
                                                                 <FormCheckbox
@@ -1094,13 +1094,13 @@ class Add_permission extends Component {
                                                                     onChange={e =>
                                                                         this.handleChange(
                                                                             e,
-                                                                            "ManagePostalCode"
+                                                                            'ManagePostalCode'
                                                                         )
                                                                     }
                                                                     className="mystyle"
                                                                 >
-                                                                    ManagePostalCode{" "}
-                                                                </FormCheckbox>{" "}
+                                                                    ManagePostalCode{' '}
+                                                                </FormCheckbox>{' '}
                                                                 <FormCheckbox
                                                                     inline
                                                                     checked={
@@ -1111,12 +1111,12 @@ class Add_permission extends Component {
                                                                     onChange={e =>
                                                                         this.handleChange(
                                                                             e,
-                                                                            "ManagePostalCodeView"
+                                                                            'ManagePostalCodeView'
                                                                         )
                                                                     }
                                                                 >
-                                                                    View{" "}
-                                                                </FormCheckbox>{" "}
+                                                                    View{' '}
+                                                                </FormCheckbox>{' '}
                                                                 <FormCheckbox
                                                                     inline
                                                                     checked={
@@ -1127,12 +1127,12 @@ class Add_permission extends Component {
                                                                     onChange={e =>
                                                                         this.handleChange(
                                                                             e,
-                                                                            "ManagePostalCodeEdit"
+                                                                            'ManagePostalCodeEdit'
                                                                         )
                                                                     }
                                                                 >
-                                                                    Edit{" "}
-                                                                </FormCheckbox>{" "}
+                                                                    Edit{' '}
+                                                                </FormCheckbox>{' '}
                                                                 <FormCheckbox
                                                                     inline
                                                                     checked={
@@ -1143,12 +1143,12 @@ class Add_permission extends Component {
                                                                     onChange={e =>
                                                                         this.handleChange(
                                                                             e,
-                                                                            "ManagePostalCodeDelete"
+                                                                            'ManagePostalCodeDelete'
                                                                         )
                                                                     }
                                                                 >
-                                                                    Delete{" "}
-                                                                </FormCheckbox>{" "}
+                                                                    Delete{' '}
+                                                                </FormCheckbox>{' '}
                                                             </div>
                                                             <div>
                                                                 <FormCheckbox
@@ -1161,13 +1161,13 @@ class Add_permission extends Component {
                                                                     onChange={e =>
                                                                         this.handleChange(
                                                                             e,
-                                                                            "ManageLocation"
+                                                                            'ManageLocation'
                                                                         )
                                                                     }
                                                                     className="mystyle"
                                                                 >
-                                                                    ManageLocation{" "}
-                                                                </FormCheckbox>{" "}
+                                                                    ManageLocation{' '}
+                                                                </FormCheckbox>{' '}
                                                                 <FormCheckbox
                                                                     inline
                                                                     checked={
@@ -1178,12 +1178,12 @@ class Add_permission extends Component {
                                                                     onChange={e =>
                                                                         this.handleChange(
                                                                             e,
-                                                                            "ManageLocationView"
+                                                                            'ManageLocationView'
                                                                         )
                                                                     }
                                                                 >
-                                                                    View{" "}
-                                                                </FormCheckbox>{" "}
+                                                                    View{' '}
+                                                                </FormCheckbox>{' '}
                                                                 <FormCheckbox
                                                                     inline
                                                                     checked={
@@ -1194,12 +1194,12 @@ class Add_permission extends Component {
                                                                     onChange={e =>
                                                                         this.handleChange(
                                                                             e,
-                                                                            "ManageLocationEdit"
+                                                                            'ManageLocationEdit'
                                                                         )
                                                                     }
                                                                 >
-                                                                    Edit{" "}
-                                                                </FormCheckbox>{" "}
+                                                                    Edit{' '}
+                                                                </FormCheckbox>{' '}
                                                                 <FormCheckbox
                                                                     inline
                                                                     checked={
@@ -1210,12 +1210,12 @@ class Add_permission extends Component {
                                                                     onChange={e =>
                                                                         this.handleChange(
                                                                             e,
-                                                                            "ManageLocationDelete"
+                                                                            'ManageLocationDelete'
                                                                         )
                                                                     }
                                                                 >
-                                                                    Delete{" "}
-                                                                </FormCheckbox>{" "}
+                                                                    Delete{' '}
+                                                                </FormCheckbox>{' '}
                                                             </div>
                                                         </Col>
                                                     ) : null}
@@ -1227,12 +1227,12 @@ class Add_permission extends Component {
                                                         onChange={e =>
                                                             this.handleChange(
                                                                 e,
-                                                                "ManageEquipment"
+                                                                'ManageEquipment'
                                                             )
                                                         }
                                                     >
-                                                        Equipment{" "}
-                                                    </FormCheckbox>{" "}
+                                                        Equipment{' '}
+                                                    </FormCheckbox>{' '}
                                                     {this.state
                                                         .ManageEquipment ? (
                                                         <Col>
@@ -1247,13 +1247,13 @@ class Add_permission extends Component {
                                                                     onChange={e =>
                                                                         this.handleChange(
                                                                             e,
-                                                                            "ManageEquipment"
+                                                                            'ManageEquipment'
                                                                         )
                                                                     }
                                                                     className="mystyle"
                                                                 >
-                                                                    ManageEquipment{" "}
-                                                                </FormCheckbox>{" "}
+                                                                    ManageEquipment{' '}
+                                                                </FormCheckbox>{' '}
                                                                 <FormCheckbox
                                                                     inline
                                                                     checked={
@@ -1264,12 +1264,12 @@ class Add_permission extends Component {
                                                                     onChange={e =>
                                                                         this.handleChange(
                                                                             e,
-                                                                            "ManageEquipmentView"
+                                                                            'ManageEquipmentView'
                                                                         )
                                                                     }
                                                                 >
-                                                                    View{" "}
-                                                                </FormCheckbox>{" "}
+                                                                    View{' '}
+                                                                </FormCheckbox>{' '}
                                                                 <FormCheckbox
                                                                     inline
                                                                     checked={
@@ -1280,12 +1280,12 @@ class Add_permission extends Component {
                                                                     onChange={e =>
                                                                         this.handleChange(
                                                                             e,
-                                                                            "ManageEquipmentEdit"
+                                                                            'ManageEquipmentEdit'
                                                                         )
                                                                     }
                                                                 >
-                                                                    Edit{" "}
-                                                                </FormCheckbox>{" "}
+                                                                    Edit{' '}
+                                                                </FormCheckbox>{' '}
                                                                 <FormCheckbox
                                                                     inline
                                                                     checked={
@@ -1296,13 +1296,13 @@ class Add_permission extends Component {
                                                                     onChange={e =>
                                                                         this.handleChange(
                                                                             e,
-                                                                            "ManageEquipmentDelete"
+                                                                            'ManageEquipmentDelete'
                                                                         )
                                                                     }
                                                                 >
-                                                                    Delete{" "}
-                                                                </FormCheckbox>{" "}
-                                                            </div>{" "}
+                                                                    Delete{' '}
+                                                                </FormCheckbox>{' '}
+                                                            </div>{' '}
                                                         </Col>
                                                     ) : null}
                                                     <FormCheckbox
@@ -1313,12 +1313,12 @@ class Add_permission extends Component {
                                                         onChange={e =>
                                                             this.handleChange(
                                                                 e,
-                                                                "ManageRequestGeneral"
+                                                                'ManageRequestGeneral'
                                                             )
                                                         }
                                                     >
-                                                        Request{" "}
-                                                    </FormCheckbox>{" "}
+                                                        Request{' '}
+                                                    </FormCheckbox>{' '}
                                                     {this.state
                                                         .ManageRequestGeneral ? (
                                                         <Col>
@@ -1333,13 +1333,13 @@ class Add_permission extends Component {
                                                                     onChange={e =>
                                                                         this.handleChange(
                                                                             e,
-                                                                            "ManageRequestGeneral"
+                                                                            'ManageRequestGeneral'
                                                                         )
                                                                     }
                                                                     className="mystyle"
                                                                 >
-                                                                    ManageRequestGeneral{" "}
-                                                                </FormCheckbox>{" "}
+                                                                    ManageRequestGeneral{' '}
+                                                                </FormCheckbox>{' '}
                                                                 <FormCheckbox
                                                                     inline
                                                                     checked={
@@ -1350,12 +1350,12 @@ class Add_permission extends Component {
                                                                     onChange={e =>
                                                                         this.handleChange(
                                                                             e,
-                                                                            "ManageRequestGeneralView"
+                                                                            'ManageRequestGeneralView'
                                                                         )
                                                                     }
                                                                 >
-                                                                    View{" "}
-                                                                </FormCheckbox>{" "}
+                                                                    View{' '}
+                                                                </FormCheckbox>{' '}
                                                                 <FormCheckbox
                                                                     inline
                                                                     checked={
@@ -1366,12 +1366,12 @@ class Add_permission extends Component {
                                                                     onChange={e =>
                                                                         this.handleChange(
                                                                             e,
-                                                                            "ManageRequestGeneralEdit"
+                                                                            'ManageRequestGeneralEdit'
                                                                         )
                                                                     }
                                                                 >
-                                                                    Edit{" "}
-                                                                </FormCheckbox>{" "}
+                                                                    Edit{' '}
+                                                                </FormCheckbox>{' '}
                                                                 <FormCheckbox
                                                                     inline
                                                                     checked={
@@ -1382,12 +1382,12 @@ class Add_permission extends Component {
                                                                     onChange={e =>
                                                                         this.handleChange(
                                                                             e,
-                                                                            "ManageRequestGeneralDelete"
+                                                                            'ManageRequestGeneralDelete'
                                                                         )
                                                                     }
                                                                 >
-                                                                    Delete{" "}
-                                                                </FormCheckbox>{" "}
+                                                                    Delete{' '}
+                                                                </FormCheckbox>{' '}
                                                             </div>
                                                             <div>
                                                                 <FormCheckbox
@@ -1400,13 +1400,13 @@ class Add_permission extends Component {
                                                                     onChange={e =>
                                                                         this.handleChange(
                                                                             e,
-                                                                            "ManageRequestIssuses"
+                                                                            'ManageRequestIssuses'
                                                                         )
                                                                     }
                                                                     className="mystyle"
                                                                 >
-                                                                    ManageRequestIssuses{" "}
-                                                                </FormCheckbox>{" "}
+                                                                    ManageRequestIssuses{' '}
+                                                                </FormCheckbox>{' '}
                                                                 <FormCheckbox
                                                                     inline
                                                                     checked={
@@ -1417,12 +1417,12 @@ class Add_permission extends Component {
                                                                     onChange={e =>
                                                                         this.handleChange(
                                                                             e,
-                                                                            "ManageRequestIssusesView"
+                                                                            'ManageRequestIssusesView'
                                                                         )
                                                                     }
                                                                 >
-                                                                    View{" "}
-                                                                </FormCheckbox>{" "}
+                                                                    View{' '}
+                                                                </FormCheckbox>{' '}
                                                                 <FormCheckbox
                                                                     inline
                                                                     checked={
@@ -1433,12 +1433,12 @@ class Add_permission extends Component {
                                                                     onChange={e =>
                                                                         this.handleChange(
                                                                             e,
-                                                                            "ManageRequestIssusesEdit"
+                                                                            'ManageRequestIssusesEdit'
                                                                         )
                                                                     }
                                                                 >
-                                                                    Edit{" "}
-                                                                </FormCheckbox>{" "}
+                                                                    Edit{' '}
+                                                                </FormCheckbox>{' '}
                                                                 <FormCheckbox
                                                                     inline
                                                                     checked={
@@ -1449,15 +1449,15 @@ class Add_permission extends Component {
                                                                     onChange={e =>
                                                                         this.handleChange(
                                                                             e,
-                                                                            "ManageRequestIssusesDelete"
+                                                                            'ManageRequestIssusesDelete'
                                                                         )
                                                                     }
                                                                 >
-                                                                    Delete{" "}
-                                                                </FormCheckbox>{" "}
-                                                            </div>{" "}
+                                                                    Delete{' '}
+                                                                </FormCheckbox>{' '}
+                                                            </div>{' '}
                                                         </Col>
-                                                    ) : null}{" "}
+                                                    ) : null}{' '}
                                                     <FormCheckbox
                                                         checked={
                                                             this.state
@@ -1466,11 +1466,11 @@ class Add_permission extends Component {
                                                         onChange={e =>
                                                             this.handleChange(
                                                                 e,
-                                                                "ManageNews"
+                                                                'ManageNews'
                                                             )
                                                         }
                                                     >
-                                                        News{" "}
+                                                        News{' '}
                                                     </FormCheckbox>
                                                     {this.state.ManageNews ? (
                                                         <Col>
@@ -1485,13 +1485,13 @@ class Add_permission extends Component {
                                                                     onChange={e =>
                                                                         this.handleChange(
                                                                             e,
-                                                                            "ManageNews"
+                                                                            'ManageNews'
                                                                         )
                                                                     }
                                                                     className="mystyle"
                                                                 >
-                                                                    ManageNews{" "}
-                                                                </FormCheckbox>{" "}
+                                                                    ManageNews{' '}
+                                                                </FormCheckbox>{' '}
                                                                 <FormCheckbox
                                                                     inline
                                                                     checked={
@@ -1502,12 +1502,12 @@ class Add_permission extends Component {
                                                                     onChange={e =>
                                                                         this.handleChange(
                                                                             e,
-                                                                            "ManageNewsView"
+                                                                            'ManageNewsView'
                                                                         )
                                                                     }
                                                                 >
-                                                                    View{" "}
-                                                                </FormCheckbox>{" "}
+                                                                    View{' '}
+                                                                </FormCheckbox>{' '}
                                                                 <FormCheckbox
                                                                     inline
                                                                     checked={
@@ -1518,12 +1518,12 @@ class Add_permission extends Component {
                                                                     onChange={e =>
                                                                         this.handleChange(
                                                                             e,
-                                                                            "ManageNewsEdit"
+                                                                            'ManageNewsEdit'
                                                                         )
                                                                     }
                                                                 >
-                                                                    Edit{" "}
-                                                                </FormCheckbox>{" "}
+                                                                    Edit{' '}
+                                                                </FormCheckbox>{' '}
                                                                 <FormCheckbox
                                                                     inline
                                                                     checked={
@@ -1534,12 +1534,12 @@ class Add_permission extends Component {
                                                                     onChange={e =>
                                                                         this.handleChange(
                                                                             e,
-                                                                            "ManageNewsDelete"
+                                                                            'ManageNewsDelete'
                                                                         )
                                                                     }
                                                                 >
-                                                                    Delete{" "}
-                                                                </FormCheckbox>{" "}
+                                                                    Delete{' '}
+                                                                </FormCheckbox>{' '}
                                                             </div>
                                                             <div>
                                                                 <FormCheckbox
@@ -1552,13 +1552,13 @@ class Add_permission extends Component {
                                                                     onChange={e =>
                                                                         this.handleChange(
                                                                             e,
-                                                                            "ManageSettingNews"
+                                                                            'ManageSettingNews'
                                                                         )
                                                                     }
                                                                     className="mystyle"
                                                                 >
-                                                                    ManageSettingNews{" "}
-                                                                </FormCheckbox>{" "}
+                                                                    ManageSettingNews{' '}
+                                                                </FormCheckbox>{' '}
                                                                 <FormCheckbox
                                                                     inline
                                                                     checked={
@@ -1569,12 +1569,12 @@ class Add_permission extends Component {
                                                                     onChange={e =>
                                                                         this.handleChange(
                                                                             e,
-                                                                            "ManageSettingNewsView"
+                                                                            'ManageSettingNewsView'
                                                                         )
                                                                     }
                                                                 >
-                                                                    View{" "}
-                                                                </FormCheckbox>{" "}
+                                                                    View{' '}
+                                                                </FormCheckbox>{' '}
                                                                 <FormCheckbox
                                                                     inline
                                                                     checked={
@@ -1585,12 +1585,12 @@ class Add_permission extends Component {
                                                                     onChange={e =>
                                                                         this.handleChange(
                                                                             e,
-                                                                            "ManageSettingNewsEdit"
+                                                                            'ManageSettingNewsEdit'
                                                                         )
                                                                     }
                                                                 >
-                                                                    Edit{" "}
-                                                                </FormCheckbox>{" "}
+                                                                    Edit{' '}
+                                                                </FormCheckbox>{' '}
                                                                 <FormCheckbox
                                                                     inline
                                                                     checked={
@@ -1601,13 +1601,13 @@ class Add_permission extends Component {
                                                                     onChange={e =>
                                                                         this.handleChange(
                                                                             e,
-                                                                            "ManageSettingNewsDelete"
+                                                                            'ManageSettingNewsDelete'
                                                                         )
                                                                     }
                                                                 >
-                                                                    Delete{" "}
-                                                                </FormCheckbox>{" "}
-                                                            </div>{" "}
+                                                                    Delete{' '}
+                                                                </FormCheckbox>{' '}
+                                                            </div>{' '}
                                                         </Col>
                                                     ) : null}
                                                     <FormCheckbox
@@ -1618,11 +1618,11 @@ class Add_permission extends Component {
                                                         onChange={e =>
                                                             this.handleChange(
                                                                 e,
-                                                                "ManageImage"
+                                                                'ManageImage'
                                                             )
                                                         }
                                                     >
-                                                        Image{" "}
+                                                        Image{' '}
                                                     </FormCheckbox>
                                                     {this.state.ManageImage ==
                                                     true ? (
@@ -1638,13 +1638,13 @@ class Add_permission extends Component {
                                                                     onChange={e =>
                                                                         this.handleChange(
                                                                             e,
-                                                                            "ManageImage"
+                                                                            'ManageImage'
                                                                         )
                                                                     }
                                                                     className="mystyle"
                                                                 >
-                                                                    ManageImage{" "}
-                                                                </FormCheckbox>{" "}
+                                                                    ManageImage{' '}
+                                                                </FormCheckbox>{' '}
                                                                 <FormCheckbox
                                                                     inline
                                                                     checked={
@@ -1655,12 +1655,12 @@ class Add_permission extends Component {
                                                                     onChange={e =>
                                                                         this.handleChange(
                                                                             e,
-                                                                            "ManageImageView"
+                                                                            'ManageImageView'
                                                                         )
                                                                     }
                                                                 >
-                                                                    View{" "}
-                                                                </FormCheckbox>{" "}
+                                                                    View{' '}
+                                                                </FormCheckbox>{' '}
                                                                 <FormCheckbox
                                                                     inline
                                                                     checked={
@@ -1671,12 +1671,12 @@ class Add_permission extends Component {
                                                                     onChange={e =>
                                                                         this.handleChange(
                                                                             e,
-                                                                            "ManageImageEdit"
+                                                                            'ManageImageEdit'
                                                                         )
                                                                     }
                                                                 >
-                                                                    Edit{" "}
-                                                                </FormCheckbox>{" "}
+                                                                    Edit{' '}
+                                                                </FormCheckbox>{' '}
                                                                 <FormCheckbox
                                                                     inline
                                                                     checked={
@@ -1687,15 +1687,15 @@ class Add_permission extends Component {
                                                                     onChange={e =>
                                                                         this.handleChange(
                                                                             e,
-                                                                            "ManageImageDelete"
+                                                                            'ManageImageDelete'
                                                                         )
                                                                     }
                                                                 >
-                                                                    Delete{" "}
-                                                                </FormCheckbox>{" "}
+                                                                    Delete{' '}
+                                                                </FormCheckbox>{' '}
                                                             </div>
                                                         </Col>
-                                                    ) : null}{" "}
+                                                    ) : null}{' '}
                                                     <FormCheckbox
                                                         checked={
                                                             this.state
@@ -1704,11 +1704,11 @@ class Add_permission extends Component {
                                                         onChange={e =>
                                                             this.handleChange(
                                                                 e,
-                                                                "ManageMessage"
+                                                                'ManageMessage'
                                                             )
                                                         }
                                                     >
-                                                        Message{" "}
+                                                        Message{' '}
                                                     </FormCheckbox>
                                                     {this.state.ManageMessage ==
                                                     true ? (
@@ -1724,13 +1724,13 @@ class Add_permission extends Component {
                                                                     onChange={e =>
                                                                         this.handleChange(
                                                                             e,
-                                                                            "ManageMessage"
+                                                                            'ManageMessage'
                                                                         )
                                                                     }
                                                                     className="mystyle"
                                                                 >
-                                                                    ManageMessage{" "}
-                                                                </FormCheckbox>{" "}
+                                                                    ManageMessage{' '}
+                                                                </FormCheckbox>{' '}
                                                                 <FormCheckbox
                                                                     inline
                                                                     checked={
@@ -1741,12 +1741,12 @@ class Add_permission extends Component {
                                                                     onChange={e =>
                                                                         this.handleChange(
                                                                             e,
-                                                                            "ManageMessageView"
+                                                                            'ManageMessageView'
                                                                         )
                                                                     }
                                                                 >
-                                                                    View{" "}
-                                                                </FormCheckbox>{" "}
+                                                                    View{' '}
+                                                                </FormCheckbox>{' '}
                                                                 <FormCheckbox
                                                                     inline
                                                                     checked={
@@ -1757,12 +1757,12 @@ class Add_permission extends Component {
                                                                     onChange={e =>
                                                                         this.handleChange(
                                                                             e,
-                                                                            "ManageMessageEdit"
+                                                                            'ManageMessageEdit'
                                                                         )
                                                                     }
                                                                 >
-                                                                    Edit{" "}
-                                                                </FormCheckbox>{" "}
+                                                                    Edit{' '}
+                                                                </FormCheckbox>{' '}
                                                                 <FormCheckbox
                                                                     inline
                                                                     checked={
@@ -1773,12 +1773,12 @@ class Add_permission extends Component {
                                                                     onChange={e =>
                                                                         this.handleChange(
                                                                             e,
-                                                                            "ManageMessageDelete"
+                                                                            'ManageMessageDelete'
                                                                         )
                                                                     }
                                                                 >
-                                                                    Delete{" "}
-                                                                </FormCheckbox>{" "}
+                                                                    Delete{' '}
+                                                                </FormCheckbox>{' '}
                                                             </div>
                                                         </Col>
                                                     ) : null}
@@ -1790,11 +1790,11 @@ class Add_permission extends Component {
                                                         onChange={e =>
                                                             this.handleChange(
                                                                 e,
-                                                                "ManageModify"
+                                                                'ManageModify'
                                                             )
                                                         }
                                                     >
-                                                        Modify{" "}
+                                                        Modify{' '}
                                                     </FormCheckbox>
                                                     {this.state.ManageModify ==
                                                     true ? (
@@ -1810,13 +1810,13 @@ class Add_permission extends Component {
                                                                     onChange={e =>
                                                                         this.handleChange(
                                                                             e,
-                                                                            "ManageModify"
+                                                                            'ManageModify'
                                                                         )
                                                                     }
                                                                     className="mystyle"
                                                                 >
-                                                                    ManageModify{" "}
-                                                                </FormCheckbox>{" "}
+                                                                    ManageModify{' '}
+                                                                </FormCheckbox>{' '}
                                                                 <FormCheckbox
                                                                     inline
                                                                     checked={
@@ -1827,12 +1827,12 @@ class Add_permission extends Component {
                                                                     onChange={e =>
                                                                         this.handleChange(
                                                                             e,
-                                                                            "ManageModifyView"
+                                                                            'ManageModifyView'
                                                                         )
                                                                     }
                                                                 >
-                                                                    View{" "}
-                                                                </FormCheckbox>{" "}
+                                                                    View{' '}
+                                                                </FormCheckbox>{' '}
                                                                 <FormCheckbox
                                                                     inline
                                                                     checked={
@@ -1843,12 +1843,12 @@ class Add_permission extends Component {
                                                                     onChange={e =>
                                                                         this.handleChange(
                                                                             e,
-                                                                            "ManageModifyEdit"
+                                                                            'ManageModifyEdit'
                                                                         )
                                                                     }
                                                                 >
-                                                                    Edit{" "}
-                                                                </FormCheckbox>{" "}
+                                                                    Edit{' '}
+                                                                </FormCheckbox>{' '}
                                                                 <FormCheckbox
                                                                     inline
                                                                     checked={
@@ -1859,12 +1859,12 @@ class Add_permission extends Component {
                                                                     onChange={e =>
                                                                         this.handleChange(
                                                                             e,
-                                                                            "ManageModifyDelete"
+                                                                            'ManageModifyDelete'
                                                                         )
                                                                     }
                                                                 >
-                                                                    Delete{" "}
-                                                                </FormCheckbox>{" "}
+                                                                    Delete{' '}
+                                                                </FormCheckbox>{' '}
                                                             </div>
                                                         </Col>
                                                     ) : null}
@@ -1876,11 +1876,11 @@ class Add_permission extends Component {
                                                         onChange={e =>
                                                             this.handleChange(
                                                                 e,
-                                                                "ManagePriority"
+                                                                'ManagePriority'
                                                             )
                                                         }
                                                     >
-                                                        Priority{" "}
+                                                        Priority{' '}
                                                     </FormCheckbox>
                                                     {this.state
                                                         .ManagePriority ==
@@ -1897,13 +1897,13 @@ class Add_permission extends Component {
                                                                     onChange={e =>
                                                                         this.handleChange(
                                                                             e,
-                                                                            "ManagePriority"
+                                                                            'ManagePriority'
                                                                         )
                                                                     }
                                                                     className="mystyle"
                                                                 >
-                                                                    ManagePriority{" "}
-                                                                </FormCheckbox>{" "}
+                                                                    ManagePriority{' '}
+                                                                </FormCheckbox>{' '}
                                                                 <FormCheckbox
                                                                     inline
                                                                     checked={
@@ -1914,12 +1914,12 @@ class Add_permission extends Component {
                                                                     onChange={e =>
                                                                         this.handleChange(
                                                                             e,
-                                                                            "ManagePriorityView"
+                                                                            'ManagePriorityView'
                                                                         )
                                                                     }
                                                                 >
-                                                                    View{" "}
-                                                                </FormCheckbox>{" "}
+                                                                    View{' '}
+                                                                </FormCheckbox>{' '}
                                                                 <FormCheckbox
                                                                     inline
                                                                     checked={
@@ -1930,12 +1930,12 @@ class Add_permission extends Component {
                                                                     onChange={e =>
                                                                         this.handleChange(
                                                                             e,
-                                                                            "ManagePriorityEdit"
+                                                                            'ManagePriorityEdit'
                                                                         )
                                                                     }
                                                                 >
-                                                                    Edit{" "}
-                                                                </FormCheckbox>{" "}
+                                                                    Edit{' '}
+                                                                </FormCheckbox>{' '}
                                                                 <FormCheckbox
                                                                     inline
                                                                     checked={
@@ -1946,12 +1946,12 @@ class Add_permission extends Component {
                                                                     onChange={e =>
                                                                         this.handleChange(
                                                                             e,
-                                                                            "ManagePriorityDelete"
+                                                                            'ManagePriorityDelete'
                                                                         )
                                                                     }
                                                                 >
-                                                                    Delete{" "}
-                                                                </FormCheckbox>{" "}
+                                                                    Delete{' '}
+                                                                </FormCheckbox>{' '}
                                                             </div>
                                                         </Col>
                                                     ) : null}
@@ -1963,11 +1963,11 @@ class Add_permission extends Component {
                                                         onChange={e =>
                                                             this.handleChange(
                                                                 e,
-                                                                "ManageImpact"
+                                                                'ManageImpact'
                                                             )
                                                         }
                                                     >
-                                                        Impact{" "}
+                                                        Impact{' '}
                                                     </FormCheckbox>
                                                     {this.state.ManageImpact ==
                                                     true ? (
@@ -1983,13 +1983,13 @@ class Add_permission extends Component {
                                                                     onChange={e =>
                                                                         this.handleChange(
                                                                             e,
-                                                                            "ManageImpact"
+                                                                            'ManageImpact'
                                                                         )
                                                                     }
                                                                     className="mystyle"
                                                                 >
-                                                                    ManageMessage{" "}
-                                                                </FormCheckbox>{" "}
+                                                                    ManageMessage{' '}
+                                                                </FormCheckbox>{' '}
                                                                 <FormCheckbox
                                                                     inline
                                                                     checked={
@@ -2000,12 +2000,12 @@ class Add_permission extends Component {
                                                                     onChange={e =>
                                                                         this.handleChange(
                                                                             e,
-                                                                            "ManageImpactView"
+                                                                            'ManageImpactView'
                                                                         )
                                                                     }
                                                                 >
-                                                                    View{" "}
-                                                                </FormCheckbox>{" "}
+                                                                    View{' '}
+                                                                </FormCheckbox>{' '}
                                                                 <FormCheckbox
                                                                     inline
                                                                     checked={
@@ -2016,12 +2016,12 @@ class Add_permission extends Component {
                                                                     onChange={e =>
                                                                         this.handleChange(
                                                                             e,
-                                                                            "ManageImpactEdit"
+                                                                            'ManageImpactEdit'
                                                                         )
                                                                     }
                                                                 >
-                                                                    Edit{" "}
-                                                                </FormCheckbox>{" "}
+                                                                    Edit{' '}
+                                                                </FormCheckbox>{' '}
                                                                 <FormCheckbox
                                                                     inline
                                                                     checked={
@@ -2032,12 +2032,12 @@ class Add_permission extends Component {
                                                                     onChange={e =>
                                                                         this.handleChange(
                                                                             e,
-                                                                            "ManageImpactDelete"
+                                                                            'ManageImpactDelete'
                                                                         )
                                                                     }
                                                                 >
-                                                                    Delete{" "}
-                                                                </FormCheckbox>{" "}
+                                                                    Delete{' '}
+                                                                </FormCheckbox>{' '}
                                                             </div>
                                                         </Col>
                                                     ) : null}
@@ -2048,25 +2048,25 @@ class Add_permission extends Component {
                                                         onChange={e =>
                                                             this.handleChange(
                                                                 e,
-                                                                "Report"
+                                                                'Report'
                                                             )
                                                         }
                                                     >
-                                                        Report{" "}
+                                                        Report{' '}
                                                     </FormCheckbox>
-                                                </ListGroupItem>{" "}
+                                                </ListGroupItem>{' '}
                                             </Col>
-                                        </Row>{" "}
+                                        </Row>{' '}
                                         <Button type="submit">
-                                            {" "}
-                                            Create New Permission{" "}
-                                        </Button>{" "}
-                                    </Form>{" "}
+                                            {' '}
+                                            Create New Permission{' '}
+                                        </Button>{' '}
+                                    </Form>{' '}
                                 </Col>
-                            </Row>{" "}
-                        </ListGroupItem>{" "}
-                    </ListGroup>{" "}
-                </Container>{" "}
+                            </Row>{' '}
+                        </ListGroupItem>{' '}
+                    </ListGroup>{' '}
+                </Container>{' '}
             </div>
         );
     }

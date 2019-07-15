@@ -4,11 +4,11 @@
  |--------------------------------------------------------------------------
  */
 
-"use strict";
+'use strict';
 (function($) {
     $(document).ready(function() {
         // Blog overview date range init.
-        $("#blog-overview-date-range").datepicker({});
+        $('#blog-overview-date-range').datepicker({});
 
         //
         // Small Stats
@@ -17,28 +17,28 @@
         // Datasets
         var boSmallStatsDatasets = [
             {
-                backgroundColor: "rgba(0, 184, 216, 0.1)",
-                borderColor: "rgb(0, 184, 216)",
+                backgroundColor: 'rgba(0, 184, 216, 0.1)',
+                borderColor: 'rgb(0, 184, 216)',
                 data: [1, 2, 1, 3, 5, 4, 7]
             },
             {
-                backgroundColor: "rgba(23,198,113,0.1)",
-                borderColor: "rgb(23,198,113)",
+                backgroundColor: 'rgba(23,198,113,0.1)',
+                borderColor: 'rgb(23,198,113)',
                 data: [1, 2, 3, 3, 3, 4, 4]
             },
             {
-                backgroundColor: "rgba(255,180,0,0.1)",
-                borderColor: "rgb(255,180,0)",
+                backgroundColor: 'rgba(255,180,0,0.1)',
+                borderColor: 'rgb(255,180,0)',
                 data: [2, 3, 3, 3, 4, 3, 3]
             },
             {
-                backgroundColor: "rgba(255,65,105,0.1)",
-                borderColor: "rgb(255,65,105)",
+                backgroundColor: 'rgba(255,65,105,0.1)',
+                borderColor: 'rgb(255,65,105)',
                 data: [1, 7, 1, 3, 1, 4, 8]
             },
             {
-                backgroundColor: "rgb(0,123,255,0.1)",
-                borderColor: "rgb(0,123,255)",
+                backgroundColor: 'rgb(0,123,255,0.1)',
+                borderColor: 'rgb(0,123,255)',
                 data: [3, 2, 3, 2, 4, 5, 4]
             }
         ];
@@ -97,24 +97,24 @@
                 Math.max.apply(Math, el.data) + 1
             );
             var ctx = document.getElementsByClassName(
-                "blog-overview-stats-small-" + (index + 1)
+                'blog-overview-stats-small-' + (index + 1)
             );
             new Chart(ctx, {
-                type: "line",
+                type: 'line',
                 data: {
                     labels: [
-                        "Label 1",
-                        "Label 2",
-                        "Label 3",
-                        "Label 4",
-                        "Label 5",
-                        "Label 6",
-                        "Label 7"
+                        'Label 1',
+                        'Label 2',
+                        'Label 3',
+                        'Label 4',
+                        'Label 5',
+                        'Label 6',
+                        'Label 7'
                     ],
                     datasets: [
                         {
-                            label: "Today",
-                            fill: "start",
+                            label: 'Today',
+                            fill: 'start',
                             data: el.data,
                             backgroundColor: el.backgroundColor,
                             borderColor: el.borderColor,
@@ -130,7 +130,7 @@
         // Blog Overview Users
         //
 
-        var bouCtx = document.getElementsByClassName("blog-overview-users")[0];
+        var bouCtx = document.getElementsByClassName('blog-overview-users')[0];
 
         // Data
         var bouData = {
@@ -140,8 +140,8 @@
             }),
             datasets: [
                 {
-                    label: "Current Month",
-                    fill: "start",
+                    label: 'Current Month',
+                    fill: 'start',
                     data: [
                         500,
                         800,
@@ -174,17 +174,17 @@
                         3100,
                         4250
                     ],
-                    backgroundColor: "rgba(0,123,255,0.1)",
-                    borderColor: "rgba(0,123,255,1)",
-                    pointBackgroundColor: "#ffffff",
-                    pointHoverBackgroundColor: "rgb(0,123,255)",
+                    backgroundColor: 'rgba(0,123,255,0.1)',
+                    borderColor: 'rgba(0,123,255,1)',
+                    pointBackgroundColor: '#ffffff',
+                    pointHoverBackgroundColor: 'rgb(0,123,255)',
                     borderWidth: 1.5,
                     pointRadius: 0,
                     pointHoverRadius: 3
                 },
                 {
-                    label: "Past Month",
-                    fill: "start",
+                    label: 'Past Month',
+                    fill: 'start',
                     data: [
                         380,
                         430,
@@ -217,15 +217,15 @@
                         780,
                         1200
                     ],
-                    backgroundColor: "rgba(255,65,105,0.1)",
-                    borderColor: "rgba(255,65,105,1)",
-                    pointBackgroundColor: "#ffffff",
-                    pointHoverBackgroundColor: "rgba(255,65,105,1)",
+                    backgroundColor: 'rgba(255,65,105,0.1)',
+                    borderColor: 'rgba(255,65,105,1)',
+                    pointBackgroundColor: '#ffffff',
+                    pointHoverBackgroundColor: 'rgba(255,65,105,1)',
                     borderDash: [3, 3],
                     borderWidth: 1,
                     pointRadius: 0,
                     pointHoverRadius: 2,
-                    pointBorderColor: "rgba(255,65,105,1)"
+                    pointBorderColor: 'rgba(255,65,105,1)'
                 }
             ]
         };
@@ -234,7 +234,7 @@
         var bouOptions = {
             responsive: true,
             legend: {
-                position: "top"
+                position: 'top'
             },
             elements: {
                 line: {
@@ -252,7 +252,7 @@
                         ticks: {
                             callback: function(tick, index) {
                                 // Jump every 7 values on the X axis labels to avoid clutter.
-                                return index % 7 !== 0 ? "" : tick;
+                                return index % 7 !== 0 ? '' : tick;
                             }
                         }
                     }
@@ -267,7 +267,7 @@
                                 }
                                 // Format the amounts using Ks for thousands.
                                 return tick > 999
-                                    ? (tick / 1000).toFixed(1) + "K"
+                                    ? (tick / 1000).toFixed(1) + 'K'
                                     : tick;
                             }
                         }
@@ -279,19 +279,19 @@
             //   duration: 0
             // },
             hover: {
-                mode: "nearest",
+                mode: 'nearest',
                 intersect: false
             },
             tooltips: {
                 custom: false,
-                mode: "nearest",
+                mode: 'nearest',
                 intersect: false
             }
         };
 
         // Generate the Analytics Overview chart.
         window.BlogOverviewUsers = new Chart(bouCtx, {
-            type: "LineWithLine",
+            type: 'LineWithLine',
             data: bouData,
             options: bouOptions
         });
@@ -313,22 +313,22 @@
         var ubdData = {
             datasets: [
                 {
-                    hoverBorderColor: "#ffffff",
+                    hoverBorderColor: '#ffffff',
                     data: [68.3, 24.2, 7.5],
                     backgroundColor: [
-                        "rgba(0,123,255,0.9)",
-                        "rgba(0,123,255,0.5)",
-                        "rgba(0,123,255,0.3)"
+                        'rgba(0,123,255,0.9)',
+                        'rgba(0,123,255,0.5)',
+                        'rgba(0,123,255,0.3)'
                     ]
                 }
             ],
-            labels: ["Desktop", "Tablet", "Mobile"]
+            labels: ['Desktop', 'Tablet', 'Mobile']
         };
 
         // Options
         var ubdOptions = {
             legend: {
-                position: "bottom",
+                position: 'bottom',
                 labels: {
                     padding: 25,
                     boxWidth: 20
@@ -339,16 +339,16 @@
             // animation: false,
             tooltips: {
                 custom: false,
-                mode: "index",
-                position: "nearest"
+                mode: 'index',
+                position: 'nearest'
             }
         };
 
-        var ubdCtx = document.getElementsByClassName("blog-users-by-device")[0];
+        var ubdCtx = document.getElementsByClassName('blog-users-by-device')[0];
 
         // Generate the users by device chart.
         window.ubdChart = new Chart(ubdCtx, {
-            type: "pie",
+            type: 'pie',
             data: ubdData,
             options: ubdOptions
         });

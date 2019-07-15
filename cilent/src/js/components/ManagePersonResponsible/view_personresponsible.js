@@ -1,6 +1,6 @@
-import React, { Component } from "react";
-import ReactDOM from "react-dom";
-import Select from "react-select";
+import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
+import Select from 'react-select';
 import {
     ListGroup,
     ListGroupItem,
@@ -13,13 +13,13 @@ import {
     FormSelect,
     Button,
     Container
-} from "shards-react";
-import Swal from "sweetalert2";
-import axios from "axios";
-import { ToastContainer } from "react-toastr";
-import "../../../css/alert.css";
-import "../../../css/animate.css";
-import HocValidateUser from "../../../HocValidateUser";
+} from 'shards-react';
+import Swal from 'sweetalert2';
+import axios from 'axios';
+import { ToastContainer } from 'react-toastr';
+import '../../../css/alert.css';
+import '../../../css/animate.css';
+import HocValidateUser from '../../../HocValidateUser';
 let container;
 
 class View_PersonResponsible extends Component {
@@ -27,17 +27,17 @@ class View_PersonResponsible extends Component {
         super(props);
         this.state = {
             client_id: this.props.client_id,
-            first_name: "",
-            last_name: "",
-            nick_name: "",
-            telephone: "",
-            email: "",
-            position: "",
-            id_card: "",
-            id_employee: "",
-            location_id: "",
-            company_id: "",
-            department_id: "",
+            first_name: '',
+            last_name: '',
+            nick_name: '',
+            telephone: '',
+            email: '',
+            position: '',
+            id_card: '',
+            id_employee: '',
+            location_id: '',
+            company_id: '',
+            department_id: '',
             getlocation: [],
             getcompany: [],
             getdepartment: [],
@@ -82,7 +82,7 @@ class View_PersonResponsible extends Component {
                 insertdata
             )
             .then(response => {
-                Swal.fire("Successfully", "Add data successfully ", "success");
+                Swal.fire('Successfully', 'Add data successfully ', 'success');
 
                 this.setState({
                     errors: []
@@ -94,7 +94,7 @@ class View_PersonResponsible extends Component {
                 });
                 console.log(error.response.data.errors);
 
-                Swal.fire("Errors", "check the value of a form field", "error");
+                Swal.fire('Errors', 'check the value of a form field', 'error');
             });
     }
 
@@ -114,7 +114,7 @@ class View_PersonResponsible extends Component {
 
     componentDidMount() {
         axios
-            .get("/api/location/index")
+            .get('/api/location/index')
             .then(res => {
                 this.setState({
                     getlocation: res.data
@@ -128,7 +128,7 @@ class View_PersonResponsible extends Component {
             });
 
         axios
-            .get("/api/company/index")
+            .get('/api/company/index')
             .then(res => {
                 this.setState({
                     getcompany: res.data
@@ -142,7 +142,7 @@ class View_PersonResponsible extends Component {
             });
 
         axios
-            .get("/api/department/index")
+            .get('/api/department/index')
             .then(res => {
                 this.setState({
                     getdepartment: res.data
@@ -180,7 +180,7 @@ class View_PersonResponsible extends Component {
     render() {
         const { getlocation, getcompany, getdepartment } = this.state;
         return (
-            <div style={{ paddingTop: "30px" }}>
+            <div style={{ paddingTop: '30px' }}>
                 <Container>
                     <ListGroup flush>
                         <ListGroupItem className="p-3">
@@ -197,10 +197,10 @@ class View_PersonResponsible extends Component {
                                                     name="first_name"
                                                     className={`form-control ${
                                                         this.hasErrorFor(
-                                                            "first_name"
+                                                            'first_name'
                                                         )
-                                                            ? "is-invalid"
-                                                            : ""
+                                                            ? 'is-invalid'
+                                                            : ''
                                                     }`}
                                                     placeholder="กรอกชื่อผู้ใช้"
                                                     type="text"
@@ -212,7 +212,7 @@ class View_PersonResponsible extends Component {
                                                     }
                                                 />
                                                 {this.renderErrorFor(
-                                                    "first_name"
+                                                    'first_name'
                                                 )}
                                             </Col>
 
@@ -225,10 +225,10 @@ class View_PersonResponsible extends Component {
                                                     name="last_name"
                                                     className={`form-control ${
                                                         this.hasErrorFor(
-                                                            "last_name"
+                                                            'last_name'
                                                         )
-                                                            ? "is-invalid"
-                                                            : ""
+                                                            ? 'is-invalid'
+                                                            : ''
                                                     }`}
                                                     placeholder="กรอกชื่อผู้ใช้"
                                                     type="text"
@@ -238,7 +238,7 @@ class View_PersonResponsible extends Component {
                                                     }
                                                 />
                                                 {this.renderErrorFor(
-                                                    "last_name"
+                                                    'last_name'
                                                 )}
                                             </Col>
                                         </Row>
@@ -253,10 +253,10 @@ class View_PersonResponsible extends Component {
                                                     name="nick_name"
                                                     className={`form-control ${
                                                         this.hasErrorFor(
-                                                            "nick_name"
+                                                            'nick_name'
                                                         )
-                                                            ? "is-invalid"
-                                                            : ""
+                                                            ? 'is-invalid'
+                                                            : ''
                                                     }`}
                                                     placeholder="กรอกชื่อผู้ใช้"
                                                     type="text"
@@ -266,7 +266,7 @@ class View_PersonResponsible extends Component {
                                                     }
                                                 />
                                                 {this.renderErrorFor(
-                                                    "nick_name"
+                                                    'nick_name'
                                                 )}
                                             </Col>
                                         </Row>
@@ -281,10 +281,10 @@ class View_PersonResponsible extends Component {
                                                     name="telephone"
                                                     className={`form-control ${
                                                         this.hasErrorFor(
-                                                            "telephone"
+                                                            'telephone'
                                                         )
-                                                            ? "is-invalid"
-                                                            : ""
+                                                            ? 'is-invalid'
+                                                            : ''
                                                     }`}
                                                     placeholder="กรอกชื่อผู้ใช้"
                                                     type="text"
@@ -294,7 +294,7 @@ class View_PersonResponsible extends Component {
                                                     }
                                                 />
                                                 {this.renderErrorFor(
-                                                    "telephone"
+                                                    'telephone'
                                                 )}
                                             </Col>
                                             <Col md="6" className="form-group">
@@ -306,10 +306,10 @@ class View_PersonResponsible extends Component {
                                                     name="email"
                                                     className={`form-control ${
                                                         this.hasErrorFor(
-                                                            "email"
+                                                            'email'
                                                         )
-                                                            ? "is-invalid"
-                                                            : ""
+                                                            ? 'is-invalid'
+                                                            : ''
                                                     }`}
                                                     placeholder="กรอกชื่อผู้ใช้"
                                                     type="text"
@@ -318,7 +318,7 @@ class View_PersonResponsible extends Component {
                                                         this.handleFieldChange
                                                     }
                                                 />
-                                                {this.renderErrorFor("email")}
+                                                {this.renderErrorFor('email')}
                                             </Col>
                                         </Row>
 
@@ -332,10 +332,10 @@ class View_PersonResponsible extends Component {
                                                     name="position"
                                                     className={`form-control ${
                                                         this.hasErrorFor(
-                                                            "position"
+                                                            'position'
                                                         )
-                                                            ? "is-invalid"
-                                                            : ""
+                                                            ? 'is-invalid'
+                                                            : ''
                                                     }`}
                                                     placeholder="กรอกชื่อผู้ใช้"
                                                     type="text"
@@ -345,7 +345,7 @@ class View_PersonResponsible extends Component {
                                                     }
                                                 />
                                                 {this.renderErrorFor(
-                                                    "position"
+                                                    'position'
                                                 )}
                                             </Col>
                                         </Row>
@@ -360,10 +360,10 @@ class View_PersonResponsible extends Component {
                                                     name="location_id"
                                                     className={`form-control ${
                                                         this.hasErrorFor(
-                                                            "location_id"
+                                                            'location_id'
                                                         )
-                                                            ? "is-invalid"
-                                                            : ""
+                                                            ? 'is-invalid'
+                                                            : ''
                                                     }`}
                                                     value={
                                                         this.state.location_id
@@ -392,7 +392,7 @@ class View_PersonResponsible extends Component {
                                                     )}
                                                 </FormSelect>
                                                 {this.renderErrorFor(
-                                                    "location_id"
+                                                    'location_id'
                                                 )}
                                             </Col>
                                         </Row>
@@ -407,10 +407,10 @@ class View_PersonResponsible extends Component {
                                                     name="company_id"
                                                     className={`form-control ${
                                                         this.hasErrorFor(
-                                                            "company_id"
+                                                            'company_id'
                                                         )
-                                                            ? "is-invalid"
-                                                            : ""
+                                                            ? 'is-invalid'
+                                                            : ''
                                                     }`}
                                                     value={
                                                         this.state.company_id
@@ -439,7 +439,7 @@ class View_PersonResponsible extends Component {
                                                     )}
                                                 </FormSelect>
                                                 {this.renderErrorFor(
-                                                    "company_id"
+                                                    'company_id'
                                                 )}
                                             </Col>
                                         </Row>
@@ -454,10 +454,10 @@ class View_PersonResponsible extends Component {
                                                     name="department_id"
                                                     className={`form-control ${
                                                         this.hasErrorFor(
-                                                            "department_id"
+                                                            'department_id'
                                                         )
-                                                            ? "is-invalid"
-                                                            : ""
+                                                            ? 'is-invalid'
+                                                            : ''
                                                     }`}
                                                     value={
                                                         this.state.department_id
@@ -489,7 +489,7 @@ class View_PersonResponsible extends Component {
                                                     )}
                                                 </FormSelect>
                                                 {this.renderErrorFor(
-                                                    "department_id"
+                                                    'department_id'
                                                 )}
                                             </Col>
                                         </Row>

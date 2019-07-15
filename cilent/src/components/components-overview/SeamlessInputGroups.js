@@ -1,11 +1,11 @@
-import React from "react";
+import React from 'react';
 import {
     InputGroup,
     InputGroupAddon,
     InputGroupText,
     FormInput,
     Button
-} from "shards-react";
+} from 'shards-react';
 
 const SeamlessInputGroups = () => (
     <div>

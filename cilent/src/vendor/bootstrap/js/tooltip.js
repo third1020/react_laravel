@@ -23,15 +23,15 @@
  * SOFTWARE.
  */
 (function(global, factory) {
-    typeof exports === "object" && typeof module !== "undefined"
-        ? (module.exports = factory(require("popper.js")))
-        : typeof define === "function" && define.amd
-        ? define(["popper.js"], factory)
+    typeof exports === 'object' && typeof module !== 'undefined'
+        ? (module.exports = factory(require('popper.js')))
+        : typeof define === 'function' && define.amd
+        ? define(['popper.js'], factory)
         : (global.Tooltip = factory(global.Popper));
 })(this, function(Popper) {
-    "use strict";
+    'use strict';
 
-    Popper = Popper && "default" in Popper ? Popper["default"] : Popper;
+    Popper = Popper && 'default' in Popper ? Popper['default'] : Popper;
 
     /**
      * Check if the given variable is a function
@@ -44,13 +44,13 @@
         var getType = {};
         return (
             functionToCheck &&
-            getType.toString.call(functionToCheck) === "[object Function]"
+            getType.toString.call(functionToCheck) === '[object Function]'
         );
     }
 
     var classCallCheck = function(instance, Constructor) {
         if (!(instance instanceof Constructor)) {
-            throw new TypeError("Cannot call a class as a function");
+            throw new TypeError('Cannot call a class as a function');
         }
     };
 
@@ -60,7 +60,7 @@
                 var descriptor = props[i];
                 descriptor.enumerable = descriptor.enumerable || false;
                 descriptor.configurable = true;
-                if ("value" in descriptor) descriptor.writable = true;
+                if ('value' in descriptor) descriptor.writable = true;
                 Object.defineProperty(target, descriptor.key, descriptor);
             }
         }
@@ -92,11 +92,11 @@
         container: false,
         delay: 0,
         html: false,
-        placement: "top",
-        title: "",
+        placement: 'top',
+        title: '',
         template:
             '<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner"></div></div>',
-        trigger: "hover focus",
+        trigger: 'hover focus',
         offset: 0
     };
 
@@ -150,10 +150,10 @@
 
             // get events list
             var events =
-                typeof options.trigger === "string"
-                    ? options.trigger.split(" ").filter(function(trigger) {
+                typeof options.trigger === 'string'
+                    ? options.trigger.split(' ').filter(function(trigger) {
                           return (
-                              ["click", "hover", "focus"].indexOf(trigger) !==
+                              ['click', 'hover', 'focus'].indexOf(trigger) !==
                               -1
                           );
                       })
@@ -205,7 +205,7 @@
 
         createClass(Tooltip, [
             {
-                key: "_create",
+                key: '_create',
 
                 /**
                  * Creates a new tooltip node
@@ -219,19 +219,19 @@
                  */
                 value: function _create(reference, template, title, allowHtml) {
                     // create tooltip element
-                    var tooltipGenerator = window.document.createElement("div");
+                    var tooltipGenerator = window.document.createElement('div');
                     tooltipGenerator.innerHTML = template.trim();
                     var tooltipNode = tooltipGenerator.childNodes[0];
 
                     // add unique ID to our tooltip (needed for accessibility reasons)
                     tooltipNode.id =
-                        "tooltip_" +
+                        'tooltip_' +
                         Math.random()
                             .toString(36)
                             .substr(2, 10);
 
                     // set initial `aria-hidden` state to `false` (it's visible!)
-                    tooltipNode.setAttribute("aria-hidden", "false");
+                    tooltipNode.setAttribute('aria-hidden', 'false');
 
                     // add title to tooltip
                     var titleNode = tooltipGenerator.querySelector(
@@ -258,7 +258,7 @@
                 }
             },
             {
-                key: "_show",
+                key: '_show',
                 value: function _show(reference, options) {
                     // don't show if it's already visible
                     if (this._isOpen) {
@@ -268,15 +268,15 @@
 
                     // if the tooltipNode already exists, just show it
                     if (this._tooltipNode) {
-                        this._tooltipNode.style.display = "";
-                        this._tooltipNode.setAttribute("aria-hidden", "false");
+                        this._tooltipNode.style.display = '';
+                        this._tooltipNode.setAttribute('aria-hidden', 'false');
                         this.popperInstance.update();
                         return this;
                     }
 
                     // get title
                     var title =
-                        reference.getAttribute("title") || options.title;
+                        reference.getAttribute('title') || options.title;
 
                     // don't show tooltip if no title is defined
                     if (!title) {
@@ -292,7 +292,7 @@
                     );
 
                     // Add `aria-describedby` to our reference element for accessibility reasons
-                    reference.setAttribute("aria-describedby", tooltipNode.id);
+                    reference.setAttribute('aria-describedby', tooltipNode.id);
 
                     // append tooltip to container
                     var container = this._findContainer(
@@ -334,7 +334,7 @@
                 }
             },
             {
-                key: "_hide",
+                key: '_hide',
                 value: function _hide() /*reference, options*/ {
                     // don't hide if it's already hidden
                     if (!this._isOpen) {
@@ -344,14 +344,14 @@
                     this._isOpen = false;
 
                     // hide tooltipNode
-                    this._tooltipNode.style.display = "none";
-                    this._tooltipNode.setAttribute("aria-hidden", "true");
+                    this._tooltipNode.style.display = 'none';
+                    this._tooltipNode.setAttribute('aria-hidden', 'true');
 
                     return this;
                 }
             },
             {
-                key: "_dispose",
+                key: '_dispose',
                 value: function _dispose() {
                     var _this = this;
 
@@ -380,10 +380,10 @@
                 }
             },
             {
-                key: "_findContainer",
+                key: '_findContainer',
                 value: function _findContainer(container, reference) {
                     // if container is a query, get the relative element
-                    if (typeof container === "string") {
+                    if (typeof container === 'string') {
                         container = window.document.querySelector(container);
                     } else if (container === false) {
                         // if container is `false`, set it to reference parent
@@ -401,13 +401,13 @@
                  */
             },
             {
-                key: "_append",
+                key: '_append',
                 value: function _append(tooltipNode, container) {
                     container.appendChild(tooltipNode);
                 }
             },
             {
-                key: "_setEventListeners",
+                key: '_setEventListeners',
                 value: function _setEventListeners(reference, events, options) {
                     var _this2 = this;
 
@@ -416,17 +416,17 @@
 
                     events.forEach(function(event) {
                         switch (event) {
-                            case "hover":
-                                directEvents.push("mouseenter");
-                                oppositeEvents.push("mouseleave");
+                            case 'hover':
+                                directEvents.push('mouseenter');
+                                oppositeEvents.push('mouseleave');
                                 break;
-                            case "focus":
-                                directEvents.push("focus");
-                                oppositeEvents.push("blur");
+                            case 'focus':
+                                directEvents.push('focus');
+                                oppositeEvents.push('blur');
                                 break;
-                            case "click":
-                                directEvents.push("click");
-                                oppositeEvents.push("click");
+                            case 'click':
+                                directEvents.push('click');
+                                oppositeEvents.push('click');
                                 break;
                         }
                     });
@@ -468,7 +468,7 @@
                 }
             },
             {
-                key: "_scheduleShow",
+                key: '_scheduleShow',
                 value: function _scheduleShow(
                     reference,
                     delay,
@@ -484,7 +484,7 @@
                 }
             },
             {
-                key: "_scheduleHide",
+                key: '_scheduleHide',
                 value: function _scheduleHide(reference, delay, options, evt) {
                     var _this4 = this;
 
@@ -500,7 +500,7 @@
 
                         // if we are hiding because of a mouseleave, we must check that the new
                         // reference isn't the tooltip, because in this case we don't want to hide it
-                        if (evt.type === "mouseleave") {
+                        if (evt.type === 'mouseleave') {
                             var isSet = _this4._setTooltipNodeEvent(
                                 evt,
                                 reference,
@@ -562,8 +562,8 @@
             }
         };
 
-        this.arrowSelector = ".tooltip-arrow, .tooltip__arrow";
-        this.innerSelector = ".tooltip-inner, .tooltip__inner";
+        this.arrowSelector = '.tooltip-arrow, .tooltip__arrow';
+        this.innerSelector = '.tooltip-inner, .tooltip__inner';
         this._events = [];
 
         this._setTooltipNodeEvent = function(evt, reference, delay, options) {
