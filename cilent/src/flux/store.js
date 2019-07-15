@@ -5,49 +5,49 @@ import Constants from "./constants";
 import getSidebarNavItems from "../data/sidebar-nav-items";
 
 let _store = {
-  menuVisible: false,
-  navItems: getSidebarNavItems()
+    menuVisible: false,
+    navItems: getSidebarNavItems()
 };
 
 class Store extends EventEmitter {
-  constructor() {
-    super();
+    constructor() {
+        super();
 
-    this.registerToActions = this.registerToActions.bind(this);
-    this.toggleSidebar = this.toggleSidebar.bind(this);
+        this.registerToActions = this.registerToActions.bind(this);
+        this.toggleSidebar = this.toggleSidebar.bind(this);
 
-    Dispatcher.register(this.registerToActions.bind(this));
-  }
-
-  registerToActions({ actionType, payload }) {
-    switch (actionType) {
-      case Constants.TOGGLE_SIDEBAR:
-        this.toggleSidebar();
-        break;
-      default:
+        Dispatcher.register(this.registerToActions.bind(this));
     }
-  }
 
-  toggleSidebar() {
-    _store.menuVisible = !_store.menuVisible;
-    this.emit(Constants.CHANGE);
-  }
+    registerToActions({ actionType, payload }) {
+        switch (actionType) {
+            case Constants.TOGGLE_SIDEBAR:
+                this.toggleSidebar();
+                break;
+            default:
+        }
+    }
 
-  getMenuState() {
-    return _store.menuVisible;
-  }
+    toggleSidebar() {
+        _store.menuVisible = !_store.menuVisible;
+        this.emit(Constants.CHANGE);
+    }
 
-  getSidebarItems() {
-    return _store.navItems;
-  }
+    getMenuState() {
+        return _store.menuVisible;
+    }
 
-  addChangeListener(callback) {
-    this.on(Constants.CHANGE, callback);
-  }
+    getSidebarItems() {
+        return _store.navItems;
+    }
 
-  removeChangeListener(callback) {
-    this.removeListener(Constants.CHANGE, callback);
-  }
+    addChangeListener(callback) {
+        this.on(Constants.CHANGE, callback);
+    }
+
+    removeChangeListener(callback) {
+        this.removeListener(Constants.CHANGE, callback);
+    }
 }
 
 export default new Store();

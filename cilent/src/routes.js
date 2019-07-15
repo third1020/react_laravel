@@ -11,7 +11,7 @@ import Errors from "./views/Errors";
 import ComponentsOverview from "./views/ComponentsOverview";
 import Tables from "./views/Tables";
 import BlogPosts from "./views/BlogPosts";
-import View_user from './js/components/User/view_user';
+import View_user from "./js/components/User/view_user";
 
 import ManageUser from "./js/components/User/list_user";
 import ManageAddress from "./js/components/ManageAddress/list_address";
@@ -58,7 +58,6 @@ import Add_RequestIssuses from "./js/components/ManageRequestIssuses/add_request
 import Add_SettingNews from "./js/components/ManageSettingNews/add_settingnews";
 import Add_SubDistrict from "./js/components/ManageSubDistrict/add_subdistrict";
 
-
 import Update_permission from "./js/components/ManagePermission/update_permission";
 import Update_address from "./js/components/ManageAddress/update_address";
 import Update_company from "./js/components/ManageCompany/update_company";
@@ -80,9 +79,6 @@ import Update_RequestIssuses from "./js/components/ManageRequestIssuses/update_r
 import Update_SettingNews from "./js/components/ManageSettingNews/update_settingnews";
 import Update_SubDistrict from "./js/components/ManageSubDistrict/update_subdistrict";
 
-
-
-
 import View_address from "./js/components/ManageAddress/view_address";
 import View_company from "./js/components/ManageCompany/view_company";
 import View_department from "./js/components/ManageDepartment/view_department";
@@ -103,448 +99,438 @@ import View_RequestIssuses from "./js/components/ManageRequestIssuses/view_reque
 import View_SettingNews from "./js/components/ManageSettingNews/view_settingnews";
 import View_SubDistrict from "./js/components/ManageSubDistrict/view_subdistrict";
 
-
 import Report from "./js/components/Report/report_incident";
 
-
 export default [
+    {
+        path: "/Dashboard",
+        exact: true,
+        layout: DefaultLayout,
+        component: () => <Redirect to="/blog-overview" />
+    },
+    {
+        path: "/blog-overview",
+        layout: DefaultLayout,
+        component: BlogOverview
+    },
 
-  {
-    path: "/Dashboard",
-    exact: true,
-    layout: DefaultLayout,
-    component: () => <Redirect to="/blog-overview" />
-  },
-  {
-    path: "/blog-overview",
-    layout: DefaultLayout,
-    component: BlogOverview
-  },
+    {
+        path: "/ManageUser",
+        layout: DefaultLayout,
+        component: ManageUser
+    },
+    {
+        path: "/ManagePermission",
+        layout: DefaultLayout,
+        component: ManagePermission
+    },
+    {
+        path: "/ManageAddress",
+        layout: DefaultLayout,
+        component: ManageAddress
+    },
+    {
+        path: "/ManageCompany",
+        layout: DefaultLayout,
+        component: ManageCompany
+    },
+    {
+        path: "/ManageDepartment",
+        layout: DefaultLayout,
+        component: ManageDepartment
+    },
+    {
+        path: "/ManageDistrict",
+        layout: DefaultLayout,
+        component: ManageDistrict
+    },
+    {
+        path: "/ManageEquipment",
+        layout: DefaultLayout,
+        component: ManageEquipment
+    },
+    {
+        path: "/ManageImage",
+        layout: DefaultLayout,
+        component: ManageImage
+    },
+    {
+        path: "/ManageImpact",
+        layout: DefaultLayout,
+        component: ManageImpact
+    },
+    {
+        path: "/ManageLocation",
+        layout: DefaultLayout,
+        component: ManageLocation
+    },
+    {
+        path: "/ManageMessage",
+        layout: DefaultLayout,
+        component: ManageMessage
+    },
+    {
+        path: "/ManageModify",
+        layout: DefaultLayout,
+        component: ManageModify
+    },
+    {
+        path: "/ManageNews",
+        layout: DefaultLayout,
+        component: ManageNews
+    },
+    {
+        path: "/ManagePersonContact",
+        layout: DefaultLayout,
+        component: ManagePersonContact
+    },
+    {
+        path: "/ManagePersonResponsible",
+        layout: DefaultLayout,
+        component: ManagePersonResponsible
+    },
+    {
+        path: "/ManagePostalCode",
+        layout: DefaultLayout,
+        component: ManagePostalCode
+    },
+    {
+        path: "/ManagePriority",
+        layout: DefaultLayout,
+        component: ManagePriority
+    },
+    {
+        path: "/ManageProvince",
+        layout: DefaultLayout,
+        component: ManageProvince
+    },
+    {
+        path: "/ManageRequestGeneral",
+        layout: DefaultLayout,
+        component: ManageRequestGeneral
+    },
+    {
+        path: "/ManageRequestIssuses",
+        layout: DefaultLayout,
+        component: ManageRequestIssuses
+    },
+    {
+        path: "/ManageSettingNews",
+        layout: DefaultLayout,
+        component: ManageSettingNews
+    },
+    {
+        path: "/ManageSubDistrict",
+        layout: DefaultLayout,
+        component: ManageSubDistrict
+    },
 
-  {
-    path: "/ManageUser",
-    layout: DefaultLayout,
-    component: ManageUser
-  },
-  {
-    path: "/ManagePermission",
-    layout: DefaultLayout,
-    component: ManagePermission
-  },
-  {
-    path: "/ManageAddress",
-    layout: DefaultLayout,
-    component: ManageAddress
-  },
-  {
-    path: "/ManageCompany",
-    layout: DefaultLayout,
-    component: ManageCompany
-  },
-  {
-    path: "/ManageDepartment",
-    layout: DefaultLayout,
-    component: ManageDepartment
-  },
-  {
-    path: "/ManageDistrict",
-    layout: DefaultLayout,
-    component: ManageDistrict
-  },
-  {
-    path: "/ManageEquipment",
-    layout: DefaultLayout,
-    component: ManageEquipment
-  },
-  {
-    path: "/ManageImage",
-    layout: DefaultLayout,
-    component: ManageImage
-  },
-  {
-    path: "/ManageImpact",
-    layout: DefaultLayout,
-    component: ManageImpact
-  },
-  {
-    path: "/ManageLocation",
-    layout: DefaultLayout,
-    component: ManageLocation
-  },
-  {
-    path: "/ManageMessage",
-    layout: DefaultLayout,
-    component: ManageMessage
-  },
-  {
-    path: "/ManageModify",
-    layout: DefaultLayout,
-    component: ManageModify
-  },
-  {
-    path: "/ManageNews",
-    layout: DefaultLayout,
-    component: ManageNews
-  },
-  {
-    path: "/ManagePersonContact",
-    layout: DefaultLayout,
-    component: ManagePersonContact
-  },
-  {
-    path: "/ManagePersonResponsible",
-    layout: DefaultLayout,
-    component: ManagePersonResponsible
-  },
-  {
-    path: "/ManagePostalCode",
-    layout: DefaultLayout,
-    component: ManagePostalCode
-  },
-  {
-    path: "/ManagePriority",
-    layout: DefaultLayout,
-    component: ManagePriority
-  },
-  {
-    path: "/ManageProvince",
-    layout: DefaultLayout,
-    component: ManageProvince
-  },
-  {
-    path: "/ManageRequestGeneral",
-    layout: DefaultLayout,
-    component: ManageRequestGeneral
-  },
-  {
-    path: "/ManageRequestIssuses",
-    layout: DefaultLayout,
-    component: ManageRequestIssuses
-  },
-  {
-    path: "/ManageSettingNews",
-    layout: DefaultLayout,
-    component: ManageSettingNews
-  },
-  {
-    path: "/ManageSubDistrict",
-    layout: DefaultLayout,
-    component: ManageSubDistrict
-  },
+    {
+        path: "/AddUser",
+        layout: DefaultLayout,
+        component: Add_user
+    },
+    {
+        path: "/AddPermission",
+        layout: DefaultLayout,
+        component: Add_permission
+    },
+    {
+        path: "/AddAddress",
+        layout: DefaultLayout,
+        component: Add_address
+    },
+    {
+        path: "/AddCompany",
+        layout: DefaultLayout,
+        component: Add_company
+    },
+    {
+        path: "/AddDepartment",
+        layout: DefaultLayout,
+        component: Add_department
+    },
+    {
+        path: "/AddDistrict",
+        layout: DefaultLayout,
+        component: Add_district
+    },
+    {
+        path: "/AddEquipment",
+        layout: DefaultLayout,
+        component: Add_equipment
+    },
+    {
+        path: "/AddImpact",
+        layout: DefaultLayout,
+        component: Add_impact
+    },
+    {
+        path: "/AddLocation",
+        layout: DefaultLayout,
+        component: Add_Location
+    },
+    {
+        path: "/AddMessage",
+        layout: DefaultLayout,
+        component: Add_Message
+    },
+    {
+        path: "/AddModify",
+        layout: DefaultLayout,
+        component: Add_Modify
+    },
+    {
+        path: "/AddNews",
+        layout: DefaultLayout,
+        component: Add_News
+    },
+    {
+        path: "/AddPersonContact",
+        layout: DefaultLayout,
+        component: Add_PersonContact
+    },
+    {
+        path: "/AddPersonResponsible",
+        layout: DefaultLayout,
+        component: Add_PersonResponsible
+    },
+    {
+        path: "/AddPostalCode",
+        layout: DefaultLayout,
+        component: Add_PostalCode
+    },
+    {
+        path: "/AddPriority",
+        layout: DefaultLayout,
+        component: Add_Priority
+    },
+    {
+        path: "/AddProvince",
+        layout: DefaultLayout,
+        component: Add_Province
+    },
+    {
+        path: "/AddRequestGeneral",
+        layout: DefaultLayout,
+        component: Add_RequestGeneral
+    },
+    {
+        path: "/AddRequestIssues",
+        layout: DefaultLayout,
+        component: Add_RequestIssuses
+    },
+    {
+        path: "/AddSettingNews",
+        layout: DefaultLayout,
+        component: Add_SettingNews
+    },
+    {
+        path: "/AddSubDistrict",
+        layout: DefaultLayout,
+        component: Add_SubDistrict
+    },
 
-  {
-    path: "/AddUser",
-    layout: DefaultLayout,
-    component: Add_user
-  },
-  {
-    path: "/AddPermission",
-    layout: DefaultLayout,
-    component: Add_permission
-  },
-  {
-    path: "/AddAddress",
-    layout: DefaultLayout,
-    component: Add_address
-  },
-  {
-    path: "/AddCompany",
-    layout: DefaultLayout,
-    component: Add_company
-  },
-  {
-    path: "/AddDepartment",
-    layout: DefaultLayout,
-    component: Add_department
-  },
-  {
-    path: "/AddDistrict",
-    layout: DefaultLayout,
-    component: Add_district
-  },
-  {
-    path: "/AddEquipment",
-    layout: DefaultLayout,
-    component: Add_equipment
-  },
-  {
-    path: "/AddImpact",
-    layout: DefaultLayout,
-    component: Add_impact
-  },
-  {
-    path: "/AddLocation",
-    layout: DefaultLayout,
-    component: Add_Location
-  },
-  {
-    path: "/AddMessage",
-    layout: DefaultLayout,
-    component: Add_Message
-  },
-  {
-    path: "/AddModify",
-    layout: DefaultLayout,
-    component: Add_Modify
-  },
-  {
-    path: "/AddNews",
-    layout: DefaultLayout,
-    component: Add_News
-  },
-  {
-    path: "/AddPersonContact",
-    layout: DefaultLayout,
-    component: Add_PersonContact
-  },
-  {
-    path: "/AddPersonResponsible",
-    layout: DefaultLayout,
-    component: Add_PersonResponsible
-  },
-  {
-    path: "/AddPostalCode",
-    layout: DefaultLayout,
-    component: Add_PostalCode
-  },
-  {
-    path: "/AddPriority",
-    layout: DefaultLayout,
-    component: Add_Priority
-  },
-  {
-    path: "/AddProvince",
-    layout: DefaultLayout,
-    component: Add_Province
-  },
-  {
-    path: "/AddRequestGeneral",
-    layout: DefaultLayout,
-    component: Add_RequestGeneral
-  },
-  {
-    path: "/AddRequestIssues",
-    layout: DefaultLayout,
-    component: Add_RequestIssuses
-  },
-  {
-    path: "/AddSettingNews",
-    layout: DefaultLayout,
-    component: Add_SettingNews
-  },
-  {
-    path: "/AddSubDistrict",
-    layout: DefaultLayout,
-    component: Add_SubDistrict
-  },
+    {
+        path: "/UpdatePermssion/:id",
+        layout: DefaultLayout,
+        component: Update_permission
+    },
+    {
+        path: "/UpdateAddress/:id",
+        layout: DefaultLayout,
+        component: Update_address
+    },
+    {
+        path: "/UpdateCompany/:id",
+        layout: DefaultLayout,
+        component: Update_company
+    },
+    {
+        path: "/UpdateDepartment/:id",
+        layout: DefaultLayout,
+        component: Update_department
+    },
+    {
+        path: "/UpdateDistrict/:id",
+        layout: DefaultLayout,
+        component: Update_district
+    },
+    {
+        path: "/UpdateEquipment/:id",
+        layout: DefaultLayout,
+        component: Update_equipment
+    },
+    {
+        path: "/UpdateImpact/:id",
+        layout: DefaultLayout,
+        component: Update_impact
+    },
+    {
+        path: "/UpdateLocation/:id",
+        layout: DefaultLayout,
+        component: Update_Location
+    },
+    {
+        path: "/UpdateMessage/:id",
+        layout: DefaultLayout,
+        component: Update_Message
+    },
+    {
+        path: "/UpdateModify/:id",
+        layout: DefaultLayout,
+        component: Update_Modify
+    },
+    {
+        path: "/UpdateNews/:id",
+        layout: DefaultLayout,
+        component: Update_News
+    },
+    {
+        path: "/UpdatePersonContact/:id",
+        layout: DefaultLayout,
+        component: Update_PersonContact
+    },
+    {
+        path: "/UpdatePersonResponsible/:id",
+        layout: DefaultLayout,
+        component: Update_PersonResponsible
+    },
+    {
+        path: "/UpdatePostalCode/:id",
+        layout: DefaultLayout,
+        component: Update_PostalCode
+    },
+    {
+        path: "/UpdatePriority/:id",
+        layout: DefaultLayout,
+        component: Update_Priority
+    },
+    {
+        path: "/UpdateProvince/:id",
+        layout: DefaultLayout,
+        component: Update_Province
+    },
+    {
+        path: "/UpdateRequestGeneral/:id",
+        layout: DefaultLayout,
+        component: Update_RequestGeneral
+    },
+    {
+        path: "/UpdateRequestIssuses/:id",
+        layout: DefaultLayout,
+        component: Update_RequestIssuses
+    },
+    {
+        path: "/UpdateSettingNews/:id",
+        layout: DefaultLayout,
+        component: Update_SettingNews
+    },
+    {
+        path: "/UpdateSubDistrict/:id",
+        layout: DefaultLayout,
+        component: Update_SubDistrict
+    },
 
+    {
+        path: "/ViewAddress/:id",
+        layout: DefaultLayout,
+        component: View_address
+    },
+    {
+        path: "/ViewCompany/:id",
+        layout: DefaultLayout,
+        component: View_company
+    },
+    {
+        path: "/ViewDepartment/:id",
+        layout: DefaultLayout,
+        component: View_department
+    },
+    {
+        path: "/ViewDistrict/:id",
+        layout: DefaultLayout,
+        component: View_district
+    },
+    {
+        path: "/ViewEquipment/:id",
+        layout: DefaultLayout,
+        component: View_equipment
+    },
+    {
+        path: "/ViewImpact/:id",
+        layout: DefaultLayout,
+        component: View_impact
+    },
+    {
+        path: "/ViewLocation/:id",
+        layout: DefaultLayout,
+        component: View_Location
+    },
+    {
+        path: "/ViewMessage/:id",
+        layout: DefaultLayout,
+        component: View_Message
+    },
+    {
+        path: "/ViewModify/:id",
+        layout: DefaultLayout,
+        component: View_Modify
+    },
+    {
+        path: "/ViewNews/:id",
+        layout: DefaultLayout,
+        component: View_News
+    },
+    {
+        path: "/ViewPersonContact/:id",
+        layout: DefaultLayout,
+        component: View_PersonContact
+    },
+    {
+        path: "/ViewPersonResponsible/:id",
+        layout: DefaultLayout,
+        component: View_PersonResponsible
+    },
+    {
+        path: "/ViewPostalCode/:id",
+        layout: DefaultLayout,
+        component: View_PostalCode
+    },
+    {
+        path: "/ViewPriority/:id",
+        layout: DefaultLayout,
+        component: View_Priority
+    },
+    {
+        path: "/ViewProvince/:id",
+        layout: DefaultLayout,
+        component: View_Province
+    },
+    {
+        path: "/ViewRequestGeneral/:id",
+        layout: DefaultLayout,
+        component: View_RequestGeneral
+    },
+    {
+        path: "/ViewRequestIssuses/:id",
+        layout: DefaultLayout,
+        component: View_RequestIssuses
+    },
+    {
+        path: "/ViewSettingNews/:id",
+        layout: DefaultLayout,
+        component: View_SettingNews
+    },
+    {
+        path: "/ViewSubDistrict/:id",
+        layout: DefaultLayout,
+        component: View_SubDistrict
+    },
 
-  {
-    path: "/UpdatePermssion/:id",
-    layout: DefaultLayout,
-    component: Update_permission
-  },
-  {
-    path: "/UpdateAddress/:id",
-    layout: DefaultLayout,
-    component: Update_address
-  },
-  {
-    path: "/UpdateCompany/:id",
-    layout: DefaultLayout,
-    component: Update_company
-  },
-  {
-    path: "/UpdateDepartment/:id",
-    layout: DefaultLayout,
-    component: Update_department
-  },
-  {
-    path: "/UpdateDistrict/:id",
-    layout: DefaultLayout,
-    component: Update_district
-  },
-  {
-    path: "/UpdateEquipment/:id",
-    layout: DefaultLayout,
-    component: Update_equipment
-  },
-  {
-    path: "/UpdateImpact/:id",
-    layout: DefaultLayout,
-    component: Update_impact
-  },
-  {
-    path: "/UpdateLocation/:id",
-    layout: DefaultLayout,
-    component: Update_Location
-  },
-  {
-    path: "/UpdateMessage/:id",
-    layout: DefaultLayout,
-    component: Update_Message
-  },
-  {
-    path: "/UpdateModify/:id",
-    layout: DefaultLayout,
-    component: Update_Modify
-  },
-  {
-    path: "/UpdateNews/:id",
-    layout: DefaultLayout,
-    component: Update_News
-  },
-  {
-    path: "/UpdatePersonContact/:id",
-    layout: DefaultLayout,
-    component: Update_PersonContact
-  },
-  {
-    path: "/UpdatePersonResponsible/:id",
-    layout: DefaultLayout,
-    component: Update_PersonResponsible
-  },
-  {
-    path: "/UpdatePostalCode/:id",
-    layout: DefaultLayout,
-    component: Update_PostalCode
-  },
-  {
-    path: "/UpdatePriority/:id",
-    layout: DefaultLayout,
-    component: Update_Priority
-  },
-  {
-    path: "/UpdateProvince/:id",
-    layout: DefaultLayout,
-    component: Update_Province
-  },
-  {
-    path: "/UpdateRequestGeneral/:id",
-    layout: DefaultLayout,
-    component: Update_RequestGeneral
-  },
-  {
-    path: "/UpdateRequestIssuses/:id",
-    layout: DefaultLayout,
-    component: Update_RequestIssuses
-  },
-  {
-    path: "/UpdateSettingNews/:id",
-    layout: DefaultLayout,
-    component: Update_SettingNews
-  },
-  {
-    path: "/UpdateSubDistrict/:id",
-    layout: DefaultLayout,
-    component: Update_SubDistrict
-  },
-
-  {
-    path: "/ViewAddress/:id",
-    layout: DefaultLayout,
-    component: View_address
-  },
-  {
-    path: "/ViewCompany/:id",
-    layout: DefaultLayout,
-    component: View_company
-  },
-  {
-    path: "/ViewDepartment/:id",
-    layout: DefaultLayout,
-    component: View_department
-  },
-  {
-    path: "/ViewDistrict/:id",
-    layout: DefaultLayout,
-    component: View_district
-  },
-  {
-    path: "/ViewEquipment/:id",
-    layout: DefaultLayout,
-    component: View_equipment
-  },
-  {
-    path: "/ViewImpact/:id",
-    layout: DefaultLayout,
-    component: View_impact
-  },
-  {
-    path: "/ViewLocation/:id",
-    layout: DefaultLayout,
-    component: View_Location
-  },
-  {
-    path: "/ViewMessage/:id",
-    layout: DefaultLayout,
-    component: View_Message
-  },
-  {
-    path: "/ViewModify/:id",
-    layout: DefaultLayout,
-    component: View_Modify
-  },
-  {
-    path: "/ViewNews/:id",
-    layout: DefaultLayout,
-    component: View_News
-  },
-  {
-    path: "/ViewPersonContact/:id",
-    layout: DefaultLayout,
-    component: View_PersonContact
-  },
-  {
-    path: "/ViewPersonResponsible/:id",
-    layout: DefaultLayout,
-    component: View_PersonResponsible
-  },
-  {
-    path: "/ViewPostalCode/:id",
-    layout: DefaultLayout,
-    component: View_PostalCode
-  },
-  {
-    path: "/ViewPriority/:id",
-    layout: DefaultLayout,
-    component: View_Priority
-  },
-  {
-    path: "/ViewProvince/:id",
-    layout: DefaultLayout,
-    component: View_Province
-  },
-  {
-    path: "/ViewRequestGeneral/:id",
-    layout: DefaultLayout,
-    component: View_RequestGeneral
-  },
-  {
-    path: "/ViewRequestIssuses/:id",
-    layout: DefaultLayout,
-    component: View_RequestIssuses
-  },
-  {
-    path: "/ViewSettingNews/:id",
-    layout: DefaultLayout,
-    component: View_SettingNews
-  },
-  {
-    path: "/ViewSubDistrict/:id",
-    layout: DefaultLayout,
-    component: View_SubDistrict
-  },
-
-
-
-
-  {
-    path: "/Report",
-    layout: DefaultLayout,
-    component: Report
-  },
-
-
-
+    {
+        path: "/Report",
+        layout: DefaultLayout,
+        component: Report
+    }
 ];
