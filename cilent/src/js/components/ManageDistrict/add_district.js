@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
-import Select from 'react-select';
+import React, { Component } from "react";
+import ReactDOM from "react-dom";
+import Select from "react-select";
 import {
     ListGroup,
     ListGroupItem,
@@ -13,21 +13,21 @@ import {
     FormSelect,
     Button,
     Container
-} from 'shards-react';
-import Swal from 'sweetalert2';
-import axios from 'axios';
-import { ToastContainer } from 'react-toastr';
-import '../../../css/alert.css';
-import '../../../css/animate.css';
-import HocValidateUser from '../../../HocValidateUser';
+} from "shards-react";
+import Swal from "sweetalert2";
+import axios from "axios";
+import { ToastContainer } from "react-toastr";
+import "../../../css/alert.css";
+import "../../../css/animate.css";
+import HocValidateUser from "../../../HocValidateUser";
 let container;
 
 class Add_district extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            name: '',
-            province_id: '',
+            name: "",
+            province_id: "",
 
             getprovince: [],
             errors: []
@@ -56,13 +56,13 @@ class Add_district extends Component {
         console.log(insertdata);
 
         axios
-            .post('/api/district/store', insertdata)
+            .post("/api/district/store", insertdata)
             .then(response => {
-                Swal.fire('Successfully', 'Add data successfully ', 'success');
+                Swal.fire("Successfully", "Add data successfully ", "success");
 
                 this.setState({
-                    name: '',
-                    province_id: '',
+                    name: "",
+                    province_id: "",
                     errors: []
                 });
             })
@@ -72,7 +72,7 @@ class Add_district extends Component {
                 });
                 console.log(error.response.data.errors);
 
-                Swal.fire('Errors', 'check the value of a form field', 'error');
+                Swal.fire("Errors", "check the value of a form field", "error");
             });
     }
 
@@ -92,7 +92,7 @@ class Add_district extends Component {
 
     componentDidMount() {
         axios
-            .get('/api/province/index')
+            .get("/api/province/index")
             .then(res => {
                 this.setState({
                     getprovince: res.data
@@ -109,7 +109,7 @@ class Add_district extends Component {
     render() {
         const { getprovince } = this.state;
         return (
-            <div style={{ paddingTop: '30px' }}>
+            <div style={{ paddingTop: "30px" }}>
                 <Container>
                     <ListGroup flush>
                         <ListGroupItem className="p-3">
@@ -125,9 +125,9 @@ class Add_district extends Component {
                                                     id="name"
                                                     name="name"
                                                     className={`form-control ${
-                                                        this.hasErrorFor('name')
-                                                            ? 'is-invalid'
-                                                            : ''
+                                                        this.hasErrorFor("name")
+                                                            ? "is-invalid"
+                                                            : ""
                                                     }`}
                                                     placeholder="กรอกชื่อผู้ใช้"
                                                     type="text"
@@ -136,7 +136,7 @@ class Add_district extends Component {
                                                         this.handleFieldChange
                                                     }
                                                 />
-                                                {this.renderErrorFor('name')}
+                                                {this.renderErrorFor("name")}
                                             </Col>
                                         </Row>
 
@@ -150,10 +150,10 @@ class Add_district extends Component {
                                                     name="province_id"
                                                     className={`form-control ${
                                                         this.hasErrorFor(
-                                                            'province_id'
+                                                            "province_id"
                                                         )
-                                                            ? 'is-invalid'
-                                                            : ''
+                                                            ? "is-invalid"
+                                                            : ""
                                                     }`}
                                                     value={
                                                         this.state.province_id
@@ -182,7 +182,7 @@ class Add_district extends Component {
                                                     )}
                                                 </FormSelect>
                                                 {this.renderErrorFor(
-                                                    'province_id'
+                                                    "province_id"
                                                 )}
                                             </Col>
                                         </Row>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 class E404 extends React.Component {
     render() {

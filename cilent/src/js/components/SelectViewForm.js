@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import View_user from './User/view_user';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import View_user from "./User/view_user";
 // import Update_permission from './manage_permission/update_permission';
 // import Update_contact from './manage_contact/update_contact';
 // import Update_equipment from './manage_equipment/update_equipment';
@@ -29,13 +29,13 @@ import View_user from './User/view_user';
 // { this.props.ChooseUpdateForm == "problems" ? (<Update_problems id={this.props.id}/>) :null }
 // { this.props.ChooseUpdateForm == "request" ? (<Update_request id={this.props.id}/>) :null }
 
-import { Button, Form } from 'react-bootstrap';
+import { Button, Form } from "react-bootstrap";
 
 export default class SelectViewForm extends Component {
     render() {
         return (
             <div>
-                {this.props.ChooseUpdateForm == 'user' ? (
+                {this.props.ChooseUpdateForm == "user" ? (
                     <View_user
                         id={this.props.id}
                         updateurl={this.props.updateurl}

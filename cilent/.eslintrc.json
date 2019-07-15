@@ -13,8 +13,6 @@
     "jest": true
   },
   "rules": {
-	"react/jsx-uses-react": "error",   
-    "react/jsx-uses-vars": "error" ,
     "no-console": "off",
     "react/prop-types": "off",
     "prettier/prettier": [
@@ -24,7 +22,7 @@
         "semi": true
       }
     ],
-    "no-unused-vars": ["error", { "vars": "all", "args": "after-used", "ignoreRestSiblings": false }]
+    "no-unused-vars": ["error", { "ignoreRestSiblings": true }]
   },
   "plugins": ["react", "prettier"],
   "extends": [

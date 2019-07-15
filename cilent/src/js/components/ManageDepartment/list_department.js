@@ -1,18 +1,18 @@
-import React from 'react';
-import DataTable from '../DataTable';
-import clsx from 'clsx';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
-import HocValidateUser from '../../../HocValidateUser';
+import React from "react";
+import DataTable from "../DataTable";
+import clsx from "clsx";
+import { makeStyles, useTheme } from "@material-ui/core/styles";
+import HocValidateUser from "../../../HocValidateUser";
 
 const drawerWidth = 240;
 
 const useStyles = makeStyles(theme => ({
     root: {
-        display: 'flex'
+        display: "flex"
     },
     appBar: {
         zIndex: theme.zIndex.drawer + 1,
-        transition: theme.transitions.create(['width', 'margin'], {
+        transition: theme.transitions.create(["width", "margin"], {
             easing: theme.transitions.easing.sharp,
             duration: theme.transitions.duration.leavingScreen
         })
@@ -20,7 +20,7 @@ const useStyles = makeStyles(theme => ({
     appBarShift: {
         marginLeft: drawerWidth,
         width: `calc(100% - ${drawerWidth}px)`,
-        transition: theme.transitions.create(['width', 'margin'], {
+        transition: theme.transitions.create(["width", "margin"], {
             easing: theme.transitions.easing.sharp,
             duration: theme.transitions.duration.enteringScreen
         })
@@ -29,36 +29,36 @@ const useStyles = makeStyles(theme => ({
         marginRight: 36
     },
     hide: {
-        display: 'none'
+        display: "none"
     },
     drawer: {
         width: drawerWidth,
         flexShrink: 0,
-        whiteSpace: 'nowrap'
+        whiteSpace: "nowrap"
     },
     drawerOpen: {
         width: drawerWidth,
-        transition: theme.transitions.create('width', {
+        transition: theme.transitions.create("width", {
             easing: theme.transitions.easing.sharp,
             duration: theme.transitions.duration.enteringScreen
         })
     },
     drawerClose: {
-        transition: theme.transitions.create('width', {
+        transition: theme.transitions.create("width", {
             easing: theme.transitions.easing.sharp,
             duration: theme.transitions.duration.leavingScreen
         }),
-        overflowX: 'hidden',
+        overflowX: "hidden",
         width: theme.spacing(7) + 1,
-        [theme.breakpoints.up('sm')]: {
+        [theme.breakpoints.up("sm")]: {
             width: theme.spacing(9) + 1
         }
     },
     toolbar: {
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'flex-end',
-        padding: '0 8px',
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "flex-end",
+        padding: "0 8px",
         ...theme.mixins.toolbar
     },
     content: {
@@ -69,23 +69,23 @@ const useStyles = makeStyles(theme => ({
 
 function ManageDepartment() {
     const classes = useStyles();
-    const columns = ['id', 'name', 'Action'];
+    const columns = ["id", "name", "Action"];
 
     return (
         <div>
             <DataTable
                 url="/api/department"
                 columns={columns}
-                name={'department'}
-                headname={' List Department - ข้อมูลแผนก '}
-                headTablename={'ตารางแสดงข้อมูลแผนก'}
-                edit={'แก้ไข'}
-                delete={'ลบ'}
-                addlink={'/AddDepartment'}
-                addbutton={'Add Department'}
-                manage={'ManageDepartment'}
-                updateurl={'UpdateDepartment'}
-                viewurl={'ViewDepartment'}
+                name={"department"}
+                headname={" List Department - ข้อมูลแผนก "}
+                headTablename={"ตารางแสดงข้อมูลแผนก"}
+                edit={"แก้ไข"}
+                delete={"ลบ"}
+                addlink={"/AddDepartment"}
+                addbutton={"Add Department"}
+                manage={"ManageDepartment"}
+                updateurl={"UpdateDepartment"}
+                viewurl={"ViewDepartment"}
             />
         </div>
     );

@@ -1,8 +1,8 @@
-import React from 'react';
-import { Nav } from 'shards-react';
+import React from "react";
+import { Nav } from "shards-react";
 
-import SidebarNavItem from './SidebarNavItem';
-import { Store } from '../../../flux';
+import SidebarNavItem from "./SidebarNavItem";
+import { Store } from "../../../flux";
 
 class SidebarNavItems extends React.Component {
     constructor(props) {
@@ -38,15 +38,15 @@ class SidebarNavItems extends React.Component {
             <div key={idx}>
                 <h4
                     style={{
-                        borderTopStyle: 'solid',
-                        borderTopWidth: 'thin',
-                        textTransform: 'uppercase',
-                        fontWeight: '600',
-                        fontSize: '12px',
-                        letterSpacing: '1px',
-                        color: 'rgb(138, 147, 165)',
-                        padding: '10px 20px 0px',
-                        margin: '10px 0px 0px'
+                        borderTopStyle: "solid",
+                        borderTopWidth: "thin",
+                        textTransform: "uppercase",
+                        fontWeight: "600",
+                        fontSize: "12px",
+                        letterSpacing: "1px",
+                        color: "rgb(138, 147, 165)",
+                        padding: "10px 20px 0px",
+                        margin: "10px 0px 0px"
                     }}
                 >
                     {nameNav}
@@ -63,32 +63,32 @@ class SidebarNavItems extends React.Component {
                 <Nav className="nav--no-borders flex-column">
                     {items.map((item, idx) => {
                         switch (item.title) {
-                            case 'ManageUser':
-                                return this.itemNav('User', idx, item);
-                            case 'ManagePersonContact':
-                                return this.itemNav('Person', idx, item);
+                            case "ManageUser":
+                                return this.itemNav("User", idx, item);
+                            case "ManagePersonContact":
+                                return this.itemNav("Person", idx, item);
                             // case 'ManagePersonContact':
                             //   return itemNav("Address", idx, item);;
-                            case 'ManageAddress':
-                                return this.itemNav('Address', idx, item);
-                            case 'ManageEquipment':
-                                return this.itemNav('Equipment', idx, item);
-                            case 'ManageRequestGeneral':
-                                return this.itemNav('Request', idx, item);
-                            case 'ManageNews':
-                                return this.itemNav('News', idx, item);
-                            case 'ManageImage':
-                                return this.itemNav('Image', idx, item);
-                            case 'ManageMessage':
-                                return this.itemNav('Message', idx, item);
-                            case 'ManageModify':
-                                return this.itemNav('Modify', idx, item);
-                            case 'ManagePriority':
-                                return this.itemNav('Priority', idx, item);
-                            case 'ManageImpact':
-                                return this.itemNav('Impact', idx, item);
-                            case 'Report':
-                                return this.itemNav('Report', idx, item);
+                            case "ManageAddress":
+                                return this.itemNav("Address", idx, item);
+                            case "ManageEquipment":
+                                return this.itemNav("Equipment", idx, item);
+                            case "ManageRequestGeneral":
+                                return this.itemNav("Request", idx, item);
+                            case "ManageNews":
+                                return this.itemNav("News", idx, item);
+                            case "ManageImage":
+                                return this.itemNav("Image", idx, item);
+                            case "ManageMessage":
+                                return this.itemNav("Message", idx, item);
+                            case "ManageModify":
+                                return this.itemNav("Modify", idx, item);
+                            case "ManagePriority":
+                                return this.itemNav("Priority", idx, item);
+                            case "ManageImpact":
+                                return this.itemNav("Impact", idx, item);
+                            case "Report":
+                                return this.itemNav("Report", idx, item);
                             default:
                                 return <SidebarNavItem key={idx} item={item} />;
                         }

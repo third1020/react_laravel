@@ -1,7 +1,7 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { NavLink as RouteNavLink } from 'react-router-dom';
-import { NavItem, NavLink, Button } from 'shards-react';
+import React from "react";
+import PropTypes from "prop-types";
+import { NavLink as RouteNavLink } from "react-router-dom";
+import { NavItem, NavLink, Button } from "shards-react";
 
 const SidebarNavItem = ({ item }) => (
     <NavItem>

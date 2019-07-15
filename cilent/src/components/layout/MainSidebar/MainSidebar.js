@@ -1,13 +1,13 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import classNames from 'classnames';
-import { Col } from 'shards-react';
+import React from "react";
+import PropTypes from "prop-types";
+import classNames from "classnames";
+import { Col } from "shards-react";
 
-import SidebarMainNavbar from './SidebarMainNavbar';
-import SidebarSearch from './SidebarSearch';
-import SidebarNavItems from './SidebarNavItems';
+import SidebarMainNavbar from "./SidebarMainNavbar";
+import SidebarSearch from "./SidebarSearch";
+import SidebarNavItems from "./SidebarNavItems";
 
-import { Store } from '../../../flux';
+import { Store } from "../../../flux";
 
 class MainSidebar extends React.Component {
     constructor(props) {
@@ -39,10 +39,10 @@ class MainSidebar extends React.Component {
 
     render() {
         const classes = classNames(
-            'main-sidebar',
-            'px-0',
-            'col-12',
-            this.state.menuVisible && 'open'
+            "main-sidebar",
+            "px-0",
+            "col-12",
+            this.state.menuVisible && "open"
         );
 
         return (

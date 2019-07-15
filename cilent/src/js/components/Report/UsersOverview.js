@@ -1,6 +1,6 @@
-import React from 'react';
-import Swal from 'sweetalert2';
-import axios from 'axios';
+import React from "react";
+import Swal from "sweetalert2";
+import axios from "axios";
 import {
     Row,
     Col,
@@ -12,8 +12,8 @@ import {
     DatePicker,
     InputGroupAddon,
     InputGroupText
-} from 'shards-react';
-import classNames from 'classnames';
+} from "shards-react";
+import classNames from "classnames";
 
 import {
     LineChart,
@@ -23,25 +23,25 @@ import {
     YAxis,
     Tooltip,
     Legend
-} from 'recharts';
-import '../../../assets/range-date-picker.css';
+} from "recharts";
+import "../../../assets/range-date-picker.css";
 
 class UsersOverview extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            startDate: '',
-            endDate: '',
-            arrayday: '',
+            startDate: "",
+            endDate: "",
+            arrayday: "",
             numday: 28,
-            name: 'test',
+            name: "test",
             getrequestgeneral: [],
             getrequestissues: [],
             width: window.innerWidth,
             data: [
-                { name: '', คำร้องทั่วไป: 0 },
-                { name: '', คำร้องปัญหาต่างๆ: 0 }
+                { name: "", คำร้องทั่วไป: 0 },
+                { name: "", คำร้องปัญหาต่างๆ: 0 }
             ]
         };
 
@@ -67,7 +67,7 @@ class UsersOverview extends React.Component {
 
     appendLeadingZeroes(n) {
         if (n <= 9) {
-            return '0' + n;
+            return "0" + n;
         }
         return n;
     }
@@ -96,37 +96,37 @@ class UsersOverview extends React.Component {
             numday: count,
             arrayday: arr
         });
-        if (this.state.startDate != '') {
+        if (this.state.startDate != "") {
             formatted_startDate =
                 this.state.startDate.getFullYear() +
-                '-' +
+                "-" +
                 this.appendLeadingZeroes(this.state.startDate.getMonth() + 1) +
-                '-' +
+                "-" +
                 this.appendLeadingZeroes(this.state.startDate.getDate()) +
-                ' ' +
+                " " +
                 this.appendLeadingZeroes(this.state.startDate.getHours()) +
-                ':' +
+                ":" +
                 this.appendLeadingZeroes(this.state.startDate.getMinutes()) +
-                ':' +
+                ":" +
                 this.appendLeadingZeroes(this.state.startDate.getSeconds());
         }
 
-        if (this.state.endDate != '') {
+        if (this.state.endDate != "") {
             formatted_endDate =
                 this.state.endDate.getFullYear() +
-                '-' +
+                "-" +
                 this.appendLeadingZeroes(this.state.endDate.getMonth() + 1) +
-                '-' +
+                "-" +
                 this.appendLeadingZeroes(this.state.endDate.getDate()) +
-                ' ' +
+                " " +
                 this.appendLeadingZeroes(this.state.endDate.getHours()) +
-                ':' +
+                ":" +
                 this.appendLeadingZeroes(this.state.endDate.getMinutes()) +
-                ':' +
+                ":" +
                 this.appendLeadingZeroes(this.state.endDate.getSeconds());
         }
 
-        if (this.state.startDate && this.state.endDate != '') {
+        if (this.state.startDate && this.state.endDate != "") {
             for (let i = 0; i < this.state.getrequestgeneral.length; i++) {
                 if (
                     formatted_startDate <
@@ -178,14 +178,14 @@ class UsersOverview extends React.Component {
         for (let i = 0; i < count; i++) {
             var daymonthgeneral =
                 this.appendLeadingZeroes(arr[i].getDate()) +
-                '/' +
+                "/" +
                 this.appendLeadingZeroes(arr[i].getMonth() + 1);
 
             const valuegenaral = reportGeneral.filter(item => {
                 var daydbrequestgeneral = new Date(item.created_at);
                 var dayformatdb =
                     this.appendLeadingZeroes(daydbrequestgeneral.getDate()) +
-                    '/' +
+                    "/" +
                     this.appendLeadingZeroes(
                         daydbrequestgeneral.getMonth() + 1
                     );
@@ -195,14 +195,14 @@ class UsersOverview extends React.Component {
 
             var daymonthissues =
                 this.appendLeadingZeroes(arr[i].getDate()) +
-                '/' +
+                "/" +
                 this.appendLeadingZeroes(arr[i].getMonth() + 1);
 
             const valueissues = reportIssues.filter(item => {
                 var daydbrequestissues = new Date(item.created_at);
                 var dayformatdb =
                     this.appendLeadingZeroes(daydbrequestissues.getDate()) +
-                    '/' +
+                    "/" +
                     this.appendLeadingZeroes(daydbrequestissues.getMonth() + 1);
 
                 return daymonthissues == dayformatdb;
@@ -219,18 +219,18 @@ class UsersOverview extends React.Component {
             data: setdata
         });
 
-        if (setdata == '') {
+        if (setdata == "") {
             Swal.fire(
-                'ไม่พบข้อมูล',
-                'ไม่พบข้อมูลในวันที่ท่านเลือก กรุณาตรวจสอบใหม่อีกครั้ง',
-                'error'
+                "ไม่พบข้อมูล",
+                "ไม่พบข้อมูลในวันที่ท่านเลือก กรุณาตรวจสอบใหม่อีกครั้ง",
+                "error"
             );
         }
     }
 
     componentDidMount() {
         axios
-            .get('/api/requestgeneral/index')
+            .get("/api/requestgeneral/index")
             .then(res => {
                 this.setState({
                     getrequestgeneral: res.data
@@ -241,7 +241,7 @@ class UsersOverview extends React.Component {
             });
 
         axios
-            .get('/api/requestissues/index')
+            .get("/api/requestissues/index")
             .then(res => {
                 this.setState({
                     getrequestissues: res.data
@@ -257,9 +257,9 @@ class UsersOverview extends React.Component {
         const { className } = this.props;
         const classes = classNames(
             className,
-            'd-flex',
-            'my-auto',
-            'date-range'
+            "d-flex",
+            "my-auto",
+            "date-range"
         );
         const { width } = this.state;
         return (
@@ -307,7 +307,7 @@ class UsersOverview extends React.Component {
                             </Col>
                         </Row>
 
-                        {this.state.data == '' ? (
+                        {this.state.data == "" ? (
                             <div>
                                 <h4>กรุณากำหนดช่วงเวลาในการ</h4>
                             </div>

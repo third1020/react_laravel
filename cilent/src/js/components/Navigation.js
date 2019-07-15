@@ -1,22 +1,22 @@
-import React from 'react';
-import clsx from 'clsx';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
-import Drawer from '@material-ui/core/Drawer';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import List from '@material-ui/core/List';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import Typography from '@material-ui/core/Typography';
-import Divider from '@material-ui/core/Divider';
-import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import MailIcon from '@material-ui/icons/Mail';
+import React from "react";
+import clsx from "clsx";
+import { makeStyles, useTheme } from "@material-ui/core/styles";
+import Drawer from "@material-ui/core/Drawer";
+import AppBar from "@material-ui/core/AppBar";
+import Toolbar from "@material-ui/core/Toolbar";
+import List from "@material-ui/core/List";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import Typography from "@material-ui/core/Typography";
+import Divider from "@material-ui/core/Divider";
+import IconButton from "@material-ui/core/IconButton";
+import MenuIcon from "@material-ui/icons/Menu";
+import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
+import ChevronRightIcon from "@material-ui/icons/ChevronRight";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemIcon from "@material-ui/core/ListItemIcon";
+import ListItemText from "@material-ui/core/ListItemText";
+import InboxIcon from "@material-ui/icons/MoveToInbox";
+import MailIcon from "@material-ui/icons/Mail";
 import {
     FaBlog,
     FaBeer,
@@ -30,18 +30,18 @@ import {
     FaComment,
     FaPen,
     FaHospital
-} from 'react-icons/fa';
-import { Link } from 'react-router-dom';
+} from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const drawerWidth = 240;
 
 const useStyles = makeStyles(theme => ({
     root: {
-        display: 'flex'
+        display: "flex"
     },
     appBar: {
         zIndex: theme.zIndex.drawer + 1,
-        transition: theme.transitions.create(['width', 'margin'], {
+        transition: theme.transitions.create(["width", "margin"], {
             easing: theme.transitions.easing.sharp,
             duration: theme.transitions.duration.leavingScreen
         })
@@ -49,7 +49,7 @@ const useStyles = makeStyles(theme => ({
     appBarShift: {
         marginLeft: drawerWidth,
         width: `calc(100% - ${drawerWidth}px)`,
-        transition: theme.transitions.create(['width', 'margin'], {
+        transition: theme.transitions.create(["width", "margin"], {
             easing: theme.transitions.easing.sharp,
             duration: theme.transitions.duration.enteringScreen
         })
@@ -58,36 +58,36 @@ const useStyles = makeStyles(theme => ({
         marginRight: 36
     },
     hide: {
-        display: 'none'
+        display: "none"
     },
     drawer: {
         width: drawerWidth,
         flexShrink: 0,
-        whiteSpace: 'nowrap'
+        whiteSpace: "nowrap"
     },
     drawerOpen: {
         width: drawerWidth,
-        transition: theme.transitions.create('width', {
+        transition: theme.transitions.create("width", {
             easing: theme.transitions.easing.sharp,
             duration: theme.transitions.duration.enteringScreen
         })
     },
     drawerClose: {
-        transition: theme.transitions.create('width', {
+        transition: theme.transitions.create("width", {
             easing: theme.transitions.easing.sharp,
             duration: theme.transitions.duration.leavingScreen
         }),
-        overflowX: 'hidden',
+        overflowX: "hidden",
         width: theme.spacing(7) + 1,
-        [theme.breakpoints.up('sm')]: {
+        [theme.breakpoints.up("sm")]: {
             width: theme.spacing(9) + 1
         }
     },
     toolbar: {
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'flex-end',
-        padding: '0 8px',
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "flex-end",
+        padding: "0 8px",
         ...theme.mixins.toolbar
     },
     content: {
@@ -98,32 +98,32 @@ const useStyles = makeStyles(theme => ({
 
 function Dashboard() {
     var links = [
-        { link: 'user', icon: FaBlog },
-        { link: 'ManageNews', icon: FaBeer },
-        { link: 'ManageMessage', icon: FaUser },
-        { link: 'ManageEquipment', icon: FaHome },
-        { link: 'ManageRequipment', icon: FaBook },
-        { link: 'ManageProblem', icon: FaRegAddressBook },
-        { link: 'ManageIncident', icon: FaFacebookMessenger },
-        { link: 'ManageContact', icon: FaRegNewspaper },
-        { link: 'ManageImpact', icon: FaBox },
-        { link: 'ManagePriority', icon: FaPen },
-        { link: 'ManageSolution', icon: FaHospital },
-        { link: 'Report', icon: FaBlog }
+        { link: "user", icon: FaBlog },
+        { link: "ManageNews", icon: FaBeer },
+        { link: "ManageMessage", icon: FaUser },
+        { link: "ManageEquipment", icon: FaHome },
+        { link: "ManageRequipment", icon: FaBook },
+        { link: "ManageProblem", icon: FaRegAddressBook },
+        { link: "ManageIncident", icon: FaFacebookMessenger },
+        { link: "ManageContact", icon: FaRegNewspaper },
+        { link: "ManageImpact", icon: FaBox },
+        { link: "ManagePriority", icon: FaPen },
+        { link: "ManageSolution", icon: FaHospital },
+        { link: "Report", icon: FaBlog }
     ];
 
     const classes = useStyles();
     const theme = useTheme();
-    const [open, setOpen] = React.useState(sessionStorage.getItem('sidebar'));
+    const [open, setOpen] = React.useState(sessionStorage.getItem("sidebar"));
 
     function handleDrawerOpen() {
         setOpen(true);
-        sessionStorage.setItem('sidebar', true);
+        sessionStorage.setItem("sidebar", true);
     }
 
     function handleDrawerClose() {
         setOpen(false);
-        sessionStorage.setItem('sidebar', false);
+        sessionStorage.setItem("sidebar", false);
     }
 
     return (
@@ -149,14 +149,14 @@ function Dashboard() {
                     </IconButton>
                     <Link
                         to="/"
-                        onClick={() => sessionStorage.removeItem('Token')}
+                        onClick={() => sessionStorage.removeItem("Token")}
                         style={{
-                            position: 'fixed',
-                            right: '5%',
-                            paddingBottom: '5px'
+                            position: "fixed",
+                            right: "5%",
+                            paddingBottom: "5px"
                         }}
                     >
-                        <button style={{ color: 'white', fontSize: '20px' }}>
+                        <button style={{ color: "white", fontSize: "20px" }}>
                             logout
                         </button>
                     </Link>
@@ -182,7 +182,7 @@ function Dashboard() {
             >
                 <div className={classes.toolbar}>
                     <IconButton onClick={handleDrawerClose}>
-                        {theme.direction === 'rtl' ? (
+                        {theme.direction === "rtl" ? (
                             <ChevronRightIcon />
                         ) : (
                             <ChevronLeftIcon />
@@ -195,7 +195,7 @@ function Dashboard() {
                         <Link to={link.link} key={link.link}>
                             <ListItem button key={link.link} to="/">
                                 <ListItemIcon>
-                                    <link.icon style={{ fontSize: '1.5em' }} />
+                                    <link.icon style={{ fontSize: "1.5em" }} />
                                 </ListItemIcon>
                                 <ListItemText primary={link.link} />
                             </ListItem>
@@ -206,8 +206,8 @@ function Dashboard() {
                 <List>
                     <ListItem button key="Logout">
                         <ListItemIcon>
-                            {' '}
-                            <MailIcon />{' '}
+                            {" "}
+                            <MailIcon />{" "}
                         </ListItemIcon>
                         <ListItemText primary="Logout" />
                     </ListItem>

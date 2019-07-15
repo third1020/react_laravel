@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import {
     Row,
     Col,
@@ -7,7 +7,7 @@ import {
     FormFeedback,
     FormInput,
     FormSelect
-} from 'shards-react';
+} from "shards-react";
 
 const FormValidation = () => (
     <Col sm="12" md="6">

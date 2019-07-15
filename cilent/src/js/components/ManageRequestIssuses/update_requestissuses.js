@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
-import Select from 'react-select';
+import React, { Component } from "react";
+import ReactDOM from "react-dom";
+import Select from "react-select";
 import {
     ListGroup,
     ListGroupItem,
@@ -13,29 +13,29 @@ import {
     FormSelect,
     Button,
     Container
-} from 'shards-react';
-import Swal from 'sweetalert2';
-import axios from 'axios';
-import { ToastContainer } from 'react-toastr';
-import '../../../css/alert.css';
-import '../../../css/animate.css';
-import HocValidateUser from '../../../HocValidateUser';
+} from "shards-react";
+import Swal from "sweetalert2";
+import axios from "axios";
+import { ToastContainer } from "react-toastr";
+import "../../../css/alert.css";
+import "../../../css/animate.css";
+import HocValidateUser from "../../../HocValidateUser";
 let container;
 
 var today = new Date();
 var date =
-    today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+    today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate();
 var time =
-    today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
-var dateTime = date + ' ' + time;
+    today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+var dateTime = date + " " + time;
 
 class Update_RequestIssuses extends Component {
     constructor(props) {
         super(props);
         this.state = {
             client_id: this.props.client_id,
-            name: '',
-            status: '',
+            name: "",
+            status: "",
             auditor_user_id: this.props.client_id,
             approval_user_id: this.props.client_id,
             audit_timestamp: dateTime,
@@ -77,7 +77,7 @@ class Update_RequestIssuses extends Component {
                 insertdata
             )
             .then(response => {
-                Swal.fire('Successfully', 'Add data successfully ', 'success');
+                Swal.fire("Successfully", "Add data successfully ", "success");
 
                 this.setState({
                     errors: []
@@ -89,7 +89,7 @@ class Update_RequestIssuses extends Component {
                 });
                 console.log(error.response.data.errors);
 
-                Swal.fire('Errors', 'check the value of a form field', 'error');
+                Swal.fire("Errors", "check the value of a form field", "error");
             });
     }
 
@@ -123,7 +123,7 @@ class Update_RequestIssuses extends Component {
 
     render() {
         return (
-            <div style={{ paddingTop: '30px' }}>
+            <div style={{ paddingTop: "30px" }}>
                 <Container>
                     <ListGroup flush>
                         <ListGroupItem className="p-3">
@@ -139,9 +139,9 @@ class Update_RequestIssuses extends Component {
                                                     id="name"
                                                     name="name"
                                                     className={`form-control ${
-                                                        this.hasErrorFor('name')
-                                                            ? 'is-invalid'
-                                                            : ''
+                                                        this.hasErrorFor("name")
+                                                            ? "is-invalid"
+                                                            : ""
                                                     }`}
                                                     placeholder="กรอกชื่อผู้ใช้"
                                                     type="text"
@@ -150,7 +150,7 @@ class Update_RequestIssuses extends Component {
                                                         this.handleFieldChange
                                                     }
                                                 />
-                                                {this.renderErrorFor('name')}
+                                                {this.renderErrorFor("name")}
                                             </Col>
                                         </Row>
 
@@ -164,10 +164,10 @@ class Update_RequestIssuses extends Component {
                                                     name="status"
                                                     className={`form-control ${
                                                         this.hasErrorFor(
-                                                            'status'
+                                                            "status"
                                                         )
-                                                            ? 'is-invalid'
-                                                            : ''
+                                                            ? "is-invalid"
+                                                            : ""
                                                     }`}
                                                     value={this.state.status}
                                                     onChange={
@@ -190,7 +190,7 @@ class Update_RequestIssuses extends Component {
                                                         Rejected
                                                     </option>
                                                 </FormSelect>
-                                                {this.renderErrorFor('status')}
+                                                {this.renderErrorFor("status")}
                                             </Col>
                                         </Row>
 

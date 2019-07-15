@@ -1,5 +1,5 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from "react";
+import PropTypes from "prop-types";
 import {
     Card,
     CardHeader,
@@ -9,7 +9,7 @@ import {
     Button,
     Row,
     Col
-} from 'shards-react';
+} from "shards-react";
 
 const Discussions = ({ title, discussions }) => (
     <Card small className="blog-comments">
@@ -37,8 +37,8 @@ const Discussions = ({ title, discussions }) => (
                                 href={discussion.author.url}
                             >
                                 {discussion.author.name}
-                            </a>{' '}
-                            on{' '}
+                            </a>{" "}
+                            on{" "}
                             <a
                                 className="text-secondary"
                                 href={discussion.post.url}
@@ -61,13 +61,13 @@ const Discussions = ({ title, discussions }) => (
                                 <Button theme="white">
                                     <span className="text-success">
                                         <i className="material-icons">check</i>
-                                    </span>{' '}
+                                    </span>{" "}
                                     Approve
                                 </Button>
                                 <Button theme="white">
                                     <span className="text-danger">
                                         <i className="material-icons">clear</i>
-                                    </span>{' '}
+                                    </span>{" "}
                                     Reject
                                 </Button>
                                 <Button theme="white">
@@ -75,7 +75,7 @@ const Discussions = ({ title, discussions }) => (
                                         <i className="material-icons">
                                             more_vert
                                         </i>
-                                    </span>{' '}
+                                    </span>{" "}
                                     Edit
                                 </Button>
                             </ButtonGroup>
@@ -109,47 +109,47 @@ Discussions.propTypes = {
 };
 
 Discussions.defaultProps = {
-    title: 'Discussions',
+    title: "Discussions",
     discussions: [
         {
             id: 1,
-            date: '3 days ago',
+            date: "3 days ago",
             author: {
-                image: require('../../images/avatars/1.jpg'),
-                name: 'John Doe',
-                url: '#'
+                image: require("../../images/avatars/1.jpg"),
+                name: "John Doe",
+                url: "#"
             },
             post: {
-                title: 'Hello World!',
-                url: '#'
+                title: "Hello World!",
+                url: "#"
             },
-            body: 'Well, the way they make shows is, they make one show ...'
+            body: "Well, the way they make shows is, they make one show ..."
         },
         {
             id: 2,
-            date: '4 days ago',
+            date: "4 days ago",
             author: {
-                image: require('../../images/avatars/2.jpg'),
-                name: 'John Doe',
-                url: '#'
+                image: require("../../images/avatars/2.jpg"),
+                name: "John Doe",
+                url: "#"
             },
             post: {
-                title: 'Hello World!',
-                url: '#'
+                title: "Hello World!",
+                url: "#"
             },
-            body: 'After the avalanche, it took us a week to climb out. Now...'
+            body: "After the avalanche, it took us a week to climb out. Now..."
         },
         {
             id: 3,
-            date: '5 days ago',
+            date: "5 days ago",
             author: {
-                image: require('../../images/avatars/3.jpg'),
-                name: 'John Doe',
-                url: '#'
+                image: require("../../images/avatars/3.jpg"),
+                name: "John Doe",
+                url: "#"
             },
             post: {
-                title: 'Hello World!',
-                url: '#'
+                title: "Hello World!",
+                url: "#"
             },
             body: "My money's in that office, right? If she start giving me..."
         }

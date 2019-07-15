@@ -1,13 +1,13 @@
-import React from 'react';
-import classNames from 'classnames';
+import React from "react";
+import classNames from "classnames";
 import {
     InputGroup,
     DatePicker,
     InputGroupAddon,
     InputGroupText
-} from 'shards-react';
+} from "shards-react";
 
-import '../../assets/range-date-picker.css';
+import "../../assets/range-date-picker.css";
 
 class RangeDatePicker extends React.Component {
     constructor(props) {
@@ -40,9 +40,9 @@ class RangeDatePicker extends React.Component {
         const { className } = this.props;
         const classes = classNames(
             className,
-            'd-flex',
-            'my-auto',
-            'date-range'
+            "d-flex",
+            "my-auto",
+            "date-range"
         );
 
         return (

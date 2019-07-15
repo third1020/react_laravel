@@ -6,10 +6,10 @@
  * https://github.com/select2/select2/blob/master/LICENSE.md
  */
 (function(factory) {
-    if (typeof define === 'function' && define.amd) {
+    if (typeof define === "function" && define.amd) {
         // AMD. Register as an anonymous module.
-        define(['jquery'], factory);
-    } else if (typeof module === 'object' && module.exports) {
+        define(["jquery"], factory);
+    } else if (typeof module === "object" && module.exports) {
         // Node/CommonJS
         module.exports = function(root, jQuery) {
             if (jQuery === undefined) {
@@ -17,10 +17,10 @@
                 // build a jQuery instance, we normalize how we use modules
                 // that require this pattern but the window provided is a noop
                 // if it's defined (how jquery works)
-                if (typeof window !== 'undefined') {
-                    jQuery = require('jquery');
+                if (typeof window !== "undefined") {
+                    jQuery = require("jquery");
                 } else {
-                    jQuery = require('jquery')(root);
+                    jQuery = require("jquery")(root);
                 }
             }
             factory(jQuery);
@@ -96,17 +96,17 @@
                             i,
                             j,
                             part,
-                            baseParts = baseName && baseName.split('/'),
+                            baseParts = baseName && baseName.split("/"),
                             map = config.map,
-                            starMap = (map && map['*']) || {};
+                            starMap = (map && map["*"]) || {};
 
                         //Adjust any relative paths.
-                        if (name && name.charAt(0) === '.') {
+                        if (name && name.charAt(0) === ".") {
                             //If have a base name, try to normalize against it,
                             //otherwise, assume it is a top-level require that will
                             //be relative to baseUrl in the end.
                             if (baseName) {
-                                name = name.split('/');
+                                name = name.split("/");
                                 lastIndex = name.length - 1;
 
                                 // Node .js allowance:
@@ -116,7 +116,7 @@
                                 ) {
                                     name[lastIndex] = name[lastIndex].replace(
                                         jsSuffixRegExp,
-                                        ''
+                                        ""
                                     );
                                 }
 
@@ -131,14 +131,14 @@
                                 //start trimDots
                                 for (i = 0; i < name.length; i += 1) {
                                     part = name[i];
-                                    if (part === '.') {
+                                    if (part === ".") {
                                         name.splice(i, 1);
                                         i -= 1;
-                                    } else if (part === '..') {
+                                    } else if (part === "..") {
                                         if (
                                             i === 1 &&
-                                            (name[2] === '..' ||
-                                                name[0] === '..')
+                                            (name[2] === ".." ||
+                                                name[0] === "..")
                                         ) {
                                             //End of the line. Keep at least one non-dot
                                             //path segment at the front so it can be mapped
@@ -155,8 +155,8 @@
                                 }
                                 //end trimDots
 
-                                name = name.join('/');
-                            } else if (name.indexOf('./') === 0) {
+                                name = name.join("/");
+                            } else if (name.indexOf("./") === 0) {
                                 // No baseName, so this is ID is resolved relative
                                 // to baseUrl, pull off the leading dot.
                                 name = name.substring(2);
@@ -165,10 +165,10 @@
 
                         //Apply map config if available.
                         if ((baseParts || starMap) && map) {
-                            nameParts = name.split('/');
+                            nameParts = name.split("/");
 
                             for (i = nameParts.length; i > 0; i -= 1) {
-                                nameSegment = nameParts.slice(0, i).join('/');
+                                nameSegment = nameParts.slice(0, i).join("/");
 
                                 if (baseParts) {
                                     //Find the longest baseName segment match in the config.
@@ -176,7 +176,7 @@
                                     for (j = baseParts.length; j > 0; j -= 1) {
                                         mapValue =
                                             map[
-                                                baseParts.slice(0, j).join('/')
+                                                baseParts.slice(0, j).join("/")
                                             ];
 
                                         //baseName segment has  config, find if it has one for
@@ -217,7 +217,7 @@
 
                             if (foundMap) {
                                 nameParts.splice(0, foundI, foundMap);
-                                name = nameParts.join('/');
+                                name = nameParts.join("/");
                             }
                         }
 
@@ -235,7 +235,7 @@
                             //one arg, it is the array form without a callback. Insert
                             //a null so that the following concat is correct.
                             if (
-                                typeof args[0] !== 'string' &&
+                                typeof args[0] !== "string" &&
                                 args.length === 1
                             ) {
                                 args.push(null);
@@ -271,7 +271,7 @@
                             !hasProp(defined, name) &&
                             !hasProp(defining, name)
                         ) {
-                            throw new Error('No ' + name);
+                            throw new Error("No " + name);
                         }
                         return defined[name];
                     }
@@ -281,7 +281,7 @@
                     //did not have a plugin prefix.
                     function splitPrefix(name) {
                         var prefix,
-                            index = name ? name.indexOf('!') : -1;
+                            index = name ? name.indexOf("!") : -1;
                         if (index > -1) {
                             prefix = name.substring(0, index);
                             name = name.substring(index + 1, name.length);
@@ -328,7 +328,7 @@
 
                         //Using ridiculous property names for space reasons
                         return {
-                            f: prefix ? prefix + '!' + name : name, //fullName
+                            f: prefix ? prefix + "!" + name : name, //fullName
                             n: name,
                             pr: prefix,
                             p: plugin
@@ -352,7 +352,7 @@
                         },
                         exports: function(name) {
                             var e = defined[name];
-                            if (typeof e !== 'undefined') {
+                            if (typeof e !== "undefined") {
                                 return e;
                             } else {
                                 return (defined[name] = {});
@@ -361,7 +361,7 @@
                         module: function(name) {
                             return {
                                 id: name,
-                                uri: '',
+                                uri: "",
                                 exports: defined[name],
                                 config: makeConfig(name)
                             };
@@ -383,28 +383,28 @@
 
                         //Call the callback to define the module, if necessary.
                         if (
-                            callbackType === 'undefined' ||
-                            callbackType === 'function'
+                            callbackType === "undefined" ||
+                            callbackType === "function"
                         ) {
                             //Pull out the defined dependencies and pass the ordered
                             //values to the callback.
                             //Default to [require, exports, module] if no deps
                             deps =
                                 !deps.length && callback.length
-                                    ? ['require', 'exports', 'module']
+                                    ? ["require", "exports", "module"]
                                     : deps;
                             for (i = 0; i < deps.length; i += 1) {
                                 map = makeMap(deps[i], relName);
                                 depName = map.f;
 
                                 //Fast path CommonJS standard dependencies.
-                                if (depName === 'require') {
+                                if (depName === "require") {
                                     args[i] = handlers.require(name);
-                                } else if (depName === 'exports') {
+                                } else if (depName === "exports") {
                                     //CommonJS module spec 1.1
                                     args[i] = handlers.exports(name);
                                     usingExports = true;
-                                } else if (depName === 'module') {
+                                } else if (depName === "module") {
                                     //CommonJS module spec 1.1
                                     cjsModule = args[i] = handlers.module(name);
                                 } else if (
@@ -423,7 +423,7 @@
                                     args[i] = defined[depName];
                                 } else {
                                     throw new Error(
-                                        name + ' missing ' + depName
+                                        name + " missing " + depName
                                     );
                                 }
                             }
@@ -461,7 +461,7 @@
                         forceSync,
                         alt
                     ) {
-                        if (typeof deps === 'string') {
+                        if (typeof deps === "string") {
                             if (handlers[deps]) {
                                 //callback in this case is really relName
                                 return handlers[deps](callback);
@@ -497,7 +497,7 @@
 
                         //If relName is a function, it is an errback handler,
                         //so remove it.
-                        if (typeof relName === 'function') {
+                        if (typeof relName === "function") {
                             relName = forceSync;
                             forceSync = alt;
                         }
@@ -534,9 +534,9 @@
                     requirejs._defined = defined;
 
                     define = function(name, deps, callback) {
-                        if (typeof name !== 'string') {
+                        if (typeof name !== "string") {
                             throw new Error(
-                                'See almond README: incorrect module build, no module name'
+                                "See almond README: incorrect module build, no module name"
                             );
                         }
 
@@ -567,24 +567,24 @@
                 S2.define = define;
             }
         })();
-        S2.define('almond', function() {});
+        S2.define("almond", function() {});
 
         /* global jQuery:false, $:false */
-        S2.define('jquery', [], function() {
+        S2.define("jquery", [], function() {
             var _$ = jQuery || $;
 
             if (_$ == null && console && console.error) {
                 console.error(
-                    'Select2: An instance of jQuery or a jQuery-compatible library was not ' +
-                        'found. Make sure that you are including jQuery before Select2 on your ' +
-                        'web page.'
+                    "Select2: An instance of jQuery or a jQuery-compatible library was not " +
+                        "found. Make sure that you are including jQuery before Select2 on your " +
+                        "web page."
                 );
             }
 
             return _$;
         });
 
-        S2.define('select2/utils', ['jquery'], function($) {
+        S2.define("select2/utils", ["jquery"], function($) {
             var Utils = {};
 
             Utils.Extend = function(ChildClass, SuperClass) {
@@ -615,11 +615,11 @@
                 for (var methodName in proto) {
                     var m = proto[methodName];
 
-                    if (typeof m !== 'function') {
+                    if (typeof m !== "function") {
                         continue;
                     }
 
-                    if (methodName === 'constructor') {
+                    if (methodName === "constructor") {
                         continue;
                     }
 
@@ -738,8 +738,8 @@
                     );
                 }
 
-                if ('*' in this.listeners) {
-                    this.invoke(this.listeners['*'], arguments);
+                if ("*" in this.listeners) {
+                    this.invoke(this.listeners["*"], arguments);
                 }
             };
 
@@ -752,7 +752,7 @@
             Utils.Observable = Observable;
 
             Utils.generateChars = function(length) {
-                var chars = '';
+                var chars = "";
 
                 for (var i = 0; i < length; i++) {
                     var randomChar = Math.floor(Math.random() * 36);
@@ -770,7 +770,7 @@
 
             Utils._convertData = function(data) {
                 for (var originalKey in data) {
-                    var keys = originalKey.split('-');
+                    var keys = originalKey.split("-");
 
                     var dataLevel = data;
 
@@ -818,12 +818,12 @@
                 //Check both x and y declarations
                 if (
                     overflowX === overflowY &&
-                    (overflowY === 'hidden' || overflowY === 'visible')
+                    (overflowY === "hidden" || overflowY === "visible")
                 ) {
                     return false;
                 }
 
-                if (overflowX === 'scroll' || overflowY === 'scroll') {
+                if (overflowX === "scroll" || overflowY === "scroll") {
                     return true;
                 }
 
@@ -835,17 +835,17 @@
 
             Utils.escapeMarkup = function(markup) {
                 var replaceMap = {
-                    '\\': '&#92;',
-                    '&': '&amp;',
-                    '<': '&lt;',
-                    '>': '&gt;',
-                    '"': '&quot;',
-                    "'": '&#39;',
-                    '/': '&#47;'
+                    "\\": "&#92;",
+                    "&": "&amp;",
+                    "<": "&lt;",
+                    ">": "&gt;",
+                    '"': "&quot;",
+                    "'": "&#39;",
+                    "/": "&#47;"
                 };
 
                 // Do not try to escape the markup if it's not a string
-                if (typeof markup !== 'string') {
+                if (typeof markup !== "string") {
                     return markup;
                 }
 
@@ -858,7 +858,7 @@
             Utils.appendMany = function($element, $nodes) {
                 // jQuery 1.7.x does not support $.fn.append() with an array
                 // Fall back to a jQuery object collection using $.fn.add()
-                if ($.fn.jquery.substr(0, 3) === '1.7') {
+                if ($.fn.jquery.substr(0, 3) === "1.7") {
                     var $jqNodes = $();
 
                     $.map($nodes, function(node) {
@@ -874,7 +874,7 @@
             return Utils;
         });
 
-        S2.define('select2/results', ['jquery', './utils'], function($, Utils) {
+        S2.define("select2/results", ["jquery", "./utils"], function($, Utils) {
             function Results($element, options, dataAdapter) {
                 this.$element = $element;
                 this.data = dataAdapter;
@@ -890,8 +890,8 @@
                     '<ul class="select2-results__options" role="tree"></ul>'
                 );
 
-                if (this.options.get('multiple')) {
-                    $results.attr('aria-multiselectable', 'true');
+                if (this.options.get("multiple")) {
+                    $results.attr("aria-multiselectable", "true");
                 }
 
                 this.$results = $results;
@@ -904,7 +904,7 @@
             };
 
             Results.prototype.displayMessage = function(params) {
-                var escapeMarkup = this.options.get('escapeMarkup');
+                var escapeMarkup = this.options.get("escapeMarkup");
 
                 this.clear();
                 this.hideLoading();
@@ -915,18 +915,18 @@
                 );
 
                 var message = this.options
-                    .get('translations')
+                    .get("translations")
                     .get(params.message);
 
                 $message.append(escapeMarkup(message(params.args)));
 
-                $message[0].className += ' select2-results__message';
+                $message[0].className += " select2-results__message";
 
                 this.$results.append($message);
             };
 
             Results.prototype.hideMessages = function() {
-                this.$results.find('.select2-results__message').remove();
+                this.$results.find(".select2-results__message").remove();
             };
 
             Results.prototype.append = function(data) {
@@ -936,8 +936,8 @@
 
                 if (data.results == null || data.results.length === 0) {
                     if (this.$results.children().length === 0) {
-                        this.trigger('results:message', {
-                            message: 'noResults'
+                        this.trigger("results:message", {
+                            message: "noResults"
                         });
                     }
 
@@ -958,31 +958,31 @@
             };
 
             Results.prototype.position = function($results, $dropdown) {
-                var $resultsContainer = $dropdown.find('.select2-results');
+                var $resultsContainer = $dropdown.find(".select2-results");
                 $resultsContainer.append($results);
             };
 
             Results.prototype.sort = function(data) {
-                var sorter = this.options.get('sorter');
+                var sorter = this.options.get("sorter");
 
                 return sorter(data);
             };
 
             Results.prototype.highlightFirstItem = function() {
                 var $options = this.$results.find(
-                    '.select2-results__option[aria-selected]'
+                    ".select2-results__option[aria-selected]"
                 );
 
-                var $selected = $options.filter('[aria-selected=true]');
+                var $selected = $options.filter("[aria-selected=true]");
 
                 // Check if there are any selected options
                 if ($selected.length > 0) {
                     // If there are selected options, highlight the first
-                    $selected.first().trigger('mouseenter');
+                    $selected.first().trigger("mouseenter");
                 } else {
                     // If there are no selected options, highlight the first option
                     // in the dropdown
-                    $options.first().trigger('mouseenter');
+                    $options.first().trigger("mouseenter");
                 }
 
                 this.ensureHighlightVisible();
@@ -997,25 +997,25 @@
                     });
 
                     var $options = self.$results.find(
-                        '.select2-results__option[aria-selected]'
+                        ".select2-results__option[aria-selected]"
                     );
 
                     $options.each(function() {
                         var $option = $(this);
 
-                        var item = $.data(this, 'data');
+                        var item = $.data(this, "data");
 
                         // id needs to be converted to a string when comparing
-                        var id = '' + item.id;
+                        var id = "" + item.id;
 
                         if (
                             (item.element != null && item.element.selected) ||
                             (item.element == null &&
                                 $.inArray(id, selectedIds) > -1)
                         ) {
-                            $option.attr('aria-selected', 'true');
+                            $option.attr("aria-selected", "true");
                         } else {
-                            $option.attr('aria-selected', 'false');
+                            $option.attr("aria-selected", "false");
                         }
                     });
                 });
@@ -1025,8 +1025,8 @@
                 this.hideLoading();
 
                 var loadingMore = this.options
-                    .get('translations')
-                    .get('searching');
+                    .get("translations")
+                    .get("searching");
 
                 var loading = {
                     disabled: true,
@@ -1034,31 +1034,31 @@
                     text: loadingMore(params)
                 };
                 var $loading = this.option(loading);
-                $loading.className += ' loading-results';
+                $loading.className += " loading-results";
 
                 this.$results.prepend($loading);
             };
 
             Results.prototype.hideLoading = function() {
-                this.$results.find('.loading-results').remove();
+                this.$results.find(".loading-results").remove();
             };
 
             Results.prototype.option = function(data) {
-                var option = document.createElement('li');
-                option.className = 'select2-results__option';
+                var option = document.createElement("li");
+                option.className = "select2-results__option";
 
                 var attrs = {
-                    role: 'treeitem',
-                    'aria-selected': 'false'
+                    role: "treeitem",
+                    "aria-selected": "false"
                 };
 
                 if (data.disabled) {
-                    delete attrs['aria-selected'];
-                    attrs['aria-disabled'] = 'true';
+                    delete attrs["aria-selected"];
+                    attrs["aria-disabled"] = "true";
                 }
 
                 if (data.id == null) {
-                    delete attrs['aria-selected'];
+                    delete attrs["aria-selected"];
                 }
 
                 if (data._resultId != null) {
@@ -1070,9 +1070,9 @@
                 }
 
                 if (data.children) {
-                    attrs.role = 'group';
-                    attrs['aria-label'] = data.text;
-                    delete attrs['aria-selected'];
+                    attrs.role = "group";
+                    attrs["aria-label"] = data.text;
+                    delete attrs["aria-selected"];
                 }
 
                 for (var attr in attrs) {
@@ -1084,8 +1084,8 @@
                 if (data.children) {
                     var $option = $(option);
 
-                    var label = document.createElement('strong');
-                    label.className = 'select2-results__group';
+                    var label = document.createElement("strong");
+                    label.className = "select2-results__group";
 
                     var $label = $(label);
                     this.template(data, label);
@@ -1100,9 +1100,9 @@
                         $children.push($child);
                     }
 
-                    var $childrenContainer = $('<ul></ul>', {
+                    var $childrenContainer = $("<ul></ul>", {
                         class:
-                            'select2-results__options select2-results__options--nested'
+                            "select2-results__options select2-results__options--nested"
                     });
 
                     $childrenContainer.append($children);
@@ -1113,7 +1113,7 @@
                     this.template(data, option);
                 }
 
-                $.data(option, 'data', data);
+                $.data(option, "data", data);
 
                 return option;
             };
@@ -1121,11 +1121,11 @@
             Results.prototype.bind = function(container, $container) {
                 var self = this;
 
-                var id = container.id + '-results';
+                var id = container.id + "-results";
 
-                this.$results.attr('id', id);
+                this.$results.attr("id", id);
 
-                container.on('results:all', function(params) {
+                container.on("results:all", function(params) {
                     self.clear();
                     self.append(params.data);
 
@@ -1135,7 +1135,7 @@
                     }
                 });
 
-                container.on('results:append', function(params) {
+                container.on("results:append", function(params) {
                     self.append(params.data);
 
                     if (container.isOpen()) {
@@ -1143,12 +1143,12 @@
                     }
                 });
 
-                container.on('query', function(params) {
+                container.on("query", function(params) {
                     self.hideMessages();
                     self.showLoading(params);
                 });
 
-                container.on('select', function() {
+                container.on("select", function() {
                     if (!container.isOpen()) {
                         return;
                     }
@@ -1157,7 +1157,7 @@
                     self.highlightFirstItem();
                 });
 
-                container.on('unselect', function() {
+                container.on("unselect", function() {
                     if (!container.isOpen()) {
                         return;
                     }
@@ -1166,54 +1166,54 @@
                     self.highlightFirstItem();
                 });
 
-                container.on('open', function() {
+                container.on("open", function() {
                     // When the dropdown is open, aria-expended="true"
-                    self.$results.attr('aria-expanded', 'true');
-                    self.$results.attr('aria-hidden', 'false');
+                    self.$results.attr("aria-expanded", "true");
+                    self.$results.attr("aria-hidden", "false");
 
                     self.setClasses();
                     self.ensureHighlightVisible();
                 });
 
-                container.on('close', function() {
+                container.on("close", function() {
                     // When the dropdown is closed, aria-expended="false"
-                    self.$results.attr('aria-expanded', 'false');
-                    self.$results.attr('aria-hidden', 'true');
-                    self.$results.removeAttr('aria-activedescendant');
+                    self.$results.attr("aria-expanded", "false");
+                    self.$results.attr("aria-hidden", "true");
+                    self.$results.removeAttr("aria-activedescendant");
                 });
 
-                container.on('results:toggle', function() {
+                container.on("results:toggle", function() {
                     var $highlighted = self.getHighlightedResults();
 
                     if ($highlighted.length === 0) {
                         return;
                     }
 
-                    $highlighted.trigger('mouseup');
+                    $highlighted.trigger("mouseup");
                 });
 
-                container.on('results:select', function() {
+                container.on("results:select", function() {
                     var $highlighted = self.getHighlightedResults();
 
                     if ($highlighted.length === 0) {
                         return;
                     }
 
-                    var data = $highlighted.data('data');
+                    var data = $highlighted.data("data");
 
-                    if ($highlighted.attr('aria-selected') == 'true') {
-                        self.trigger('close', {});
+                    if ($highlighted.attr("aria-selected") == "true") {
+                        self.trigger("close", {});
                     } else {
-                        self.trigger('select', {
+                        self.trigger("select", {
                             data: data
                         });
                     }
                 });
 
-                container.on('results:previous', function() {
+                container.on("results:previous", function() {
                     var $highlighted = self.getHighlightedResults();
 
-                    var $options = self.$results.find('[aria-selected]');
+                    var $options = self.$results.find("[aria-selected]");
 
                     var currentIndex = $options.index($highlighted);
 
@@ -1231,7 +1231,7 @@
 
                     var $next = $options.eq(nextIndex);
 
-                    $next.trigger('mouseenter');
+                    $next.trigger("mouseenter");
 
                     var currentOffset = self.$results.offset().top;
                     var nextTop = $next.offset().top;
@@ -1245,10 +1245,10 @@
                     }
                 });
 
-                container.on('results:next', function() {
+                container.on("results:next", function() {
                     var $highlighted = self.getHighlightedResults();
 
-                    var $options = self.$results.find('[aria-selected]');
+                    var $options = self.$results.find("[aria-selected]");
 
                     var currentIndex = $options.index($highlighted);
 
@@ -1261,7 +1261,7 @@
 
                     var $next = $options.eq(nextIndex);
 
-                    $next.trigger('mouseenter');
+                    $next.trigger("mouseenter");
 
                     var currentOffset =
                         self.$results.offset().top +
@@ -1278,18 +1278,18 @@
                     }
                 });
 
-                container.on('results:focus', function(params) {
+                container.on("results:focus", function(params) {
                     params.element.addClass(
-                        'select2-results__option--highlighted'
+                        "select2-results__option--highlighted"
                     );
                 });
 
-                container.on('results:message', function(params) {
+                container.on("results:message", function(params) {
                     self.displayMessage(params);
                 });
 
                 if ($.fn.mousewheel) {
-                    this.$results.on('mousewheel', function(e) {
+                    this.$results.on("mousewheel", function(e) {
                         var top = self.$results.scrollTop();
 
                         var bottom =
@@ -1317,27 +1317,27 @@
                 }
 
                 this.$results.on(
-                    'mouseup',
-                    '.select2-results__option[aria-selected]',
+                    "mouseup",
+                    ".select2-results__option[aria-selected]",
                     function(evt) {
                         var $this = $(this);
 
-                        var data = $this.data('data');
+                        var data = $this.data("data");
 
-                        if ($this.attr('aria-selected') === 'true') {
-                            if (self.options.get('multiple')) {
-                                self.trigger('unselect', {
+                        if ($this.attr("aria-selected") === "true") {
+                            if (self.options.get("multiple")) {
+                                self.trigger("unselect", {
                                     originalEvent: evt,
                                     data: data
                                 });
                             } else {
-                                self.trigger('close', {});
+                                self.trigger("close", {});
                             }
 
                             return;
                         }
 
-                        self.trigger('select', {
+                        self.trigger("select", {
                             originalEvent: evt,
                             data: data
                         });
@@ -1345,16 +1345,16 @@
                 );
 
                 this.$results.on(
-                    'mouseenter',
-                    '.select2-results__option[aria-selected]',
+                    "mouseenter",
+                    ".select2-results__option[aria-selected]",
                     function(evt) {
-                        var data = $(this).data('data');
+                        var data = $(this).data("data");
 
                         self.getHighlightedResults().removeClass(
-                            'select2-results__option--highlighted'
+                            "select2-results__option--highlighted"
                         );
 
-                        self.trigger('results:focus', {
+                        self.trigger("results:focus", {
                             data: data,
                             element: $(this)
                         });
@@ -1364,7 +1364,7 @@
 
             Results.prototype.getHighlightedResults = function() {
                 var $highlighted = this.$results.find(
-                    '.select2-results__option--highlighted'
+                    ".select2-results__option--highlighted"
                 );
 
                 return $highlighted;
@@ -1381,7 +1381,7 @@
                     return;
                 }
 
-                var $options = this.$results.find('[aria-selected]');
+                var $options = this.$results.find("[aria-selected]");
 
                 var currentIndex = $options.index($highlighted);
 
@@ -1404,14 +1404,14 @@
             };
 
             Results.prototype.template = function(result, container) {
-                var template = this.options.get('templateResult');
-                var escapeMarkup = this.options.get('escapeMarkup');
+                var template = this.options.get("templateResult");
+                var escapeMarkup = this.options.get("escapeMarkup");
 
                 var content = template(result, container);
 
                 if (content == null) {
-                    container.style.display = 'none';
-                } else if (typeof content === 'string') {
+                    container.style.display = "none";
+                } else if (typeof content === "string") {
                     container.innerHTML = escapeMarkup(content);
                 } else {
                     $(container).append(content);
@@ -1421,7 +1421,7 @@
             return Results;
         });
 
-        S2.define('select2/keys', [], function() {
+        S2.define("select2/keys", [], function() {
             var KEYS = {
                 BACKSPACE: 8,
                 TAB: 9,
@@ -1446,8 +1446,8 @@
         });
 
         S2.define(
-            'select2/selection/base',
-            ['jquery', '../utils', '../keys'],
+            "select2/selection/base",
+            ["jquery", "../utils", "../keys"],
             function($, Utils, KEYS) {
                 function BaseSelection($element, options) {
                     this.$element = $element;
@@ -1462,19 +1462,19 @@
                     var $selection = $(
                         '<span class="select2-selection" role="combobox" ' +
                             ' aria-haspopup="true" aria-expanded="false">' +
-                            '</span>'
+                            "</span>"
                     );
 
                     this._tabindex = 0;
 
-                    if (this.$element.data('old-tabindex') != null) {
-                        this._tabindex = this.$element.data('old-tabindex');
-                    } else if (this.$element.attr('tabindex') != null) {
-                        this._tabindex = this.$element.attr('tabindex');
+                    if (this.$element.data("old-tabindex") != null) {
+                        this._tabindex = this.$element.data("old-tabindex");
+                    } else if (this.$element.attr("tabindex") != null) {
+                        this._tabindex = this.$element.attr("tabindex");
                     }
 
-                    $selection.attr('title', this.$element.attr('title'));
-                    $selection.attr('tabindex', this._tabindex);
+                    $selection.attr("title", this.$element.attr("title"));
+                    $selection.attr("tabindex", this._tabindex);
 
                     this.$selection = $selection;
 
@@ -1484,63 +1484,63 @@
                 BaseSelection.prototype.bind = function(container, $container) {
                     var self = this;
 
-                    var id = container.id + '-container';
-                    var resultsId = container.id + '-results';
+                    var id = container.id + "-container";
+                    var resultsId = container.id + "-results";
 
                     this.container = container;
 
-                    this.$selection.on('focus', function(evt) {
-                        self.trigger('focus', evt);
+                    this.$selection.on("focus", function(evt) {
+                        self.trigger("focus", evt);
                     });
 
-                    this.$selection.on('blur', function(evt) {
+                    this.$selection.on("blur", function(evt) {
                         self._handleBlur(evt);
                     });
 
-                    this.$selection.on('keydown', function(evt) {
-                        self.trigger('keypress', evt);
+                    this.$selection.on("keydown", function(evt) {
+                        self.trigger("keypress", evt);
 
                         if (evt.which === KEYS.SPACE) {
                             evt.preventDefault();
                         }
                     });
 
-                    container.on('results:focus', function(params) {
+                    container.on("results:focus", function(params) {
                         self.$selection.attr(
-                            'aria-activedescendant',
+                            "aria-activedescendant",
                             params.data._resultId
                         );
                     });
 
-                    container.on('selection:update', function(params) {
+                    container.on("selection:update", function(params) {
                         self.update(params.data);
                     });
 
-                    container.on('open', function() {
+                    container.on("open", function() {
                         // When the dropdown is open, aria-expanded="true"
-                        self.$selection.attr('aria-expanded', 'true');
-                        self.$selection.attr('aria-owns', resultsId);
+                        self.$selection.attr("aria-expanded", "true");
+                        self.$selection.attr("aria-owns", resultsId);
 
                         self._attachCloseHandler(container);
                     });
 
-                    container.on('close', function() {
+                    container.on("close", function() {
                         // When the dropdown is closed, aria-expanded="false"
-                        self.$selection.attr('aria-expanded', 'false');
-                        self.$selection.removeAttr('aria-activedescendant');
-                        self.$selection.removeAttr('aria-owns');
+                        self.$selection.attr("aria-expanded", "false");
+                        self.$selection.removeAttr("aria-activedescendant");
+                        self.$selection.removeAttr("aria-owns");
 
                         self.$selection.focus();
 
                         self._detachCloseHandler(container);
                     });
 
-                    container.on('enable', function() {
-                        self.$selection.attr('tabindex', self._tabindex);
+                    container.on("enable", function() {
+                        self.$selection.attr("tabindex", self._tabindex);
                     });
 
-                    container.on('disable', function() {
-                        self.$selection.attr('tabindex', '-1');
+                    container.on("disable", function() {
+                        self.$selection.attr("tabindex", "-1");
                     });
                 };
 
@@ -1561,7 +1561,7 @@
                             return;
                         }
 
-                        self.trigger('blur', evt);
+                        self.trigger("blur", evt);
                     }, 1);
                 };
 
@@ -1571,13 +1571,13 @@
                     var self = this;
 
                     $(document.body).on(
-                        'mousedown.select2.' + container.id,
+                        "mousedown.select2." + container.id,
                         function(e) {
                             var $target = $(e.target);
 
-                            var $select = $target.closest('.select2');
+                            var $select = $target.closest(".select2");
 
-                            var $all = $('.select2.select2-container--open');
+                            var $all = $(".select2.select2-container--open");
 
                             $all.each(function() {
                                 var $this = $(this);
@@ -1586,9 +1586,9 @@
                                     return;
                                 }
 
-                                var $element = $this.data('element');
+                                var $element = $this.data("element");
 
-                                $element.select2('close');
+                                $element.select2("close");
                             });
                         }
                     );
@@ -1597,14 +1597,14 @@
                 BaseSelection.prototype._detachCloseHandler = function(
                     container
                 ) {
-                    $(document.body).off('mousedown.select2.' + container.id);
+                    $(document.body).off("mousedown.select2." + container.id);
                 };
 
                 BaseSelection.prototype.position = function(
                     $selection,
                     $container
                 ) {
-                    var $selectionContainer = $container.find('.selection');
+                    var $selectionContainer = $container.find(".selection");
                     $selectionContainer.append($selection);
                 };
 
@@ -1614,7 +1614,7 @@
 
                 BaseSelection.prototype.update = function(data) {
                     throw new Error(
-                        'The `update` method must be defined in child classes.'
+                        "The `update` method must be defined in child classes."
                     );
                 };
 
@@ -1623,8 +1623,8 @@
         );
 
         S2.define(
-            'select2/selection/single',
-            ['jquery', './base', '../utils', '../keys'],
+            "select2/selection/single",
+            ["jquery", "./base", "../utils", "../keys"],
             function($, BaseSelection, Utils, KEYS) {
                 function SingleSelection() {
                     SingleSelection.__super__.constructor.apply(
@@ -1640,13 +1640,13 @@
                         this
                     );
 
-                    $selection.addClass('select2-selection--single');
+                    $selection.addClass("select2-selection--single");
 
                     $selection.html(
                         '<span class="select2-selection__rendered"></span>' +
                             '<span class="select2-selection__arrow" role="presentation">' +
                             '<b role="presentation"></b>' +
-                            '</span>'
+                            "</span>"
                     );
 
                     return $selection;
@@ -1660,58 +1660,58 @@
 
                     SingleSelection.__super__.bind.apply(this, arguments);
 
-                    var id = container.id + '-container';
+                    var id = container.id + "-container";
 
                     this.$selection
-                        .find('.select2-selection__rendered')
-                        .attr('id', id);
-                    this.$selection.attr('aria-labelledby', id);
+                        .find(".select2-selection__rendered")
+                        .attr("id", id);
+                    this.$selection.attr("aria-labelledby", id);
 
-                    this.$selection.on('mousedown', function(evt) {
+                    this.$selection.on("mousedown", function(evt) {
                         // Only respond to left clicks
                         if (evt.which !== 1) {
                             return;
                         }
 
-                        self.trigger('toggle', {
+                        self.trigger("toggle", {
                             originalEvent: evt
                         });
                     });
 
-                    this.$selection.on('focus', function(evt) {
+                    this.$selection.on("focus", function(evt) {
                         // User focuses on the container
                     });
 
-                    this.$selection.on('blur', function(evt) {
+                    this.$selection.on("blur", function(evt) {
                         // User exits the container
                     });
 
-                    container.on('focus', function(evt) {
+                    container.on("focus", function(evt) {
                         if (!container.isOpen()) {
                             self.$selection.focus();
                         }
                     });
 
-                    container.on('selection:update', function(params) {
+                    container.on("selection:update", function(params) {
                         self.update(params.data);
                     });
                 };
 
                 SingleSelection.prototype.clear = function() {
                     this.$selection
-                        .find('.select2-selection__rendered')
+                        .find(".select2-selection__rendered")
                         .empty();
                 };
 
                 SingleSelection.prototype.display = function(data, container) {
-                    var template = this.options.get('templateSelection');
-                    var escapeMarkup = this.options.get('escapeMarkup');
+                    var template = this.options.get("templateSelection");
+                    var escapeMarkup = this.options.get("escapeMarkup");
 
                     return escapeMarkup(template(data, container));
                 };
 
                 SingleSelection.prototype.selectionContainer = function() {
-                    return $('<span></span>');
+                    return $("<span></span>");
                 };
 
                 SingleSelection.prototype.update = function(data) {
@@ -1723,12 +1723,12 @@
                     var selection = data[0];
 
                     var $rendered = this.$selection.find(
-                        '.select2-selection__rendered'
+                        ".select2-selection__rendered"
                     );
                     var formatted = this.display(selection, $rendered);
 
                     $rendered.empty().append(formatted);
-                    $rendered.prop('title', selection.title || selection.text);
+                    $rendered.prop("title", selection.title || selection.text);
                 };
 
                 return SingleSelection;
@@ -1736,8 +1736,8 @@
         );
 
         S2.define(
-            'select2/selection/multiple',
-            ['jquery', './base', '../utils'],
+            "select2/selection/multiple",
+            ["jquery", "./base", "../utils"],
             function($, BaseSelection, Utils) {
                 function MultipleSelection($element, options) {
                     MultipleSelection.__super__.constructor.apply(
@@ -1753,7 +1753,7 @@
                         this
                     );
 
-                    $selection.addClass('select2-selection--multiple');
+                    $selection.addClass("select2-selection--multiple");
 
                     $selection.html(
                         '<ul class="select2-selection__rendered"></ul>'
@@ -1770,27 +1770,27 @@
 
                     MultipleSelection.__super__.bind.apply(this, arguments);
 
-                    this.$selection.on('click', function(evt) {
-                        self.trigger('toggle', {
+                    this.$selection.on("click", function(evt) {
+                        self.trigger("toggle", {
                             originalEvent: evt
                         });
                     });
 
                     this.$selection.on(
-                        'click',
-                        '.select2-selection__choice__remove',
+                        "click",
+                        ".select2-selection__choice__remove",
                         function(evt) {
                             // Ignore the event if it is disabled
-                            if (self.options.get('disabled')) {
+                            if (self.options.get("disabled")) {
                                 return;
                             }
 
                             var $remove = $(this);
                             var $selection = $remove.parent();
 
-                            var data = $selection.data('data');
+                            var data = $selection.data("data");
 
-                            self.trigger('unselect', {
+                            self.trigger("unselect", {
                                 originalEvent: evt,
                                 data: data
                             });
@@ -1800,7 +1800,7 @@
 
                 MultipleSelection.prototype.clear = function() {
                     this.$selection
-                        .find('.select2-selection__rendered')
+                        .find(".select2-selection__rendered")
                         .empty();
                 };
 
@@ -1808,8 +1808,8 @@
                     data,
                     container
                 ) {
-                    var template = this.options.get('templateSelection');
-                    var escapeMarkup = this.options.get('escapeMarkup');
+                    var template = this.options.get("templateSelection");
+                    var escapeMarkup = this.options.get("escapeMarkup");
 
                     return escapeMarkup(template(data, container));
                 };
@@ -1818,9 +1818,9 @@
                     var $container = $(
                         '<li class="select2-selection__choice">' +
                             '<span class="select2-selection__choice__remove" role="presentation">' +
-                            '&times;' +
-                            '</span>' +
-                            '</li>'
+                            "&times;" +
+                            "</span>" +
+                            "</li>"
                     );
 
                     return $container;
@@ -1843,17 +1843,17 @@
 
                         $selection.append(formatted);
                         $selection.prop(
-                            'title',
+                            "title",
                             selection.title || selection.text
                         );
 
-                        $selection.data('data', selection);
+                        $selection.data("data", selection);
 
                         $selections.push($selection);
                     }
 
                     var $rendered = this.$selection.find(
-                        '.select2-selection__rendered'
+                        ".select2-selection__rendered"
                     );
 
                     Utils.appendMany($rendered, $selections);
@@ -1863,12 +1863,12 @@
             }
         );
 
-        S2.define('select2/selection/placeholder', ['../utils'], function(
+        S2.define("select2/selection/placeholder", ["../utils"], function(
             Utils
         ) {
             function Placeholder(decorated, $element, options) {
                 this.placeholder = this.normalizePlaceholder(
-                    options.get('placeholder')
+                    options.get("placeholder")
                 );
 
                 decorated.call(this, $element, options);
@@ -1878,9 +1878,9 @@
                 _,
                 placeholder
             ) {
-                if (typeof placeholder === 'string') {
+                if (typeof placeholder === "string") {
                     placeholder = {
-                        id: '',
+                        id: "",
                         text: placeholder
                     };
                 }
@@ -1896,8 +1896,8 @@
 
                 $placeholder.html(this.display(placeholder));
                 $placeholder
-                    .addClass('select2-selection__placeholder')
-                    .removeClass('select2-selection__choice');
+                    .addClass("select2-selection__placeholder")
+                    .removeClass("select2-selection__choice");
 
                 return $placeholder;
             };
@@ -1916,7 +1916,7 @@
                 var $placeholder = this.createPlaceholder(this.placeholder);
 
                 this.$selection
-                    .find('.select2-selection__rendered')
+                    .find(".select2-selection__rendered")
                     .append($placeholder);
             };
 
@@ -1924,8 +1924,8 @@
         });
 
         S2.define(
-            'select2/selection/allowClear',
-            ['jquery', '../keys'],
+            "select2/selection/allowClear",
+            ["jquery", "../keys"],
             function($, KEYS) {
                 function AllowClear() {}
 
@@ -1940,38 +1940,38 @@
 
                     if (this.placeholder == null) {
                         if (
-                            this.options.get('debug') &&
+                            this.options.get("debug") &&
                             window.console &&
                             console.error
                         ) {
                             console.error(
-                                'Select2: The `allowClear` option should be used in combination ' +
-                                    'with the `placeholder` option.'
+                                "Select2: The `allowClear` option should be used in combination " +
+                                    "with the `placeholder` option."
                             );
                         }
                     }
 
                     this.$selection.on(
-                        'mousedown',
-                        '.select2-selection__clear',
+                        "mousedown",
+                        ".select2-selection__clear",
                         function(evt) {
                             self._handleClear(evt);
                         }
                     );
 
-                    container.on('keypress', function(evt) {
+                    container.on("keypress", function(evt) {
                         self._handleKeyboardClear(evt, container);
                     });
                 };
 
                 AllowClear.prototype._handleClear = function(_, evt) {
                     // Ignore the event if it is disabled
-                    if (this.options.get('disabled')) {
+                    if (this.options.get("disabled")) {
                         return;
                     }
 
                     var $clear = this.$selection.find(
-                        '.select2-selection__clear'
+                        ".select2-selection__clear"
                     );
 
                     // Ignore the event if nothing has been selected
@@ -1981,7 +1981,7 @@
 
                     evt.stopPropagation();
 
-                    var data = $clear.data('data');
+                    var data = $clear.data("data");
 
                     for (var d = 0; d < data.length; d++) {
                         var unselectData = {
@@ -1990,7 +1990,7 @@
 
                         // Trigger the `unselect` event, so people can prevent it from being
                         // cleared.
-                        this.trigger('unselect', unselectData);
+                        this.trigger("unselect", unselectData);
 
                         // If the event was prevented, don't clear it out.
                         if (unselectData.prevented) {
@@ -1998,9 +1998,9 @@
                         }
                     }
 
-                    this.$element.val(this.placeholder.id).trigger('change');
+                    this.$element.val(this.placeholder.id).trigger("change");
 
-                    this.trigger('toggle', {});
+                    this.trigger("toggle", {});
                 };
 
                 AllowClear.prototype._handleKeyboardClear = function(
@@ -2024,7 +2024,7 @@
                     decorated.call(this, data);
 
                     if (
-                        this.$selection.find('.select2-selection__placeholder')
+                        this.$selection.find(".select2-selection__placeholder")
                             .length > 0 ||
                         data.length === 0
                     ) {
@@ -2033,13 +2033,13 @@
 
                     var $remove = $(
                         '<span class="select2-selection__clear">' +
-                            '&times;' +
-                            '</span>'
+                            "&times;" +
+                            "</span>"
                     );
-                    $remove.data('data', data);
+                    $remove.data("data", data);
 
                     this.$selection
-                        .find('.select2-selection__rendered')
+                        .find(".select2-selection__rendered")
                         .prepend($remove);
                 };
 
@@ -2048,8 +2048,8 @@
         );
 
         S2.define(
-            'select2/selection/search',
-            ['jquery', '../utils', '../keys'],
+            "select2/selection/search",
+            ["jquery", "../utils", "../keys"],
             function($, Utils, KEYS) {
                 function Search(decorated, $element, options) {
                     decorated.call(this, $element, options);
@@ -2061,11 +2061,11 @@
                             '<input class="select2-search__field" type="search" tabindex="-1"' +
                             ' autocomplete="off" autocorrect="off" autocapitalize="off"' +
                             ' spellcheck="false" role="textbox" aria-autocomplete="list" />' +
-                            '</li>'
+                            "</li>"
                     );
 
                     this.$searchContainer = $search;
-                    this.$search = $search.find('input');
+                    this.$search = $search.find("input");
 
                     var $rendered = decorated.call(this);
 
@@ -2083,57 +2083,57 @@
 
                     decorated.call(this, container, $container);
 
-                    container.on('open', function() {
-                        self.$search.trigger('focus');
+                    container.on("open", function() {
+                        self.$search.trigger("focus");
                     });
 
-                    container.on('close', function() {
-                        self.$search.val('');
-                        self.$search.removeAttr('aria-activedescendant');
-                        self.$search.trigger('focus');
+                    container.on("close", function() {
+                        self.$search.val("");
+                        self.$search.removeAttr("aria-activedescendant");
+                        self.$search.trigger("focus");
                     });
 
-                    container.on('enable', function() {
-                        self.$search.prop('disabled', false);
+                    container.on("enable", function() {
+                        self.$search.prop("disabled", false);
 
                         self._transferTabIndex();
                     });
 
-                    container.on('disable', function() {
-                        self.$search.prop('disabled', true);
+                    container.on("disable", function() {
+                        self.$search.prop("disabled", true);
                     });
 
-                    container.on('focus', function(evt) {
-                        self.$search.trigger('focus');
+                    container.on("focus", function(evt) {
+                        self.$search.trigger("focus");
                     });
 
-                    container.on('results:focus', function(params) {
-                        self.$search.attr('aria-activedescendant', params.id);
+                    container.on("results:focus", function(params) {
+                        self.$search.attr("aria-activedescendant", params.id);
                     });
 
                     this.$selection.on(
-                        'focusin',
-                        '.select2-search--inline',
+                        "focusin",
+                        ".select2-search--inline",
                         function(evt) {
-                            self.trigger('focus', evt);
+                            self.trigger("focus", evt);
                         }
                     );
 
                     this.$selection.on(
-                        'focusout',
-                        '.select2-search--inline',
+                        "focusout",
+                        ".select2-search--inline",
                         function(evt) {
                             self._handleBlur(evt);
                         }
                     );
 
                     this.$selection.on(
-                        'keydown',
-                        '.select2-search--inline',
+                        "keydown",
+                        ".select2-search--inline",
                         function(evt) {
                             evt.stopPropagation();
 
-                            self.trigger('keypress', evt);
+                            self.trigger("keypress", evt);
 
                             self._keyUpPrevented = evt.isDefaultPrevented();
 
@@ -2141,14 +2141,14 @@
 
                             if (
                                 key === KEYS.BACKSPACE &&
-                                self.$search.val() === ''
+                                self.$search.val() === ""
                             ) {
                                 var $previousChoice = self.$searchContainer.prev(
-                                    '.select2-selection__choice'
+                                    ".select2-selection__choice"
                                 );
 
                                 if ($previousChoice.length > 0) {
-                                    var item = $previousChoice.data('data');
+                                    var item = $previousChoice.data("data");
 
                                     self.searchRemoveChoice(item);
 
@@ -2170,34 +2170,34 @@
                     // This will prevent double-triggering of events for browsers which support
                     // both the `keyup` and `input` events.
                     this.$selection.on(
-                        'input.searchcheck',
-                        '.select2-search--inline',
+                        "input.searchcheck",
+                        ".select2-search--inline",
                         function(evt) {
                             // IE will trigger the `input` event when a placeholder is used on a
                             // search box. To get around this issue, we are forced to ignore all
                             // `input` events in IE and keep using `keyup`.
                             if (disableInputEvents) {
                                 self.$selection.off(
-                                    'input.search input.searchcheck'
+                                    "input.search input.searchcheck"
                                 );
                                 return;
                             }
 
                             // Unbind the duplicated `keyup` event
-                            self.$selection.off('keyup.search');
+                            self.$selection.off("keyup.search");
                         }
                     );
 
                     this.$selection.on(
-                        'keyup.search input.search',
-                        '.select2-search--inline',
+                        "keyup.search input.search",
+                        ".select2-search--inline",
                         function(evt) {
                             // IE will trigger the `input` event when a placeholder is used on a
                             // search box. To get around this issue, we are forced to ignore all
                             // `input` events in IE and keep using `keyup`.
-                            if (disableInputEvents && evt.type === 'input') {
+                            if (disableInputEvents && evt.type === "input") {
                                 self.$selection.off(
-                                    'input.search input.searchcheck'
+                                    "input.search input.searchcheck"
                                 );
                                 return;
                             }
@@ -2232,29 +2232,29 @@
                  */
                 Search.prototype._transferTabIndex = function(decorated) {
                     this.$search.attr(
-                        'tabindex',
-                        this.$selection.attr('tabindex')
+                        "tabindex",
+                        this.$selection.attr("tabindex")
                     );
-                    this.$selection.attr('tabindex', '-1');
+                    this.$selection.attr("tabindex", "-1");
                 };
 
                 Search.prototype.createPlaceholder = function(
                     decorated,
                     placeholder
                 ) {
-                    this.$search.attr('placeholder', placeholder.text);
+                    this.$search.attr("placeholder", placeholder.text);
                 };
 
                 Search.prototype.update = function(decorated, data) {
                     var searchHadFocus =
                         this.$search[0] == document.activeElement;
 
-                    this.$search.attr('placeholder', '');
+                    this.$search.attr("placeholder", "");
 
                     decorated.call(this, data);
 
                     this.$selection
-                        .find('.select2-selection__rendered')
+                        .find(".select2-selection__rendered")
                         .append(this.$searchContainer);
 
                     this.resizeSearch();
@@ -2269,7 +2269,7 @@
                     if (!this._keyUpPrevented) {
                         var input = this.$search.val();
 
-                        this.trigger('query', {
+                        this.trigger("query", {
                             term: input
                         });
                     }
@@ -2281,7 +2281,7 @@
                     decorated,
                     item
                 ) {
-                    this.trigger('unselect', {
+                    this.trigger("unselect", {
                         data: item
                     });
 
@@ -2290,28 +2290,28 @@
                 };
 
                 Search.prototype.resizeSearch = function() {
-                    this.$search.css('width', '25px');
+                    this.$search.css("width", "25px");
 
-                    var width = '';
+                    var width = "";
 
-                    if (this.$search.attr('placeholder') !== '') {
+                    if (this.$search.attr("placeholder") !== "") {
                         width = this.$selection
-                            .find('.select2-selection__rendered')
+                            .find(".select2-selection__rendered")
                             .innerWidth();
                     } else {
                         var minimumWidth = this.$search.val().length + 1;
 
-                        width = minimumWidth * 0.75 + 'em';
+                        width = minimumWidth * 0.75 + "em";
                     }
 
-                    this.$search.css('width', width);
+                    this.$search.css("width", width);
                 };
 
                 return Search;
             }
         );
 
-        S2.define('select2/selection/eventRelay', ['jquery'], function($) {
+        S2.define("select2/selection/eventRelay", ["jquery"], function($) {
             function EventRelay() {}
 
             EventRelay.prototype.bind = function(
@@ -2321,26 +2321,26 @@
             ) {
                 var self = this;
                 var relayEvents = [
-                    'open',
-                    'opening',
-                    'close',
-                    'closing',
-                    'select',
-                    'selecting',
-                    'unselect',
-                    'unselecting'
+                    "open",
+                    "opening",
+                    "close",
+                    "closing",
+                    "select",
+                    "selecting",
+                    "unselect",
+                    "unselecting"
                 ];
 
                 var preventableEvents = [
-                    'opening',
-                    'closing',
-                    'selecting',
-                    'unselecting'
+                    "opening",
+                    "closing",
+                    "selecting",
+                    "unselecting"
                 ];
 
                 decorated.call(this, container, $container);
 
-                container.on('*', function(name, params) {
+                container.on("*", function(name, params) {
                     // Ignore events that should not be relayed
                     if ($.inArray(name, relayEvents) === -1) {
                         return;
@@ -2350,7 +2350,7 @@
                     params = params || {};
 
                     // Generate the jQuery event for the Select2 event
-                    var evt = $.Event('select2:' + name, {
+                    var evt = $.Event("select2:" + name, {
                         params: params
                     });
 
@@ -2368,7 +2368,7 @@
             return EventRelay;
         });
 
-        S2.define('select2/translation', ['jquery', 'require'], function(
+        S2.define("select2/translation", ["jquery", "require"], function(
             $,
             require
         ) {
@@ -2405,853 +2405,853 @@
             return Translation;
         });
 
-        S2.define('select2/diacritics', [], function() {
+        S2.define("select2/diacritics", [], function() {
             var diacritics = {
-                '\u24B6': 'A',
-                Ａ: 'A',
-                À: 'A',
-                Á: 'A',
-                Â: 'A',
-                Ầ: 'A',
-                Ấ: 'A',
-                Ẫ: 'A',
-                Ẩ: 'A',
-                Ã: 'A',
-                Ā: 'A',
-                Ă: 'A',
-                Ằ: 'A',
-                Ắ: 'A',
-                Ẵ: 'A',
-                Ẳ: 'A',
-                Ȧ: 'A',
-                Ǡ: 'A',
-                Ä: 'A',
-                Ǟ: 'A',
-                Ả: 'A',
-                Å: 'A',
-                Ǻ: 'A',
-                Ǎ: 'A',
-                Ȁ: 'A',
-                Ȃ: 'A',
-                Ạ: 'A',
-                Ậ: 'A',
-                Ặ: 'A',
-                Ḁ: 'A',
-                Ą: 'A',
-                Ⱥ: 'A',
-                Ɐ: 'A',
-                Ꜳ: 'AA',
-                Æ: 'AE',
-                Ǽ: 'AE',
-                Ǣ: 'AE',
-                Ꜵ: 'AO',
-                Ꜷ: 'AU',
-                Ꜹ: 'AV',
-                Ꜻ: 'AV',
-                Ꜽ: 'AY',
-                '\u24B7': 'B',
-                Ｂ: 'B',
-                Ḃ: 'B',
-                Ḅ: 'B',
-                Ḇ: 'B',
-                Ƀ: 'B',
-                Ƃ: 'B',
-                Ɓ: 'B',
-                '\u24B8': 'C',
-                Ｃ: 'C',
-                Ć: 'C',
-                Ĉ: 'C',
-                Ċ: 'C',
-                Č: 'C',
-                Ç: 'C',
-                Ḉ: 'C',
-                Ƈ: 'C',
-                Ȼ: 'C',
-                Ꜿ: 'C',
-                '\u24B9': 'D',
-                Ｄ: 'D',
-                Ḋ: 'D',
-                Ď: 'D',
-                Ḍ: 'D',
-                Ḑ: 'D',
-                Ḓ: 'D',
-                Ḏ: 'D',
-                Đ: 'D',
-                Ƌ: 'D',
-                Ɗ: 'D',
-                Ɖ: 'D',
-                Ꝺ: 'D',
-                Ǳ: 'DZ',
-                Ǆ: 'DZ',
-                ǲ: 'Dz',
-                ǅ: 'Dz',
-                '\u24BA': 'E',
-                Ｅ: 'E',
-                È: 'E',
-                É: 'E',
-                Ê: 'E',
-                Ề: 'E',
-                Ế: 'E',
-                Ễ: 'E',
-                Ể: 'E',
-                Ẽ: 'E',
-                Ē: 'E',
-                Ḕ: 'E',
-                Ḗ: 'E',
-                Ĕ: 'E',
-                Ė: 'E',
-                Ë: 'E',
-                Ẻ: 'E',
-                Ě: 'E',
-                Ȅ: 'E',
-                Ȇ: 'E',
-                Ẹ: 'E',
-                Ệ: 'E',
-                Ȩ: 'E',
-                Ḝ: 'E',
-                Ę: 'E',
-                Ḙ: 'E',
-                Ḛ: 'E',
-                Ɛ: 'E',
-                Ǝ: 'E',
-                '\u24BB': 'F',
-                Ｆ: 'F',
-                Ḟ: 'F',
-                Ƒ: 'F',
-                Ꝼ: 'F',
-                '\u24BC': 'G',
-                Ｇ: 'G',
-                Ǵ: 'G',
-                Ĝ: 'G',
-                Ḡ: 'G',
-                Ğ: 'G',
-                Ġ: 'G',
-                Ǧ: 'G',
-                Ģ: 'G',
-                Ǥ: 'G',
-                Ɠ: 'G',
-                Ꞡ: 'G',
-                Ᵹ: 'G',
-                Ꝿ: 'G',
-                '\u24BD': 'H',
-                Ｈ: 'H',
-                Ĥ: 'H',
-                Ḣ: 'H',
-                Ḧ: 'H',
-                Ȟ: 'H',
-                Ḥ: 'H',
-                Ḩ: 'H',
-                Ḫ: 'H',
-                Ħ: 'H',
-                Ⱨ: 'H',
-                Ⱶ: 'H',
-                Ɥ: 'H',
-                '\u24BE': 'I',
-                Ｉ: 'I',
-                Ì: 'I',
-                Í: 'I',
-                Î: 'I',
-                Ĩ: 'I',
-                Ī: 'I',
-                Ĭ: 'I',
-                İ: 'I',
-                Ï: 'I',
-                Ḯ: 'I',
-                Ỉ: 'I',
-                Ǐ: 'I',
-                Ȉ: 'I',
-                Ȋ: 'I',
-                Ị: 'I',
-                Į: 'I',
-                Ḭ: 'I',
-                Ɨ: 'I',
-                '\u24BF': 'J',
-                Ｊ: 'J',
-                Ĵ: 'J',
-                Ɉ: 'J',
-                '\u24C0': 'K',
-                Ｋ: 'K',
-                Ḱ: 'K',
-                Ǩ: 'K',
-                Ḳ: 'K',
-                Ķ: 'K',
-                Ḵ: 'K',
-                Ƙ: 'K',
-                Ⱪ: 'K',
-                Ꝁ: 'K',
-                Ꝃ: 'K',
-                Ꝅ: 'K',
-                Ꞣ: 'K',
-                '\u24C1': 'L',
-                Ｌ: 'L',
-                Ŀ: 'L',
-                Ĺ: 'L',
-                Ľ: 'L',
-                Ḷ: 'L',
-                Ḹ: 'L',
-                Ļ: 'L',
-                Ḽ: 'L',
-                Ḻ: 'L',
-                Ł: 'L',
-                Ƚ: 'L',
-                Ɫ: 'L',
-                Ⱡ: 'L',
-                Ꝉ: 'L',
-                Ꝇ: 'L',
-                Ꞁ: 'L',
-                Ǉ: 'LJ',
-                ǈ: 'Lj',
-                '\u24C2': 'M',
-                Ｍ: 'M',
-                Ḿ: 'M',
-                Ṁ: 'M',
-                Ṃ: 'M',
-                Ɱ: 'M',
-                Ɯ: 'M',
-                '\u24C3': 'N',
-                Ｎ: 'N',
-                Ǹ: 'N',
-                Ń: 'N',
-                Ñ: 'N',
-                Ṅ: 'N',
-                Ň: 'N',
-                Ṇ: 'N',
-                Ņ: 'N',
-                Ṋ: 'N',
-                Ṉ: 'N',
-                Ƞ: 'N',
-                Ɲ: 'N',
-                Ꞑ: 'N',
-                Ꞥ: 'N',
-                Ǌ: 'NJ',
-                ǋ: 'Nj',
-                '\u24C4': 'O',
-                Ｏ: 'O',
-                Ò: 'O',
-                Ó: 'O',
-                Ô: 'O',
-                Ồ: 'O',
-                Ố: 'O',
-                Ỗ: 'O',
-                Ổ: 'O',
-                Õ: 'O',
-                Ṍ: 'O',
-                Ȭ: 'O',
-                Ṏ: 'O',
-                Ō: 'O',
-                Ṑ: 'O',
-                Ṓ: 'O',
-                Ŏ: 'O',
-                Ȯ: 'O',
-                Ȱ: 'O',
-                Ö: 'O',
-                Ȫ: 'O',
-                Ỏ: 'O',
-                Ő: 'O',
-                Ǒ: 'O',
-                Ȍ: 'O',
-                Ȏ: 'O',
-                Ơ: 'O',
-                Ờ: 'O',
-                Ớ: 'O',
-                Ỡ: 'O',
-                Ở: 'O',
-                Ợ: 'O',
-                Ọ: 'O',
-                Ộ: 'O',
-                Ǫ: 'O',
-                Ǭ: 'O',
-                Ø: 'O',
-                Ǿ: 'O',
-                Ɔ: 'O',
-                Ɵ: 'O',
-                Ꝋ: 'O',
-                Ꝍ: 'O',
-                Ƣ: 'OI',
-                Ꝏ: 'OO',
-                Ȣ: 'OU',
-                '\u24C5': 'P',
-                Ｐ: 'P',
-                Ṕ: 'P',
-                Ṗ: 'P',
-                Ƥ: 'P',
-                Ᵽ: 'P',
-                Ꝑ: 'P',
-                Ꝓ: 'P',
-                Ꝕ: 'P',
-                '\u24C6': 'Q',
-                Ｑ: 'Q',
-                Ꝗ: 'Q',
-                Ꝙ: 'Q',
-                Ɋ: 'Q',
-                '\u24C7': 'R',
-                Ｒ: 'R',
-                Ŕ: 'R',
-                Ṙ: 'R',
-                Ř: 'R',
-                Ȑ: 'R',
-                Ȓ: 'R',
-                Ṛ: 'R',
-                Ṝ: 'R',
-                Ŗ: 'R',
-                Ṟ: 'R',
-                Ɍ: 'R',
-                Ɽ: 'R',
-                Ꝛ: 'R',
-                Ꞧ: 'R',
-                Ꞃ: 'R',
-                '\u24C8': 'S',
-                Ｓ: 'S',
-                ẞ: 'S',
-                Ś: 'S',
-                Ṥ: 'S',
-                Ŝ: 'S',
-                Ṡ: 'S',
-                Š: 'S',
-                Ṧ: 'S',
-                Ṣ: 'S',
-                Ṩ: 'S',
-                Ș: 'S',
-                Ş: 'S',
-                Ȿ: 'S',
-                Ꞩ: 'S',
-                Ꞅ: 'S',
-                '\u24C9': 'T',
-                Ｔ: 'T',
-                Ṫ: 'T',
-                Ť: 'T',
-                Ṭ: 'T',
-                Ț: 'T',
-                Ţ: 'T',
-                Ṱ: 'T',
-                Ṯ: 'T',
-                Ŧ: 'T',
-                Ƭ: 'T',
-                Ʈ: 'T',
-                Ⱦ: 'T',
-                Ꞇ: 'T',
-                Ꜩ: 'TZ',
-                '\u24CA': 'U',
-                Ｕ: 'U',
-                Ù: 'U',
-                Ú: 'U',
-                Û: 'U',
-                Ũ: 'U',
-                Ṹ: 'U',
-                Ū: 'U',
-                Ṻ: 'U',
-                Ŭ: 'U',
-                Ü: 'U',
-                Ǜ: 'U',
-                Ǘ: 'U',
-                Ǖ: 'U',
-                Ǚ: 'U',
-                Ủ: 'U',
-                Ů: 'U',
-                Ű: 'U',
-                Ǔ: 'U',
-                Ȕ: 'U',
-                Ȗ: 'U',
-                Ư: 'U',
-                Ừ: 'U',
-                Ứ: 'U',
-                Ữ: 'U',
-                Ử: 'U',
-                Ự: 'U',
-                Ụ: 'U',
-                Ṳ: 'U',
-                Ų: 'U',
-                Ṷ: 'U',
-                Ṵ: 'U',
-                Ʉ: 'U',
-                '\u24CB': 'V',
-                Ｖ: 'V',
-                Ṽ: 'V',
-                Ṿ: 'V',
-                Ʋ: 'V',
-                Ꝟ: 'V',
-                Ʌ: 'V',
-                Ꝡ: 'VY',
-                '\u24CC': 'W',
-                Ｗ: 'W',
-                Ẁ: 'W',
-                Ẃ: 'W',
-                Ŵ: 'W',
-                Ẇ: 'W',
-                Ẅ: 'W',
-                Ẉ: 'W',
-                Ⱳ: 'W',
-                '\u24CD': 'X',
-                Ｘ: 'X',
-                Ẋ: 'X',
-                Ẍ: 'X',
-                '\u24CE': 'Y',
-                Ｙ: 'Y',
-                Ỳ: 'Y',
-                Ý: 'Y',
-                Ŷ: 'Y',
-                Ỹ: 'Y',
-                Ȳ: 'Y',
-                Ẏ: 'Y',
-                Ÿ: 'Y',
-                Ỷ: 'Y',
-                Ỵ: 'Y',
-                Ƴ: 'Y',
-                Ɏ: 'Y',
-                Ỿ: 'Y',
-                '\u24CF': 'Z',
-                Ｚ: 'Z',
-                Ź: 'Z',
-                Ẑ: 'Z',
-                Ż: 'Z',
-                Ž: 'Z',
-                Ẓ: 'Z',
-                Ẕ: 'Z',
-                Ƶ: 'Z',
-                Ȥ: 'Z',
-                Ɀ: 'Z',
-                Ⱬ: 'Z',
-                Ꝣ: 'Z',
-                '\u24D0': 'a',
-                ａ: 'a',
-                ẚ: 'a',
-                à: 'a',
-                á: 'a',
-                â: 'a',
-                ầ: 'a',
-                ấ: 'a',
-                ẫ: 'a',
-                ẩ: 'a',
-                ã: 'a',
-                ā: 'a',
-                ă: 'a',
-                ằ: 'a',
-                ắ: 'a',
-                ẵ: 'a',
-                ẳ: 'a',
-                ȧ: 'a',
-                ǡ: 'a',
-                ä: 'a',
-                ǟ: 'a',
-                ả: 'a',
-                å: 'a',
-                ǻ: 'a',
-                ǎ: 'a',
-                ȁ: 'a',
-                ȃ: 'a',
-                ạ: 'a',
-                ậ: 'a',
-                ặ: 'a',
-                ḁ: 'a',
-                ą: 'a',
-                ⱥ: 'a',
-                ɐ: 'a',
-                ꜳ: 'aa',
-                æ: 'ae',
-                ǽ: 'ae',
-                ǣ: 'ae',
-                ꜵ: 'ao',
-                ꜷ: 'au',
-                ꜹ: 'av',
-                ꜻ: 'av',
-                ꜽ: 'ay',
-                '\u24D1': 'b',
-                ｂ: 'b',
-                ḃ: 'b',
-                ḅ: 'b',
-                ḇ: 'b',
-                ƀ: 'b',
-                ƃ: 'b',
-                ɓ: 'b',
-                '\u24D2': 'c',
-                ｃ: 'c',
-                ć: 'c',
-                ĉ: 'c',
-                ċ: 'c',
-                č: 'c',
-                ç: 'c',
-                ḉ: 'c',
-                ƈ: 'c',
-                ȼ: 'c',
-                ꜿ: 'c',
-                ↄ: 'c',
-                '\u24D3': 'd',
-                ｄ: 'd',
-                ḋ: 'd',
-                ď: 'd',
-                ḍ: 'd',
-                ḑ: 'd',
-                ḓ: 'd',
-                ḏ: 'd',
-                đ: 'd',
-                ƌ: 'd',
-                ɖ: 'd',
-                ɗ: 'd',
-                ꝺ: 'd',
-                ǳ: 'dz',
-                ǆ: 'dz',
-                '\u24D4': 'e',
-                ｅ: 'e',
-                è: 'e',
-                é: 'e',
-                ê: 'e',
-                ề: 'e',
-                ế: 'e',
-                ễ: 'e',
-                ể: 'e',
-                ẽ: 'e',
-                ē: 'e',
-                ḕ: 'e',
-                ḗ: 'e',
-                ĕ: 'e',
-                ė: 'e',
-                ë: 'e',
-                ẻ: 'e',
-                ě: 'e',
-                ȅ: 'e',
-                ȇ: 'e',
-                ẹ: 'e',
-                ệ: 'e',
-                ȩ: 'e',
-                ḝ: 'e',
-                ę: 'e',
-                ḙ: 'e',
-                ḛ: 'e',
-                ɇ: 'e',
-                ɛ: 'e',
-                ǝ: 'e',
-                '\u24D5': 'f',
-                ｆ: 'f',
-                ḟ: 'f',
-                ƒ: 'f',
-                ꝼ: 'f',
-                '\u24D6': 'g',
-                ｇ: 'g',
-                ǵ: 'g',
-                ĝ: 'g',
-                ḡ: 'g',
-                ğ: 'g',
-                ġ: 'g',
-                ǧ: 'g',
-                ģ: 'g',
-                ǥ: 'g',
-                ɠ: 'g',
-                ꞡ: 'g',
-                ᵹ: 'g',
-                ꝿ: 'g',
-                '\u24D7': 'h',
-                ｈ: 'h',
-                ĥ: 'h',
-                ḣ: 'h',
-                ḧ: 'h',
-                ȟ: 'h',
-                ḥ: 'h',
-                ḩ: 'h',
-                ḫ: 'h',
-                ẖ: 'h',
-                ħ: 'h',
-                ⱨ: 'h',
-                ⱶ: 'h',
-                ɥ: 'h',
-                ƕ: 'hv',
-                '\u24D8': 'i',
-                ｉ: 'i',
-                ì: 'i',
-                í: 'i',
-                î: 'i',
-                ĩ: 'i',
-                ī: 'i',
-                ĭ: 'i',
-                ï: 'i',
-                ḯ: 'i',
-                ỉ: 'i',
-                ǐ: 'i',
-                ȉ: 'i',
-                ȋ: 'i',
-                ị: 'i',
-                į: 'i',
-                ḭ: 'i',
-                ɨ: 'i',
-                ı: 'i',
-                '\u24D9': 'j',
-                ｊ: 'j',
-                ĵ: 'j',
-                ǰ: 'j',
-                ɉ: 'j',
-                '\u24DA': 'k',
-                ｋ: 'k',
-                ḱ: 'k',
-                ǩ: 'k',
-                ḳ: 'k',
-                ķ: 'k',
-                ḵ: 'k',
-                ƙ: 'k',
-                ⱪ: 'k',
-                ꝁ: 'k',
-                ꝃ: 'k',
-                ꝅ: 'k',
-                ꞣ: 'k',
-                '\u24DB': 'l',
-                ｌ: 'l',
-                ŀ: 'l',
-                ĺ: 'l',
-                ľ: 'l',
-                ḷ: 'l',
-                ḹ: 'l',
-                ļ: 'l',
-                ḽ: 'l',
-                ḻ: 'l',
-                ſ: 'l',
-                ł: 'l',
-                ƚ: 'l',
-                ɫ: 'l',
-                ⱡ: 'l',
-                ꝉ: 'l',
-                ꞁ: 'l',
-                ꝇ: 'l',
-                ǉ: 'lj',
-                '\u24DC': 'm',
-                ｍ: 'm',
-                ḿ: 'm',
-                ṁ: 'm',
-                ṃ: 'm',
-                ɱ: 'm',
-                ɯ: 'm',
-                '\u24DD': 'n',
-                ｎ: 'n',
-                ǹ: 'n',
-                ń: 'n',
-                ñ: 'n',
-                ṅ: 'n',
-                ň: 'n',
-                ṇ: 'n',
-                ņ: 'n',
-                ṋ: 'n',
-                ṉ: 'n',
-                ƞ: 'n',
-                ɲ: 'n',
-                ŉ: 'n',
-                ꞑ: 'n',
-                ꞥ: 'n',
-                ǌ: 'nj',
-                '\u24DE': 'o',
-                ｏ: 'o',
-                ò: 'o',
-                ó: 'o',
-                ô: 'o',
-                ồ: 'o',
-                ố: 'o',
-                ỗ: 'o',
-                ổ: 'o',
-                õ: 'o',
-                ṍ: 'o',
-                ȭ: 'o',
-                ṏ: 'o',
-                ō: 'o',
-                ṑ: 'o',
-                ṓ: 'o',
-                ŏ: 'o',
-                ȯ: 'o',
-                ȱ: 'o',
-                ö: 'o',
-                ȫ: 'o',
-                ỏ: 'o',
-                ő: 'o',
-                ǒ: 'o',
-                ȍ: 'o',
-                ȏ: 'o',
-                ơ: 'o',
-                ờ: 'o',
-                ớ: 'o',
-                ỡ: 'o',
-                ở: 'o',
-                ợ: 'o',
-                ọ: 'o',
-                ộ: 'o',
-                ǫ: 'o',
-                ǭ: 'o',
-                ø: 'o',
-                ǿ: 'o',
-                ɔ: 'o',
-                ꝋ: 'o',
-                ꝍ: 'o',
-                ɵ: 'o',
-                ƣ: 'oi',
-                ȣ: 'ou',
-                ꝏ: 'oo',
-                '\u24DF': 'p',
-                ｐ: 'p',
-                ṕ: 'p',
-                ṗ: 'p',
-                ƥ: 'p',
-                ᵽ: 'p',
-                ꝑ: 'p',
-                ꝓ: 'p',
-                ꝕ: 'p',
-                '\u24E0': 'q',
-                ｑ: 'q',
-                ɋ: 'q',
-                ꝗ: 'q',
-                ꝙ: 'q',
-                '\u24E1': 'r',
-                ｒ: 'r',
-                ŕ: 'r',
-                ṙ: 'r',
-                ř: 'r',
-                ȑ: 'r',
-                ȓ: 'r',
-                ṛ: 'r',
-                ṝ: 'r',
-                ŗ: 'r',
-                ṟ: 'r',
-                ɍ: 'r',
-                ɽ: 'r',
-                ꝛ: 'r',
-                ꞧ: 'r',
-                ꞃ: 'r',
-                '\u24E2': 's',
-                ｓ: 's',
-                ß: 's',
-                ś: 's',
-                ṥ: 's',
-                ŝ: 's',
-                ṡ: 's',
-                š: 's',
-                ṧ: 's',
-                ṣ: 's',
-                ṩ: 's',
-                ș: 's',
-                ş: 's',
-                ȿ: 's',
-                ꞩ: 's',
-                ꞅ: 's',
-                ẛ: 's',
-                '\u24E3': 't',
-                ｔ: 't',
-                ṫ: 't',
-                ẗ: 't',
-                ť: 't',
-                ṭ: 't',
-                ț: 't',
-                ţ: 't',
-                ṱ: 't',
-                ṯ: 't',
-                ŧ: 't',
-                ƭ: 't',
-                ʈ: 't',
-                ⱦ: 't',
-                ꞇ: 't',
-                ꜩ: 'tz',
-                '\u24E4': 'u',
-                ｕ: 'u',
-                ù: 'u',
-                ú: 'u',
-                û: 'u',
-                ũ: 'u',
-                ṹ: 'u',
-                ū: 'u',
-                ṻ: 'u',
-                ŭ: 'u',
-                ü: 'u',
-                ǜ: 'u',
-                ǘ: 'u',
-                ǖ: 'u',
-                ǚ: 'u',
-                ủ: 'u',
-                ů: 'u',
-                ű: 'u',
-                ǔ: 'u',
-                ȕ: 'u',
-                ȗ: 'u',
-                ư: 'u',
-                ừ: 'u',
-                ứ: 'u',
-                ữ: 'u',
-                ử: 'u',
-                ự: 'u',
-                ụ: 'u',
-                ṳ: 'u',
-                ų: 'u',
-                ṷ: 'u',
-                ṵ: 'u',
-                ʉ: 'u',
-                '\u24E5': 'v',
-                ｖ: 'v',
-                ṽ: 'v',
-                ṿ: 'v',
-                ʋ: 'v',
-                ꝟ: 'v',
-                ʌ: 'v',
-                ꝡ: 'vy',
-                '\u24E6': 'w',
-                ｗ: 'w',
-                ẁ: 'w',
-                ẃ: 'w',
-                ŵ: 'w',
-                ẇ: 'w',
-                ẅ: 'w',
-                ẘ: 'w',
-                ẉ: 'w',
-                ⱳ: 'w',
-                '\u24E7': 'x',
-                ｘ: 'x',
-                ẋ: 'x',
-                ẍ: 'x',
-                '\u24E8': 'y',
-                ｙ: 'y',
-                ỳ: 'y',
-                ý: 'y',
-                ŷ: 'y',
-                ỹ: 'y',
-                ȳ: 'y',
-                ẏ: 'y',
-                ÿ: 'y',
-                ỷ: 'y',
-                ẙ: 'y',
-                ỵ: 'y',
-                ƴ: 'y',
-                ɏ: 'y',
-                ỿ: 'y',
-                '\u24E9': 'z',
-                ｚ: 'z',
-                ź: 'z',
-                ẑ: 'z',
-                ż: 'z',
-                ž: 'z',
-                ẓ: 'z',
-                ẕ: 'z',
-                ƶ: 'z',
-                ȥ: 'z',
-                ɀ: 'z',
-                ⱬ: 'z',
-                ꝣ: 'z',
-                Ά: '\u0391',
-                Έ: '\u0395',
-                Ή: '\u0397',
-                Ί: '\u0399',
-                Ϊ: '\u0399',
-                Ό: '\u039F',
-                Ύ: '\u03A5',
-                Ϋ: '\u03A5',
-                Ώ: '\u03A9',
-                ά: '\u03B1',
-                έ: '\u03B5',
-                ή: '\u03B7',
-                ί: '\u03B9',
-                ϊ: '\u03B9',
-                ΐ: '\u03B9',
-                ό: '\u03BF',
-                ύ: '\u03C5',
-                ϋ: '\u03C5',
-                ΰ: '\u03C5',
-                ω: '\u03C9',
-                ς: '\u03C3'
+                "\u24B6": "A",
+                Ａ: "A",
+                À: "A",
+                Á: "A",
+                Â: "A",
+                Ầ: "A",
+                Ấ: "A",
+                Ẫ: "A",
+                Ẩ: "A",
+                Ã: "A",
+                Ā: "A",
+                Ă: "A",
+                Ằ: "A",
+                Ắ: "A",
+                Ẵ: "A",
+                Ẳ: "A",
+                Ȧ: "A",
+                Ǡ: "A",
+                Ä: "A",
+                Ǟ: "A",
+                Ả: "A",
+                Å: "A",
+                Ǻ: "A",
+                Ǎ: "A",
+                Ȁ: "A",
+                Ȃ: "A",
+                Ạ: "A",
+                Ậ: "A",
+                Ặ: "A",
+                Ḁ: "A",
+                Ą: "A",
+                Ⱥ: "A",
+                Ɐ: "A",
+                Ꜳ: "AA",
+                Æ: "AE",
+                Ǽ: "AE",
+                Ǣ: "AE",
+                Ꜵ: "AO",
+                Ꜷ: "AU",
+                Ꜹ: "AV",
+                Ꜻ: "AV",
+                Ꜽ: "AY",
+                "\u24B7": "B",
+                Ｂ: "B",
+                Ḃ: "B",
+                Ḅ: "B",
+                Ḇ: "B",
+                Ƀ: "B",
+                Ƃ: "B",
+                Ɓ: "B",
+                "\u24B8": "C",
+                Ｃ: "C",
+                Ć: "C",
+                Ĉ: "C",
+                Ċ: "C",
+                Č: "C",
+                Ç: "C",
+                Ḉ: "C",
+                Ƈ: "C",
+                Ȼ: "C",
+                Ꜿ: "C",
+                "\u24B9": "D",
+                Ｄ: "D",
+                Ḋ: "D",
+                Ď: "D",
+                Ḍ: "D",
+                Ḑ: "D",
+                Ḓ: "D",
+                Ḏ: "D",
+                Đ: "D",
+                Ƌ: "D",
+                Ɗ: "D",
+                Ɖ: "D",
+                Ꝺ: "D",
+                Ǳ: "DZ",
+                Ǆ: "DZ",
+                ǲ: "Dz",
+                ǅ: "Dz",
+                "\u24BA": "E",
+                Ｅ: "E",
+                È: "E",
+                É: "E",
+                Ê: "E",
+                Ề: "E",
+                Ế: "E",
+                Ễ: "E",
+                Ể: "E",
+                Ẽ: "E",
+                Ē: "E",
+                Ḕ: "E",
+                Ḗ: "E",
+                Ĕ: "E",
+                Ė: "E",
+                Ë: "E",
+                Ẻ: "E",
+                Ě: "E",
+                Ȅ: "E",
+                Ȇ: "E",
+                Ẹ: "E",
+                Ệ: "E",
+                Ȩ: "E",
+                Ḝ: "E",
+                Ę: "E",
+                Ḙ: "E",
+                Ḛ: "E",
+                Ɛ: "E",
+                Ǝ: "E",
+                "\u24BB": "F",
+                Ｆ: "F",
+                Ḟ: "F",
+                Ƒ: "F",
+                Ꝼ: "F",
+                "\u24BC": "G",
+                Ｇ: "G",
+                Ǵ: "G",
+                Ĝ: "G",
+                Ḡ: "G",
+                Ğ: "G",
+                Ġ: "G",
+                Ǧ: "G",
+                Ģ: "G",
+                Ǥ: "G",
+                Ɠ: "G",
+                Ꞡ: "G",
+                Ᵹ: "G",
+                Ꝿ: "G",
+                "\u24BD": "H",
+                Ｈ: "H",
+                Ĥ: "H",
+                Ḣ: "H",
+                Ḧ: "H",
+                Ȟ: "H",
+                Ḥ: "H",
+                Ḩ: "H",
+                Ḫ: "H",
+                Ħ: "H",
+                Ⱨ: "H",
+                Ⱶ: "H",
+                Ɥ: "H",
+                "\u24BE": "I",
+                Ｉ: "I",
+                Ì: "I",
+                Í: "I",
+                Î: "I",
+                Ĩ: "I",
+                Ī: "I",
+                Ĭ: "I",
+                İ: "I",
+                Ï: "I",
+                Ḯ: "I",
+                Ỉ: "I",
+                Ǐ: "I",
+                Ȉ: "I",
+                Ȋ: "I",
+                Ị: "I",
+                Į: "I",
+                Ḭ: "I",
+                Ɨ: "I",
+                "\u24BF": "J",
+                Ｊ: "J",
+                Ĵ: "J",
+                Ɉ: "J",
+                "\u24C0": "K",
+                Ｋ: "K",
+                Ḱ: "K",
+                Ǩ: "K",
+                Ḳ: "K",
+                Ķ: "K",
+                Ḵ: "K",
+                Ƙ: "K",
+                Ⱪ: "K",
+                Ꝁ: "K",
+                Ꝃ: "K",
+                Ꝅ: "K",
+                Ꞣ: "K",
+                "\u24C1": "L",
+                Ｌ: "L",
+                Ŀ: "L",
+                Ĺ: "L",
+                Ľ: "L",
+                Ḷ: "L",
+                Ḹ: "L",
+                Ļ: "L",
+                Ḽ: "L",
+                Ḻ: "L",
+                Ł: "L",
+                Ƚ: "L",
+                Ɫ: "L",
+                Ⱡ: "L",
+                Ꝉ: "L",
+                Ꝇ: "L",
+                Ꞁ: "L",
+                Ǉ: "LJ",
+                ǈ: "Lj",
+                "\u24C2": "M",
+                Ｍ: "M",
+                Ḿ: "M",
+                Ṁ: "M",
+                Ṃ: "M",
+                Ɱ: "M",
+                Ɯ: "M",
+                "\u24C3": "N",
+                Ｎ: "N",
+                Ǹ: "N",
+                Ń: "N",
+                Ñ: "N",
+                Ṅ: "N",
+                Ň: "N",
+                Ṇ: "N",
+                Ņ: "N",
+                Ṋ: "N",
+                Ṉ: "N",
+                Ƞ: "N",
+                Ɲ: "N",
+                Ꞑ: "N",
+                Ꞥ: "N",
+                Ǌ: "NJ",
+                ǋ: "Nj",
+                "\u24C4": "O",
+                Ｏ: "O",
+                Ò: "O",
+                Ó: "O",
+                Ô: "O",
+                Ồ: "O",
+                Ố: "O",
+                Ỗ: "O",
+                Ổ: "O",
+                Õ: "O",
+                Ṍ: "O",
+                Ȭ: "O",
+                Ṏ: "O",
+                Ō: "O",
+                Ṑ: "O",
+                Ṓ: "O",
+                Ŏ: "O",
+                Ȯ: "O",
+                Ȱ: "O",
+                Ö: "O",
+                Ȫ: "O",
+                Ỏ: "O",
+                Ő: "O",
+                Ǒ: "O",
+                Ȍ: "O",
+                Ȏ: "O",
+                Ơ: "O",
+                Ờ: "O",
+                Ớ: "O",
+                Ỡ: "O",
+                Ở: "O",
+                Ợ: "O",
+                Ọ: "O",
+                Ộ: "O",
+                Ǫ: "O",
+                Ǭ: "O",
+                Ø: "O",
+                Ǿ: "O",
+                Ɔ: "O",
+                Ɵ: "O",
+                Ꝋ: "O",
+                Ꝍ: "O",
+                Ƣ: "OI",
+                Ꝏ: "OO",
+                Ȣ: "OU",
+                "\u24C5": "P",
+                Ｐ: "P",
+                Ṕ: "P",
+                Ṗ: "P",
+                Ƥ: "P",
+                Ᵽ: "P",
+                Ꝑ: "P",
+                Ꝓ: "P",
+                Ꝕ: "P",
+                "\u24C6": "Q",
+                Ｑ: "Q",
+                Ꝗ: "Q",
+                Ꝙ: "Q",
+                Ɋ: "Q",
+                "\u24C7": "R",
+                Ｒ: "R",
+                Ŕ: "R",
+                Ṙ: "R",
+                Ř: "R",
+                Ȑ: "R",
+                Ȓ: "R",
+                Ṛ: "R",
+                Ṝ: "R",
+                Ŗ: "R",
+                Ṟ: "R",
+                Ɍ: "R",
+                Ɽ: "R",
+                Ꝛ: "R",
+                Ꞧ: "R",
+                Ꞃ: "R",
+                "\u24C8": "S",
+                Ｓ: "S",
+                ẞ: "S",
+                Ś: "S",
+                Ṥ: "S",
+                Ŝ: "S",
+                Ṡ: "S",
+                Š: "S",
+                Ṧ: "S",
+                Ṣ: "S",
+                Ṩ: "S",
+                Ș: "S",
+                Ş: "S",
+                Ȿ: "S",
+                Ꞩ: "S",
+                Ꞅ: "S",
+                "\u24C9": "T",
+                Ｔ: "T",
+                Ṫ: "T",
+                Ť: "T",
+                Ṭ: "T",
+                Ț: "T",
+                Ţ: "T",
+                Ṱ: "T",
+                Ṯ: "T",
+                Ŧ: "T",
+                Ƭ: "T",
+                Ʈ: "T",
+                Ⱦ: "T",
+                Ꞇ: "T",
+                Ꜩ: "TZ",
+                "\u24CA": "U",
+                Ｕ: "U",
+                Ù: "U",
+                Ú: "U",
+                Û: "U",
+                Ũ: "U",
+                Ṹ: "U",
+                Ū: "U",
+                Ṻ: "U",
+                Ŭ: "U",
+                Ü: "U",
+                Ǜ: "U",
+                Ǘ: "U",
+                Ǖ: "U",
+                Ǚ: "U",
+                Ủ: "U",
+                Ů: "U",
+                Ű: "U",
+                Ǔ: "U",
+                Ȕ: "U",
+                Ȗ: "U",
+                Ư: "U",
+                Ừ: "U",
+                Ứ: "U",
+                Ữ: "U",
+                Ử: "U",
+                Ự: "U",
+                Ụ: "U",
+                Ṳ: "U",
+                Ų: "U",
+                Ṷ: "U",
+                Ṵ: "U",
+                Ʉ: "U",
+                "\u24CB": "V",
+                Ｖ: "V",
+                Ṽ: "V",
+                Ṿ: "V",
+                Ʋ: "V",
+                Ꝟ: "V",
+                Ʌ: "V",
+                Ꝡ: "VY",
+                "\u24CC": "W",
+                Ｗ: "W",
+                Ẁ: "W",
+                Ẃ: "W",
+                Ŵ: "W",
+                Ẇ: "W",
+                Ẅ: "W",
+                Ẉ: "W",
+                Ⱳ: "W",
+                "\u24CD": "X",
+                Ｘ: "X",
+                Ẋ: "X",
+                Ẍ: "X",
+                "\u24CE": "Y",
+                Ｙ: "Y",
+                Ỳ: "Y",
+                Ý: "Y",
+                Ŷ: "Y",
+                Ỹ: "Y",
+                Ȳ: "Y",
+                Ẏ: "Y",
+                Ÿ: "Y",
+                Ỷ: "Y",
+                Ỵ: "Y",
+                Ƴ: "Y",
+                Ɏ: "Y",
+                Ỿ: "Y",
+                "\u24CF": "Z",
+                Ｚ: "Z",
+                Ź: "Z",
+                Ẑ: "Z",
+                Ż: "Z",
+                Ž: "Z",
+                Ẓ: "Z",
+                Ẕ: "Z",
+                Ƶ: "Z",
+                Ȥ: "Z",
+                Ɀ: "Z",
+                Ⱬ: "Z",
+                Ꝣ: "Z",
+                "\u24D0": "a",
+                ａ: "a",
+                ẚ: "a",
+                à: "a",
+                á: "a",
+                â: "a",
+                ầ: "a",
+                ấ: "a",
+                ẫ: "a",
+                ẩ: "a",
+                ã: "a",
+                ā: "a",
+                ă: "a",
+                ằ: "a",
+                ắ: "a",
+                ẵ: "a",
+                ẳ: "a",
+                ȧ: "a",
+                ǡ: "a",
+                ä: "a",
+                ǟ: "a",
+                ả: "a",
+                å: "a",
+                ǻ: "a",
+                ǎ: "a",
+                ȁ: "a",
+                ȃ: "a",
+                ạ: "a",
+                ậ: "a",
+                ặ: "a",
+                ḁ: "a",
+                ą: "a",
+                ⱥ: "a",
+                ɐ: "a",
+                ꜳ: "aa",
+                æ: "ae",
+                ǽ: "ae",
+                ǣ: "ae",
+                ꜵ: "ao",
+                ꜷ: "au",
+                ꜹ: "av",
+                ꜻ: "av",
+                ꜽ: "ay",
+                "\u24D1": "b",
+                ｂ: "b",
+                ḃ: "b",
+                ḅ: "b",
+                ḇ: "b",
+                ƀ: "b",
+                ƃ: "b",
+                ɓ: "b",
+                "\u24D2": "c",
+                ｃ: "c",
+                ć: "c",
+                ĉ: "c",
+                ċ: "c",
+                č: "c",
+                ç: "c",
+                ḉ: "c",
+                ƈ: "c",
+                ȼ: "c",
+                ꜿ: "c",
+                ↄ: "c",
+                "\u24D3": "d",
+                ｄ: "d",
+                ḋ: "d",
+                ď: "d",
+                ḍ: "d",
+                ḑ: "d",
+                ḓ: "d",
+                ḏ: "d",
+                đ: "d",
+                ƌ: "d",
+                ɖ: "d",
+                ɗ: "d",
+                ꝺ: "d",
+                ǳ: "dz",
+                ǆ: "dz",
+                "\u24D4": "e",
+                ｅ: "e",
+                è: "e",
+                é: "e",
+                ê: "e",
+                ề: "e",
+                ế: "e",
+                ễ: "e",
+                ể: "e",
+                ẽ: "e",
+                ē: "e",
+                ḕ: "e",
+                ḗ: "e",
+                ĕ: "e",
+                ė: "e",
+                ë: "e",
+                ẻ: "e",
+                ě: "e",
+                ȅ: "e",
+                ȇ: "e",
+                ẹ: "e",
+                ệ: "e",
+                ȩ: "e",
+                ḝ: "e",
+                ę: "e",
+                ḙ: "e",
+                ḛ: "e",
+                ɇ: "e",
+                ɛ: "e",
+                ǝ: "e",
+                "\u24D5": "f",
+                ｆ: "f",
+                ḟ: "f",
+                ƒ: "f",
+                ꝼ: "f",
+                "\u24D6": "g",
+                ｇ: "g",
+                ǵ: "g",
+                ĝ: "g",
+                ḡ: "g",
+                ğ: "g",
+                ġ: "g",
+                ǧ: "g",
+                ģ: "g",
+                ǥ: "g",
+                ɠ: "g",
+                ꞡ: "g",
+                ᵹ: "g",
+                ꝿ: "g",
+                "\u24D7": "h",
+                ｈ: "h",
+                ĥ: "h",
+                ḣ: "h",
+                ḧ: "h",
+                ȟ: "h",
+                ḥ: "h",
+                ḩ: "h",
+                ḫ: "h",
+                ẖ: "h",
+                ħ: "h",
+                ⱨ: "h",
+                ⱶ: "h",
+                ɥ: "h",
+                ƕ: "hv",
+                "\u24D8": "i",
+                ｉ: "i",
+                ì: "i",
+                í: "i",
+                î: "i",
+                ĩ: "i",
+                ī: "i",
+                ĭ: "i",
+                ï: "i",
+                ḯ: "i",
+                ỉ: "i",
+                ǐ: "i",
+                ȉ: "i",
+                ȋ: "i",
+                ị: "i",
+                į: "i",
+                ḭ: "i",
+                ɨ: "i",
+                ı: "i",
+                "\u24D9": "j",
+                ｊ: "j",
+                ĵ: "j",
+                ǰ: "j",
+                ɉ: "j",
+                "\u24DA": "k",
+                ｋ: "k",
+                ḱ: "k",
+                ǩ: "k",
+                ḳ: "k",
+                ķ: "k",
+                ḵ: "k",
+                ƙ: "k",
+                ⱪ: "k",
+                ꝁ: "k",
+                ꝃ: "k",
+                ꝅ: "k",
+                ꞣ: "k",
+                "\u24DB": "l",
+                ｌ: "l",
+                ŀ: "l",
+                ĺ: "l",
+                ľ: "l",
+                ḷ: "l",
+                ḹ: "l",
+                ļ: "l",
+                ḽ: "l",
+                ḻ: "l",
+                ſ: "l",
+                ł: "l",
+                ƚ: "l",
+                ɫ: "l",
+                ⱡ: "l",
+                ꝉ: "l",
+                ꞁ: "l",
+                ꝇ: "l",
+                ǉ: "lj",
+                "\u24DC": "m",
+                ｍ: "m",
+                ḿ: "m",
+                ṁ: "m",
+                ṃ: "m",
+                ɱ: "m",
+                ɯ: "m",
+                "\u24DD": "n",
+                ｎ: "n",
+                ǹ: "n",
+                ń: "n",
+                ñ: "n",
+                ṅ: "n",
+                ň: "n",
+                ṇ: "n",
+                ņ: "n",
+                ṋ: "n",
+                ṉ: "n",
+                ƞ: "n",
+                ɲ: "n",
+                ŉ: "n",
+                ꞑ: "n",
+                ꞥ: "n",
+                ǌ: "nj",
+                "\u24DE": "o",
+                ｏ: "o",
+                ò: "o",
+                ó: "o",
+                ô: "o",
+                ồ: "o",
+                ố: "o",
+                ỗ: "o",
+                ổ: "o",
+                õ: "o",
+                ṍ: "o",
+                ȭ: "o",
+                ṏ: "o",
+                ō: "o",
+                ṑ: "o",
+                ṓ: "o",
+                ŏ: "o",
+                ȯ: "o",
+                ȱ: "o",
+                ö: "o",
+                ȫ: "o",
+                ỏ: "o",
+                ő: "o",
+                ǒ: "o",
+                ȍ: "o",
+                ȏ: "o",
+                ơ: "o",
+                ờ: "o",
+                ớ: "o",
+                ỡ: "o",
+                ở: "o",
+                ợ: "o",
+                ọ: "o",
+                ộ: "o",
+                ǫ: "o",
+                ǭ: "o",
+                ø: "o",
+                ǿ: "o",
+                ɔ: "o",
+                ꝋ: "o",
+                ꝍ: "o",
+                ɵ: "o",
+                ƣ: "oi",
+                ȣ: "ou",
+                ꝏ: "oo",
+                "\u24DF": "p",
+                ｐ: "p",
+                ṕ: "p",
+                ṗ: "p",
+                ƥ: "p",
+                ᵽ: "p",
+                ꝑ: "p",
+                ꝓ: "p",
+                ꝕ: "p",
+                "\u24E0": "q",
+                ｑ: "q",
+                ɋ: "q",
+                ꝗ: "q",
+                ꝙ: "q",
+                "\u24E1": "r",
+                ｒ: "r",
+                ŕ: "r",
+                ṙ: "r",
+                ř: "r",
+                ȑ: "r",
+                ȓ: "r",
+                ṛ: "r",
+                ṝ: "r",
+                ŗ: "r",
+                ṟ: "r",
+                ɍ: "r",
+                ɽ: "r",
+                ꝛ: "r",
+                ꞧ: "r",
+                ꞃ: "r",
+                "\u24E2": "s",
+                ｓ: "s",
+                ß: "s",
+                ś: "s",
+                ṥ: "s",
+                ŝ: "s",
+                ṡ: "s",
+                š: "s",
+                ṧ: "s",
+                ṣ: "s",
+                ṩ: "s",
+                ș: "s",
+                ş: "s",
+                ȿ: "s",
+                ꞩ: "s",
+                ꞅ: "s",
+                ẛ: "s",
+                "\u24E3": "t",
+                ｔ: "t",
+                ṫ: "t",
+                ẗ: "t",
+                ť: "t",
+                ṭ: "t",
+                ț: "t",
+                ţ: "t",
+                ṱ: "t",
+                ṯ: "t",
+                ŧ: "t",
+                ƭ: "t",
+                ʈ: "t",
+                ⱦ: "t",
+                ꞇ: "t",
+                ꜩ: "tz",
+                "\u24E4": "u",
+                ｕ: "u",
+                ù: "u",
+                ú: "u",
+                û: "u",
+                ũ: "u",
+                ṹ: "u",
+                ū: "u",
+                ṻ: "u",
+                ŭ: "u",
+                ü: "u",
+                ǜ: "u",
+                ǘ: "u",
+                ǖ: "u",
+                ǚ: "u",
+                ủ: "u",
+                ů: "u",
+                ű: "u",
+                ǔ: "u",
+                ȕ: "u",
+                ȗ: "u",
+                ư: "u",
+                ừ: "u",
+                ứ: "u",
+                ữ: "u",
+                ử: "u",
+                ự: "u",
+                ụ: "u",
+                ṳ: "u",
+                ų: "u",
+                ṷ: "u",
+                ṵ: "u",
+                ʉ: "u",
+                "\u24E5": "v",
+                ｖ: "v",
+                ṽ: "v",
+                ṿ: "v",
+                ʋ: "v",
+                ꝟ: "v",
+                ʌ: "v",
+                ꝡ: "vy",
+                "\u24E6": "w",
+                ｗ: "w",
+                ẁ: "w",
+                ẃ: "w",
+                ŵ: "w",
+                ẇ: "w",
+                ẅ: "w",
+                ẘ: "w",
+                ẉ: "w",
+                ⱳ: "w",
+                "\u24E7": "x",
+                ｘ: "x",
+                ẋ: "x",
+                ẍ: "x",
+                "\u24E8": "y",
+                ｙ: "y",
+                ỳ: "y",
+                ý: "y",
+                ŷ: "y",
+                ỹ: "y",
+                ȳ: "y",
+                ẏ: "y",
+                ÿ: "y",
+                ỷ: "y",
+                ẙ: "y",
+                ỵ: "y",
+                ƴ: "y",
+                ɏ: "y",
+                ỿ: "y",
+                "\u24E9": "z",
+                ｚ: "z",
+                ź: "z",
+                ẑ: "z",
+                ż: "z",
+                ž: "z",
+                ẓ: "z",
+                ẕ: "z",
+                ƶ: "z",
+                ȥ: "z",
+                ɀ: "z",
+                ⱬ: "z",
+                ꝣ: "z",
+                Ά: "\u0391",
+                Έ: "\u0395",
+                Ή: "\u0397",
+                Ί: "\u0399",
+                Ϊ: "\u0399",
+                Ό: "\u039F",
+                Ύ: "\u03A5",
+                Ϋ: "\u03A5",
+                Ώ: "\u03A9",
+                ά: "\u03B1",
+                έ: "\u03B5",
+                ή: "\u03B7",
+                ί: "\u03B9",
+                ϊ: "\u03B9",
+                ΐ: "\u03B9",
+                ό: "\u03BF",
+                ύ: "\u03C5",
+                ϋ: "\u03C5",
+                ΰ: "\u03C5",
+                ω: "\u03C9",
+                ς: "\u03C3"
             };
 
             return diacritics;
         });
 
-        S2.define('select2/data/base', ['../utils'], function(Utils) {
+        S2.define("select2/data/base", ["../utils"], function(Utils) {
             function BaseAdapter($element, options) {
                 BaseAdapter.__super__.constructor.call(this);
             }
@@ -3260,13 +3260,13 @@
 
             BaseAdapter.prototype.current = function(callback) {
                 throw new Error(
-                    'The `current` method must be defined in child classes.'
+                    "The `current` method must be defined in child classes."
                 );
             };
 
             BaseAdapter.prototype.query = function(params, callback) {
                 throw new Error(
-                    'The `query` method must be defined in child classes.'
+                    "The `query` method must be defined in child classes."
                 );
             };
 
@@ -3279,14 +3279,14 @@
             };
 
             BaseAdapter.prototype.generateResultId = function(container, data) {
-                var id = container.id + '-result-';
+                var id = container.id + "-result-";
 
                 id += Utils.generateChars(4);
 
                 if (data.id != null) {
-                    id += '-' + data.id.toString();
+                    id += "-" + data.id.toString();
                 } else {
-                    id += '-' + Utils.generateChars(4);
+                    id += "-" + Utils.generateChars(4);
                 }
                 return id;
             };
@@ -3295,8 +3295,8 @@
         });
 
         S2.define(
-            'select2/data/select',
-            ['./base', '../utils', 'jquery'],
+            "select2/data/select",
+            ["./base", "../utils", "jquery"],
             function(BaseAdapter, Utils, $) {
                 function SelectAdapter($element, options) {
                     this.$element = $element;
@@ -3311,7 +3311,7 @@
                     var data = [];
                     var self = this;
 
-                    this.$element.find(':selected').each(function() {
+                    this.$element.find(":selected").each(function() {
                         var $option = $(this);
 
                         var option = self.item($option);
@@ -3328,15 +3328,15 @@
                     data.selected = true;
 
                     // If data.element is a DOM node, use it instead
-                    if ($(data.element).is('option')) {
+                    if ($(data.element).is("option")) {
                         data.element.selected = true;
 
-                        this.$element.trigger('change');
+                        this.$element.trigger("change");
 
                         return;
                     }
 
-                    if (this.$element.prop('multiple')) {
+                    if (this.$element.prop("multiple")) {
                         this.current(function(currentData) {
                             var val = [];
 
@@ -3352,29 +3352,29 @@
                             }
 
                             self.$element.val(val);
-                            self.$element.trigger('change');
+                            self.$element.trigger("change");
                         });
                     } else {
                         var val = data.id;
 
                         this.$element.val(val);
-                        this.$element.trigger('change');
+                        this.$element.trigger("change");
                     }
                 };
 
                 SelectAdapter.prototype.unselect = function(data) {
                     var self = this;
 
-                    if (!this.$element.prop('multiple')) {
+                    if (!this.$element.prop("multiple")) {
                         return;
                     }
 
                     data.selected = false;
 
-                    if ($(data.element).is('option')) {
+                    if ($(data.element).is("option")) {
                         data.element.selected = false;
 
-                        this.$element.trigger('change');
+                        this.$element.trigger("change");
 
                         return;
                     }
@@ -3392,7 +3392,7 @@
 
                         self.$element.val(val);
 
-                        self.$element.trigger('change');
+                        self.$element.trigger("change");
                     });
                 };
 
@@ -3401,20 +3401,20 @@
 
                     this.container = container;
 
-                    container.on('select', function(params) {
+                    container.on("select", function(params) {
                         self.select(params.data);
                     });
 
-                    container.on('unselect', function(params) {
+                    container.on("unselect", function(params) {
                         self.unselect(params.data);
                     });
                 };
 
                 SelectAdapter.prototype.destroy = function() {
                     // Remove anything added to child elements
-                    this.$element.find('*').each(function() {
+                    this.$element.find("*").each(function() {
                         // Remove any custom data set by Select2
-                        $.removeData(this, 'data');
+                        $.removeData(this, "data");
                     });
                 };
 
@@ -3427,7 +3427,7 @@
                     $options.each(function() {
                         var $option = $(this);
 
-                        if (!$option.is('option') && !$option.is('optgroup')) {
+                        if (!$option.is("option") && !$option.is("optgroup")) {
                             return;
                         }
 
@@ -3453,10 +3453,10 @@
                     var option;
 
                     if (data.children) {
-                        option = document.createElement('optgroup');
+                        option = document.createElement("optgroup");
                         option.label = data.text;
                     } else {
-                        option = document.createElement('option');
+                        option = document.createElement("option");
 
                         if (option.textContent !== undefined) {
                             option.textContent = data.text;
@@ -3487,7 +3487,7 @@
                     normalizedData.element = option;
 
                     // Override the option's data with the combined data
-                    $.data(option, 'data', normalizedData);
+                    $.data(option, "data", normalizedData);
 
                     return $option;
                 };
@@ -3495,28 +3495,28 @@
                 SelectAdapter.prototype.item = function($option) {
                     var data = {};
 
-                    data = $.data($option[0], 'data');
+                    data = $.data($option[0], "data");
 
                     if (data != null) {
                         return data;
                     }
 
-                    if ($option.is('option')) {
+                    if ($option.is("option")) {
                         data = {
                             id: $option.val(),
                             text: $option.text(),
-                            disabled: $option.prop('disabled'),
-                            selected: $option.prop('selected'),
-                            title: $option.prop('title')
+                            disabled: $option.prop("disabled"),
+                            selected: $option.prop("selected"),
+                            title: $option.prop("title")
                         };
-                    } else if ($option.is('optgroup')) {
+                    } else if ($option.is("optgroup")) {
                         data = {
-                            text: $option.prop('label'),
+                            text: $option.prop("label"),
                             children: [],
-                            title: $option.prop('title')
+                            title: $option.prop("title")
                         };
 
-                        var $children = $option.children('option');
+                        var $children = $option.children("option");
                         var children = [];
 
                         for (var c = 0; c < $children.length; c++) {
@@ -3533,7 +3533,7 @@
                     data = this._normalizeItem(data);
                     data.element = $option[0];
 
-                    $.data($option[0], 'data', data);
+                    $.data($option[0], "data", data);
 
                     return data;
                 };
@@ -3549,7 +3549,7 @@
                     item = $.extend(
                         {},
                         {
-                            text: ''
+                            text: ""
                         },
                         item
                     );
@@ -3582,7 +3582,7 @@
                 };
 
                 SelectAdapter.prototype.matches = function(params, data) {
-                    var matcher = this.options.get('matcher');
+                    var matcher = this.options.get("matcher");
 
                     return matcher(params, data);
                 };
@@ -3592,11 +3592,11 @@
         );
 
         S2.define(
-            'select2/data/array',
-            ['./select', '../utils', 'jquery'],
+            "select2/data/array",
+            ["./select", "../utils", "jquery"],
             function(SelectAdapter, Utils, $) {
                 function ArrayAdapter($element, options) {
-                    var data = options.get('data') || [];
+                    var data = options.get("data") || [];
 
                     ArrayAdapter.__super__.constructor.call(
                         this,
@@ -3611,7 +3611,7 @@
 
                 ArrayAdapter.prototype.select = function(data) {
                     var $option = this.$element
-                        .find('option')
+                        .find("option")
                         .filter(function(i, elm) {
                             return elm.value == data.id.toString();
                         });
@@ -3628,7 +3628,7 @@
                 ArrayAdapter.prototype.convertToOptions = function(data) {
                     var self = this;
 
-                    var $existing = this.$element.find('option');
+                    var $existing = this.$element.find("option");
                     var existingIds = $existing
                         .map(function() {
                             return self.item($(this)).id;
@@ -3689,11 +3689,11 @@
         );
 
         S2.define(
-            'select2/data/ajax',
-            ['./array', '../utils', 'jquery'],
+            "select2/data/ajax",
+            ["./array", "../utils", "jquery"],
             function(ArrayAdapter, Utils, $) {
                 function AjaxAdapter($element, options) {
-                    this.ajaxOptions = this._applyDefaults(options.get('ajax'));
+                    this.ajaxOptions = this._applyDefaults(options.get("ajax"));
 
                     if (this.ajaxOptions.processResults != null) {
                         this.processResults = this.ajaxOptions.processResults;
@@ -3747,16 +3747,16 @@
 
                     var options = $.extend(
                         {
-                            type: 'GET'
+                            type: "GET"
                         },
                         this.ajaxOptions
                     );
 
-                    if (typeof options.url === 'function') {
+                    if (typeof options.url === "function") {
                         options.url = options.url.call(this.$element, params);
                     }
 
-                    if (typeof options.data === 'function') {
+                    if (typeof options.data === "function") {
                         options.data = options.data.call(this.$element, params);
                     }
 
@@ -3767,7 +3767,7 @@
                                 var results = self.processResults(data, params);
 
                                 if (
-                                    self.options.get('debug') &&
+                                    self.options.get("debug") &&
                                     window.console &&
                                     console.error
                                 ) {
@@ -3778,8 +3778,8 @@
                                         !$.isArray(results.results)
                                     ) {
                                         console.error(
-                                            'Select2: The AJAX results did not return an array in the ' +
-                                                '`results` key of the response.'
+                                            "Select2: The AJAX results did not return an array in the " +
+                                                "`results` key of the response."
                                         );
                                     }
                                 }
@@ -3791,13 +3791,13 @@
                                 // Only works if the transport exposes a status property
                                 if (
                                     $request.status &&
-                                    $request.status === '0'
+                                    $request.status === "0"
                                 ) {
                                     return;
                                 }
 
-                                self.trigger('results:message', {
-                                    message: 'errorLoading'
+                                self.trigger("results:message", {
+                                    message: "errorLoading"
                                 });
                             }
                         );
@@ -3823,17 +3823,17 @@
             }
         );
 
-        S2.define('select2/data/tags', ['jquery'], function($) {
+        S2.define("select2/data/tags", ["jquery"], function($) {
             function Tags(decorated, $element, options) {
-                var tags = options.get('tags');
+                var tags = options.get("tags");
 
-                var createTag = options.get('createTag');
+                var createTag = options.get("createTag");
 
                 if (createTag !== undefined) {
                     this.createTag = createTag;
                 }
 
-                var insertTag = options.get('insertTag');
+                var insertTag = options.get("insertTag");
 
                 if (insertTag !== undefined) {
                     this.insertTag = insertTag;
@@ -3878,8 +3878,8 @@
                                 true
                             );
 
-                        var optionText = (option.text || '').toUpperCase();
-                        var paramsTerm = (params.term || '').toUpperCase();
+                        var optionText = (option.text || "").toUpperCase();
+                        var paramsTerm = (params.term || "").toUpperCase();
 
                         var checkText = optionText === paramsTerm;
 
@@ -3903,7 +3903,7 @@
 
                     if (tag != null) {
                         var $option = self.option(tag);
-                        $option.attr('data-select2-tag', true);
+                        $option.attr("data-select2-tag", true);
 
                         self.addOptions([$option]);
 
@@ -3921,7 +3921,7 @@
             Tags.prototype.createTag = function(decorated, params) {
                 var term = $.trim(params.term);
 
-                if (term === '') {
+                if (term === "") {
                     return null;
                 }
 
@@ -3938,7 +3938,7 @@
             Tags.prototype._removeOldTags = function(_) {
                 var tag = this._lastTag;
 
-                var $options = this.$element.find('option[data-select2-tag]');
+                var $options = this.$element.find("option[data-select2-tag]");
 
                 $options.each(function() {
                     if (this.selected) {
@@ -3952,9 +3952,9 @@
             return Tags;
         });
 
-        S2.define('select2/data/tokenizer', ['jquery'], function($) {
+        S2.define("select2/data/tokenizer", ["jquery"], function($) {
             function Tokenizer(decorated, $element, options) {
-                var tokenizer = options.get('tokenizer');
+                var tokenizer = options.get("tokenizer");
 
                 if (tokenizer !== undefined) {
                     this.tokenizer = tokenizer;
@@ -3973,7 +3973,7 @@
                 this.$search =
                     container.dropdown.$search ||
                     container.selection.$search ||
-                    $container.find('.select2-search__field');
+                    $container.find(".select2-search__field");
             };
 
             Tokenizer.prototype.query = function(decorated, params, callback) {
@@ -3986,7 +3986,7 @@
                     // Check if the data object already exists as a tag
                     // Select it if it doesn't
                     var $existingOptions = self.$element
-                        .find('option')
+                        .find("option")
                         .filter(function() {
                             return $(this).val() === item.id;
                         });
@@ -3994,7 +3994,7 @@
                     // If an existing option wasn't found for it, create the option
                     if (!$existingOptions.length) {
                         var $option = self.option(item);
-                        $option.attr('data-select2-tag', true);
+                        $option.attr("data-select2-tag", true);
 
                         self._removeOldTags();
                         self.addOptions([$option]);
@@ -4005,12 +4005,12 @@
                 }
 
                 function select(data) {
-                    self.trigger('select', {
+                    self.trigger("select", {
                         data: data
                     });
                 }
 
-                params.term = params.term || '';
+                params.term = params.term || "";
 
                 var tokenData = this.tokenizer(
                     params,
@@ -4037,7 +4037,7 @@
                 options,
                 callback
             ) {
-                var separators = options.get('tokenSeparators') || [];
+                var separators = options.get("tokenSeparators") || [];
                 var term = params.term;
                 var i = 0;
 
@@ -4074,7 +4074,7 @@
                     callback(data);
 
                     // Reset the term to not include the tokenized portion
-                    term = term.substr(i + 1) || '';
+                    term = term.substr(i + 1) || "";
                     i = 0;
                 }
 
@@ -4086,9 +4086,9 @@
             return Tokenizer;
         });
 
-        S2.define('select2/data/minimumInputLength', [], function() {
+        S2.define("select2/data/minimumInputLength", [], function() {
             function MinimumInputLength(decorated, $e, options) {
-                this.minimumInputLength = options.get('minimumInputLength');
+                this.minimumInputLength = options.get("minimumInputLength");
 
                 decorated.call(this, $e, options);
             }
@@ -4098,11 +4098,11 @@
                 params,
                 callback
             ) {
-                params.term = params.term || '';
+                params.term = params.term || "";
 
                 if (params.term.length < this.minimumInputLength) {
-                    this.trigger('results:message', {
-                        message: 'inputTooShort',
+                    this.trigger("results:message", {
+                        message: "inputTooShort",
                         args: {
                             minimum: this.minimumInputLength,
                             input: params.term,
@@ -4119,9 +4119,9 @@
             return MinimumInputLength;
         });
 
-        S2.define('select2/data/maximumInputLength', [], function() {
+        S2.define("select2/data/maximumInputLength", [], function() {
             function MaximumInputLength(decorated, $e, options) {
-                this.maximumInputLength = options.get('maximumInputLength');
+                this.maximumInputLength = options.get("maximumInputLength");
 
                 decorated.call(this, $e, options);
             }
@@ -4131,14 +4131,14 @@
                 params,
                 callback
             ) {
-                params.term = params.term || '';
+                params.term = params.term || "";
 
                 if (
                     this.maximumInputLength > 0 &&
                     params.term.length > this.maximumInputLength
                 ) {
-                    this.trigger('results:message', {
-                        message: 'inputTooLong',
+                    this.trigger("results:message", {
+                        message: "inputTooLong",
                         args: {
                             maximum: this.maximumInputLength,
                             input: params.term,
@@ -4155,10 +4155,10 @@
             return MaximumInputLength;
         });
 
-        S2.define('select2/data/maximumSelectionLength', [], function() {
+        S2.define("select2/data/maximumSelectionLength", [], function() {
             function MaximumSelectionLength(decorated, $e, options) {
                 this.maximumSelectionLength = options.get(
-                    'maximumSelectionLength'
+                    "maximumSelectionLength"
                 );
 
                 decorated.call(this, $e, options);
@@ -4177,8 +4177,8 @@
                         self.maximumSelectionLength > 0 &&
                         count >= self.maximumSelectionLength
                     ) {
-                        self.trigger('results:message', {
-                            message: 'maximumSelected',
+                        self.trigger("results:message", {
+                            message: "maximumSelected",
                             args: {
                                 maximum: self.maximumSelectionLength
                             }
@@ -4192,7 +4192,7 @@
             return MaximumSelectionLength;
         });
 
-        S2.define('select2/dropdown', ['jquery', './utils'], function(
+        S2.define("select2/dropdown", ["jquery", "./utils"], function(
             $,
             Utils
         ) {
@@ -4209,10 +4209,10 @@
                 var $dropdown = $(
                     '<span class="select2-dropdown">' +
                         '<span class="select2-results"></span>' +
-                        '</span>'
+                        "</span>"
                 );
 
-                $dropdown.attr('dir', this.options.get('dir'));
+                $dropdown.attr("dir", this.options.get("dir"));
 
                 this.$dropdown = $dropdown;
 
@@ -4235,7 +4235,7 @@
             return Dropdown;
         });
 
-        S2.define('select2/dropdown/search', ['jquery', '../utils'], function(
+        S2.define("select2/dropdown/search", ["jquery", "../utils"], function(
             $,
             Utils
         ) {
@@ -4249,11 +4249,11 @@
                         '<input class="select2-search__field" type="search" tabindex="-1"' +
                         ' autocomplete="off" autocorrect="off" autocapitalize="off"' +
                         ' spellcheck="false" role="textbox" />' +
-                        '</span>'
+                        "</span>"
                 );
 
                 this.$searchContainer = $search;
-                this.$search = $search.find('input');
+                this.$search = $search.find("input");
 
                 $rendered.prepend($search);
 
@@ -4265,8 +4265,8 @@
 
                 decorated.call(this, container, $container);
 
-                this.$search.on('keydown', function(evt) {
-                    self.trigger('keypress', evt);
+                this.$search.on("keydown", function(evt) {
+                    self.trigger("keypress", evt);
 
                     self._keyUpPrevented = evt.isDefaultPrevented();
                 });
@@ -4274,17 +4274,17 @@
                 // Workaround for browsers which do not support the `input` event
                 // This will prevent double-triggering of events for browsers which support
                 // both the `keyup` and `input` events.
-                this.$search.on('input', function(evt) {
+                this.$search.on("input", function(evt) {
                     // Unbind the duplicated `keyup` event
-                    $(this).off('keyup');
+                    $(this).off("keyup");
                 });
 
-                this.$search.on('keyup input', function(evt) {
+                this.$search.on("keyup input", function(evt) {
                     self.handleSearch(evt);
                 });
 
-                container.on('open', function() {
-                    self.$search.attr('tabindex', 0);
+                container.on("open", function() {
+                    self.$search.attr("tabindex", 0);
 
                     self.$search.focus();
 
@@ -4293,29 +4293,29 @@
                     }, 0);
                 });
 
-                container.on('close', function() {
-                    self.$search.attr('tabindex', -1);
+                container.on("close", function() {
+                    self.$search.attr("tabindex", -1);
 
-                    self.$search.val('');
+                    self.$search.val("");
                 });
 
-                container.on('focus', function() {
+                container.on("focus", function() {
                     if (container.isOpen()) {
                         self.$search.focus();
                     }
                 });
 
-                container.on('results:all', function(params) {
-                    if (params.query.term == null || params.query.term === '') {
+                container.on("results:all", function(params) {
+                    if (params.query.term == null || params.query.term === "") {
                         var showSearch = self.showSearch(params);
 
                         if (showSearch) {
                             self.$searchContainer.removeClass(
-                                'select2-search--hide'
+                                "select2-search--hide"
                             );
                         } else {
                             self.$searchContainer.addClass(
-                                'select2-search--hide'
+                                "select2-search--hide"
                             );
                         }
                     }
@@ -4326,7 +4326,7 @@
                 if (!this._keyUpPrevented) {
                     var input = this.$search.val();
 
-                    this.trigger('query', {
+                    this.trigger("query", {
                         term: input
                     });
                 }
@@ -4341,7 +4341,7 @@
             return Search;
         });
 
-        S2.define('select2/dropdown/hidePlaceholder', [], function() {
+        S2.define("select2/dropdown/hidePlaceholder", [], function() {
             function HidePlaceholder(
                 decorated,
                 $element,
@@ -4349,7 +4349,7 @@
                 dataAdapter
             ) {
                 this.placeholder = this.normalizePlaceholder(
-                    options.get('placeholder')
+                    options.get("placeholder")
                 );
 
                 decorated.call(this, $element, options, dataAdapter);
@@ -4365,9 +4365,9 @@
                 _,
                 placeholder
             ) {
-                if (typeof placeholder === 'string') {
+                if (typeof placeholder === "string") {
                     placeholder = {
-                        id: '',
+                        id: "",
                         text: placeholder
                     };
                 }
@@ -4392,7 +4392,7 @@
             return HidePlaceholder;
         });
 
-        S2.define('select2/dropdown/infiniteScroll', ['jquery'], function($) {
+        S2.define("select2/dropdown/infiniteScroll", ["jquery"], function($) {
             function InfiniteScroll(decorated, $element, options, dataAdapter) {
                 this.lastParams = {};
 
@@ -4422,17 +4422,17 @@
 
                 decorated.call(this, container, $container);
 
-                container.on('query', function(params) {
+                container.on("query", function(params) {
                     self.lastParams = params;
                     self.loading = true;
                 });
 
-                container.on('query:append', function(params) {
+                container.on("query:append", function(params) {
                     self.lastParams = params;
                     self.loading = true;
                 });
 
-                this.$results.on('scroll', function() {
+                this.$results.on("scroll", function() {
                     var isLoadMoreVisible = $.contains(
                         document.documentElement,
                         self.$loadingMore[0]
@@ -4462,7 +4462,7 @@
 
                 params.page++;
 
-                this.trigger('query:append', params);
+                this.trigger("query:append", params);
             };
 
             InfiniteScroll.prototype.showLoadingMore = function(_, data) {
@@ -4471,14 +4471,14 @@
 
             InfiniteScroll.prototype.createLoadingMore = function() {
                 var $option = $(
-                    '<li ' +
+                    "<li " +
                         'class="select2-results__option select2-results__option--load-more"' +
                         'role="treeitem" aria-disabled="true"></li>'
                 );
 
                 var message = this.options
-                    .get('translations')
-                    .get('loadingMore');
+                    .get("translations")
+                    .get("loadingMore");
 
                 $option.html(message(this.lastParams));
 
@@ -4489,12 +4489,12 @@
         });
 
         S2.define(
-            'select2/dropdown/attachBody',
-            ['jquery', '../utils'],
+            "select2/dropdown/attachBody",
+            ["jquery", "../utils"],
             function($, Utils) {
                 function AttachBody(decorated, $element, options) {
                     this.$dropdownParent =
-                        options.get('dropdownParent') || $(document.body);
+                        options.get("dropdownParent") || $(document.body);
 
                     decorated.call(this, $element, options);
                 }
@@ -4510,31 +4510,31 @@
 
                     decorated.call(this, container, $container);
 
-                    container.on('open', function() {
+                    container.on("open", function() {
                         self._showDropdown();
                         self._attachPositioningHandler(container);
 
                         if (!setupResultsEvents) {
                             setupResultsEvents = true;
 
-                            container.on('results:all', function() {
+                            container.on("results:all", function() {
                                 self._positionDropdown();
                                 self._resizeDropdown();
                             });
 
-                            container.on('results:append', function() {
+                            container.on("results:append", function() {
                                 self._positionDropdown();
                                 self._resizeDropdown();
                             });
                         }
                     });
 
-                    container.on('close', function() {
+                    container.on("close", function() {
                         self._hideDropdown();
                         self._detachPositioningHandler(container);
                     });
 
-                    this.$dropdownContainer.on('mousedown', function(evt) {
+                    this.$dropdownContainer.on("mousedown", function(evt) {
                         evt.stopPropagation();
                     });
                 };
@@ -4551,13 +4551,13 @@
                     $container
                 ) {
                     // Clone all of the container classes
-                    $dropdown.attr('class', $container.attr('class'));
+                    $dropdown.attr("class", $container.attr("class"));
 
-                    $dropdown.removeClass('select2');
-                    $dropdown.addClass('select2-container--open');
+                    $dropdown.removeClass("select2");
+                    $dropdown.addClass("select2-container--open");
 
                     $dropdown.css({
-                        position: 'absolute',
+                        position: "absolute",
                         top: -999999
                     });
 
@@ -4565,7 +4565,7 @@
                 };
 
                 AttachBody.prototype.render = function(decorated) {
-                    var $container = $('<span></span>');
+                    var $container = $("<span></span>");
 
                     var $dropdown = decorated.call(this);
                     $container.append($dropdown);
@@ -4585,31 +4585,31 @@
                 ) {
                     var self = this;
 
-                    var scrollEvent = 'scroll.select2.' + container.id;
-                    var resizeEvent = 'resize.select2.' + container.id;
+                    var scrollEvent = "scroll.select2." + container.id;
+                    var resizeEvent = "resize.select2." + container.id;
                     var orientationEvent =
-                        'orientationchange.select2.' + container.id;
+                        "orientationchange.select2." + container.id;
 
                     var $watchers = this.$container
                         .parents()
                         .filter(Utils.hasScroll);
                     $watchers.each(function() {
-                        $(this).data('select2-scroll-position', {
+                        $(this).data("select2-scroll-position", {
                             x: $(this).scrollLeft(),
                             y: $(this).scrollTop()
                         });
                     });
 
                     $watchers.on(scrollEvent, function(ev) {
-                        var position = $(this).data('select2-scroll-position');
+                        var position = $(this).data("select2-scroll-position");
                         $(this).scrollTop(position.y);
                     });
 
                     $(window).on(
                         scrollEvent +
-                            ' ' +
+                            " " +
                             resizeEvent +
-                            ' ' +
+                            " " +
                             orientationEvent,
                         function(e) {
                             self._positionDropdown();
@@ -4622,10 +4622,10 @@
                     decorated,
                     container
                 ) {
-                    var scrollEvent = 'scroll.select2.' + container.id;
-                    var resizeEvent = 'resize.select2.' + container.id;
+                    var scrollEvent = "scroll.select2." + container.id;
+                    var resizeEvent = "resize.select2." + container.id;
                     var orientationEvent =
-                        'orientationchange.select2.' + container.id;
+                        "orientationchange.select2." + container.id;
 
                     var $watchers = this.$container
                         .parents()
@@ -4633,7 +4633,7 @@
                     $watchers.off(scrollEvent);
 
                     $(window).off(
-                        scrollEvent + ' ' + resizeEvent + ' ' + orientationEvent
+                        scrollEvent + " " + resizeEvent + " " + orientationEvent
                     );
                 };
 
@@ -4641,10 +4641,10 @@
                     var $window = $(window);
 
                     var isCurrentlyAbove = this.$dropdown.hasClass(
-                        'select2-dropdown--above'
+                        "select2-dropdown--above"
                     );
                     var isCurrentlyBelow = this.$dropdown.hasClass(
-                        'select2-dropdown--below'
+                        "select2-dropdown--below"
                     );
 
                     var newDirection = null;
@@ -4685,7 +4685,7 @@
 
                     // For statically positoned elements, we need to get the element
                     // that is determining the offset
-                    if ($offsetParent.css('position') === 'static') {
+                    if ($offsetParent.css("position") === "static") {
                         $offsetParent = $offsetParent.offsetParent();
                     }
 
@@ -4695,7 +4695,7 @@
                     css.left -= parentOffset.left;
 
                     if (!isCurrentlyAbove && !isCurrentlyBelow) {
-                        newDirection = 'below';
+                        newDirection = "below";
                     }
 
                     if (
@@ -4703,18 +4703,18 @@
                         enoughRoomAbove &&
                         !isCurrentlyAbove
                     ) {
-                        newDirection = 'above';
+                        newDirection = "above";
                     } else if (
                         !enoughRoomAbove &&
                         enoughRoomBelow &&
                         isCurrentlyAbove
                     ) {
-                        newDirection = 'below';
+                        newDirection = "below";
                     }
 
                     if (
-                        newDirection == 'above' ||
-                        (isCurrentlyAbove && newDirection !== 'below')
+                        newDirection == "above" ||
+                        (isCurrentlyAbove && newDirection !== "below")
                     ) {
                         css.top =
                             container.top - parentOffset.top - dropdown.height;
@@ -4723,14 +4723,14 @@
                     if (newDirection != null) {
                         this.$dropdown
                             .removeClass(
-                                'select2-dropdown--below select2-dropdown--above'
+                                "select2-dropdown--below select2-dropdown--above"
                             )
-                            .addClass('select2-dropdown--' + newDirection);
+                            .addClass("select2-dropdown--" + newDirection);
                         this.$container
                             .removeClass(
-                                'select2-container--below select2-container--above'
+                                "select2-container--below select2-container--above"
                             )
-                            .addClass('select2-container--' + newDirection);
+                            .addClass("select2-container--" + newDirection);
                     }
 
                     this.$dropdownContainer.css(css);
@@ -4738,13 +4738,13 @@
 
                 AttachBody.prototype._resizeDropdown = function() {
                     var css = {
-                        width: this.$container.outerWidth(false) + 'px'
+                        width: this.$container.outerWidth(false) + "px"
                     };
 
-                    if (this.options.get('dropdownAutoWidth')) {
+                    if (this.options.get("dropdownAutoWidth")) {
                         css.minWidth = css.width;
-                        css.position = 'relative';
-                        css.width = 'auto';
+                        css.position = "relative";
+                        css.width = "auto";
                     }
 
                     this.$dropdown.css(css);
@@ -4761,7 +4761,7 @@
             }
         );
 
-        S2.define('select2/dropdown/minimumResultsForSearch', [], function() {
+        S2.define("select2/dropdown/minimumResultsForSearch", [], function() {
             function countResults(data) {
                 var count = 0;
 
@@ -4785,7 +4785,7 @@
                 dataAdapter
             ) {
                 this.minimumResultsForSearch = options.get(
-                    'minimumResultsForSearch'
+                    "minimumResultsForSearch"
                 );
 
                 if (this.minimumResultsForSearch < 0) {
@@ -4812,7 +4812,7 @@
             return MinimumResultsForSearch;
         });
 
-        S2.define('select2/dropdown/selectOnClose', [], function() {
+        S2.define("select2/dropdown/selectOnClose", [], function() {
             function SelectOnClose() {}
 
             SelectOnClose.prototype.bind = function(
@@ -4824,7 +4824,7 @@
 
                 decorated.call(this, container, $container);
 
-                container.on('close', function(params) {
+                container.on("close", function(params) {
                     self._handleSelectOnClose(params);
                 });
             };
@@ -4836,8 +4836,8 @@
                     // Don't select an item if the close event was triggered from a select or
                     // unselect event
                     if (
-                        event._type === 'select' ||
-                        event._type === 'unselect'
+                        event._type === "select" ||
+                        event._type === "unselect"
                     ) {
                         return;
                     }
@@ -4850,7 +4850,7 @@
                     return;
                 }
 
-                var data = $highlightedResults.data('data');
+                var data = $highlightedResults.data("data");
 
                 // Don't re-select already selected resulte
                 if (
@@ -4860,7 +4860,7 @@
                     return;
                 }
 
-                this.trigger('select', {
+                this.trigger("select", {
                     data: data
                 });
             };
@@ -4868,7 +4868,7 @@
             return SelectOnClose;
         });
 
-        S2.define('select2/dropdown/closeOnSelect', [], function() {
+        S2.define("select2/dropdown/closeOnSelect", [], function() {
             function CloseOnSelect() {}
 
             CloseOnSelect.prototype.bind = function(
@@ -4880,11 +4880,11 @@
 
                 decorated.call(this, container, $container);
 
-                container.on('select', function(evt) {
+                container.on("select", function(evt) {
                     self._selectTriggered(evt);
                 });
 
-                container.on('unselect', function(evt) {
+                container.on("unselect", function(evt) {
                     self._selectTriggered(evt);
                 });
             };
@@ -4897,7 +4897,7 @@
                     return;
                 }
 
-                this.trigger('close', {
+                this.trigger("close", {
                     originalEvent: originalEvent,
                     originalSelect2Event: evt
                 });
@@ -4906,19 +4906,19 @@
             return CloseOnSelect;
         });
 
-        S2.define('select2/i18n/en', [], function() {
+        S2.define("select2/i18n/en", [], function() {
             // English
             return {
                 errorLoading: function() {
-                    return 'The results could not be loaded.';
+                    return "The results could not be loaded.";
                 },
                 inputTooLong: function(args) {
                     var overChars = args.input.length - args.maximum;
 
-                    var message = 'Please delete ' + overChars + ' character';
+                    var message = "Please delete " + overChars + " character";
 
                     if (overChars != 1) {
-                        message += 's';
+                        message += "s";
                     }
 
                     return message;
@@ -4927,71 +4927,71 @@
                     var remainingChars = args.minimum - args.input.length;
 
                     var message =
-                        'Please enter ' +
+                        "Please enter " +
                         remainingChars +
-                        ' or more characters';
+                        " or more characters";
 
                     return message;
                 },
                 loadingMore: function() {
-                    return 'Loading more results…';
+                    return "Loading more results…";
                 },
                 maximumSelected: function(args) {
                     var message =
-                        'You can only select ' + args.maximum + ' item';
+                        "You can only select " + args.maximum + " item";
 
                     if (args.maximum != 1) {
-                        message += 's';
+                        message += "s";
                     }
 
                     return message;
                 },
                 noResults: function() {
-                    return 'No results found';
+                    return "No results found";
                 },
                 searching: function() {
-                    return 'Searching…';
+                    return "Searching…";
                 }
             };
         });
         S2.define(
-            'select2/defaults',
+            "select2/defaults",
             [
-                'jquery',
-                'require',
+                "jquery",
+                "require",
 
-                './results',
+                "./results",
 
-                './selection/single',
-                './selection/multiple',
-                './selection/placeholder',
-                './selection/allowClear',
-                './selection/search',
-                './selection/eventRelay',
+                "./selection/single",
+                "./selection/multiple",
+                "./selection/placeholder",
+                "./selection/allowClear",
+                "./selection/search",
+                "./selection/eventRelay",
 
-                './utils',
-                './translation',
-                './diacritics',
+                "./utils",
+                "./translation",
+                "./diacritics",
 
-                './data/select',
-                './data/array',
-                './data/ajax',
-                './data/tags',
-                './data/tokenizer',
-                './data/minimumInputLength',
-                './data/maximumInputLength',
-                './data/maximumSelectionLength',
+                "./data/select",
+                "./data/array",
+                "./data/ajax",
+                "./data/tags",
+                "./data/tokenizer",
+                "./data/minimumInputLength",
+                "./data/maximumInputLength",
+                "./data/maximumSelectionLength",
 
-                './dropdown',
-                './dropdown/search',
-                './dropdown/hidePlaceholder',
-                './dropdown/infiniteScroll',
-                './dropdown/attachBody',
-                './dropdown/minimumResultsForSearch',
-                './dropdown/selectOnClose',
-                './dropdown/closeOnSelect',
+                "./dropdown",
+                "./dropdown/search",
+                "./dropdown/hidePlaceholder",
+                "./dropdown/infiniteScroll",
+                "./dropdown/attachBody",
+                "./dropdown/minimumResultsForSearch",
+                "./dropdown/selectOnClose",
+                "./dropdown/closeOnSelect",
 
-                './i18n/en'
+                "./i18n/en"
             ],
             function(
                 $,
@@ -5086,7 +5086,7 @@
 
                         if (options.query != null) {
                             var Query = require(options.amdBase +
-                                'compat/query');
+                                "compat/query");
 
                             options.dataAdapter = Utils.Decorate(
                                 options.dataAdapter,
@@ -5096,7 +5096,7 @@
 
                         if (options.initSelection != null) {
                             var InitSelection = require(options.amdBase +
-                                'compat/initSelection');
+                                "compat/initSelection");
 
                             options.dataAdapter = Utils.Decorate(
                                 options.dataAdapter,
@@ -5162,7 +5162,7 @@
                             options.adaptDropdownCssClass != null
                         ) {
                             var DropdownCSS = require(options.amdBase +
-                                'compat/dropdownCss');
+                                "compat/dropdownCss");
 
                             options.dropdownAdapter = Utils.Decorate(
                                 options.dropdownAdapter,
@@ -5211,7 +5211,7 @@
                             options.adaptContainerCssClass != null
                         ) {
                             var ContainerCSS = require(options.amdBase +
-                                'compat/containerCss');
+                                "compat/containerCss");
 
                             options.selectionAdapter = Utils.Decorate(
                                 options.selectionAdapter,
@@ -5225,11 +5225,11 @@
                         );
                     }
 
-                    if (typeof options.language === 'string') {
+                    if (typeof options.language === "string") {
                         // Check if the language is specified with a region
-                        if (options.language.indexOf('-') > 0) {
+                        if (options.language.indexOf("-") > 0) {
                             // Extract the region information if it is included
-                            var languageParts = options.language.split('-');
+                            var languageParts = options.language.split("-");
                             var baseLanguage = languageParts[0];
 
                             options.language = [options.language, baseLanguage];
@@ -5240,7 +5240,7 @@
 
                     if ($.isArray(options.language)) {
                         var languages = new Translation();
-                        options.language.push('en');
+                        options.language.push("en");
 
                         var languageNames = options.language;
 
@@ -5269,7 +5269,7 @@
                                             'Select2: The language file for "' +
                                                 name +
                                                 '" could not be ' +
-                                                'automatically loaded. A fallback will be used instead.'
+                                                "automatically loaded. A fallback will be used instead."
                                         );
                                     }
 
@@ -5283,7 +5283,7 @@
                         options.translations = languages;
                     } else {
                         var baseTranslation = Translation.loadPath(
-                            this.defaults.amdLanguageBase + 'en'
+                            this.defaults.amdLanguageBase + "en"
                         );
                         var customTranslation = new Translation(
                             options.language
@@ -5309,7 +5309,7 @@
 
                     function matcher(params, data) {
                         // Always return the object if there is nothing to compare
-                        if ($.trim(params.term) === '') {
+                        if ($.trim(params.term) === "") {
                             return data;
                         }
 
@@ -5357,8 +5357,8 @@
                     }
 
                     this.defaults = {
-                        amdBase: './',
-                        amdLanguageBase: './i18n/',
+                        amdBase: "./",
+                        amdLanguageBase: "./i18n/",
                         closeOnSelect: true,
                         debug: false,
                         dropdownAutoWidth: false,
@@ -5379,8 +5379,8 @@
                         templateSelection: function(selection) {
                             return selection.text;
                         },
-                        theme: 'default',
-                        width: 'resolve'
+                        theme: "default",
+                        width: "resolve"
                     };
                 };
 
@@ -5402,8 +5402,8 @@
         );
 
         S2.define(
-            'select2/options',
-            ['require', 'jquery', './defaults', './utils'],
+            "select2/options",
+            ["require", "jquery", "./defaults", "./utils"],
             function(require, $, Defaults, Utils) {
                 function Options(options, $element) {
                     this.options = options;
@@ -5414,9 +5414,9 @@
 
                     this.options = Defaults.apply(this.options);
 
-                    if ($element && $element.is('input')) {
-                        var InputCompat = require(this.get('amdBase') +
-                            'compat/inputData');
+                    if ($element && $element.is("input")) {
+                        var InputCompat = require(this.get("amdBase") +
+                            "compat/inputData");
 
                         this.options.dataAdapter = Utils.Decorate(
                             this.options.dataAdapter,
@@ -5426,73 +5426,73 @@
                 }
 
                 Options.prototype.fromElement = function($e) {
-                    var excludedData = ['select2'];
+                    var excludedData = ["select2"];
 
                     if (this.options.multiple == null) {
-                        this.options.multiple = $e.prop('multiple');
+                        this.options.multiple = $e.prop("multiple");
                     }
 
                     if (this.options.disabled == null) {
-                        this.options.disabled = $e.prop('disabled');
+                        this.options.disabled = $e.prop("disabled");
                     }
 
                     if (this.options.language == null) {
-                        if ($e.prop('lang')) {
+                        if ($e.prop("lang")) {
                             this.options.language = $e
-                                .prop('lang')
+                                .prop("lang")
                                 .toLowerCase();
-                        } else if ($e.closest('[lang]').prop('lang')) {
+                        } else if ($e.closest("[lang]").prop("lang")) {
                             this.options.language = $e
-                                .closest('[lang]')
-                                .prop('lang');
+                                .closest("[lang]")
+                                .prop("lang");
                         }
                     }
 
                     if (this.options.dir == null) {
-                        if ($e.prop('dir')) {
-                            this.options.dir = $e.prop('dir');
-                        } else if ($e.closest('[dir]').prop('dir')) {
-                            this.options.dir = $e.closest('[dir]').prop('dir');
+                        if ($e.prop("dir")) {
+                            this.options.dir = $e.prop("dir");
+                        } else if ($e.closest("[dir]").prop("dir")) {
+                            this.options.dir = $e.closest("[dir]").prop("dir");
                         } else {
-                            this.options.dir = 'ltr';
+                            this.options.dir = "ltr";
                         }
                     }
 
-                    $e.prop('disabled', this.options.disabled);
-                    $e.prop('multiple', this.options.multiple);
+                    $e.prop("disabled", this.options.disabled);
+                    $e.prop("multiple", this.options.multiple);
 
-                    if ($e.data('select2Tags')) {
+                    if ($e.data("select2Tags")) {
                         if (
                             this.options.debug &&
                             window.console &&
                             console.warn
                         ) {
                             console.warn(
-                                'Select2: The `data-select2-tags` attribute has been changed to ' +
+                                "Select2: The `data-select2-tags` attribute has been changed to " +
                                     'use the `data-data` and `data-tags="true"` attributes and will be ' +
-                                    'removed in future versions of Select2.'
+                                    "removed in future versions of Select2."
                             );
                         }
 
-                        $e.data('data', $e.data('select2Tags'));
-                        $e.data('tags', true);
+                        $e.data("data", $e.data("select2Tags"));
+                        $e.data("tags", true);
                     }
 
-                    if ($e.data('ajaxUrl')) {
+                    if ($e.data("ajaxUrl")) {
                         if (
                             this.options.debug &&
                             window.console &&
                             console.warn
                         ) {
                             console.warn(
-                                'Select2: The `data-ajax-url` attribute has been changed to ' +
-                                    '`data-ajax--url` and support for the old attribute will be removed' +
-                                    ' in future versions of Select2.'
+                                "Select2: The `data-ajax-url` attribute has been changed to " +
+                                    "`data-ajax--url` and support for the old attribute will be removed" +
+                                    " in future versions of Select2."
                             );
                         }
 
-                        $e.attr('ajax--url', $e.data('ajaxUrl'));
-                        $e.data('ajax--url', $e.data('ajaxUrl'));
+                        $e.attr("ajax--url", $e.data("ajaxUrl"));
+                        $e.data("ajax--url", $e.data("ajaxUrl"));
                     }
 
                     var dataset = {};
@@ -5501,7 +5501,7 @@
                     // jQuery 1.x does not correctly handle data attributes with multiple dashes
                     if (
                         $.fn.jquery &&
-                        $.fn.jquery.substr(0, 2) == '1.' &&
+                        $.fn.jquery.substr(0, 2) == "1." &&
                         $e[0].dataset
                     ) {
                         dataset = $.extend(true, {}, $e[0].dataset, $e.data());
@@ -5541,12 +5541,12 @@
         );
 
         S2.define(
-            'select2/core',
-            ['jquery', './options', './utils', './keys'],
+            "select2/core",
+            ["jquery", "./options", "./utils", "./keys"],
             function($, Options, Utils, KEYS) {
                 var Select2 = function($element, options) {
-                    if ($element.data('select2') != null) {
-                        $element.data('select2').destroy();
+                    if ($element.data("select2") != null) {
+                        $element.data("select2").destroy();
                     }
 
                     this.$element = $element;
@@ -5561,20 +5561,20 @@
 
                     // Set up the tabindex
 
-                    var tabindex = $element.attr('tabindex') || 0;
-                    $element.data('old-tabindex', tabindex);
-                    $element.attr('tabindex', '-1');
+                    var tabindex = $element.attr("tabindex") || 0;
+                    $element.data("old-tabindex", tabindex);
+                    $element.attr("tabindex", "-1");
 
                     // Set up containers and adapters
 
-                    var DataAdapter = this.options.get('dataAdapter');
+                    var DataAdapter = this.options.get("dataAdapter");
                     this.dataAdapter = new DataAdapter($element, this.options);
 
                     var $container = this.render();
 
                     this._placeContainer($container);
 
-                    var SelectionAdapter = this.options.get('selectionAdapter');
+                    var SelectionAdapter = this.options.get("selectionAdapter");
                     this.selection = new SelectionAdapter(
                         $element,
                         this.options
@@ -5583,13 +5583,13 @@
 
                     this.selection.position(this.$selection, $container);
 
-                    var DropdownAdapter = this.options.get('dropdownAdapter');
+                    var DropdownAdapter = this.options.get("dropdownAdapter");
                     this.dropdown = new DropdownAdapter($element, this.options);
                     this.$dropdown = this.dropdown.render();
 
                     this.dropdown.position(this.$dropdown, $container);
 
-                    var ResultsAdapter = this.options.get('resultsAdapter');
+                    var ResultsAdapter = this.options.get("resultsAdapter");
                     this.results = new ResultsAdapter(
                         $element,
                         this.options,
@@ -5618,39 +5618,39 @@
 
                     // Set the initial state
                     this.dataAdapter.current(function(initialData) {
-                        self.trigger('selection:update', {
+                        self.trigger("selection:update", {
                             data: initialData
                         });
                     });
 
                     // Hide the original select
-                    $element.addClass('select2-hidden-accessible');
-                    $element.attr('aria-hidden', 'true');
+                    $element.addClass("select2-hidden-accessible");
+                    $element.attr("aria-hidden", "true");
 
                     // Synchronize any monitored attributes
                     this._syncAttributes();
 
-                    $element.data('select2', this);
+                    $element.data("select2", this);
                 };
 
                 Utils.Extend(Select2, Utils.Observable);
 
                 Select2.prototype._generateId = function($element) {
-                    var id = '';
+                    var id = "";
 
-                    if ($element.attr('id') != null) {
-                        id = $element.attr('id');
-                    } else if ($element.attr('name') != null) {
+                    if ($element.attr("id") != null) {
+                        id = $element.attr("id");
+                    } else if ($element.attr("name") != null) {
                         id =
-                            $element.attr('name') +
-                            '-' +
+                            $element.attr("name") +
+                            "-" +
                             Utils.generateChars(2);
                     } else {
                         id = Utils.generateChars(4);
                     }
 
-                    id = id.replace(/(:|\.|\[|\]|,)/g, '');
-                    id = 'select2-' + id;
+                    id = id.replace(/(:|\.|\[|\]|,)/g, "");
+                    id = "select2-" + id;
 
                     return id;
                 };
@@ -5660,48 +5660,48 @@
 
                     var width = this._resolveWidth(
                         this.$element,
-                        this.options.get('width')
+                        this.options.get("width")
                     );
 
                     if (width != null) {
-                        $container.css('width', width);
+                        $container.css("width", width);
                     }
                 };
 
                 Select2.prototype._resolveWidth = function($element, method) {
                     var WIDTH = /^width:(([-+]?([0-9]*\.)?[0-9]+)(px|em|ex|%|in|cm|mm|pt|pc))/i;
 
-                    if (method == 'resolve') {
-                        var styleWidth = this._resolveWidth($element, 'style');
+                    if (method == "resolve") {
+                        var styleWidth = this._resolveWidth($element, "style");
 
                         if (styleWidth != null) {
                             return styleWidth;
                         }
 
-                        return this._resolveWidth($element, 'element');
+                        return this._resolveWidth($element, "element");
                     }
 
-                    if (method == 'element') {
+                    if (method == "element") {
                         var elementWidth = $element.outerWidth(false);
 
                         if (elementWidth <= 0) {
-                            return 'auto';
+                            return "auto";
                         }
 
-                        return elementWidth + 'px';
+                        return elementWidth + "px";
                     }
 
-                    if (method == 'style') {
-                        var style = $element.attr('style');
+                    if (method == "style") {
+                        var style = $element.attr("style");
 
-                        if (typeof style !== 'string') {
+                        if (typeof style !== "string") {
                             return null;
                         }
 
-                        var attrs = style.split(';');
+                        var attrs = style.split(";");
 
                         for (var i = 0, l = attrs.length; i < l; i = i + 1) {
-                            var attr = attrs[i].replace(/\s/g, '');
+                            var attr = attrs[i].replace(/\s/g, "");
                             var matches = attr.match(WIDTH);
 
                             if (matches !== null && matches.length >= 1) {
@@ -5726,16 +5726,16 @@
                 Select2.prototype._registerDomEvents = function() {
                     var self = this;
 
-                    this.$element.on('change.select2', function() {
+                    this.$element.on("change.select2", function() {
                         self.dataAdapter.current(function(data) {
-                            self.trigger('selection:update', {
+                            self.trigger("selection:update", {
                                 data: data
                             });
                         });
                     });
 
-                    this.$element.on('focus.select2', function(evt) {
-                        self.trigger('focus', evt);
+                    this.$element.on("focus.select2", function(evt) {
+                        self.trigger("focus", evt);
                     });
 
                     this._syncA = Utils.bind(this._syncAttributes, this);
@@ -5743,7 +5743,7 @@
 
                     if (this.$element[0].attachEvent) {
                         this.$element[0].attachEvent(
-                            'onpropertychange',
+                            "onpropertychange",
                             this._syncA
                         );
                     }
@@ -5764,17 +5764,17 @@
                         });
                     } else if (this.$element[0].addEventListener) {
                         this.$element[0].addEventListener(
-                            'DOMAttrModified',
+                            "DOMAttrModified",
                             self._syncA,
                             false
                         );
                         this.$element[0].addEventListener(
-                            'DOMNodeInserted',
+                            "DOMNodeInserted",
                             self._syncS,
                             false
                         );
                         this.$element[0].addEventListener(
-                            'DOMNodeRemoved',
+                            "DOMNodeRemoved",
                             self._syncS,
                             false
                         );
@@ -5784,24 +5784,24 @@
                 Select2.prototype._registerDataEvents = function() {
                     var self = this;
 
-                    this.dataAdapter.on('*', function(name, params) {
+                    this.dataAdapter.on("*", function(name, params) {
                         self.trigger(name, params);
                     });
                 };
 
                 Select2.prototype._registerSelectionEvents = function() {
                     var self = this;
-                    var nonRelayEvents = ['toggle', 'focus'];
+                    var nonRelayEvents = ["toggle", "focus"];
 
-                    this.selection.on('toggle', function() {
+                    this.selection.on("toggle", function() {
                         self.toggleDropdown();
                     });
 
-                    this.selection.on('focus', function(params) {
+                    this.selection.on("focus", function(params) {
                         self.focus(params);
                     });
 
-                    this.selection.on('*', function(name, params) {
+                    this.selection.on("*", function(name, params) {
                         if ($.inArray(name, nonRelayEvents) !== -1) {
                             return;
                         }
@@ -5813,7 +5813,7 @@
                 Select2.prototype._registerDropdownEvents = function() {
                     var self = this;
 
-                    this.dropdown.on('*', function(name, params) {
+                    this.dropdown.on("*", function(name, params) {
                         self.trigger(name, params);
                     });
                 };
@@ -5821,7 +5821,7 @@
                 Select2.prototype._registerResultsEvents = function() {
                     var self = this;
 
-                    this.results.on('*', function(name, params) {
+                    this.results.on("*", function(name, params) {
                         self.trigger(name, params);
                     });
                 };
@@ -5829,51 +5829,51 @@
                 Select2.prototype._registerEvents = function() {
                     var self = this;
 
-                    this.on('open', function() {
-                        self.$container.addClass('select2-container--open');
+                    this.on("open", function() {
+                        self.$container.addClass("select2-container--open");
                     });
 
-                    this.on('close', function() {
-                        self.$container.removeClass('select2-container--open');
+                    this.on("close", function() {
+                        self.$container.removeClass("select2-container--open");
                     });
 
-                    this.on('enable', function() {
+                    this.on("enable", function() {
                         self.$container.removeClass(
-                            'select2-container--disabled'
+                            "select2-container--disabled"
                         );
                     });
 
-                    this.on('disable', function() {
-                        self.$container.addClass('select2-container--disabled');
+                    this.on("disable", function() {
+                        self.$container.addClass("select2-container--disabled");
                     });
 
-                    this.on('blur', function() {
-                        self.$container.removeClass('select2-container--focus');
+                    this.on("blur", function() {
+                        self.$container.removeClass("select2-container--focus");
                     });
 
-                    this.on('query', function(params) {
+                    this.on("query", function(params) {
                         if (!self.isOpen()) {
-                            self.trigger('open', {});
+                            self.trigger("open", {});
                         }
 
                         this.dataAdapter.query(params, function(data) {
-                            self.trigger('results:all', {
+                            self.trigger("results:all", {
                                 data: data,
                                 query: params
                             });
                         });
                     });
 
-                    this.on('query:append', function(params) {
+                    this.on("query:append", function(params) {
                         this.dataAdapter.query(params, function(data) {
-                            self.trigger('results:append', {
+                            self.trigger("results:append", {
                                 data: data,
                                 query: params
                             });
                         });
                     });
 
-                    this.on('keypress', function(evt) {
+                    this.on("keypress", function(evt) {
                         var key = evt.which;
 
                         if (self.isOpen()) {
@@ -5886,19 +5886,19 @@
 
                                 evt.preventDefault();
                             } else if (key === KEYS.ENTER) {
-                                self.trigger('results:select', {});
+                                self.trigger("results:select", {});
 
                                 evt.preventDefault();
                             } else if (key === KEYS.SPACE && evt.ctrlKey) {
-                                self.trigger('results:toggle', {});
+                                self.trigger("results:toggle", {});
 
                                 evt.preventDefault();
                             } else if (key === KEYS.UP) {
-                                self.trigger('results:previous', {});
+                                self.trigger("results:previous", {});
 
                                 evt.preventDefault();
                             } else if (key === KEYS.DOWN) {
-                                self.trigger('results:next', {});
+                                self.trigger("results:next", {});
 
                                 evt.preventDefault();
                             }
@@ -5918,18 +5918,18 @@
 
                 Select2.prototype._syncAttributes = function() {
                     this.options.set(
-                        'disabled',
-                        this.$element.prop('disabled')
+                        "disabled",
+                        this.$element.prop("disabled")
                     );
 
-                    if (this.options.get('disabled')) {
+                    if (this.options.get("disabled")) {
                         if (this.isOpen()) {
                             this.close();
                         }
 
-                        this.trigger('disable', {});
+                        this.trigger("disable", {});
                     } else {
-                        this.trigger('enable', {});
+                        this.trigger("enable", {});
                     }
                 };
 
@@ -5942,8 +5942,8 @@
                     if (
                         evt &&
                         evt.target &&
-                        (evt.target.nodeName !== 'OPTION' &&
-                            evt.target.nodeName !== 'OPTGROUP')
+                        (evt.target.nodeName !== "OPTION" &&
+                            evt.target.nodeName !== "OPTGROUP")
                     ) {
                         return;
                     }
@@ -5973,7 +5973,7 @@
                     // Only re-pull the data if we think there is a change
                     if (changed) {
                         this.dataAdapter.current(function(currentData) {
-                            self.trigger('selection:update', {
+                            self.trigger("selection:update", {
                                 data: currentData
                             });
                         });
@@ -5987,10 +5987,10 @@
                 Select2.prototype.trigger = function(name, args) {
                     var actualTrigger = Select2.__super__.trigger;
                     var preTriggerMap = {
-                        open: 'opening',
-                        close: 'closing',
-                        select: 'selecting',
-                        unselect: 'unselecting'
+                        open: "opening",
+                        close: "closing",
+                        select: "selecting",
+                        unselect: "unselecting"
                     };
 
                     if (args === undefined) {
@@ -6022,7 +6022,7 @@
                 };
 
                 Select2.prototype.toggleDropdown = function() {
-                    if (this.options.get('disabled')) {
+                    if (this.options.get("disabled")) {
                         return;
                     }
 
@@ -6038,7 +6038,7 @@
                         return;
                     }
 
-                    this.trigger('query', {});
+                    this.trigger("query", {});
                 };
 
                 Select2.prototype.close = function() {
@@ -6046,15 +6046,15 @@
                         return;
                     }
 
-                    this.trigger('close', {});
+                    this.trigger("close", {});
                 };
 
                 Select2.prototype.isOpen = function() {
-                    return this.$container.hasClass('select2-container--open');
+                    return this.$container.hasClass("select2-container--open");
                 };
 
                 Select2.prototype.hasFocus = function() {
-                    return this.$container.hasClass('select2-container--focus');
+                    return this.$container.hasClass("select2-container--focus");
                 };
 
                 Select2.prototype.focus = function(data) {
@@ -6063,20 +6063,20 @@
                         return;
                     }
 
-                    this.$container.addClass('select2-container--focus');
-                    this.trigger('focus', {});
+                    this.$container.addClass("select2-container--focus");
+                    this.trigger("focus", {});
                 };
 
                 Select2.prototype.enable = function(args) {
                     if (
-                        this.options.get('debug') &&
+                        this.options.get("debug") &&
                         window.console &&
                         console.warn
                     ) {
                         console.warn(
                             'Select2: The `select2("enable")` method has been deprecated and will' +
                                 ' be removed in later Select2 versions. Use $element.prop("disabled")' +
-                                ' instead.'
+                                " instead."
                         );
                     }
 
@@ -6086,19 +6086,19 @@
 
                     var disabled = !args[0];
 
-                    this.$element.prop('disabled', disabled);
+                    this.$element.prop("disabled", disabled);
                 };
 
                 Select2.prototype.data = function() {
                     if (
-                        this.options.get('debug') &&
+                        this.options.get("debug") &&
                         arguments.length > 0 &&
                         window.console &&
                         console.warn
                     ) {
                         console.warn(
                             'Select2: Data can no longer be set using `select2("data")`. You ' +
-                                'should consider setting the value instead using `$element.val()`.'
+                                "should consider setting the value instead using `$element.val()`."
                         );
                     }
 
@@ -6113,13 +6113,13 @@
 
                 Select2.prototype.val = function(args) {
                     if (
-                        this.options.get('debug') &&
+                        this.options.get("debug") &&
                         window.console &&
                         console.warn
                     ) {
                         console.warn(
                             'Select2: The `select2("val")` method has been deprecated and will be' +
-                                ' removed in later Select2 versions. Use $element.val() instead.'
+                                " removed in later Select2 versions. Use $element.val() instead."
                         );
                     }
 
@@ -6135,7 +6135,7 @@
                         });
                     }
 
-                    this.$element.val(newVal).trigger('change');
+                    this.$element.val(newVal).trigger("change");
                 };
 
                 Select2.prototype.destroy = function() {
@@ -6143,7 +6143,7 @@
 
                     if (this.$element[0].detachEvent) {
                         this.$element[0].detachEvent(
-                            'onpropertychange',
+                            "onpropertychange",
                             this._syncA
                         );
                     }
@@ -6153,17 +6153,17 @@
                         this._observer = null;
                     } else if (this.$element[0].removeEventListener) {
                         this.$element[0].removeEventListener(
-                            'DOMAttrModified',
+                            "DOMAttrModified",
                             this._syncA,
                             false
                         );
                         this.$element[0].removeEventListener(
-                            'DOMNodeInserted',
+                            "DOMNodeInserted",
                             this._syncS,
                             false
                         );
                         this.$element[0].removeEventListener(
-                            'DOMNodeRemoved',
+                            "DOMNodeRemoved",
                             this._syncS,
                             false
                         );
@@ -6172,15 +6172,15 @@
                     this._syncA = null;
                     this._syncS = null;
 
-                    this.$element.off('.select2');
+                    this.$element.off(".select2");
                     this.$element.attr(
-                        'tabindex',
-                        this.$element.data('old-tabindex')
+                        "tabindex",
+                        this.$element.data("old-tabindex")
                     );
 
-                    this.$element.removeClass('select2-hidden-accessible');
-                    this.$element.attr('aria-hidden', 'false');
-                    this.$element.removeData('select2');
+                    this.$element.removeClass("select2-hidden-accessible");
+                    this.$element.attr("aria-hidden", "false");
+                    this.$element.removeData("select2");
 
                     this.dataAdapter.destroy();
                     this.selection.destroy();
@@ -6198,18 +6198,18 @@
                         '<span class="select2 select2-container">' +
                             '<span class="selection"></span>' +
                             '<span class="dropdown-wrapper" aria-hidden="true"></span>' +
-                            '</span>'
+                            "</span>"
                     );
 
-                    $container.attr('dir', this.options.get('dir'));
+                    $container.attr("dir", this.options.get("dir"));
 
                     this.$container = $container;
 
                     this.$container.addClass(
-                        'select2-container--' + this.options.get('theme')
+                        "select2-container--" + this.options.get("theme")
                     );
 
-                    $container.data('element', this.$element);
+                    $container.data("element", this.$element);
 
                     return $container;
                 };
@@ -6218,33 +6218,33 @@
             }
         );
 
-        S2.define('select2/compat/utils', ['jquery'], function($) {
+        S2.define("select2/compat/utils", ["jquery"], function($) {
             function syncCssClasses($dest, $src, adapter) {
                 var classes,
                     replacements = [],
                     adapted;
 
-                classes = $.trim($dest.attr('class'));
+                classes = $.trim($dest.attr("class"));
 
                 if (classes) {
-                    classes = '' + classes; // for IE which returns object
+                    classes = "" + classes; // for IE which returns object
 
                     $(classes.split(/\s+/)).each(function() {
                         // Save all Select2 classes
-                        if (this.indexOf('select2-') === 0) {
+                        if (this.indexOf("select2-") === 0) {
                             replacements.push(this);
                         }
                     });
                 }
 
-                classes = $.trim($src.attr('class'));
+                classes = $.trim($src.attr("class"));
 
                 if (classes) {
-                    classes = '' + classes; // for IE which returns object
+                    classes = "" + classes; // for IE which returns object
 
                     $(classes.split(/\s+/)).each(function() {
                         // Only adapt non-Select2 classes
-                        if (this.indexOf('select2-') !== 0) {
+                        if (this.indexOf("select2-") !== 0) {
                             adapted = adapter(this);
 
                             if (adapted != null) {
@@ -6254,7 +6254,7 @@
                     });
                 }
 
-                $dest.attr('class', replacements.join(' '));
+                $dest.attr("class", replacements.join(" "));
             }
 
             return {
@@ -6263,8 +6263,8 @@
         });
 
         S2.define(
-            'select2/compat/containerCss',
-            ['jquery', './utils'],
+            "select2/compat/containerCss",
+            ["jquery", "./utils"],
             function($, CompatUtils) {
                 // No-op CSS adapter that discards all classes by default
                 function _containerAdapter(clazz) {
@@ -6277,22 +6277,22 @@
                     var $container = decorated.call(this);
 
                     var containerCssClass =
-                        this.options.get('containerCssClass') || '';
+                        this.options.get("containerCssClass") || "";
 
                     if ($.isFunction(containerCssClass)) {
                         containerCssClass = containerCssClass(this.$element);
                     }
 
                     var containerCssAdapter = this.options.get(
-                        'adaptContainerCssClass'
+                        "adaptContainerCssClass"
                     );
                     containerCssAdapter =
                         containerCssAdapter || _containerAdapter;
 
-                    if (containerCssClass.indexOf(':all:') !== -1) {
+                    if (containerCssClass.indexOf(":all:") !== -1) {
                         containerCssClass = containerCssClass.replace(
-                            ':all:',
-                            ''
+                            ":all:",
+                            ""
                         );
 
                         var _cssAdapter = containerCssAdapter;
@@ -6302,14 +6302,14 @@
 
                             if (adapted != null) {
                                 // Append the old one along with the adapted one
-                                return adapted + ' ' + clazz;
+                                return adapted + " " + clazz;
                             }
 
                             return clazz;
                         };
                     }
 
-                    var containerCss = this.options.get('containerCss') || {};
+                    var containerCss = this.options.get("containerCss") || {};
 
                     if ($.isFunction(containerCss)) {
                         containerCss = containerCss(this.$element);
@@ -6331,7 +6331,7 @@
             }
         );
 
-        S2.define('select2/compat/dropdownCss', ['jquery', './utils'], function(
+        S2.define("select2/compat/dropdownCss", ["jquery", "./utils"], function(
             $,
             CompatUtils
         ) {
@@ -6346,19 +6346,19 @@
                 var $dropdown = decorated.call(this);
 
                 var dropdownCssClass =
-                    this.options.get('dropdownCssClass') || '';
+                    this.options.get("dropdownCssClass") || "";
 
                 if ($.isFunction(dropdownCssClass)) {
                     dropdownCssClass = dropdownCssClass(this.$element);
                 }
 
                 var dropdownCssAdapter = this.options.get(
-                    'adaptDropdownCssClass'
+                    "adaptDropdownCssClass"
                 );
                 dropdownCssAdapter = dropdownCssAdapter || _dropdownAdapter;
 
-                if (dropdownCssClass.indexOf(':all:') !== -1) {
-                    dropdownCssClass = dropdownCssClass.replace(':all:', '');
+                if (dropdownCssClass.indexOf(":all:") !== -1) {
+                    dropdownCssClass = dropdownCssClass.replace(":all:", "");
 
                     var _cssAdapter = dropdownCssAdapter;
 
@@ -6367,14 +6367,14 @@
 
                         if (adapted != null) {
                             // Append the old one along with the adapted one
-                            return adapted + ' ' + clazz;
+                            return adapted + " " + clazz;
                         }
 
                         return clazz;
                     };
                 }
 
-                var dropdownCss = this.options.get('dropdownCss') || {};
+                var dropdownCss = this.options.get("dropdownCss") || {};
 
                 if ($.isFunction(dropdownCss)) {
                     dropdownCss = dropdownCss(this.$element);
@@ -6395,19 +6395,19 @@
             return DropdownCSS;
         });
 
-        S2.define('select2/compat/initSelection', ['jquery'], function($) {
+        S2.define("select2/compat/initSelection", ["jquery"], function($) {
             function InitSelection(decorated, $element, options) {
-                if (options.get('debug') && window.console && console.warn) {
+                if (options.get("debug") && window.console && console.warn) {
                     console.warn(
-                        'Select2: The `initSelection` option has been deprecated in favor' +
-                            ' of a custom data adapter that overrides the `current` method. ' +
-                            'This method is now called multiple times instead of a single ' +
-                            'time when the instance is initialized. Support will be removed ' +
-                            'for the `initSelection` option in future versions of Select2'
+                        "Select2: The `initSelection` option has been deprecated in favor" +
+                            " of a custom data adapter that overrides the `current` method. " +
+                            "This method is now called multiple times instead of a single " +
+                            "time when the instance is initialized. Support will be removed " +
+                            "for the `initSelection` option in future versions of Select2"
                     );
                 }
 
-                this.initSelection = options.get('initSelection');
+                this.initSelection = options.get("initSelection");
                 this._isInitialized = false;
 
                 decorated.call(this, $element, options);
@@ -6436,17 +6436,17 @@
             return InitSelection;
         });
 
-        S2.define('select2/compat/inputData', ['jquery'], function($) {
+        S2.define("select2/compat/inputData", ["jquery"], function($) {
             function InputData(decorated, $element, options) {
                 this._currentData = [];
-                this._valueSeparator = options.get('valueSeparator') || ',';
+                this._valueSeparator = options.get("valueSeparator") || ",";
 
-                if ($element.prop('type') === 'hidden') {
-                    if (options.get('debug') && console && console.warn) {
+                if ($element.prop("type") === "hidden") {
+                    if (options.get("debug") && console && console.warn) {
                         console.warn(
-                            'Select2: Using a hidden input with Select2 is no longer ' +
-                                'supported and may stop working in the future. It is recommended ' +
-                                'to use a `<select>` element instead.'
+                            "Select2: Using a hidden input with Select2 is no longer " +
+                                "supported and may stop working in the future. It is recommended " +
+                                "to use a `<select>` element instead."
                         );
                     }
                 }
@@ -6496,7 +6496,7 @@
             };
 
             InputData.prototype.select = function(_, data) {
-                if (!this.options.get('multiple')) {
+                if (!this.options.get("multiple")) {
                     this.current(function(allData) {
                         $.map(allData, function(data) {
                             data.selected = false;
@@ -6504,13 +6504,13 @@
                     });
 
                     this.$element.val(data.id);
-                    this.$element.trigger('change');
+                    this.$element.trigger("change");
                 } else {
                     var value = this.$element.val();
                     value += this._valueSeparator + data.id;
 
                     this.$element.val(value);
-                    this.$element.trigger('change');
+                    this.$element.trigger("change");
                 }
             };
 
@@ -6533,7 +6533,7 @@
                     }
 
                     self.$element.val(values.join(self._valueSeparator));
-                    self.$element.trigger('change');
+                    self.$element.trigger("change");
                 });
             };
 
@@ -6557,7 +6557,7 @@
 
             InputData.prototype.addOptions = function(_, $options) {
                 var options = $.map($options, function($option) {
-                    return $.data($option[0], 'data');
+                    return $.data($option[0], "data");
                 });
 
                 this._currentData.push.apply(this._currentData, options);
@@ -6566,12 +6566,12 @@
             return InputData;
         });
 
-        S2.define('select2/compat/matcher', ['jquery'], function($) {
+        S2.define("select2/compat/matcher", ["jquery"], function($) {
             function oldMatcher(matcher) {
                 function wrappedMatcher(params, data) {
                     var match = $.extend(true, {}, data);
 
-                    if (params.term == null || $.trim(params.term) === '') {
+                    if (params.term == null || $.trim(params.term) === "") {
                         return match;
                     }
 
@@ -6611,14 +6611,14 @@
             return oldMatcher;
         });
 
-        S2.define('select2/compat/query', [], function() {
+        S2.define("select2/compat/query", [], function() {
             function Query(decorated, $element, options) {
-                if (options.get('debug') && window.console && console.warn) {
+                if (options.get("debug") && window.console && console.warn) {
                     console.warn(
-                        'Select2: The `query` option has been deprecated in favor of a ' +
-                            'custom data adapter that overrides the `query` method. Support ' +
-                            'will be removed for the `query` option in future versions of ' +
-                            'Select2.'
+                        "Select2: The `query` option has been deprecated in favor of a " +
+                            "custom data adapter that overrides the `query` method. Support " +
+                            "will be removed for the `query` option in future versions of " +
+                            "Select2."
                     );
                 }
 
@@ -6628,7 +6628,7 @@
             Query.prototype.query = function(_, params, callback) {
                 params.callback = callback;
 
-                var query = this.options.get('query');
+                var query = this.options.get("query");
 
                 query.call(null, params);
             };
@@ -6636,7 +6636,7 @@
             return Query;
         });
 
-        S2.define('select2/dropdown/attachContainer', [], function() {
+        S2.define("select2/dropdown/attachContainer", [], function() {
             function AttachContainer(decorated, $element, options) {
                 decorated.call(this, $element, options);
             }
@@ -6646,17 +6646,17 @@
                 $dropdown,
                 $container
             ) {
-                var $dropdownContainer = $container.find('.dropdown-wrapper');
+                var $dropdownContainer = $container.find(".dropdown-wrapper");
                 $dropdownContainer.append($dropdown);
 
-                $dropdown.addClass('select2-dropdown--below');
-                $container.addClass('select2-container--below');
+                $dropdown.addClass("select2-dropdown--below");
+                $container.addClass("select2-container--below");
             };
 
             return AttachContainer;
         });
 
-        S2.define('select2/dropdown/stopPropagation', [], function() {
+        S2.define("select2/dropdown/stopPropagation", [], function() {
             function StopPropagation() {}
 
             StopPropagation.prototype.bind = function(
@@ -6667,29 +6667,29 @@
                 decorated.call(this, container, $container);
 
                 var stoppedEvents = [
-                    'blur',
-                    'change',
-                    'click',
-                    'dblclick',
-                    'focus',
-                    'focusin',
-                    'focusout',
-                    'input',
-                    'keydown',
-                    'keyup',
-                    'keypress',
-                    'mousedown',
-                    'mouseenter',
-                    'mouseleave',
-                    'mousemove',
-                    'mouseover',
-                    'mouseup',
-                    'search',
-                    'touchend',
-                    'touchstart'
+                    "blur",
+                    "change",
+                    "click",
+                    "dblclick",
+                    "focus",
+                    "focusin",
+                    "focusout",
+                    "input",
+                    "keydown",
+                    "keyup",
+                    "keypress",
+                    "mousedown",
+                    "mouseenter",
+                    "mouseleave",
+                    "mousemove",
+                    "mouseover",
+                    "mouseup",
+                    "search",
+                    "touchend",
+                    "touchstart"
                 ];
 
-                this.$dropdown.on(stoppedEvents.join(' '), function(evt) {
+                this.$dropdown.on(stoppedEvents.join(" "), function(evt) {
                     evt.stopPropagation();
                 });
             };
@@ -6697,7 +6697,7 @@
             return StopPropagation;
         });
 
-        S2.define('select2/selection/stopPropagation', [], function() {
+        S2.define("select2/selection/stopPropagation", [], function() {
             function StopPropagation() {}
 
             StopPropagation.prototype.bind = function(
@@ -6707,29 +6707,29 @@
             ) {
                 decorated.call(this, container, $container);
                 var stoppedEvents = [
-                    'blur',
-                    'change',
-                    'click',
-                    'dblclick',
-                    'focus',
-                    'focusin',
-                    'focusout',
-                    'input',
-                    'keydown',
-                    'keyup',
-                    'keypress',
-                    'mousedown',
-                    'mouseenter',
-                    'mouseleave',
-                    'mousemove',
-                    'mouseover',
-                    'mouseup',
-                    'search',
-                    'touchend',
-                    'touchstart'
+                    "blur",
+                    "change",
+                    "click",
+                    "dblclick",
+                    "focus",
+                    "focusin",
+                    "focusout",
+                    "input",
+                    "keydown",
+                    "keyup",
+                    "keypress",
+                    "mousedown",
+                    "mouseenter",
+                    "mouseleave",
+                    "mousemove",
+                    "mouseover",
+                    "mouseup",
+                    "search",
+                    "touchend",
+                    "touchstart"
                 ];
 
-                this.$selection.on(stoppedEvents.join(' '), function(evt) {
+                this.$selection.on(stoppedEvents.join(" "), function(evt) {
                     evt.stopPropagation();
                 });
             };
@@ -6745,10 +6745,10 @@
          * http://jquery.org/license
          */
         (function(factory) {
-            if (typeof S2.define === 'function' && S2.define.amd) {
+            if (typeof S2.define === "function" && S2.define.amd) {
                 // AMD. Register as an anonymous module.
-                S2.define('jquery-mousewheel', ['jquery'], factory);
-            } else if (typeof exports === 'object') {
+                S2.define("jquery-mousewheel", ["jquery"], factory);
+            } else if (typeof exports === "object") {
                 // Node/CommonJS style for Browserify
                 module.exports = factory;
             } else {
@@ -6757,18 +6757,18 @@
             }
         })(function($) {
             var toFix = [
-                    'wheel',
-                    'mousewheel',
-                    'DOMMouseScroll',
-                    'MozMousePixelScroll'
+                    "wheel",
+                    "mousewheel",
+                    "DOMMouseScroll",
+                    "MozMousePixelScroll"
                 ],
                 toBind =
-                    'onwheel' in document || document.documentMode >= 9
-                        ? ['wheel']
+                    "onwheel" in document || document.documentMode >= 9
+                        ? ["wheel"]
                         : [
-                              'mousewheel',
-                              'DomMouseScroll',
-                              'MozMousePixelScroll'
+                              "mousewheel",
+                              "DomMouseScroll",
+                              "MozMousePixelScroll"
                           ],
                 slice = Array.prototype.slice,
                 nullLowestDeltaTimeout,
@@ -6781,7 +6781,7 @@
             }
 
             var special = ($.event.special.mousewheel = {
-                version: '3.1.12',
+                version: "3.1.12",
 
                 setup: function() {
                     if (this.addEventListener) {
@@ -6794,12 +6794,12 @@
                     // Store the line height and page height for this particular element
                     $.data(
                         this,
-                        'mousewheel-line-height',
+                        "mousewheel-line-height",
                         special.getLineHeight(this)
                     );
                     $.data(
                         this,
-                        'mousewheel-page-height',
+                        "mousewheel-page-height",
                         special.getPageHeight(this)
                     );
                 },
@@ -6817,21 +6817,21 @@
                         this.onmousewheel = null;
                     }
                     // Clean up the data we added to the element
-                    $.removeData(this, 'mousewheel-line-height');
-                    $.removeData(this, 'mousewheel-page-height');
+                    $.removeData(this, "mousewheel-line-height");
+                    $.removeData(this, "mousewheel-page-height");
                 },
 
                 getLineHeight: function(elem) {
                     var $elem = $(elem),
                         $parent = $elem[
-                            'offsetParent' in $.fn ? 'offsetParent' : 'parent'
+                            "offsetParent" in $.fn ? "offsetParent" : "parent"
                         ]();
                     if (!$parent.length) {
-                        $parent = $('body');
+                        $parent = $("body");
                     }
                     return (
-                        parseInt($parent.css('fontSize'), 10) ||
-                        parseInt($elem.css('fontSize'), 10) ||
+                        parseInt($parent.css("fontSize"), 10) ||
+                        parseInt($elem.css("fontSize"), 10) ||
                         16
                     );
                 },
@@ -6849,12 +6849,12 @@
             $.fn.extend({
                 mousewheel: function(fn) {
                     return fn
-                        ? this.bind('mousewheel', fn)
-                        : this.trigger('mousewheel');
+                        ? this.bind("mousewheel", fn)
+                        : this.trigger("mousewheel");
                 },
 
                 unmousewheel: function(fn) {
-                    return this.unbind('mousewheel', fn);
+                    return this.unbind("mousewheel", fn);
                 }
             });
 
@@ -6868,25 +6868,25 @@
                     offsetX = 0,
                     offsetY = 0;
                 event = $.event.fix(orgEvent);
-                event.type = 'mousewheel';
+                event.type = "mousewheel";
 
                 // Old school scrollwheel delta
-                if ('detail' in orgEvent) {
+                if ("detail" in orgEvent) {
                     deltaY = orgEvent.detail * -1;
                 }
-                if ('wheelDelta' in orgEvent) {
+                if ("wheelDelta" in orgEvent) {
                     deltaY = orgEvent.wheelDelta;
                 }
-                if ('wheelDeltaY' in orgEvent) {
+                if ("wheelDeltaY" in orgEvent) {
                     deltaY = orgEvent.wheelDeltaY;
                 }
-                if ('wheelDeltaX' in orgEvent) {
+                if ("wheelDeltaX" in orgEvent) {
                     deltaX = orgEvent.wheelDeltaX * -1;
                 }
 
                 // Firefox < 17 horizontal scrolling related to DOMMouseScroll event
                 if (
-                    'axis' in orgEvent &&
+                    "axis" in orgEvent &&
                     orgEvent.axis === orgEvent.HORIZONTAL_AXIS
                 ) {
                     deltaX = deltaY * -1;
@@ -6897,11 +6897,11 @@
                 delta = deltaY === 0 ? deltaX : deltaY;
 
                 // New school wheel delta (wheel event)
-                if ('deltaY' in orgEvent) {
+                if ("deltaY" in orgEvent) {
                     deltaY = orgEvent.deltaY * -1;
                     delta = deltaY;
                 }
-                if ('deltaX' in orgEvent) {
+                if ("deltaX" in orgEvent) {
                     deltaX = orgEvent.deltaX;
                     if (deltaY === 0) {
                         delta = deltaX * -1;
@@ -6919,12 +6919,12 @@
                 //   * deltaMode 1 is by lines
                 //   * deltaMode 2 is by pages
                 if (orgEvent.deltaMode === 1) {
-                    var lineHeight = $.data(this, 'mousewheel-line-height');
+                    var lineHeight = $.data(this, "mousewheel-line-height");
                     delta *= lineHeight;
                     deltaY *= lineHeight;
                     deltaX *= lineHeight;
                 } else if (orgEvent.deltaMode === 2) {
-                    var pageHeight = $.data(this, 'mousewheel-page-height');
+                    var pageHeight = $.data(this, "mousewheel-page-height");
                     delta *= pageHeight;
                     deltaY *= pageHeight;
                     deltaX *= pageHeight;
@@ -6951,13 +6951,13 @@
                 }
 
                 // Get a whole, normalized value for the deltas
-                delta = Math[delta >= 1 ? 'floor' : 'ceil'](
+                delta = Math[delta >= 1 ? "floor" : "ceil"](
                     delta / lowestDelta
                 );
-                deltaX = Math[deltaX >= 1 ? 'floor' : 'ceil'](
+                deltaX = Math[deltaX >= 1 ? "floor" : "ceil"](
                     deltaX / lowestDelta
                 );
-                deltaY = Math[deltaY >= 1 ? 'floor' : 'ceil'](
+                deltaY = Math[deltaY >= 1 ? "floor" : "ceil"](
                     deltaY / lowestDelta
                 );
 
@@ -7011,30 +7011,30 @@
                 // Turn this off by setting $.event.special.mousewheel.settings.adjustOldDeltas to false.
                 return (
                     special.settings.adjustOldDeltas &&
-                    orgEvent.type === 'mousewheel' &&
+                    orgEvent.type === "mousewheel" &&
                     absDelta % 120 === 0
                 );
             }
         });
 
         S2.define(
-            'jquery.select2',
+            "jquery.select2",
             [
-                'jquery',
-                'jquery-mousewheel',
+                "jquery",
+                "jquery-mousewheel",
 
-                './select2/core',
-                './select2/defaults'
+                "./select2/core",
+                "./select2/defaults"
             ],
             function($, _, Select2, Defaults) {
                 if ($.fn.select2 == null) {
                     // All methods that should return the element
-                    var thisMethods = ['open', 'close', 'destroy'];
+                    var thisMethods = ["open", "close", "destroy"];
 
                     $.fn.select2 = function(options) {
                         options = options || {};
 
-                        if (typeof options === 'object') {
+                        if (typeof options === "object") {
                             this.each(function() {
                                 var instanceOptions = $.extend(
                                     true,
@@ -7049,12 +7049,12 @@
                             });
 
                             return this;
-                        } else if (typeof options === 'string') {
+                        } else if (typeof options === "string") {
                             var ret;
                             var args = Array.prototype.slice.call(arguments, 1);
 
                             this.each(function() {
-                                var instance = $(this).data('select2');
+                                var instance = $(this).data("select2");
 
                                 if (
                                     instance == null &&
@@ -7065,7 +7065,7 @@
                                         "The select2('" +
                                             options +
                                             "') method was called on an " +
-                                            'element that is not using Select2.'
+                                            "element that is not using Select2."
                                     );
                                 }
 
@@ -7080,7 +7080,7 @@
                             return ret;
                         } else {
                             throw new Error(
-                                'Invalid arguments for Select2: ' + options
+                                "Invalid arguments for Select2: " + options
                             );
                         }
                     };
@@ -7103,7 +7103,7 @@
 
     // Autoload the jQuery bindings
     // We know that all of the modules exist above this, so we're safe
-    var select2 = S2.require('jquery.select2');
+    var select2 = S2.require("jquery.select2");
 
     // Hold the AMD module references on the jQuery function that was just loaded
     // This allows Select2 to use the internal loader outside of this file, such

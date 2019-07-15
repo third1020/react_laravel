@@ -1,10 +1,10 @@
-import React from 'react';
+import React from "react";
 import {
     InputGroup,
     InputGroupAddon,
     InputGroupText,
     FormSelect
-} from 'shards-react';
+} from "shards-react";
 
 const CustomSelect = () => (
     <div>

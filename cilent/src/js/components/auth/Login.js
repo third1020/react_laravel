@@ -1,19 +1,19 @@
-import axios from 'axios';
-import React, { Component } from 'react';
+import axios from "axios";
+import React, { Component } from "react";
 
-import '../../../css/login.css';
-import Swal from 'sweetalert2/dist/sweetalert2.js';
+import "../../../css/login.css";
+import Swal from "sweetalert2/dist/sweetalert2.js";
 
-import '../../../css/util.css';
-import IMG from '../../../images/img-01.png';
-import { FaUserAlt } from 'react-icons/fa';
+import "../../../css/util.css";
+import IMG from "../../../images/img-01.png";
+import { FaUserAlt } from "react-icons/fa";
 
 export default class Login extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            username: '',
-            password: ''
+            username: "",
+            password: ""
         };
         this.handleFieldChange = this.handleFieldChange.bind(this);
         this.handleCreateNewProject = this.handleCreateNewProject.bind(this);
@@ -38,15 +38,15 @@ export default class Login extends Component {
         };
 
         axios
-            .post('/api/login', project)
+            .post("/api/login", project)
             .then(response => {
                 // redirect to the homepage
                 console.log(response.data);
 
                 if (response.data.data.token != null) {
-                    sessionStorage.setItem('Token', response.data.data.token);
+                    sessionStorage.setItem("Token", response.data.data.token);
                     axios
-                        .get('api/profile', {
+                        .get("api/profile", {
                             headers: {
                                 Authorization: `Bearer ${sessionStorage.Token}`
                             }
@@ -56,462 +56,462 @@ export default class Login extends Component {
 
                             if (response.status === 200) {
                                 Swal.fire({
-                                    title: 'Loading...',
+                                    title: "Loading...",
                                     onBeforeOpen: () => {
                                         Swal.showLoading();
                                     }
                                 });
                                 axios
-                                    .post('api/permission/getPermission', {
+                                    .post("api/permission/getPermission", {
                                         permission_id:
                                             response.data.user.permission_id
                                     })
                                     .then(res => {
                                         console.log(res.data);
                                         sessionStorage.setItem(
-                                            'permission_name',
+                                            "permission_name",
                                             res.data.getpermission
                                                 .permission_name
                                         );
                                         sessionStorage.setItem(
-                                            'ManageUser',
+                                            "ManageUser",
                                             res.data.getpermission.ManageUser
                                         );
                                         sessionStorage.setItem(
-                                            'ManageUserView',
+                                            "ManageUserView",
                                             res.data.getpermission
                                                 .ManageUserView
                                         );
                                         sessionStorage.setItem(
-                                            'ManageUserEdit',
+                                            "ManageUserEdit",
                                             res.data.getpermission
                                                 .ManageUserEdit
                                         );
                                         sessionStorage.setItem(
-                                            'ManageUserDelete',
+                                            "ManageUserDelete",
                                             res.data.getpermission
                                                 .ManageUserDelete
                                         );
 
                                         sessionStorage.setItem(
-                                            'ManagePermission',
+                                            "ManagePermission",
                                             res.data.getpermission
                                                 .ManagePermission
                                         );
                                         sessionStorage.setItem(
-                                            'ManagePermissionView',
+                                            "ManagePermissionView",
                                             res.data.getpermission
                                                 .ManagePermissionView
                                         );
                                         sessionStorage.setItem(
-                                            'ManagePermissionEdit',
+                                            "ManagePermissionEdit",
                                             res.data.getpermission
                                                 .ManagePermissionEdit
                                         );
                                         sessionStorage.setItem(
-                                            'ManagePermissionDelete',
+                                            "ManagePermissionDelete",
                                             res.data.getpermission
                                                 .ManagePermissionDelete
                                         );
 
                                         sessionStorage.setItem(
-                                            'ManageAddress',
+                                            "ManageAddress",
                                             res.data.getpermission.ManageAddress
                                         );
                                         sessionStorage.setItem(
-                                            'ManageAddressView',
+                                            "ManageAddressView",
                                             res.data.getpermission
                                                 .ManageAddressView
                                         );
                                         sessionStorage.setItem(
-                                            'ManageAddressEdit',
+                                            "ManageAddressEdit",
                                             res.data.getpermission
                                                 .ManageAddressEdit
                                         );
                                         sessionStorage.setItem(
-                                            'ManageAddressDelete',
+                                            "ManageAddressDelete",
                                             res.data.getpermission
                                                 .ManageAddressDelete
                                         );
 
                                         sessionStorage.setItem(
-                                            'ManageCompany',
+                                            "ManageCompany",
                                             res.data.getpermission.ManageCompany
                                         );
                                         sessionStorage.setItem(
-                                            'ManageCompanyView',
+                                            "ManageCompanyView",
                                             res.data.getpermission
                                                 .ManageCompanyView
                                         );
                                         sessionStorage.setItem(
-                                            'ManageCompanyEdit',
+                                            "ManageCompanyEdit",
                                             res.data.getpermission
                                                 .ManageCompanyEdit
                                         );
                                         sessionStorage.setItem(
-                                            'ManageCompanyDelete',
+                                            "ManageCompanyDelete",
                                             res.data.getpermission
                                                 .ManageCompanyDelete
                                         );
 
                                         sessionStorage.setItem(
-                                            'ManageDepartment',
+                                            "ManageDepartment",
                                             res.data.getpermission
                                                 .ManageDepartment
                                         );
                                         sessionStorage.setItem(
-                                            'ManageDepartmentView',
+                                            "ManageDepartmentView",
                                             res.data.getpermission
                                                 .ManageDepartmentView
                                         );
                                         sessionStorage.setItem(
-                                            'ManageDepartmentEdit',
+                                            "ManageDepartmentEdit",
                                             res.data.getpermission
                                                 .ManageDepartmentEdit
                                         );
                                         sessionStorage.setItem(
-                                            'ManageDepartmentDelete',
+                                            "ManageDepartmentDelete",
                                             res.data.getpermission
                                                 .ManageDepartmentDelete
                                         );
 
                                         sessionStorage.setItem(
-                                            'ManageDistrict',
+                                            "ManageDistrict",
                                             res.data.getpermission
                                                 .ManageDistrict
                                         );
                                         sessionStorage.setItem(
-                                            'ManageDistrictView',
+                                            "ManageDistrictView",
                                             res.data.getpermission
                                                 .ManageDistrictView
                                         );
                                         sessionStorage.setItem(
-                                            'ManageDistrictEdit',
+                                            "ManageDistrictEdit",
                                             res.data.getpermission
                                                 .ManageDistrictEdit
                                         );
                                         sessionStorage.setItem(
-                                            'ManageDistrictDelete',
+                                            "ManageDistrictDelete",
                                             res.data.getpermission
                                                 .ManageDistrictDelete
                                         );
 
                                         sessionStorage.setItem(
-                                            'ManageEquipment',
+                                            "ManageEquipment",
                                             res.data.getpermission
                                                 .ManageEquipment
                                         );
                                         sessionStorage.setItem(
-                                            'ManageEquipmentView',
+                                            "ManageEquipmentView",
                                             res.data.getpermission
                                                 .ManageEquipmentView
                                         );
                                         sessionStorage.setItem(
-                                            'ManageEquipmentEdit',
+                                            "ManageEquipmentEdit",
                                             res.data.getpermission
                                                 .ManageEquipmentEdit
                                         );
                                         sessionStorage.setItem(
-                                            'ManageEquipmentDelete',
+                                            "ManageEquipmentDelete",
                                             res.data.getpermission
                                                 .ManageEquipmentDelete
                                         );
 
                                         sessionStorage.setItem(
-                                            'ManageImage',
+                                            "ManageImage",
                                             res.data.getpermission.ManageImage
                                         );
                                         sessionStorage.setItem(
-                                            'ManageImageView',
+                                            "ManageImageView",
                                             res.data.getpermission
                                                 .ManageImageView
                                         );
                                         sessionStorage.setItem(
-                                            'ManageImageEdit',
+                                            "ManageImageEdit",
                                             res.data.getpermission
                                                 .ManageImageEdit
                                         );
                                         sessionStorage.setItem(
-                                            'ManageImageDelete',
+                                            "ManageImageDelete",
                                             res.data.getpermission
                                                 .ManageImageDelete
                                         );
 
                                         sessionStorage.setItem(
-                                            'ManageImpact',
+                                            "ManageImpact",
                                             res.data.getpermission.ManageImpact
                                         );
                                         sessionStorage.setItem(
-                                            'ManageImpactView',
+                                            "ManageImpactView",
                                             res.data.getpermission
                                                 .ManageImpactView
                                         );
                                         sessionStorage.setItem(
-                                            'ManageImpactEdit',
+                                            "ManageImpactEdit",
                                             res.data.getpermission
                                                 .ManageImpactEdit
                                         );
                                         sessionStorage.setItem(
-                                            'ManageImpactDelete',
+                                            "ManageImpactDelete",
                                             res.data.getpermission
                                                 .ManageImpactDelete
                                         );
 
                                         sessionStorage.setItem(
-                                            'ManageLocation',
+                                            "ManageLocation",
                                             res.data.getpermission
                                                 .ManageLocation
                                         );
                                         sessionStorage.setItem(
-                                            'ManageLocationView',
+                                            "ManageLocationView",
                                             res.data.getpermission
                                                 .ManageLocationView
                                         );
                                         sessionStorage.setItem(
-                                            'ManageLocationEdit',
+                                            "ManageLocationEdit",
                                             res.data.getpermission
                                                 .ManageLocationEdit
                                         );
                                         sessionStorage.setItem(
-                                            'ManageLocationDelete',
+                                            "ManageLocationDelete",
                                             res.data.getpermission
                                                 .ManageLocationDelete
                                         );
 
                                         sessionStorage.setItem(
-                                            'ManageMessage',
+                                            "ManageMessage",
                                             res.data.getpermission.ManageMessage
                                         );
                                         sessionStorage.setItem(
-                                            'ManageMessageView',
+                                            "ManageMessageView",
                                             res.data.getpermission
                                                 .ManageMessageView
                                         );
                                         sessionStorage.setItem(
-                                            'ManageMessageEdit',
+                                            "ManageMessageEdit",
                                             res.data.getpermission
                                                 .ManageMessageEdit
                                         );
                                         sessionStorage.setItem(
-                                            'ManageMessageDelete',
+                                            "ManageMessageDelete",
                                             res.data.getpermission
                                                 .ManageMessageDelete
                                         );
 
                                         sessionStorage.setItem(
-                                            'ManageModify',
+                                            "ManageModify",
                                             res.data.getpermission.ManageModify
                                         );
                                         sessionStorage.setItem(
-                                            'ManageModifyView',
+                                            "ManageModifyView",
                                             res.data.getpermission
                                                 .ManageModifyView
                                         );
                                         sessionStorage.setItem(
-                                            'ManageModifyEdit',
+                                            "ManageModifyEdit",
                                             res.data.getpermission
                                                 .ManageModifyEdit
                                         );
                                         sessionStorage.setItem(
-                                            'ManageModifyDelete',
+                                            "ManageModifyDelete",
                                             res.data.getpermission
                                                 .ManageModifyDelete
                                         );
 
                                         sessionStorage.setItem(
-                                            'ManageNews',
+                                            "ManageNews",
                                             res.data.getpermission.ManageNews
                                         );
                                         sessionStorage.setItem(
-                                            'ManageNewsView',
+                                            "ManageNewsView",
                                             res.data.getpermission
                                                 .ManageNewsView
                                         );
                                         sessionStorage.setItem(
-                                            'ManageNewsEdit',
+                                            "ManageNewsEdit",
                                             res.data.getpermission
                                                 .ManageNewsEdit
                                         );
                                         sessionStorage.setItem(
-                                            'ManageNewsDelete',
+                                            "ManageNewsDelete",
                                             res.data.getpermission
                                                 .ManageNewsDelete
                                         );
 
                                         sessionStorage.setItem(
-                                            'ManagePersonContact',
+                                            "ManagePersonContact",
                                             res.data.getpermission
                                                 .ManagePersonContact
                                         );
                                         sessionStorage.setItem(
-                                            'ManagePersonContactView',
+                                            "ManagePersonContactView",
                                             res.data.getpermission
                                                 .ManagePersonContactView
                                         );
                                         sessionStorage.setItem(
-                                            'ManagePersonContactEdit',
+                                            "ManagePersonContactEdit",
                                             res.data.getpermission
                                                 .ManagePersonContactEdit
                                         );
                                         sessionStorage.setItem(
-                                            'ManagePersonContactDelete',
+                                            "ManagePersonContactDelete",
                                             res.data.getpermission
                                                 .ManagePersonContactDelete
                                         );
 
                                         sessionStorage.setItem(
-                                            'ManagePersonResponsible',
+                                            "ManagePersonResponsible",
                                             res.data.getpermission
                                                 .ManagePersonResponsible
                                         );
                                         sessionStorage.setItem(
-                                            'ManagePersonResponsibleView',
+                                            "ManagePersonResponsibleView",
                                             res.data.getpermission
                                                 .ManagePersonResponsibleView
                                         );
                                         sessionStorage.setItem(
-                                            'ManagePersonResponsibleEdit',
+                                            "ManagePersonResponsibleEdit",
                                             res.data.getpermission
                                                 .ManagePersonResponsibleEdit
                                         );
                                         sessionStorage.setItem(
-                                            'ManagePersonResponsibleDelete',
+                                            "ManagePersonResponsibleDelete",
                                             res.data.getpermission
                                                 .ManagePersonResponsibleDelete
                                         );
 
                                         sessionStorage.setItem(
-                                            'ManagePostalCode',
+                                            "ManagePostalCode",
                                             res.data.getpermission
                                                 .ManagePostalCode
                                         );
                                         sessionStorage.setItem(
-                                            'ManagePostalCodeView',
+                                            "ManagePostalCodeView",
                                             res.data.getpermission
                                                 .ManagePostalCodeView
                                         );
                                         sessionStorage.setItem(
-                                            'ManagePostalCodeEdit',
+                                            "ManagePostalCodeEdit",
                                             res.data.getpermission
                                                 .ManagePostalCodeEdit
                                         );
                                         sessionStorage.setItem(
-                                            'ManagePostalCodeDelete',
+                                            "ManagePostalCodeDelete",
                                             res.data.getpermission
                                                 .ManagePostalCodeDelete
                                         );
 
                                         sessionStorage.setItem(
-                                            'ManagePriority',
+                                            "ManagePriority",
                                             res.data.getpermission
                                                 .ManagePriority
                                         );
                                         sessionStorage.setItem(
-                                            'ManagePriorityView',
+                                            "ManagePriorityView",
                                             res.data.getpermission
                                                 .ManagePriorityView
                                         );
                                         sessionStorage.setItem(
-                                            'ManagePriorityEdit',
+                                            "ManagePriorityEdit",
                                             res.data.getpermission
                                                 .ManagePriorityEdit
                                         );
                                         sessionStorage.setItem(
-                                            'ManagePriorityDelete',
+                                            "ManagePriorityDelete",
                                             res.data.getpermission
                                                 .ManagePriorityDelete
                                         );
 
                                         sessionStorage.setItem(
-                                            'ManageProvince',
+                                            "ManageProvince",
                                             res.data.getpermission
                                                 .ManageProvince
                                         );
                                         sessionStorage.setItem(
-                                            'ManageProvinceView',
+                                            "ManageProvinceView",
                                             res.data.getpermission
                                                 .ManageProvinceView
                                         );
                                         sessionStorage.setItem(
-                                            'ManageProvinceEdit',
+                                            "ManageProvinceEdit",
                                             res.data.getpermission
                                                 .ManageProvinceEdit
                                         );
                                         sessionStorage.setItem(
-                                            'ManageProvinceDelete',
+                                            "ManageProvinceDelete",
                                             res.data.getpermission
                                                 .ManageProvinceDelete
                                         );
 
                                         sessionStorage.setItem(
-                                            'ManageRequestGeneral',
+                                            "ManageRequestGeneral",
                                             res.data.getpermission
                                                 .ManageRequestGeneral
                                         );
                                         sessionStorage.setItem(
-                                            'ManageRequestGeneralView',
+                                            "ManageRequestGeneralView",
                                             res.data.getpermission
                                                 .ManageRequestGeneralView
                                         );
                                         sessionStorage.setItem(
-                                            'ManageRequestGeneralEdit',
+                                            "ManageRequestGeneralEdit",
                                             res.data.getpermission
                                                 .ManageRequestGeneralEdit
                                         );
                                         sessionStorage.setItem(
-                                            'ManageRequestGeneralDelete',
+                                            "ManageRequestGeneralDelete",
                                             res.data.getpermission
                                                 .ManageRequestGeneralDelete
                                         );
 
                                         sessionStorage.setItem(
-                                            'ManageRequestIssuses',
+                                            "ManageRequestIssuses",
                                             res.data.getpermission
                                                 .ManageRequestIssuses
                                         );
                                         sessionStorage.setItem(
-                                            'ManageRequestIssusesView',
+                                            "ManageRequestIssusesView",
                                             res.data.getpermission
                                                 .ManageRequestIssusesView
                                         );
                                         sessionStorage.setItem(
-                                            'ManageRequestIssusesEdit',
+                                            "ManageRequestIssusesEdit",
                                             res.data.getpermission
                                                 .ManageRequestIssusesEdit
                                         );
                                         sessionStorage.setItem(
-                                            'ManageRequestIssusesDelete',
+                                            "ManageRequestIssusesDelete",
                                             res.data.getpermission
                                                 .ManageRequestIssusesDelete
                                         );
 
                                         sessionStorage.setItem(
-                                            'ManageSettingNews',
+                                            "ManageSettingNews",
                                             res.data.getpermission
                                                 .ManageSettingNews
                                         );
                                         sessionStorage.setItem(
-                                            'ManageSettingNewsView',
+                                            "ManageSettingNewsView",
                                             res.data.getpermission
                                                 .ManageSettingNewsView
                                         );
                                         sessionStorage.setItem(
-                                            'ManageSettingNewsEdit',
+                                            "ManageSettingNewsEdit",
                                             res.data.getpermission
                                                 .ManageSettingNewsEdit
                                         );
                                         sessionStorage.setItem(
-                                            'ManageSettingNewsDelete',
+                                            "ManageSettingNewsDelete",
                                             res.data.getpermission
                                                 .ManageSettingNewsDelete
                                         );
 
                                         sessionStorage.setItem(
-                                            'Report',
+                                            "Report",
                                             res.data.getpermission.Report
                                         );
 
-                                        window.location.href = '/Dashboard';
+                                        window.location.href = "/Dashboard";
                                     })
                                     .catch(err => {
                                         console.log(err);
@@ -527,9 +527,9 @@ export default class Login extends Component {
             })
             .catch(error => {
                 Swal.fire({
-                    type: 'error',
-                    title: 'Login error',
-                    text: 'Incorrect username or password.'
+                    type: "error",
+                    title: "Login error",
+                    text: "Incorrect username or password."
                 });
             });
     }
@@ -589,7 +589,7 @@ export default class Login extends Component {
                                         className="fa fa-lock"
                                         aria-hidden="true"
                                     >
-                                        {' '}
+                                        {" "}
                                     </i>
                                 </span>
                             </div>
