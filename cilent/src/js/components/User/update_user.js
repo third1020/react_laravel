@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 
+import ImageUploader from 'react-images-upload';
 import {
   ListGroup,
   ListGroupItem,
@@ -10,7 +11,7 @@ import {
   FormGroup,
 
   FormSelect,
-
+  Button,
   Container
 } from "shards-react";
 import Swal from 'sweetalert2'
@@ -23,11 +24,10 @@ import HocValidateUser from "../../../HocValidateUser";
 
 
 
-    class View_user extends Component {
+    class Update_user extends Component {
       constructor (props) {
         super(props)
         this.state = {
-          checkboxpassword : '',
           username: '',
           password: '',
           email: '',
@@ -35,26 +35,29 @@ import HocValidateUser from "../../../HocValidateUser";
           user_right: 'admin',
           image_show: 'default',
           image_id: '1',
-          client_id: '1',
+          image: [],
+          client_id: this.props.client_id,
           permission_id: '1',
+          getpermission: [],
           errors: []
         }
 
         this.handleFieldChange = this.handleFieldChange.bind(this)
-        this.handleSelectChange = this.handleSelectChange.bind(this)
         this.handleCreate= this.handleCreate.bind(this)
         this.hasErrorFor = this.hasErrorFor.bind(this)
         this.renderErrorFor = this.renderErrorFor.bind(this)
+        this.onChangeUploadFile = this.onChangeUploadFile.bind(this)
         this.onDrop = this.onDrop.bind(this)
 
 
-      }
 
+      }
       onDrop(pictureFiles, pictureDataURLs) {
-		this.setState({
-            image: this.state.image.concat(pictureDataURLs),
-        });
-	}
+this.setState({
+      image: this.state.image.concat(pictureDataURLs),
+  });
+}
+
 
       handleFieldChange (event) {
         this.setState({
@@ -62,17 +65,29 @@ import HocValidateUser from "../../../HocValidateUser";
         })
       }
 
-      handleSelectChange (event) {
-        console.log(event.target.value)
+      onChangeUploadFile(event) {
         this.setState({
-          checkboxpassword: !event.target.value
-        })
+             image: event.target.files[0]
+
+           })
+           console.log(this.state.selectedFile);
       }
 
 
       handleCreate (event) {
         event.preventDefault()
       
+
+        const formData = {
+          image: this.state.image[this.state.image.length-1],
+          client_id : this.props.client_id
+        }
+
+        console.log(formData);
+
+      axios.post('/api/uploadImage',formData)
+      .then(res => {
+
         const insertdata = {
           username: this.state.username,
           password: this.state.password,
@@ -80,34 +95,52 @@ import HocValidateUser from "../../../HocValidateUser";
           is_block: this.state.is_block,
           user_right: this.state.user_right,
           image_show: this.state.image_show,
-          image_id: this.state.image_id,
-          client_id: this.state.client_id,
+          image_id: res.data.image_id,
+          client_id: this.props.client_id,
           permission_id: this.state.permission_id,
 
         }
+        console.log(insertdata);
+        axios.post(`/api/user/update/${this.props.match.params.id} `, insertdata)
+  .then(response => {
+    Swal.fire(
+        'Successfully',
+        'Add data successfully ',
+        'success'
+    )
 
+    this.setState({
+      username: '',
+      password: '',
+      email: '',
+      is_block: '',
+      user_right: '',
+      image_show: '',
+      image_id: '',
+      client_id: '',
+      permission_id: '',
+      errors: []
+    })
+  })
+  .catch(error => {
+    this.setState({
+      errors: error.response.data.errors
+    })
+    console.log(error.response.data.errors);
 
-        axios.put(`${this.props.updateurl}`, insertdata)
-          .then(response => {
-            Swal.fire(
-                'Successfully',
-                'Update data successfully ',
-                'success'
-            )
+    Swal.fire(
+        'Errors',
+        'check the value of a form field',
+        'error'
+    )
 
-          })
-          .catch(error => {
-            console.log(error.response.data.errors);
+});
 
-            Swal.fire(
-                'Errors',
-                'check the value of a form field',
-                'error'
-            )
-            this.setState({
-              errors: error.response.data.errors
-            })
-      });
+      })
+      .catch(err => {
+        console.log(err);
+      })
+
     }
 
 
@@ -125,7 +158,8 @@ import HocValidateUser from "../../../HocValidateUser";
         }
       }
 
-      componentDidMount () {
+      componentDidMount(){
+
         axios.get(`/api/user/update/${this.props.match.params.id}`).then(res => {
           this.setState({
             username: res.data.user.username,
@@ -143,10 +177,23 @@ import HocValidateUser from "../../../HocValidateUser";
         }).catch(er => {
           console.log(er);
         })
+
+
+        axios.get('/api/permission/index').then(res => {
+          this.setState({
+            getpermission : res.data
+          })
+        }).catch(err => {
+          console.log(err);
+          this.setState({
+            getpermission : []
+          })
+        })
+
       }
 
       render () {
-
+        const { getpermission } = this.state
         return (
 
       <div style={{paddingTop:"30px"}}>
@@ -157,7 +204,9 @@ import HocValidateUser from "../../../HocValidateUser";
                 <Col>
                   <Form onSubmit={this.handleCreate}>
                     <Row form>
+
                       <Col md="6" className="form-group">
+
                         <label htmlFor="feEmailAddress">Username</label>
                         <FormInput
                         id='username'
@@ -167,14 +216,22 @@ import HocValidateUser from "../../../HocValidateUser";
                         type='text'
                         value={this.state.username}
                         onChange={this.handleFieldChange}
-                        disabled
                         />
                         {this.renderErrorFor('username')}
                       </Col>
-
-
-
-
+                      <Col md="6">
+                        <label htmlFor="fePassword">Password</label>
+                        <FormInput
+                        id='password'
+                        name='password'
+                        className={`form-control ${this.hasErrorFor('password') ? 'is-invalid' : ''}`}
+                        placeholder="กรอกรหัสผ่าน"
+                        type='password'
+                        value={this.state.password}
+                        onChange={this.handleFieldChange}
+                        />
+                        {this.renderErrorFor('password')}
+                      </Col>
                     </Row>
                     <Row form>
                     <Col md="6">
@@ -188,7 +245,6 @@ import HocValidateUser from "../../../HocValidateUser";
                       name='email'
                       value={this.state.email}
                       onChange={this.handleFieldChange}
-                      disabled
                       />
                       {this.renderErrorFor('email')}
                     </FormGroup>
@@ -201,9 +257,7 @@ import HocValidateUser from "../../../HocValidateUser";
                       id="feInputState"
                       name='is_block'
                       value={this.state.is_block}
-                      onChange={this.handleFieldChange}
-                      disabled
-                      >
+                      onChange={this.handleFieldChange}>
 
                         <option value="block" >block</option>
                         <option value="unblock">unblock</option>
@@ -217,8 +271,7 @@ import HocValidateUser from "../../../HocValidateUser";
                           id="feInputState"
                           name='user_right'
                           value={this.state.user_right}
-                          onChange={this.handleFieldChange}
-                          disabled>
+                          onChange={this.handleFieldChange}>
                         <option value="admin">admin</option>
                         <option value="staff">staff</option>
                       </FormSelect>
@@ -229,12 +282,15 @@ import HocValidateUser from "../../../HocValidateUser";
                       <FormSelect
                          id="feInputState"
                          name='permission_id'
+                         className={`form-control ${this.hasErrorFor('permission_id') ? 'is-invalid' : ''}`}
                          value={this.state.permission_id}
-                         onChange={this.handleFieldChange}
-                         disabled>
-                        <option value="1">1</option>
+                         onChange={this.handleFieldChange}>
 
+                         {getpermission.map(getpermission => (
+                            <option key={getpermission.id} value={getpermission.id}>{getpermission.permission_name}</option>
+                          ))}
                       </FormSelect>
+                      {this.renderErrorFor('permission_id')}
                     </Col>
                     </Row>
 
@@ -245,32 +301,46 @@ import HocValidateUser from "../../../HocValidateUser";
                          id="feInputState"
                          name='image_show'
                          value={this.state.image_show}
-                         onChange={this.handleFieldChange}
-                         disabled>
+                         onChange={this.handleFieldChange}>
                       <option value="default">default</option>
                       <option value="image1">image1</option>
                       <option value="image2">image2</option>
                       </FormSelect>
                       </Col>
-                      <Col md="6" className="form-group">
-                        <label htmlFor="feInputState">Image</label>
-                        <FormSelect id="feInputState"
-                                    name='image_id'
-                                    value={this.state.image_id}
-                                    onChange={this.handleFieldChange}
-                                    disabled>
-                          <option value="1">1</option>
 
-                        </FormSelect>
-                      </Col>
 
                       <Col md="12" className="form-group">
+                        <label htmlFor="feInputState">Image</label>
+                        <div className='form-group'>
+                      <label htmlFor='image'>เลือกรูปภาพโปรไฟล์</label>
+                      <input
+                        className={`form-control ${this.hasErrorFor('image') ? 'is-invalid' : ''}`}
+                        hidden
+                      />
+                      <ImageUploader
+                  type="file"
+                	withIcon={true}
+                  value={this.state.image}
+                	buttonText='เลือกรูปภาพ'
+                	onChange={this.onDrop}
+                	imgExtension={['.jpg', '.gif', '.png', '.gif']}
+                	maxFileSize={2020215}
+                  singleImage={true}
+                  label='ไฟล์ขนาดต้องไม่เกิน 2 MB, สกุลไฟล์: jpg,png,gif'
+                  withPreview={true}
+                  fileSizeError="ขนาดไฟล์ใหญ่เกินไป"
+                  fileTypeError="ประเภทไฟล์ไม่ถูกต้อง"
+                      />
+                      {this.renderErrorFor('image')}
 
+                      </div>
                       </Col>
-                    </Row>
 
+                    </Row>
+                    <Button type="submit">Update Account</Button>
                   </Form>
                 </Col>
+
               </Row>
             </ListGroupItem>
           </ListGroup>
@@ -285,4 +355,4 @@ import HocValidateUser from "../../../HocValidateUser";
       }
     }
 
-    export default HocValidateUser(View_user)
+    export default HocValidateUser(Update_user)

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import ImageUploader from 'react-images-upload';
+
 import {
   ListGroup,
   ListGroupItem,
@@ -7,20 +7,18 @@ import {
   Col,
   Form,
   FormInput,
-  FormGroup,
-  FormCheckbox,
+
   FormSelect,
   Button,
   Container
 } from "shards-react";
 import Swal from 'sweetalert2'
 import axios from 'axios'
-import { ToastContainer } from "react-toastr";
+
 import "../../../css/alert.css";
 import "../../../css/animate.css";
 import HocValidateUser from "../../../HocValidateUser";
 import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
-let container;
 
 
 
@@ -110,7 +108,7 @@ this.setState({
 
       handleCreate (event) {
         event.preventDefault()
-        const { history } = this.props
+
 
 
         const insertdata = {

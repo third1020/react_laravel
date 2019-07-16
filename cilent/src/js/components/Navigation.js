@@ -99,7 +99,7 @@ function Dashboard() {
     {link: 'Report', icon: FaBlog}
   ];
 
-  const classes = useStyles();
+  
   const theme = useTheme();
   const [open, setOpen] = React.useState(sessionStorage.getItem("sidebar"));
 

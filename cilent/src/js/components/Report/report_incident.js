@@ -1,15 +1,14 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Container, Row, Col } from "shards-react";
+import { Container, Row } from "shards-react";
 
 import PageTitle from "../../../components/common/PageTitle";
-import SmallStats from "../../../components/common/SmallStats";
+
 import UsersOverview from "./UsersOverview";
 import ReportGeneral from "./ReportGeneral";
 import ReportIssues from "./ReportIssues";
-import NewDraft from "../../../components/blog/NewDraft";
-import Discussions from "../../../components/blog/Discussions";
-import TopReferrals from "../../../components/common/TopReferrals";
+
+
 import HocValidateUser from "../../../HocValidateUser";
 
 

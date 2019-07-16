@@ -7,7 +7,7 @@ import Swal from 'sweetalert2/dist/sweetalert2.js'
 
 
 import "../../../css/util.css";
-import IMG from "../../../images/img-01.png"
+
 import {FaUserAlt } from 'react-icons/fa';
 
 
@@ -38,7 +38,7 @@ export default class Login extends Component {
   handleCreateNewProject(event) {
     event.preventDefault()
 
-    const { history } = this.props
+
 
     const project = {
       username: this.state.username,
@@ -231,7 +231,7 @@ export default class Login extends Component {
 		<div className="container-login100">
 			<div className="wrap-login100">
 				<div className="login100-pic js-tilt" data-tilt>
-					<img src={IMG}></img>
+					<img src="../../../images/img-01.png"></img>
 				</div>
 
 				<form className="login100-form validate-form" onSubmit={this.handleCreateNewProject}>
@@ -274,19 +274,11 @@ export default class Login extends Component {
 					</div>
 
 					<div className="text-center p-t-12">
-						<span className="txt1">
-							Forgot
-						</span>
-						<a className="txt2" href="#">
-							Username / Password?
-						</a>
+
 					</div>
 
 					<div className="text-center p-t-136">
-						<a className="txt2" href="#">
-							Create your Account
-							<i className="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
-						</a>
+
 					</div>
 				</form>
 			</div>

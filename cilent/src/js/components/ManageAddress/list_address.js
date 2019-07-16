@@ -1,7 +1,7 @@
 
    import React from 'react';
    import DataTable from "../DataTable";
-   import clsx from 'clsx';
+
    import { makeStyles, useTheme } from '@material-ui/core/styles';
    import HocValidateUser from "../../../HocValidateUser";
 
@@ -70,7 +70,7 @@
 
    function ManageAddress() {
 
-     const classes = useStyles();
+     
      const columns = ['id','province_id', 'district_id', 'sub_district_id','postal_code_id','Action'];
 
 

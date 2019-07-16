@@ -47,7 +47,7 @@ export default function() {
   ]
 
   permission.map(item => {
-          if (sessionStorage[item] == "1") {
+          if (sessionStorage[item] === "1") {
             array.push({title: item,
                         htmlBefore: '<i class="material-icons">table_chart</i>',
                         to: "/"+item,
@@ -57,10 +57,7 @@ export default function() {
           }
       }
   )
-
-
-
-return array
+  return array
 
 
 

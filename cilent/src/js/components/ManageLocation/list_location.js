@@ -1,7 +1,7 @@
 
    import React from 'react';
    import DataTable from "../DataTable";
-   import clsx from 'clsx';
+
    import { makeStyles, useTheme } from '@material-ui/core/styles';
    import HocValidateUser from "../../../HocValidateUser";
 
@@ -70,7 +70,7 @@
 
    function ManageLocation() {
 
-     const classes = useStyles();
+     
      const columns = ['id', 'name', 'address_1','address_latitude','address_longitude','address_id','image_id','Action'];
 
 

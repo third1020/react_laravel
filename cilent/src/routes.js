@@ -12,6 +12,8 @@ import ComponentsOverview from "./views/ComponentsOverview";
 import Tables from "./views/Tables";
 import BlogPosts from "./views/BlogPosts";
 import View_user from './js/components/User/view_user';
+import Update_user from './js/components/User/update_user';
+
 
 import ManageUser from "./js/components/User/list_user";
 import ManageAddress from "./js/components/ManageAddress/list_address";
@@ -102,6 +104,7 @@ import View_RequestGeneral from "./js/components/ManageRequestGeneral/view_reque
 import View_RequestIssuses from "./js/components/ManageRequestIssuses/view_requestissuses";
 import View_SettingNews from "./js/components/ManageSettingNews/view_settingnews";
 import View_SubDistrict from "./js/components/ManageSubDistrict/view_subdistrict";
+
 
 
 import Report from "./js/components/Report/report_incident";
@@ -439,6 +442,13 @@ export default [
     layout: DefaultLayout,
     component: Update_SubDistrict
   },
+  {
+    path: "/UpdateUser/:id",
+    layout: DefaultLayout,
+    component:   Update_user
+  },
+
+
 
   {
     path: "/ViewAddress/:id",
@@ -534,6 +544,11 @@ export default [
     path: "/ViewSubDistrict/:id",
     layout: DefaultLayout,
     component: View_SubDistrict
+  },
+  {
+    path: "/ViewUser/:id",
+    layout: DefaultLayout,
+    component: View_user
   },
 
 

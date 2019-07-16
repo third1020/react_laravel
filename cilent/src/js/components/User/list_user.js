@@ -70,7 +70,7 @@ const useStyles = makeStyles(theme => ({
 
 function ManageUser() {
 
-  const classes = useStyles();
+  
   const columns = ['id', 'client_id', 'username', 'email', 'is_block', 'user_right', 'permission_id', 'Action'];
 
 

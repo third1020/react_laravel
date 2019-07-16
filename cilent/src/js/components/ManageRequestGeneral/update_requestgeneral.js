@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
-import Select from 'react-select';
+
 import {
   ListGroup,
   ListGroupItem,
@@ -8,19 +7,18 @@ import {
   Col,
   Form,
   FormInput,
-  FormGroup,
-  FormCheckbox,
+
   FormSelect,
   Button,
   Container
 } from "shards-react";
 import Swal from 'sweetalert2'
 import axios from 'axios'
-import { ToastContainer } from "react-toastr";
+
 import "../../../css/alert.css";
 import "../../../css/animate.css";
 import HocValidateUser from "../../../HocValidateUser";
-let container;
+
 var today = new Date();
 var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
 var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
@@ -59,7 +57,7 @@ var dateTime = date+' '+time;
 
       handleCreate (event) {
         event.preventDefault()
-        const { history } = this.props
+      
 
 
                 const insertdata = {

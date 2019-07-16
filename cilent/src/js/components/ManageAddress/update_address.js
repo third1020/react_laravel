@@ -14,11 +14,11 @@ import {
 } from "shards-react";
 import Swal from 'sweetalert2'
 import axios from 'axios'
-import { ToastContainer } from "react-toastr";
+
 import "../../../css/alert.css";
 import "../../../css/animate.css";
 import HocValidateUser from "../../../HocValidateUser";
-let container;
+
 
 
 
@@ -55,7 +55,7 @@ let container;
 
       handleCreate (event) {
         event.preventDefault()
-        const { history } = this.props
+
 
 
                 const insertdata = {

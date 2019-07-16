@@ -12,7 +12,8 @@ import withReactContent from 'sweetalert2-react-content'
 import { Container, Row, Col, Card, CardHeader, CardBody } from "shards-react";
 import PageTitle from "../../components/common/PageTitle";
 import jsPDF from 'jspdf';
-import SelectViewForm from './SelectViewForm';
+
+
 import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
 import { createBrowserHistory } from 'history';
@@ -187,7 +188,7 @@ class DataTable extends Component {
       customUI: ({ onClose }) => {
         return (
           <div style={{ height: '100%', width: '100%', left: 50 }}>
-            <SelectViewForm id={id} updateurl={this.props.url + '/update/' + id} ChooseUpdateForm={this.props.name} />
+          
             <footer className="modal-footer">
 
               <button type="button" className="btn btn-danger" onClick={() => {

@@ -70,7 +70,7 @@ const useStyles = makeStyles(theme => ({
 
 function ManageNews() {
 
-  const classes = useStyles();
+  
   const columns = ['id', 'setting_news_id', 'name', 'detail', 'Action'];
 
 

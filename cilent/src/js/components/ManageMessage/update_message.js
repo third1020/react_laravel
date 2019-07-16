@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
+
 import {
   ListGroup,
   ListGroupItem,
@@ -7,8 +7,7 @@ import {
   Col,
   Form,
   FormInput,
-  FormGroup,
-  FormCheckbox,
+
   FormSelect,
   Button,
   Container
@@ -25,12 +24,8 @@ import '../../../css/froala-editor/froala_editor.pkgd.min.css';
 
 
 import FroalaEditor from 'react-froala-wysiwyg';
-import FroalaEditorImg from 'react-froala-wysiwyg/FroalaEditorImg';
 
 
-
-
-let container;
 
 
 
@@ -113,7 +108,7 @@ detail: detail
 
       handleCreate (event) {
         event.preventDefault()
-        const { history } = this.props
+
 
 
                 const insertdata = {

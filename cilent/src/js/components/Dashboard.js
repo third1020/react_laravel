@@ -70,7 +70,7 @@ const useStyles = makeStyles(theme => ({
 
 function Dashboard() {
 
-  const classes = useStyles();
+  
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
 

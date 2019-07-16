@@ -1,9 +1,7 @@
 import React, {
     Component
 } from 'react';
-import ReactDOM from 'react-dom';
-import Select from 'react-select';
-import ImageUploader from 'react-images-upload';
+
 import {
     ListGroup,
     ListGroupItem,
@@ -11,24 +9,19 @@ import {
     Col,
     Form,
     FormInput,
-    FormGroup,
+
     FormCheckbox,
-    FormSelect,
+    Container,
+
     Button,
-    Container
+
 } from "shards-react";
 import Swal from 'sweetalert2'
 import axios from 'axios'
-import {
-    ToastContainer
-} from "react-toastr";
+
 import "../../../css/alert.css";
 import "../../../css/animate.css";
 import HocValidateUser from "../../../HocValidateUser";
-let container;
-
-
-
 
 class Add_permission extends Component {
     constructor(props) {
@@ -163,9 +156,7 @@ class Add_permission extends Component {
 
     handleCreate(event) {
         event.preventDefault()
-        const {
-            history
-        } = this.props
+
 
         const insertdata = {
             permission_name: this.state.permission_name,
@@ -478,7 +469,7 @@ class Add_permission extends Component {
             } >
             User <
             /FormCheckbox> {
-                this.state.ManageUser == true ? ( <
+                this.state.ManageUser === true ? ( <
                     Col >
                     <
                     div >
@@ -573,7 +564,7 @@ class Add_permission extends Component {
             } >
             Person <
             /FormCheckbox> {
-                this.state.ManagePersonContact == true ? ( <
+                this.state.ManagePersonContact === true ? ( <
                     Col >
                     <
                     div >
@@ -669,7 +660,7 @@ class Add_permission extends Component {
             /FormCheckbox>
 
             {
-                this.state.ManageAddress == true ? ( <
+                this.state.ManageAddress === true ? ( <
                     Col >
                     <
                     div >
@@ -1190,7 +1181,7 @@ class Add_permission extends Component {
             /FormCheckbox>
 
             {
-                this.state.ManageImage == true ? ( <
+                this.state.ManageImage === true ? ( <
                     Col >
                     <
                     div >
@@ -1244,7 +1235,7 @@ class Add_permission extends Component {
             /FormCheckbox>
 
             {
-                this.state.ManageMessage == true ? ( <
+                this.state.ManageMessage === true ? ( <
                     Col >
                     <
                     div >
@@ -1300,7 +1291,7 @@ class Add_permission extends Component {
             /FormCheckbox>
 
             {
-                this.state.ManageModify == true ? ( <
+                this.state.ManageModify === true ? ( <
                     Col >
                     <
                     div >
@@ -1356,7 +1347,7 @@ class Add_permission extends Component {
             /FormCheckbox>
 
             {
-                this.state.ManagePriority == true ? ( <
+                this.state.ManagePriority === true ? ( <
                     Col >
                     <
                     div >
@@ -1412,7 +1403,7 @@ class Add_permission extends Component {
             /FormCheckbox>
 
             {
-                this.state.ManageImpact == true ? ( <
+                this.state.ManageImpact === true ? ( <
                     Col >
                     <
                     div >
@@ -1492,4 +1483,4 @@ class Add_permission extends Component {
     }
 }
 
-export default Add_permission
+export default HocValidateUser(Add_permission)
