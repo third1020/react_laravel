@@ -24,6 +24,7 @@ class DataTable extends Component {
     super(props);
     this.state = {
       products: [],
+      message:'Loading...'
 
     }
   }
@@ -188,7 +189,7 @@ class DataTable extends Component {
       customUI: ({ onClose }) => {
         return (
           <div style={{ height: '100%', width: '100%', left: 50 }}>
-          
+
             <footer className="modal-footer">
 
               <button type="button" className="btn btn-danger" onClick={() => {
@@ -316,30 +317,19 @@ class DataTable extends Component {
 
     axios.get(`${this.props.url}/index`).then(response => {
       let data
-      Swal.fire({
-        title: 'Loading...',
-        html: 'กำลังโหลดข้อมูล',
-        timer: 2000,
 
-        onBeforeOpen: () => {
-          Swal.showLoading()
+      if (response.data != 0) {
+        data = response.data
+        this.setState({
+          products: response.data
+        });
+      
+      } else {
+        this.setState({
+          message: 'ไม่พบข้อมูล'
 
-          if (response.data[0] != null) {
-            data = response.data
-            this.setState({
-              products: response.data
-            });
-            Swal.close()
-          } else {
-            Swal.fire(
-              'Errors',
-              'ไม่พบข้อมูล',
-              'error'
-            )
-          }
-
-        }
-      })
+        })
+      }
     }).catch(e => {
       Swal.fire(
         'Errors',
@@ -353,7 +343,7 @@ class DataTable extends Component {
   render() {
 
     const options = {
-      noDataText: 'ข้อมูลว่างเปล่า',
+      noDataText: this.state.message,
       handleConfirmDeleteRow: this.customConfirm,
       defaultSortOrder: 'desc',
       exportCSVText: 'my_export',
